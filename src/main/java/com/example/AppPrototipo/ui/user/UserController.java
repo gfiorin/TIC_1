@@ -8,5 +8,4 @@ public class UserController {
     @Autowired
     private UserMgr userMgr;
 
-
 }
