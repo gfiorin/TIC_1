@@ -2,6 +2,7 @@ plugins {
 	id 'org.springframework.boot' version '2.5.4'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
+	id 'org.openjfx.javafxplugin' version '0.0.7'
 }
 
 group = 'com.example'
@@ -20,4 +21,9 @@ dependencies {
 
 test {
 	useJUnitPlatform()
+}
+
+javafx {
+	modules = ['javafx.controls', 'javafx.fxml']
+	version = '11.0.2'
 }
