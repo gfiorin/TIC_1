@@ -1,10 +1,6 @@
 package com.example.AppPrototipo.business.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "users")
@@ -14,18 +10,18 @@ public class User {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Integer id;
 
+    @Column(name = "name")
     private String name;
 
+    @Column(name = "email", unique = true)
     private String email;
 
-    public User(Integer id, String name, String email) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
+    public User() {
     }
 
-    public User() {
-
+    public User (String name, String email) {
+        this.name = name;
+        this.email = email;
     }
 
     public Integer getId() {
