@@ -10,4 +10,4 @@ CREATE TABLE `tic1_db`.`users` (
   PRIMARY KEY (`id`),
   UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE);
 CREATE USER 'springuser'@'%' identified by 'ThePassword';
-GRANT ALL on db_example.* to 'springuser'@'%';
+GRANT ALL on tic1_db.* to 'springuser'@'%';
