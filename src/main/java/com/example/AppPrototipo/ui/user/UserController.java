@@ -47,7 +47,7 @@ public class UserController {
                 String nombre = nombreInput.getText();
                 String email = emailInput.getText();
 
-                userMgr.addUser(nombre, email);
+                userMgr.addUser(nombre,"apellido","username",email,"password");
 
                 showAlert("Usuario creado con exito", "El usuario ha sido creado con exito");
 
