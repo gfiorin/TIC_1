@@ -13,15 +13,27 @@ public class User {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "surname")
+    private String surname;
+
+    @Column(name = "username")
+    private String username;
+
     @Column(name = "email", unique = true)
     private String email;
+
+    @Column(name = "password")
+    private String password;
 
     public User() {
     }
 
-    public User (String name, String email) {
+    public User(String name, String surname, String username, String email, String password) {
         this.name = name;
+        this.surname = surname;
+        this.username = username;
         this.email = email;
+        this.password = password;
     }
 
     public Integer getId() {
