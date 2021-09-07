@@ -11,6 +11,10 @@ public class UserMgr {
 
     private UserRepository userRepository;
 
+    public UserMgr(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
     public void addUser(String name, String email) throws InvalidInformation, UserAlreadyExsists{
 
         if (name == null || name.isBlank()){
@@ -19,16 +23,16 @@ public class UserMgr {
 
         }
 
-        for (char ch: name.toCharArray()) {
-            if(Character.isDigit(ch)){
-                throw new InvalidInformation("El nombre no puede contener numeros");
-            }
-        }
-
         if (email == null || email.isBlank()){
 
             throw new InvalidInformation("Por favor ingrese un email válido");
 
+        }
+
+        for (char ch: name.toCharArray()) {
+            if(Character.isDigit(ch)){
+                throw new InvalidInformation("El nombre no puede contener numeros");
+            }
         }
 
         if (userRepository.findOneByEmail(email) != null) {
