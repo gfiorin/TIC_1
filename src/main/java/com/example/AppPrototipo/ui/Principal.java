@@ -23,7 +23,7 @@ public class Principal {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
 
-        Parent root = fxmlLoader.load(UserController.class.getResourceAsStream("AddClient.fxml"));
+        Parent root = fxmlLoader.load(UserController.class.getResourceAsStream("AddUser.fxml"));
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.show();
