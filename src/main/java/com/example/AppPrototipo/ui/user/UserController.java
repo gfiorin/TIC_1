@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.springframework.stereotype.Component;
@@ -25,7 +26,7 @@ public class UserController {
     private TextField userInput;
 
     @FXML
-    private TextField passwordInput;
+    private PasswordField passwordInput;
 
     @FXML
     private Button cancelarBtn;
@@ -67,7 +68,7 @@ public class UserController {
                         "Ya existe un usuario registrado con ese email.");
             } catch (InvalidInformation invalidInformation) {
                 showAlert(
-                        "Informacion invalida !",
+                        "Informacion invalida!",
                         invalidInformation.getMessage());
             }
         }
