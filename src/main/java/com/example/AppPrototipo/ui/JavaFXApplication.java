@@ -20,7 +20,7 @@ public class JavaFXApplication extends Application {
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
-        root = fxmlLoader.load(Principal.class.getResourceAsStream("Principal.fxml"));
+        root = fxmlLoader.load(PrincipalController.class.getResourceAsStream("Principal.fxml"));
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }

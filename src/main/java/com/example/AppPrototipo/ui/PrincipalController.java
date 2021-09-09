@@ -7,16 +7,16 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.MenuItem;
+import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import org.springframework.stereotype.Component;
 
 
 @Component
-public class Principal {
+public class PrincipalController {
 
     @FXML
-    private MenuItem agregarUsuario;
+    private Button agregarUsuario;
 
     @FXML
     void agregarUsuarioAction(ActionEvent event) throws Exception {
