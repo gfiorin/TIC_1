@@ -15,17 +15,11 @@ public class UserMgr {
         this.userRepository = userRepository;
     }
 
-    public void addUser(String name, String surname, String username, String email, String password) throws InvalidInformation, UserAlreadyExsists {
+    public void addUser(String name, String username, String email, String password) throws InvalidInformation, UserAlreadyExsists {
 
         if (name == null || name.isBlank()){
 
             throw new InvalidInformation("Por favor ingrese un nombre válido");
-
-        }
-
-        if (surname == null || surname.isBlank()){
-
-            throw new InvalidInformation("Por favor ingrese un apellido válido");
 
         }
 
@@ -53,22 +47,11 @@ public class UserMgr {
             }
         }
 
-        for (char ch: surname.toCharArray()) {
-            if(Character.isDigit(ch)){
-                throw new InvalidInformation("El apellido no puede contener numeros");
-            }
-        }
-
         if (userRepository.findOneByEmail(email) != null) {
             throw new UserAlreadyExsists("El usuario ya ha sido registrado en el sistema");
         }
 
-        User userToAdd = new User(name, surname, username, email, password);
-
-        userRepository.save(userToAdd);
-
-        //estaria bueno mostrar algo del estilo, el usuario ha sido registrado con exito
-
+        userRepository.save(new User(name, username, email, password));
     }
 
     public void userLogIn(String email, String password) throws InvalidInformation {
