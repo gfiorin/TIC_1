@@ -16,10 +16,16 @@ import org.springframework.stereotype.Component;
 public class UserController {
 
     @FXML
-    private TextField nombreInput;
+    private TextField nameInput;
 
     @FXML
     private TextField emailInput;
+
+    @FXML
+    private TextField userInput;
+
+    @FXML
+    private TextField passwordInput;
 
     @FXML
     private Button cancelarBtn;
@@ -35,8 +41,8 @@ public class UserController {
 
     @FXML
     void agregarUsuario(ActionEvent event){
-        if (nombreInput.getText() == null || emailInput.getText() == null ||
-            nombreInput.getText().equals("") || emailInput.getText().equals("")){
+        if (nameInput.getText() == null || emailInput.getText() == null || userInput.getText() == null || passwordInput.getText() == null ||
+            nameInput.getText().equals("") || emailInput.getText().equals("") || userInput.getText().equals("") || passwordInput.getText().equals("")){
             showAlert(
                     "Datos faltantes",
                     "Uno o mas campos esta vacio. Por favor, verifique la informacion introducida.");
@@ -44,10 +50,12 @@ public class UserController {
 
             try {
 
-                String nombre = nombreInput.getText();
+                String name = nameInput.getText();
                 String email = emailInput.getText();
+                String user = userInput.getText();
+                String password = passwordInput.getText();
 
-                userMgr.addUser(nombre, email);
+                userMgr.addUser(name,user,email,password);
 
                 showAlert("Usuario creado con exito", "El usuario ha sido creado con exito");
 
@@ -60,7 +68,7 @@ public class UserController {
             } catch (InvalidInformation invalidInformation) {
                 showAlert(
                         "Informacion invalida !",
-                        "Se ha encontrado un error en los datos ingresados.");
+                        invalidInformation.getMessage());
             }
         }
     }

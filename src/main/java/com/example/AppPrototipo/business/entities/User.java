@@ -13,9 +13,6 @@ public class User {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "surname")
-    private String surname;
-
     @Column(name = "username")
     private String username;
 
@@ -28,9 +25,8 @@ public class User {
     public User() {
     }
 
-    public User(String name, String surname, String username, String email, String password) {
+    public User(String name, String username, String email, String password) {
         this.name = name;
-        this.surname = surname;
         this.username = username;
         this.email = email;
         this.password = password;
