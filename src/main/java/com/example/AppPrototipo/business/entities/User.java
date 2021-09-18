@@ -4,7 +4,8 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "users")
-public class User {
+@Inheritance(strategy = InheritanceType.JOINED)
+public abstract class User {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -13,7 +14,7 @@ public class User {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "username")
+    @Column(name = "username", unique = true)
     private String username;
 
     @Column(name = "email", unique = true)
@@ -22,8 +23,7 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    public User() {
-    }
+    public User() {}
 
     public User(String name, String username, String email, String password) {
         this.name = name;
@@ -54,6 +54,22 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
 }
