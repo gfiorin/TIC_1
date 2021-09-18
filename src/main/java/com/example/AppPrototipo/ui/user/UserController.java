@@ -56,7 +56,7 @@ public class UserController {
                 String user = userInput.getText();
                 String password = passwordInput.getText();
 
-                userMgr.addUser(name,user,email,password);
+                userMgr.addTourist(name,user,email,password);
 
                 showAlert("Usuario creado con exito", "El usuario ha sido creado con exito");
 
