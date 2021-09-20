@@ -276,7 +276,7 @@ CREATE TABLE `tourists` (
                             `idtourist` int NOT NULL,
                             `dateOfBirth` datetime DEFAULT NULL,
                             `cellphone` varchar(45) DEFAULT NULL,
-                            `documentType` enum('DNI','RG','Cedula','Passport') DEFAULT NULL,
+                            `documentType` enum('DNI','RG','Cedula','Pasaporte') DEFAULT NULL,
                             `documentNumber` varchar(45) DEFAULT NULL,
                             `countryOfBirth` int DEFAULT NULL,
                             PRIMARY KEY (`idtourist`),
@@ -292,7 +292,7 @@ CREATE TABLE `administrators` (
                                   CONSTRAINT `fk_idadministrator` FOREIGN KEY (`idadministrator`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE `toperators` (
+CREATE TABLE `touristOperators` (
                               `idtoperators` int NOT NULL,
                               `companyName` varchar(45) NOT NULL,
                               `fantasyName` varchar(45) NOT NULL,
@@ -307,11 +307,11 @@ CREATE TABLE `toperators` (
 
 CREATE TABLE `operators` (
                              `idoperator` int NOT NULL,
-                             `tOperator` int DEFAULT NULL,
+                             `toperator` int DEFAULT NULL,
                              PRIMARY KEY (`idoperator`),
-                             KEY `fk_toperator_idx` (`tOperator`),
+                             KEY `fk_toperator_idx` (`toperator`),
                              CONSTRAINT `fk_idoperator` FOREIGN KEY (`idoperator`) REFERENCES `users` (`id`),
-                             CONSTRAINT `fk_toperator` FOREIGN KEY (`tOperator`) REFERENCES `toperators` (`idtoperators`)
+                             CONSTRAINT `fk_toperator` FOREIGN KEY (`toperator`) REFERENCES `touristOperators` (`idtoperators`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `experiences` (
@@ -351,7 +351,7 @@ CREATE TABLE `complaints` (
                               CONSTRAINT `fk_tou` FOREIGN KEY (`tourist`) REFERENCES `tourists` (`idtourist`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE `tinterests` (
+CREATE TABLE `touristInterests` (
                               `idtourist` int NOT NULL,
                               `idinterest` int NOT NULL,
                               PRIMARY KEY (`idtourist`,`idinterest`),
@@ -361,7 +361,7 @@ CREATE TABLE `tinterests` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
-CREATE TABLE `intexperiences` (
+CREATE TABLE `interestsExperiences` (
                                   `idexperience` int NOT NULL,
                                   `idinterest` int NOT NULL,
                                   PRIMARY KEY (`idexperience`),
