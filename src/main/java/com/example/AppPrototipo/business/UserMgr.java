@@ -22,7 +22,7 @@ public class UserMgr {
         this.touristRepository = touristRepository;
     }
 
-    public void addTourist(String name, String username, String email, String password, String dateOfBirth, String cellphone, String documentType, String documentNumber) throws InvalidInformation, UserAlreadyExsists {
+    public void addTourist(String name, String username, String email, String password, LocalDate dateOfBirth, String cellphone, String documentType, String documentNumber) throws InvalidInformation, UserAlreadyExsists {
 
         if (name == null || name.isBlank()){
 
@@ -48,7 +48,7 @@ public class UserMgr {
 
         }
 
-        if (dateOfBirth == null || dateOfBirth.isBlank()){
+        if (dateOfBirth == null){
 
             throw new InvalidInformation("Por favor ingrese una fecha de nacimiento valida");
 
@@ -78,12 +78,12 @@ public class UserMgr {
 
         if (documentNumber == null || documentNumber.isBlank() || documentType == null || documentType.isBlank()){
 
-            touristToAdd = new Tourist(name,username,email,password, LocalDate.parse(dateOfBirth), cellphone);
+            touristToAdd = new Tourist(name,username,email,password, dateOfBirth, cellphone);
 
         }
         else {
 
-            touristToAdd = new Tourist(name,username,email,password, LocalDate.parse(dateOfBirth), cellphone, documentType, documentNumber);
+            touristToAdd = new Tourist(name,username,email,password, dateOfBirth, cellphone, documentType, documentNumber);
 
         }
 

@@ -21,6 +21,9 @@ public class Tourist extends User{
     @Column(name = "documentNumber", nullable = true)
     private String documentNumber;
 
+    @Column(name = "countryId")
+    private Integer countryId;
+
     public Tourist (String name, String username, String email, String password, LocalDate dateOfBirth, String cellphone, String documentType, String documentNumber) {
         super(name, username, email, password);
         this.dateOfBirth = dateOfBirth;
