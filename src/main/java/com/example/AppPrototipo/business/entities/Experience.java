@@ -10,24 +10,25 @@ public class Experience {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "")
+    @Column(name = "title")
     private String title;
 
-    @Column(name = "")
+    @Column(name = "description")
     private String description;
 
-    @Column(name = "")
+    @Column(name = "vaccination")
     private boolean vaccination;
 
-    @Column(name = "")
+    @Column(name = "capacity")
     private Integer capacity;
 
-    @Column(name = "")
-    private String title;
+    //@Column(name = "")
+    //private String image;
 
-    @Column(name = "")
-    private String title;
+    @Column(name = "bookable")
+    private boolean bookable;
 
-
+    @Column(name = "authorized")
+    private boolean authorized;
 
 }
