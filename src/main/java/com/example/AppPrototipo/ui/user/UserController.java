@@ -1,17 +1,21 @@
 package com.example.AppPrototipo.ui.user;
 
 import com.example.AppPrototipo.business.UserMgr;
+import com.example.AppPrototipo.business.entities.Interest;
 import com.example.AppPrototipo.business.exceptions.InvalidInformation;
 import com.example.AppPrototipo.business.exceptions.UserAlreadyExsists;
+import com.example.AppPrototipo.persistence.InterestRepository;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.springframework.stereotype.Component;
+
+import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.List;
 
 @Component
 public class UserController {
@@ -29,21 +33,59 @@ public class UserController {
     private PasswordField passwordInput;
 
     @FXML
+    private DatePicker dateOfBirthInput;
+
+    @FXML
+    private TextField cellphoneInput;
+
+    @FXML
+    private VBox checkBoxes;
+
+//    @FXML
+//    private ChoiceBox<>
+
+    @FXML
     private Button cancelarBtn;
 
     @FXML
     private Button agregarBtn;
 
-    UserMgr userMgr;
+    private final UserMgr userMgr;
+    private final InterestRepository interestRepository;
 
-    public UserController(UserMgr userMgr) {
+    public UserController(UserMgr userMgr, InterestRepository interestRepository) {
         this.userMgr = userMgr;
+        this.interestRepository = interestRepository;
+    }
+
+    @FXML
+    public void initialize(){
+        List<Interest> interests = interestRepository.findAll();
+        for(Interest interest : interests){
+            checkBoxes.getChildren().add(new CheckBox(interest.getName()));
+        }
     }
 
     @FXML
     void agregarUsuario(ActionEvent event){
-        if (nameInput.getText() == null || emailInput.getText() == null || userInput.getText() == null || passwordInput.getText() == null ||
-            nameInput.getText().equals("") || emailInput.getText().equals("") || userInput.getText().equals("") || passwordInput.getText().equals("")){
+
+        List<Control> controlList = Arrays.asList(nameInput, emailInput, userInput, passwordInput, dateOfBirthInput, cellphoneInput);
+        boolean invalidValue = false;
+        for(Control control : controlList){
+            if(control instanceof TextField){
+                if (((TextField) control).getText() == null || ((TextField) control).getText().equals("")) {
+                    invalidValue = true;
+                    break;
+                }
+            } else if(control instanceof DatePicker){
+                if(((DatePicker) control).getValue() == null){
+                    invalidValue = true;
+                    break;
+                }
+            }
+        }
+
+        if (invalidValue){
             showAlert(
                     "Datos faltantes",
                     "Uno o mas campos esta vacio. Por favor, verifique la informacion introducida.");
@@ -55,8 +97,11 @@ public class UserController {
                 String email = emailInput.getText();
                 String user = userInput.getText();
                 String password = passwordInput.getText();
+                LocalDate dateOfBirth = dateOfBirthInput.getValue();
+                String cellphone = cellphoneInput.getText();
 
-                userMgr.addTourist(name,user,email,password);
+
+                userMgr.addTourist(name, user, email, password, dateOfBirth, cellphone, null, null);
 
                 showAlert("Usuario creado con exito", "El usuario ha sido creado con exito");
 
