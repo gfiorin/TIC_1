@@ -9,19 +9,19 @@ import java.time.LocalDate;
 @Table(name = "tourists")
 public class Tourist extends User{
 
-    @Column(name = "dateOfBirth")
+    @Column(name = "date_of_birth")
     private LocalDate dateOfBirth;
 
     @Column(name = "cellphone")
     private String cellphone;
 
-    @Column(name = "documentType", nullable = true)
+    @Column(name = "document_type", nullable = true)
     private String documentType;
 
-    @Column(name = "documentNumber", nullable = true)
+    @Column(name = "document_number", nullable = true)
     private String documentNumber;
 
-    @Column(name = "countryId")
+    @Column(name = "country_id")
     private Integer countryId;
 
     public Tourist (String name, String username, String email, String password, LocalDate dateOfBirth, String cellphone, String documentType, String documentNumber) {

@@ -1,38 +1,45 @@
 package com.example.AppPrototipo.business.entities;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
-@Table(name = "touristOperators")
+@Table(name = "tourist_operators")
 public class TourOperator {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "companyName", unique = true)
+    @Column(name = "company_name", unique = true)
     private String companyName;
 
-    @Column(name = "fantasyName", unique = true)
+    @Column(name = "fantasy_name", unique = true)
     private String fantasyName;
 
-    @Column(name = "linkToWeb", unique = true)
+    @Column(name = "link_to_web", unique = true)
     private String linkToWeb;
 
-    @Column(name = "contactName")
+    @Column(name = "contact_name")
     private String contactName;
 
-    @Column(name = "contactPhone", unique = true)
+    @Column(name = "contact_phone", unique = true)
     private String contactPhone;
 
-    @Column(name = "contactPosition")
+    @Column(name = "contact_position")
     private String contactPosition;
 
-    @Column(name = "contactEmail", unique = true)
+    @Column(name = "contact_email", unique = true)
     private String contactEmail;
 
     @Column(name = "authorized")
     private boolean authorized;
+
+    @OneToMany
+    private List<Experience> listOfExperiences;
+
+    @OneToMany
+    private List<Operator> listOfAuthorizedOperators;
 
     public TourOperator() {}
 
