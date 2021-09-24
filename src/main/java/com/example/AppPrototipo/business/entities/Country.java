@@ -12,7 +12,7 @@ public class Country {
     @Id
     private Integer id;
 
-    @Column(name = "name")
+    @Column(name = "country_name")
     private String name;
 
 }

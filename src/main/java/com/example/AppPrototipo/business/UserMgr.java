@@ -1,6 +1,7 @@
 package com.example.AppPrototipo.business;
 
 import com.example.AppPrototipo.business.entities.Administrator;
+import com.example.AppPrototipo.business.entities.Operator;
 import com.example.AppPrototipo.business.entities.Tourist;
 import com.example.AppPrototipo.business.entities.User;
 import com.example.AppPrototipo.business.exceptions.InvalidInformation;
@@ -99,7 +100,7 @@ public class UserMgr {
 
     }
 
-    public void userLogIn(String emailOrUsername, String password) throws InvalidInformation {
+    public Class userLogIn(String emailOrUsername, String password) throws InvalidInformation {
 
         User user = userRepository.findOneByEmail(emailOrUsername);
 
@@ -118,13 +119,13 @@ public class UserMgr {
         if (user.getPassword().equals(password)){
 
             if (user instanceof Tourist) {
-
+                return Tourist.class;
             }
             else if (user instanceof Administrator) {
-
+                return Administrator.class;
             }
             else {
-
+                return Operator.class;
             }
 
         }
