@@ -356,8 +356,8 @@ CREATE TABLE `complaints` (
                               PRIMARY KEY (`id_complaints`),
                               KEY `fk_exp_idx` (`experience_id`),
                               KEY `fk_tou_idx` (`tourist_id`),
-                              CONSTRAINT `fk_exp` FOREIGN KEY (`experience_id`) REFERENCES `experiences` (`id_experience`),
-                              CONSTRAINT `fk_tou` FOREIGN KEY (`tourist_id`) REFERENCES `tourists` (`id_tourist`)
+                              CONSTRAINT `fk_expc` FOREIGN KEY (`experience_id`) REFERENCES `experiences` (`id_experience`),
+                              CONSTRAINT `fk_touc` FOREIGN KEY (`tourist_id`) REFERENCES `tourists` (`id_tourist`)
 );
 
 CREATE TABLE `tourist_interests` (
@@ -387,11 +387,11 @@ CREATE TABLE `reviews` (
                               PRIMARY KEY (`id_reviews`),
                               KEY `fk_exp_idx` (`experience_id`),
                               KEY `fk_tou_idx` (`tourist_id`),
-                              CONSTRAINT `fk_exp` FOREIGN KEY (`experience_id`) REFERENCES `experiences` (`id_experience`),
-                              CONSTRAINT `fk_tou` FOREIGN KEY (`tourist_id`) REFERENCES `tourists` (`id_tourist`)
+                              CONSTRAINT `fk_expr` FOREIGN KEY (`experience_id`) REFERENCES `experiences` (`id_experience`),
+                              CONSTRAINT `fk_tour` FOREIGN KEY (`tourist_id`) REFERENCES `tourists` (`id_tourist`)
 );
 
-##Create Table Attendance
+## Create 'attendance' ();
 
 CREATE USER 'springuser'@'%' identified by 'ThePassword';
 GRANT ALL on tic1_db.* to 'springuser'@'%';
