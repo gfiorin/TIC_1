@@ -1,4 +1,4 @@
-package com.example.AppPrototipo.ui.user;
+package com.example.AppPrototipo.ui.userCreation;
 
 import com.example.AppPrototipo.business.UserMgr;
 import com.example.AppPrototipo.business.entities.Interest;
@@ -18,7 +18,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Component
-public class UserController {
+public class UserCreationController {
 
     @FXML
     private TextField nameInput;
@@ -50,7 +50,7 @@ public class UserController {
     private final UserMgr userMgr;
     private final InterestRepository interestRepository;
 
-    public UserController(UserMgr userMgr, InterestRepository interestRepository) {
+    public UserCreationController(UserMgr userMgr, InterestRepository interestRepository) {
         this.userMgr = userMgr;
         this.interestRepository = interestRepository;
     }
