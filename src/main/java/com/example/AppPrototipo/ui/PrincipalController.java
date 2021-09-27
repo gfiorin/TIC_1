@@ -61,7 +61,7 @@ public class PrincipalController {
         }
 
         try {
-            userMgr.userLogIn(userInput.getText(), passwordInput.getText());
+            Class type = userMgr.userLogIn(userInput.getText(), passwordInput.getText());
         } catch (InvalidInformation invalidInformation) {
             invalidInformation.printStackTrace();
         }

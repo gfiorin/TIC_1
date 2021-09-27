@@ -41,9 +41,6 @@ public class UserController {
     @FXML
     private VBox checkBoxes;
 
-//    @FXML
-//    private ChoiceBox<>
-
     @FXML
     private Button cancelarBtn;
 

@@ -6,7 +6,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "operators")
-@PrimaryKeyJoinColumn(name = "idoperator")
+@PrimaryKeyJoinColumn(name = "id_operator")
 public class Operator extends User{
 
     public Operator() {
