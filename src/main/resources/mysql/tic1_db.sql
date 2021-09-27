@@ -1,4 +1,4 @@
-CREATE DATABASE `tic1_db` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+CREATE DATABASE `tic1_db`;
 
 USE `tic1_db`;
 
@@ -10,13 +10,13 @@ CREATE TABLE `users` (
                          `email` varchar(45) NOT NULL,
                          PRIMARY KEY (`id`),
                          UNIQUE KEY `email_UNIQUE` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 
 CREATE TABLE `countries` (
                              `id` int(11) NOT NULL AUTO_INCREMENT,
                              `country_name` varchar(80) NOT NULL,
                              PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=253 DEFAULT CHARSET=utf8;
+);
 
 INSERT INTO `tic1_db`.`countries` (`id`, `country_name`) VALUES
 (1,'Afghanistan'),
@@ -273,102 +273,125 @@ INSERT INTO `tic1_db`.`countries` (`id`, `country_name`) VALUES
 (252,'Zimbabwe');
 
 CREATE TABLE `tourists` (
-                            `idtourist` int NOT NULL,
-                            `dateOfBirth` datetime DEFAULT NULL,
+                            `id_tourist` int NOT NULL,
+                            `date_of_birth` datetime DEFAULT NULL,
                             `cellphone` varchar(45) DEFAULT NULL,
-                            `documentType` enum('DNI','RG','Cedula','Pasaporte') DEFAULT NULL,
-                            `documentNumber` varchar(45) DEFAULT NULL,
-                            `countryOfBirth` int DEFAULT NULL,
-                            PRIMARY KEY (`idtourist`),
-                            UNIQUE KEY `document_UNIQUE` (`documentNumber`),
-                            KEY `fk_idcountry_idx` (`countryOfBirth`),
-                            CONSTRAINT `fk_idcountry` FOREIGN KEY (`countryOfBirth`) REFERENCES `countries` (`id`),
-                            CONSTRAINT `fk_idtourist` FOREIGN KEY (`idtourist`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+                            `document_type` enum('DNI','RG','Cedula','Pasaporte') DEFAULT NULL,
+                            `document_number` varchar(45) DEFAULT NULL,
+                            `country_of_birth` int DEFAULT NULL,
+                            PRIMARY KEY (`id_tourist`),
+                            UNIQUE KEY `document_UNIQUE` (`document_number`),
+                            KEY `fk_idcountry_idx` (`country_of_birth`),
+                            CONSTRAINT `fk_idcountry` FOREIGN KEY (`country_of_birth`) REFERENCES `countries` (`id`),
+                            CONSTRAINT `fk_idtourist` FOREIGN KEY (`id_tourist`) REFERENCES `users` (`id`)
+);
 
 CREATE TABLE `administrators` (
-                                  `idadministrator` int NOT NULL,
-                                  PRIMARY KEY (`idadministrator`),
-                                  CONSTRAINT `fk_idadministrator` FOREIGN KEY (`idadministrator`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+                                  `id_administrator` int NOT NULL,
+                                  PRIMARY KEY (`id_administrator`),
+                                  CONSTRAINT `fk_idadministrator` FOREIGN KEY (`id_administrator`) REFERENCES `users` (`id`)
+);
 
-CREATE TABLE `touristOperators` (
-                              `idtoperators` int NOT NULL,
-                              `companyName` varchar(45) NOT NULL,
-                              `fantasyName` varchar(45) NOT NULL,
-                              `link` varchar(45) NOT NULL,
-                              `cName` varchar(45) NOT NULL,
-                              `cCellphone` varchar(45) NOT NULL,
-                              `cPosition` varchar(45) NOT NULL,
-                              `cEmail` varchar(45) NOT NULL,
-                              `authorized` enum('Si','No') NOT NULL,
-                              PRIMARY KEY (`idtoperators`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `tour_operators` (
+                              `id_toperators` int NOT NULL AUTO_INCREMENT,
+                              `company_name` varchar(45) NOT NULL,
+                              `fantasy_name` varchar(45) NOT NULL,
+                              `link_to_web` varchar(45) NOT NULL,
+                              `contact_name` varchar(45) NOT NULL,
+                              `contact_phone` varchar(45) NOT NULL,
+                              `contact_position` varchar(45) NOT NULL,
+                              `contact_email` varchar(45) NOT NULL,
+                              `authorized` tinyint NOT NULL,
+                              PRIMARY KEY (`id_toperators`),
+                              UNIQUE KEY `company_name_UNIQUE` (`company_name`),
+                              UNIQUE KEY `fantasy_name_UNIQUE` (`fantasy_name`),
+                              UNIQUE KEY `contact_email_UNIQUE` (`contact_email`),
+                              UNIQUE KEY `contact_phone_UNIQUE` (`contact_phone`),
+                              UNIQUE KEY `link_to_web_UNIQUE` (`link_to_web`)
+);
 
 CREATE TABLE `operators` (
-                             `idoperator` int NOT NULL,
+                             `id_operator` int NOT NULL,
                              `toperator` int DEFAULT NULL,
-                             PRIMARY KEY (`idoperator`),
+                             PRIMARY KEY (`id_operator`),
                              KEY `fk_toperator_idx` (`toperator`),
-                             CONSTRAINT `fk_idoperator` FOREIGN KEY (`idoperator`) REFERENCES `users` (`id`),
-                             CONSTRAINT `fk_toperator` FOREIGN KEY (`toperator`) REFERENCES `touristOperators` (`idtoperators`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+                             CONSTRAINT `fk_idoperator` FOREIGN KEY (`id_operator`) REFERENCES `users` (`id`),
+                             CONSTRAINT `fk_toperator` FOREIGN KEY (`toperator`) REFERENCES `tour_operators` (`id_toperators`)
+);
 
 CREATE TABLE `experiences` (
-                               `idexperience` int NOT NULL,
-                               `authorized` enum('Si','No') NOT NULL,
+                               `id_experience` int NOT NULL AUTO_INCREMENT,
+                               `idtourist_operator` int NOT NULL,
+                               `authorized` tinyint NOT NULL,
                                `title` varchar(45) NOT NULL,
                                `description` varchar(45) NOT NULL,
-                               `vaccination` enum('Si','No') NOT NULL,
+                               `vaccination` tinyint NOT NULL,
                                `capacity` varchar(45) NOT NULL,
-                               `bookable` enum('Si','No') NOT NULL,
-                               PRIMARY KEY (`idexperience`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+                               `bookable` tinyint NOT NULL,
+                               PRIMARY KEY (`id_experience`),
+                               KEY `fk_tourist_operator_idx` (`idtourist_operator`),
+                               CONSTRAINT `fk_tourist_operator` FOREIGN KEY (`idtourist_operator`) REFERENCES `tour_operators` (`id_toperators`)
+);
 
 CREATE TABLE `images` (
-                          `idexperience` int NOT NULL,
+                          `id_images` int NOT NULL AUTO_INCREMENT,
+                          `id_experience` int NOT NULL,
                           `image` blob NOT NULL,
-                          PRIMARY KEY (`idexperience`),
-                          CONSTRAINT `fk_idexperience` FOREIGN KEY (`idexperience`) REFERENCES `experiences` (`idexperience`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+                          PRIMARY KEY (`id_images`),
+                          CONSTRAINT `fk_idexperience` FOREIGN KEY (`id_experience`) REFERENCES `experiences` (`id_experience`)
+);
 
 CREATE TABLE `interests` (
-                             `idinterests` int NOT NULL,
+                             `id_interests` int NOT NULL AUTO_INCREMENT,
                              `name` varchar(45) NOT NULL,
-                             PRIMARY KEY (`idinterests`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+                             PRIMARY KEY (`id_interests`)
+);
 
 CREATE TABLE `complaints` (
-                              `idcomplaint` int NOT NULL,
+                              `id_complaints` int NOT NULL AUTO_INCREMENT,
                               `description` varchar(45) NOT NULL,
                               `date` datetime NOT NULL,
-                              `experience` int NOT NULL,
-                              `tourist` int NOT NULL,
-                              PRIMARY KEY (`idcomplaint`),
-                              KEY `fk_exp_idx` (`experience`),
-                              KEY `fk_tou_idx` (`tourist`),
-                              CONSTRAINT `fk_exp` FOREIGN KEY (`experience`) REFERENCES `experiences` (`idexperience`),
-                              CONSTRAINT `fk_tou` FOREIGN KEY (`tourist`) REFERENCES `tourists` (`idtourist`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+                              `experience_id` int NOT NULL,
+                              `tourist_id` int NOT NULL,
+                              PRIMARY KEY (`id_complaints`),
+                              KEY `fk_exp_idx` (`experience_id`),
+                              KEY `fk_tou_idx` (`tourist_id`),
+                              CONSTRAINT `fk_expc` FOREIGN KEY (`experience_id`) REFERENCES `experiences` (`id_experience`),
+                              CONSTRAINT `fk_touc` FOREIGN KEY (`tourist_id`) REFERENCES `tourists` (`id_tourist`)
+);
 
-CREATE TABLE `touristInterests` (
+CREATE TABLE `tourist_interests` (
                               `idtourist` int NOT NULL,
                               `idinterest` int NOT NULL,
                               PRIMARY KEY (`idtourist`,`idinterest`),
                               KEY `fk_i_idx` (`idinterest`),
-                              CONSTRAINT `fk_i` FOREIGN KEY (`idinterest`) REFERENCES `interests` (`idinterests`),
-                              CONSTRAINT `fk_t` FOREIGN KEY (`idtourist`) REFERENCES `tourists` (`idtourist`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+                              CONSTRAINT `fk_i` FOREIGN KEY (`idinterest`) REFERENCES `interests` (`id_interests`),
+                              CONSTRAINT `fk_t` FOREIGN KEY (`idtourist`) REFERENCES `tourists` (`id_tourist`)
+);
 
+CREATE TABLE `interests_experiences` (
+                                  `id_experience` int NOT NULL,
+                                  `id_interest` int NOT NULL,
+                                  PRIMARY KEY (`id_experience`),
+                                  KEY `fk_int_idx` (`id_interest`),
+                                  CONSTRAINT `fk_e` FOREIGN KEY (`id_experience`) REFERENCES `experiences` (`id_experience`),
+                                  CONSTRAINT `fk_int` FOREIGN KEY (`id_interest`) REFERENCES `interests` (`id_interests`)
+);
 
-CREATE TABLE `interestsExperiences` (
-                                  `idexperience` int NOT NULL,
-                                  `idinterest` int NOT NULL,
-                                  PRIMARY KEY (`idexperience`),
-                                  KEY `fk_int_idx` (`idinterest`),
-                                  CONSTRAINT `fk_e` FOREIGN KEY (`idexperience`) REFERENCES `experiences` (`idexperience`),
-                                  CONSTRAINT `fk_int` FOREIGN KEY (`idinterest`) REFERENCES `interests` (`idinterests`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `reviews` (
+                              `id_reviews` int NOT NULL AUTO_INCREMENT,
+                              `comment` varchar(45) NOT NULL,
+                              `rating` varchar(45) NOT NULL,
+                              `experience_id` int NOT NULL,
+                              `tourist_id` int NOT NULL,
+                              PRIMARY KEY (`id_reviews`),
+                              KEY `fk_exp_idx` (`experience_id`),
+                              KEY `fk_tou_idx` (`tourist_id`),
+                              CONSTRAINT `fk_expr` FOREIGN KEY (`experience_id`) REFERENCES `experiences` (`id_experience`),
+                              CONSTRAINT `fk_tour` FOREIGN KEY (`tourist_id`) REFERENCES `tourists` (`id_tourist`)
+);
+
+## Create 'attendance' ();
 
 CREATE USER 'springuser'@'%' identified by 'ThePassword';
 GRANT ALL on tic1_db.* to 'springuser'@'%';
