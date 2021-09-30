@@ -319,9 +319,37 @@ CREATE TABLE `operators` (
                              CONSTRAINT `fk_toperator` FOREIGN KEY (`toperator`) REFERENCES `tour_operators` (`id_toperators`)
 );
 
+CREATE TABLE `departments`(`id_departments` int NOT NULL AUTO_INCREMENT,
+                           `department_name` varchar(45) NOT NULL,
+                           PRIMARY KEY (`id_departments`)
+                          );
+
+INSERT INTO `tic1_db`.`departments` (`id_departments`, `department_name`) VALUES
+(1, 'Montevideo'),
+(2, 'Artigas'),
+(3, 'Canelones'),
+(4, 'Cerro Largo'),
+(5, 'Colonia'),
+(6, 'Durazno'),
+(7, 'Flores'),
+(8, 'Florida'),
+(9, 'Lavalleja'),
+(10, 'Maldonado'),
+(11, 'Paysandú'),
+(12, 'Rio Negro'),
+(13, 'Rivera'),
+(14, 'Rocha'),
+(15, 'Salto'),
+(16, 'San Jose'),
+(17, 'Soriano'),
+(18, 'Tacuarembo'),
+(19, 'Treinta y Tres');
+
 CREATE TABLE `experiences` (
                                `id_experience` int NOT NULL AUTO_INCREMENT,
-                               `idtourist_operator` int NOT NULL,
+                               `id_tourist_operator` int NOT NULL,
+                               `price` decimal(10,2) NOT NULL,
+                               `department` int NOT NULL,
                                `authorized` tinyint NOT NULL,
                                `title` varchar(45) NOT NULL,
                                `description` varchar(45) NOT NULL,
@@ -329,8 +357,10 @@ CREATE TABLE `experiences` (
                                `capacity` varchar(45) NOT NULL,
                                `bookable` tinyint NOT NULL,
                                PRIMARY KEY (`id_experience`),
-                               KEY `fk_tourist_operator_idx` (`idtourist_operator`),
-                               CONSTRAINT `fk_tourist_operator` FOREIGN KEY (`idtourist_operator`) REFERENCES `tour_operators` (`id_toperators`)
+                               KEY `fk_tourist_operator_idx` (`id_tourist_operator`),
+                               KEY `fk_department_idx` (`department`),
+                               CONSTRAINT `fk_department` FOREIGN KEY (`department`) REFERENCES `departments` (`id_departments`),
+                               CONSTRAINT `fk_tourist_operator` FOREIGN KEY (`id_tourist_operator`) REFERENCES `tour_operators` (`id_toperators`)
 );
 
 CREATE TABLE `images` (
@@ -341,10 +371,20 @@ CREATE TABLE `images` (
                           CONSTRAINT `fk_idexperience` FOREIGN KEY (`id_experience`) REFERENCES `experiences` (`id_experience`)
 );
 
+CREATE TABLE `types_of_experiences` (
+                        `id_types_of_experiences` int NOT NULL AUTO_INCREMENT,
+                        `name` varchar(45) NOT NULL,
+                        PRIMARY KEY (`id_types_of_experiences`),
+                        UNIQUE KEY `namet_UNIQUE` (`name`)
+);
+
 CREATE TABLE `interests` (
                              `id_interests` int NOT NULL AUTO_INCREMENT,
                              `name` varchar(45) NOT NULL,
-                             PRIMARY KEY (`id_interests`)
+                             `type_of_experience` int NOT NULL,
+                             PRIMARY KEY (`id_interests`),
+                             UNIQUE KEY `name_UNIQUE` (`name`),
+                             CONSTRAINT `fk_typeofexperience` FOREIGN KEY (`type_of_experience`) REFERENCES `types_of_experiences` (`id_types_of_experiences`)
 );
 
 CREATE TABLE `complaints` (
@@ -361,21 +401,23 @@ CREATE TABLE `complaints` (
 );
 
 CREATE TABLE `tourist_interests` (
-                              `idtourist` int NOT NULL,
-                              `idinterest` int NOT NULL,
-                              PRIMARY KEY (`idtourist`,`idinterest`),
-                              KEY `fk_i_idx` (`idinterest`),
-                              CONSTRAINT `fk_i` FOREIGN KEY (`idinterest`) REFERENCES `interests` (`id_interests`),
-                              CONSTRAINT `fk_t` FOREIGN KEY (`idtourist`) REFERENCES `tourists` (`id_tourist`)
+                              `tourist` int NOT NULL,
+                              `interest` int NOT NULL,
+                              PRIMARY KEY (`tourist`,`interest`),
+                              KEY `fk_i_idx` (`interest`),
+                              KEY `fk_t_idx` (`tourist`),
+                              CONSTRAINT `fk_i` FOREIGN KEY (`interest`) REFERENCES `interests` (`id_interests`),
+                              CONSTRAINT `fk_t` FOREIGN KEY (`tourist`) REFERENCES `tourists` (`id_tourist`)
 );
 
-CREATE TABLE `interests_experiences` (
-                                  `id_experience` int NOT NULL,
-                                  `id_interest` int NOT NULL,
-                                  PRIMARY KEY (`id_experience`),
-                                  KEY `fk_int_idx` (`id_interest`),
-                                  CONSTRAINT `fk_e` FOREIGN KEY (`id_experience`) REFERENCES `experiences` (`id_experience`),
-                                  CONSTRAINT `fk_int` FOREIGN KEY (`id_interest`) REFERENCES `interests` (`id_interests`)
+CREATE TABLE `types_experiences` (
+                                     `experience` int NOT NULL,
+                                     `type_of_experience` int NOT NULL,
+                                     PRIMARY KEY (`experience`,`type_of_experience`),
+                                     KEY `fk_exp_idx` (`experience`),
+                                     KEY `fk_type_idx` (`type_of_experience`),
+                                     CONSTRAINT `fk_exp` FOREIGN KEY (`experience`) REFERENCES `experiences` (`id_experience`),
+                                     CONSTRAINT `fk_type` FOREIGN KEY (`type_of_experience`) REFERENCES `types_of_experiences` (`id_types_of_experiences`)
 );
 
 CREATE TABLE `reviews` (
@@ -391,7 +433,7 @@ CREATE TABLE `reviews` (
                               CONSTRAINT `fk_tour` FOREIGN KEY (`tourist_id`) REFERENCES `tourists` (`id_tourist`)
 );
 
-## Create 'attendance' ();
+## CREATE TABLE 'attendance' ();
 
 CREATE USER 'springuser'@'%' identified by 'ThePassword';
 GRANT ALL on tic1_db.* to 'springuser'@'%';
