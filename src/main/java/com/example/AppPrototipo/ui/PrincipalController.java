@@ -3,8 +3,11 @@ package com.example.AppPrototipo.ui;
 import com.example.AppPrototipo.AppPrototipoApplication;
 import com.example.AppPrototipo.business.UserMgr;
 import com.example.AppPrototipo.business.entities.Administrator;
+import com.example.AppPrototipo.business.entities.Operator;
+import com.example.AppPrototipo.business.entities.Tourist;
 import com.example.AppPrototipo.business.exceptions.InvalidInformation;
 import com.example.AppPrototipo.ui.admin.AdminController;
+import com.example.AppPrototipo.ui.tourist.TouristController;
 import com.example.AppPrototipo.ui.userCreation.UserCreationController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -69,16 +72,32 @@ public class PrincipalController {
             Class type = userMgr.userLogIn(userInput.getText(), passwordInput.getText());
 
             if(type == Administrator.class){
-
                 Node source = (Node) actionEvent.getSource();
-                Stage stage  = (Stage) source.getScene().getWindow();
+                Stage oldStage  = (Stage) source.getScene().getWindow();
 
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
 
                 Parent root = fxmlLoader.load(AdminController.class.getResourceAsStream("AdminPanel.fxml"));
-                stage.setScene(new Scene(root));
-            } else {
+                Stage newStage = new Stage();
+                newStage.setScene(new Scene(root));
+                newStage.show();
+
+                oldStage.close();
+            } else if (type == Tourist.class){
+                Node source = (Node) actionEvent.getSource();
+                Stage oldStage  = (Stage) source.getScene().getWindow();
+
+                FXMLLoader fxmlLoader = new FXMLLoader();
+                fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
+
+                Parent root = fxmlLoader.load(TouristController.class.getResourceAsStream("TouristMain.fxml"));
+                Stage newStage = new Stage();
+                newStage.setScene(new Scene(root));
+                newStage.show();
+
+                oldStage.close();
+            } else if (type == Operator.class){
                 //Do nothing for now
             }
         } catch (InvalidInformation invalidInformation) {

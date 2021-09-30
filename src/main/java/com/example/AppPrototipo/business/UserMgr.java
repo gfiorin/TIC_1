@@ -66,6 +66,7 @@ public class UserMgr {
         }
 
         if (userRepository.findOneByEmail(email) != null) {
+            User user = userRepository.findOneByEmail(email);
             throw new UserAlreadyExsists("El email ya ha sido registrado en el sistema");
         }
 

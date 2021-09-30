@@ -12,7 +12,7 @@
    <center>
       <AnchorPane BorderPane.alignment="CENTER">
          <children>
-            <TextField fx:id="userInput" layoutX="56.0" layoutY="27.0" prefHeight="26.0" prefWidth="240.0" promptText="Emal o usuario" />
+            <TextField fx:id="userInput" layoutX="56.0" layoutY="27.0" prefHeight="26.0" prefWidth="240.0" promptText="Email o usuario" />
             <PasswordField fx:id="passwordInput" layoutX="57.0" layoutY="70.0" prefHeight="26.0" prefWidth="238.0" promptText="Contraseña" />
             <Button fx:id="login" layoutX="112.0" layoutY="123.0" mnemonicParsing="false" onAction="#loginAction" prefHeight="29.0" prefWidth="127.0" text="Login">
                <cursor>

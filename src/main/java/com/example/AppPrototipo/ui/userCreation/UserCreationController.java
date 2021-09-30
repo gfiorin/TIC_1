@@ -150,8 +150,8 @@ public class UserCreationController {
 
             } catch (UserAlreadyExsists e) {
                 showAlert(
-                        "Email ya registrado",
-                        "Ya existe un usuario registrado con ese email.");
+                        "Email o usuario existente!",
+                        e.getMessage());
             } catch (InvalidInformation invalidInformation) {
                 showAlert(
                         "Informacion invalida!",
