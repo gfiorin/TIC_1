@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -66,7 +67,10 @@ public class UserCreationController {
     public void initialize(){
         List<Interest> interests = interestRepository.findAll();
         for(Interest interest : interests){
-            interestVBox.getChildren().add(new CheckBox(interest.getName()));
+            CheckBox interestCheckBox = new CheckBox(interest.getName());
+            interestCheckBox.setUserData(interest);
+            interestVBox.getChildren().add(interestCheckBox);
+//            interestVBox.getChildren().add(new CheckBox(interest.getName()));
         }
 
         List<Country> countries = countryRepository.findAll();
@@ -76,28 +80,47 @@ public class UserCreationController {
     }
 
     @FXML
-    void agregarUsuario(ActionEvent event){
+    void agregarUsuario(ActionEvent event) {
 
-        List<Control> controlList = Arrays.asList(nameInput, emailInput, userInput, passwordInput, dateOfBirthInput, cellphoneInput);
+        //Control de errores
+        List<Control> controlList = Arrays.asList(nameInput, emailInput, userInput, passwordInput, dateOfBirthInput, cellphoneInput, countryInput);
         boolean invalidValue = false;
-        for(Control control : controlList){
-            if(control instanceof TextField){
-                if (((TextField) control).getText() == null || ((TextField) control).getText().equals("")) {
+        for (Control control : controlList) {
+            if (control instanceof TextField) {
+                if (((TextField) control).getText() == null || ((TextField) control).getText().isEmpty()) {
                     invalidValue = true;
                     break;
                 }
-            } else if(control instanceof DatePicker){
-                if(((DatePicker) control).getValue() == null){
+            } else if (control instanceof DatePicker) {
+                if (((DatePicker) control).getValue() == null) {
+                    invalidValue = true;
+                    break;
+                }
+            } else if (control instanceof ComboBox) {
+                if (((ComboBox) control).getValue() == null) {
                     invalidValue = true;
                     break;
                 }
             }
         }
 
-        if (invalidValue){
+        boolean anyCheckboxChecked = false;
+        for (Node node : interestVBox.getChildren()) {
+            CheckBox checkBox = (CheckBox) node;
+            if (checkBox.isSelected()) {
+                anyCheckboxChecked = true;
+                break;
+            }
+        }
+
+        if (invalidValue) {
             showAlert(
                     "Datos faltantes",
                     "Uno o mas campos esta vacio. Por favor, verifique la informacion introducida.");
+        } else if(!anyCheckboxChecked) {
+            showAlert(
+                    "Datos faltantes",
+                    "Debe seleccionar al menos un interes. Por favor, verifique la informacion introducida.");
         } else {
 
             try {
@@ -109,9 +132,17 @@ public class UserCreationController {
                 LocalDate dateOfBirth = dateOfBirthInput.getValue();
                 String cellphone = cellphoneInput.getText();
                 Country countryId = countryInput.getValue();
+                List<Interest> interests = new ArrayList<>();
+
+                for (Node node : interestVBox.getChildren()) {
+                    CheckBox checkBox = (CheckBox) node;
+                    if (checkBox.isSelected()) {
+                        interests.add((Interest) checkBox.getUserData());
+                    }
+                }
 
 
-                userMgr.addTourist(name, user, email, password, dateOfBirth, cellphone, countryId, null, null);
+                userMgr.addTourist(name, user, email, password, dateOfBirth, cellphone, countryId, interests, null, null);
 
                 showAlert("Usuario creado con exito", "El usuario ha sido creado con exito");
 

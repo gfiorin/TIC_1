@@ -361,12 +361,12 @@ CREATE TABLE `complaints` (
 );
 
 CREATE TABLE `tourist_interests` (
-                              `idtourist` int NOT NULL,
-                              `idinterest` int NOT NULL,
-                              PRIMARY KEY (`idtourist`,`idinterest`),
-                              KEY `fk_i_idx` (`idinterest`),
-                              CONSTRAINT `fk_i` FOREIGN KEY (`idinterest`) REFERENCES `interests` (`id_interests`),
-                              CONSTRAINT `fk_t` FOREIGN KEY (`idtourist`) REFERENCES `tourists` (`id_tourist`)
+                              `id_tourist` int NOT NULL,
+                              `id_interest` int NOT NULL,
+                              PRIMARY KEY (`id_tourist`,`id_interest`),
+                              KEY `fk_i_idx` (`id_interest`),
+                              CONSTRAINT `fk_i` FOREIGN KEY (`id_interest`) REFERENCES `interests` (`id_interests`),
+                              CONSTRAINT `fk_t` FOREIGN KEY (`id_tourist`) REFERENCES `tourists` (`id_tourist`)
 );
 
 CREATE TABLE `interests_experiences` (
