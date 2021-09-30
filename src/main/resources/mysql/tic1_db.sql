@@ -292,6 +292,12 @@ CREATE TABLE `administrators` (
                                   CONSTRAINT `fk_idadministrator` FOREIGN KEY (`id_administrator`) REFERENCES `users` (`id`)
 );
 
+INSERT INTO `tic1_db`.`users` (`id`,`name`,`username`,`password`,`email`) VALUES
+(1,'admin1','admin1','tic1','admin1@gmail.com');
+
+INSERT INTO `tic1_db`.`administrators` (`id_administrator`) VALUES
+(1);
+
 CREATE TABLE `tour_operators` (
                               `id_toperators` int NOT NULL AUTO_INCREMENT,
                               `company_name` varchar(45) NOT NULL,
