@@ -378,6 +378,12 @@ CREATE TABLE `types_of_experiences` (
                         UNIQUE KEY `namet_UNIQUE` (`name`)
 );
 
+INSERT INTO `tic1_db`.`types_of_experiences` (`id_types_of_experiences`,`name`) VALUES
+(1,''),
+(2,''),
+(3,''),
+(4,'');
+
 CREATE TABLE `interests` (
                              `id_interests` int NOT NULL AUTO_INCREMENT,
                              `name` varchar(45) NOT NULL,
@@ -386,6 +392,12 @@ CREATE TABLE `interests` (
                              UNIQUE KEY `name_UNIQUE` (`name`),
                              CONSTRAINT `fk_typeofexperience` FOREIGN KEY (`type_of_experience`) REFERENCES `types_of_experiences` (`id_types_of_experiences`)
 );
+
+INSERT INTO `tic1_db`.`interests` (`id_interests`,`name`,`type_of_experience`) VALUES
+(1,'',1),
+(2,'',1),
+(3,'',1),
+(4,'',1);
 
 CREATE TABLE `complaints` (
                               `id_complaints` int NOT NULL AUTO_INCREMENT,
