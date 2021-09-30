@@ -379,10 +379,10 @@ CREATE TABLE `types_of_experiences` (
 );
 
 INSERT INTO `tic1_db`.`types_of_experiences` (`id_types_of_experiences`,`name`) VALUES
-(1,''),
-(2,''),
-(3,''),
-(4,'');
+(1,'A'),
+(2,'B'),
+(3,'C'),
+(4,'D');
 
 CREATE TABLE `interests` (
                              `id_interests` int NOT NULL AUTO_INCREMENT,
@@ -394,10 +394,10 @@ CREATE TABLE `interests` (
 );
 
 INSERT INTO `tic1_db`.`interests` (`id_interests`,`name`,`type_of_experience`) VALUES
-(1,'',1),
-(2,'',1),
-(3,'',1),
-(4,'',1);
+(1,'A',1),
+(2,'B',1),
+(3,'C',1),
+(4,'D',1);
 
 CREATE TABLE `complaints` (
                               `id_complaints` int NOT NULL AUTO_INCREMENT,
@@ -413,23 +413,23 @@ CREATE TABLE `complaints` (
 );
 
 CREATE TABLE `tourist_interests` (
-                              `tourist` int NOT NULL,
-                              `interest` int NOT NULL,
-                              PRIMARY KEY (`tourist`,`interest`),
-                              KEY `fk_i_idx` (`interest`),
-                              KEY `fk_t_idx` (`tourist`),
-                              CONSTRAINT `fk_i` FOREIGN KEY (`interest`) REFERENCES `interests` (`id_interests`),
-                              CONSTRAINT `fk_t` FOREIGN KEY (`tourist`) REFERENCES `tourists` (`id_tourist`)
+                              `id_tourist` int NOT NULL,
+                              `id_interest` int NOT NULL,
+                              PRIMARY KEY (`id_tourist`,`id_interest`),
+                              KEY `fk_i_idx` (`id_interest`),
+                              KEY `fk_t_idx` (`id_tourist`),
+                              CONSTRAINT `fk_i` FOREIGN KEY (`id_interest`) REFERENCES `interests` (`id_interests`),
+                              CONSTRAINT `fk_t` FOREIGN KEY (`id_tourist`) REFERENCES `tourists` (`id_tourist`)
 );
 
 CREATE TABLE `types_experiences` (
-                                     `experience` int NOT NULL,
-                                     `type_of_experience` int NOT NULL,
-                                     PRIMARY KEY (`experience`,`type_of_experience`),
-                                     KEY `fk_exp_idx` (`experience`),
-                                     KEY `fk_type_idx` (`type_of_experience`),
-                                     CONSTRAINT `fk_exp` FOREIGN KEY (`experience`) REFERENCES `experiences` (`id_experience`),
-                                     CONSTRAINT `fk_type` FOREIGN KEY (`type_of_experience`) REFERENCES `types_of_experiences` (`id_types_of_experiences`)
+                                     `id_experience` int NOT NULL,
+                                     `id_type_of_experience` int NOT NULL,
+                                     PRIMARY KEY (`id_experience`,`id_type_of_experience`),
+                                     KEY `fk_exp_idx` (`id_experience`),
+                                     KEY `fk_type_idx` (`id_type_of_experience`),
+                                     CONSTRAINT `fk_exp` FOREIGN KEY (`id_experience`) REFERENCES `experiences` (`id_experience`),
+                                     CONSTRAINT `fk_type` FOREIGN KEY (`id_type_of_experience`) REFERENCES `types_of_experiences` (`id_types_of_experiences`)
 );
 
 CREATE TABLE `reviews` (
