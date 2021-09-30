@@ -1,9 +1,11 @@
 package com.example.AppPrototipo.ui.userCreation;
 
 import com.example.AppPrototipo.business.UserMgr;
+import com.example.AppPrototipo.business.entities.Country;
 import com.example.AppPrototipo.business.entities.Interest;
 import com.example.AppPrototipo.business.exceptions.InvalidInformation;
 import com.example.AppPrototipo.business.exceptions.UserAlreadyExsists;
+import com.example.AppPrototipo.persistence.CountryRepository;
 import com.example.AppPrototipo.persistence.InterestRepository;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -39,7 +41,10 @@ public class UserCreationController {
     private TextField cellphoneInput;
 
     @FXML
-    private VBox checkBoxes;
+    private ComboBox<Country> countryInput;
+
+    @FXML
+    private VBox interestVBox;
 
     @FXML
     private Button cancelarBtn;
@@ -49,17 +54,24 @@ public class UserCreationController {
 
     private final UserMgr userMgr;
     private final InterestRepository interestRepository;
+    private final CountryRepository countryRepository;
 
-    public UserCreationController(UserMgr userMgr, InterestRepository interestRepository) {
+    public UserCreationController(UserMgr userMgr, InterestRepository interestRepository, CountryRepository countryRepository) {
         this.userMgr = userMgr;
         this.interestRepository = interestRepository;
+        this.countryRepository = countryRepository;
     }
 
     @FXML
     public void initialize(){
         List<Interest> interests = interestRepository.findAll();
         for(Interest interest : interests){
-            checkBoxes.getChildren().add(new CheckBox(interest.getName()));
+            interestVBox.getChildren().add(new CheckBox(interest.getName()));
+        }
+
+        List<Country> countries = countryRepository.findAll();
+        for(Country country : countries){
+            countryInput.getItems().add(country);
         }
     }
 
@@ -96,9 +108,10 @@ public class UserCreationController {
                 String password = passwordInput.getText();
                 LocalDate dateOfBirth = dateOfBirthInput.getValue();
                 String cellphone = cellphoneInput.getText();
+                Country countryId = countryInput.getValue();
 
 
-                userMgr.addTourist(name, user, email, password, dateOfBirth, cellphone, null, null);
+                userMgr.addTourist(name, user, email, password, dateOfBirth, cellphone, countryId, null, null);
 
                 showAlert("Usuario creado con exito", "El usuario ha sido creado con exito");
 

@@ -15,4 +15,16 @@ public class Country {
     @Column(name = "country_name")
     private String name;
 
+    public Integer getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

@@ -1,9 +1,6 @@
 package com.example.AppPrototipo.business.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
@@ -23,21 +20,24 @@ public class Tourist extends User{
     @Column(name = "document_number", nullable = true)
     private String documentNumber;
 
-    @Column(name = "country_of_birth")
-    private Integer countryId;
+    @ManyToOne()
+    @JoinColumn(name = "country_of_birth")
+    private Country country;
 
-    public Tourist (String name, String username, String email, String password, LocalDate dateOfBirth, String cellphone, String documentType, String documentNumber) {
+    public Tourist (String name, String username, String email, String password, LocalDate dateOfBirth, String cellphone, Country country, String documentType, String documentNumber) {
         super(name, username, email, password);
         this.dateOfBirth = dateOfBirth;
         this.cellphone = cellphone;
         this.documentType = documentType;
         this.documentNumber = documentNumber;
+        this.country = country;
     }
 
-    public Tourist (String name, String username, String email, String password, LocalDate dateOfBirth, String cellphone) {
+    public Tourist (String name, String username, String email, String password, LocalDate dateOfBirth, String cellphone, Country country) {
         super(name, username, email, password);
         this.dateOfBirth = dateOfBirth;
         this.cellphone = cellphone;
+        this.country = country;
     }
 
     public Tourist() {}

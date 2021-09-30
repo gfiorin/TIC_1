@@ -1,9 +1,6 @@
 package com.example.AppPrototipo.business;
 
-import com.example.AppPrototipo.business.entities.Administrator;
-import com.example.AppPrototipo.business.entities.Operator;
-import com.example.AppPrototipo.business.entities.Tourist;
-import com.example.AppPrototipo.business.entities.User;
+import com.example.AppPrototipo.business.entities.*;
 import com.example.AppPrototipo.business.exceptions.InvalidInformation;
 import com.example.AppPrototipo.business.exceptions.UserAlreadyExsists;
 import com.example.AppPrototipo.persistence.TouristRepository;
@@ -23,7 +20,7 @@ public class UserMgr {
         this.touristRepository = touristRepository;
     }
 
-    public void addTourist(String name, String username, String email, String password, LocalDate dateOfBirth, String cellphone, String documentType, String documentNumber) throws InvalidInformation, UserAlreadyExsists {
+    public void addTourist(String name, String username, String email, String password, LocalDate dateOfBirth, String cellphone, Country country, String documentType, String documentNumber) throws InvalidInformation, UserAlreadyExsists {
 
         if (name == null || name.isBlank()){
 
@@ -79,17 +76,16 @@ public class UserMgr {
 
         if (documentNumber == null || documentNumber.isBlank() || documentType == null || documentType.isBlank()){
 
-            touristToAdd = new Tourist(name,username,email,password, dateOfBirth, cellphone);
+            touristToAdd = new Tourist(name,username,email,password, dateOfBirth, cellphone, country);
 
         }
         else {
 
-            touristToAdd = new Tourist(name,username,email,password, dateOfBirth, cellphone, documentType, documentNumber);
+            touristToAdd = new Tourist(name,username,email,password, dateOfBirth, cellphone, country, documentType, documentNumber);
 
         }
 
         touristRepository.save(touristToAdd); //estaria bueno mostrar algo del estilo, el usuario ha sido registrado con exito
-
     }
 
     public void addAdministrator() {
