@@ -31,4 +31,67 @@ public class Experience {
     @Column(name = "authorized")
     private boolean authorized;
 
+    public Experience() {
+    }
+
+    public Experience(String title, String description, boolean vaccination, Integer capacity, boolean bookable, boolean authorized) {
+        this.title = title;
+        this.description = description;
+        this.vaccination = vaccination;
+        this.capacity = capacity;
+        this.bookable = bookable;
+        this.authorized = authorized;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public boolean isVaccination() {
+        return vaccination;
+    }
+
+    public void setVaccination(boolean vaccination) {
+        this.vaccination = vaccination;
+    }
+
+    public Integer getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(Integer capacity) {
+        this.capacity = capacity;
+    }
+
+    public boolean isBookable() {
+        return bookable;
+    }
+
+    public void setBookable(boolean bookable) {
+        this.bookable = bookable;
+    }
+
+    public boolean isAuthorized() {
+        return authorized;
+    }
+
+    public void setAuthorized(boolean authorized) {
+        this.authorized = authorized;
+    }
 }
