@@ -22,13 +22,26 @@ public class AdminController {
     private final AdministratorRepository administratorRepository;
     private final OperatorsRepository operatorsRepository;
     private final TouristRepository touristRepository;
+    private final TourOperatorRepository tourOperatorRepository;
+    private final ExperienceRepository experienceRepository;
+    private final ExperienceTypeRepository experienceTypeRepository;
 
-    public AdminController(UserMgr userMgr, InterestRepository interestRepository, AdministratorRepository administratorRepository, OperatorsRepository operatorsRepository, TouristRepository touristRepository) {
+    public AdminController(UserMgr userMgr,
+                           InterestRepository interestRepository,
+                           AdministratorRepository administratorRepository,
+                           OperatorsRepository operatorsRepository,
+                           TouristRepository touristRepository,
+                           TourOperatorRepository tourOperatorRepository,
+                           ExperienceRepository experienceRepository,
+                           ExperienceTypeRepository experienceTypeRepository) {
         this.userMgr = userMgr;
         this.interestRepository = interestRepository;
         this.administratorRepository = administratorRepository;
         this.operatorsRepository = operatorsRepository;
         this.touristRepository = touristRepository;
+        this.tourOperatorRepository = tourOperatorRepository;
+        this.experienceRepository = experienceRepository;
+        this.experienceTypeRepository = experienceTypeRepository;
     }
 
     @FXML
