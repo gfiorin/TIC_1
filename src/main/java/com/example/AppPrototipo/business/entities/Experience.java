@@ -1,6 +1,7 @@
 package com.example.AppPrototipo.business.entities;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "experiences")
@@ -30,6 +31,18 @@ public class Experience {
 
     @Column(name = "authorized")
     private boolean authorized;
+
+    @ManyToMany
+    @JoinTable(
+            name = "types_experiences",
+            joinColumns = {@JoinColumn(name = "id_experience")},
+            inverseJoinColumns = {@JoinColumn(name = "id_type_of_experience")}
+    )
+    private List<ExperienceType> experienceTypes;
+
+    @ManyToOne
+    @JoinColumn(name="id_tourist_operator")
+    private TourOperator tourOperator;
 
     public Experience() {
     }

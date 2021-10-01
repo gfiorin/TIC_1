@@ -14,6 +14,10 @@ public class Interest {
     @Column(name="name")
     private String name;
 
+    @ManyToOne
+    @JoinColumn(name="type_of_experience")
+    private ExperienceType experienceType;
+
     public Interest() {
     }
 
