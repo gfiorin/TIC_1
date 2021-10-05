@@ -299,10 +299,10 @@ INSERT INTO `tic1_db`.`administrators` (`id_administrator`) VALUES
 (1);
 
 INSERT INTO `tic1_db`.`users` (`id`,`name`,`username`,`password`,`email`) VALUES
-    (1,'admin1','admin1','tic1','admin1@gmail.com');
+    (2,'admin2','admin2','tic1','admin2@gmail.com');
 
 INSERT INTO `tic1_db`.`administrators` (`id_administrator`) VALUES
-    (1);
+    (2);
 
 CREATE TABLE `tour_operators` (
                                   `id_toperators` int NOT NULL AUTO_INCREMENT,
@@ -321,6 +321,10 @@ CREATE TABLE `tour_operators` (
                                   UNIQUE KEY `contact_phone_UNIQUE` (`contact_phone`),
                                   UNIQUE KEY `link_to_web_UNIQUE` (`link_to_web`)
 );
+
+INSERT INTO tic1_db.tour_operators (company_name,fantasy_name,link_to_web,contact_name,contact_phone,contact_position,contact_email,authorized)
+VALUES ('tour_name','fantasy_name','tour.com','John Doe','123456789','Manager','jdoe@gmial.com',1);
+
 
 CREATE TABLE `operators` (
                              `id_operator` int NOT NULL,
@@ -364,7 +368,7 @@ CREATE TABLE `experiences` (
                                `department` int NOT NULL,
                                `authorized` tinyint NOT NULL,
                                `title` varchar(45) NOT NULL,
-                               `description` varchar(45) NOT NULL,
+                               `description` varchar(1000) NOT NULL,
                                `vaccination` tinyint NOT NULL,
                                `capacity` varchar(45) NOT NULL,
                                `bookable` tinyint NOT NULL,
@@ -375,6 +379,9 @@ CREATE TABLE `experiences` (
                                CONSTRAINT `fk_tourist_operator` FOREIGN KEY (`id_tourist_operator`) REFERENCES `tour_operators` (`id_toperators`)
 );
 
+INSERT INTO tic1_db.experiences (id_tourist_operator,price,department,authorized,title,description,vaccination,capacity,bookable) VALUES
+(1,1000.00,1,1,'Titulo de experiencia','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ut lacus quis libero dignissim euismod. Duis rhoncus risus eu risus consectetur sagittis. Nulla facilisi. Maecenas nec dui et turpis vulputate lobortis in eget enim. Morbi libero velit, bibendum ac erat et, rutrum gravida nibh. Maecenas bibendum varius fringilla. Sed imperdiet, mauris eget consequat gravida, sem lacus sagittis quam, eget efficitur sapien urna vitae lorem. Sed laoreet lacinia dui, sed vulputate sapien sollicitudin eget. Mauris sollicitudin ac elit at placerat.',1,'100',1);
+
 CREATE TABLE `images` (
                           `id_images` int NOT NULL AUTO_INCREMENT,
                           `id_experience` int NOT NULL,
@@ -383,33 +390,37 @@ CREATE TABLE `images` (
                           CONSTRAINT `fk_idexperience` FOREIGN KEY (`id_experience`) REFERENCES `experiences` (`id_experience`)
 );
 
-CREATE TABLE `types_of_experiences` (
-                                        `id_types_of_experiences` int NOT NULL AUTO_INCREMENT,
-                                        `name` varchar(45) NOT NULL,
-                                        PRIMARY KEY (`id_types_of_experiences`),
-                                        UNIQUE KEY `namet_UNIQUE` (`name`)
-);
-
-INSERT INTO `tic1_db`.`types_of_experiences` (`id_types_of_experiences`,`name`) VALUES
-                                                                                    (1,'A'),
-                                                                                    (2,'B'),
-                                                                                    (3,'C'),
-                                                                                    (4,'D');
-
 CREATE TABLE `interests` (
                              `id_interests` int NOT NULL AUTO_INCREMENT,
                              `name` varchar(45) NOT NULL,
-                             `type_of_experience` int NOT NULL,
                              PRIMARY KEY (`id_interests`),
-                             UNIQUE KEY `name_UNIQUE` (`name`),
-                             CONSTRAINT `fk_typeofexperience` FOREIGN KEY (`type_of_experience`) REFERENCES `types_of_experiences` (`id_types_of_experiences`)
+                             UNIQUE KEY `name_UNIQUE` (`name`)
 );
 
-INSERT INTO `tic1_db`.`interests` (`id_interests`,`name`,`type_of_experience`) VALUES
-                                                                                   (1,'A',1),
-                                                                                   (2,'B',1),
-                                                                                   (3,'C',1),
-                                                                                   (4,'D',1);
+CREATE TABLE `types_of_experiences` (
+                                        `id_types_of_experiences` int NOT NULL AUTO_INCREMENT,
+                                        `name` varchar(45) NOT NULL,
+                                        `interest` int NOT NULL,
+                                        PRIMARY KEY (`id_types_of_experiences`),
+                                        UNIQUE KEY `namet_UNIQUE` (`name`),
+                                        CONSTRAINT `fk_types_of_experiences_interests` FOREIGN KEY (`interest`) REFERENCES interests(`id_interests`)
+
+);
+
+INSERT INTO tic1_db.interests (name) VALUES
+('A'),
+('B'),
+('C'),
+('D');
+
+INSERT INTO tic1_db.types_of_experiences (name,interest) VALUES
+('A',1),
+('B',1),
+('C',1),
+('D',1),
+('E',2),
+('F',2),
+('G',2);
 
 CREATE TABLE `complaints` (
                               `id_complaints` int NOT NULL AUTO_INCREMENT,
@@ -443,6 +454,9 @@ CREATE TABLE `types_experiences` (
                                      CONSTRAINT `fk_exp` FOREIGN KEY (`id_experience`) REFERENCES `experiences` (`id_experience`),
                                      CONSTRAINT `fk_type` FOREIGN KEY (`id_type_of_experience`) REFERENCES `types_of_experiences` (`id_types_of_experiences`)
 );
+
+INSERT INTO tic1_db.types_experiences (id_experience,id_type_of_experience) VALUES
+(1,2);
 
 CREATE TABLE `reviews` (
                            `id_reviews` int NOT NULL AUTO_INCREMENT,
