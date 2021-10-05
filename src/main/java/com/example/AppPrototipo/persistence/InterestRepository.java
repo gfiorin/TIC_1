@@ -10,4 +10,5 @@ import java.util.List;
 public interface InterestRepository extends CrudRepository<Interest, Integer> {
 
     List<Interest> findAll();
+
 }

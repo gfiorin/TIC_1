@@ -1,21 +1,76 @@
 package com.example.AppPrototipo.ui.admin;
 
-import com.example.AppPrototipo.AppPrototipoApplication;
 import com.example.AppPrototipo.business.UserMgr;
+import com.example.AppPrototipo.business.entities.Country;
+import com.example.AppPrototipo.business.entities.Interest;
+import com.example.AppPrototipo.business.entities.Tourist;
 import com.example.AppPrototipo.persistence.*;
-import com.example.AppPrototipo.ui.userCreation.UserCreationController;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
+import java.util.List;
+
 @Component
 public class AdminController {
+
+    @FXML
+    private Button listOfTouristsBtn;
+
+    @FXML
+    private Button listOfOperatorsBtn;
+
+    @FXML
+    private Button listOfExperiencesBtn;
+
+    @FXML
+    private Button listOfTouristOperatorsBtn;
+
+    @FXML
+    private TableView<Tourist> touristTable;
+
+    @FXML
+    private TableColumn<Tourist, Integer> id;
+
+    @FXML
+    private TableColumn<Tourist, String> name;
+
+    @FXML
+    private TableColumn<Tourist, String> username;
+
+    @FXML
+    private TableColumn<Tourist, String> email;
+
+    //@FXML
+    //private TableColumn<Tourist, String> password;
+
+    @FXML
+    private TableColumn<Tourist, LocalDate> dateOfBirth;
+
+    @FXML
+    private TableColumn<Tourist, String> cellphone;
+
+    @FXML
+    private TableColumn<Tourist, String> documentType;
+
+    @FXML
+    private TableColumn<Tourist, String> documentNumber;
+
+    @FXML
+    private TableColumn<Tourist, Country> country;
+
+    @FXML
+    private TableColumn<Tourist, List<Interest>> listOfInterests;
 
     private final UserMgr userMgr;
     private final InterestRepository interestRepository;
@@ -42,6 +97,28 @@ public class AdminController {
         this.tourOperatorRepository = tourOperatorRepository;
         this.experienceRepository = experienceRepository;
         this.experienceTypeRepository = experienceTypeRepository;
+    }
+
+    @FXML
+    void listadoDeTuristas(ActionEvent event) {
+
+        List<Tourist> touristList = touristRepository.findAll();
+        ObservableList<Tourist> touristObervableList = FXCollections.observableArrayList(touristList);
+
+        id.setCellValueFactory(new PropertyValueFactory<Tourist,Integer>("Id"));
+        name.setCellValueFactory(new PropertyValueFactory<Tourist,String>("Name"));
+        username.setCellValueFactory(new PropertyValueFactory<Tourist,String>("Username"));
+        email.setCellValueFactory(new PropertyValueFactory<Tourist,String>("Email"));
+        //password.setCellValueFactory(new PropertyValueFactory<Tourist,String>("Password"));
+        dateOfBirth.setCellValueFactory(new PropertyValueFactory<Tourist,LocalDate>("Date of birth"));
+        cellphone.setCellValueFactory(new PropertyValueFactory<Tourist,String>("Cellphone"));
+        documentType.setCellValueFactory(new PropertyValueFactory<Tourist,String>("Document type"));
+        documentNumber.setCellValueFactory(new PropertyValueFactory<Tourist,String>("Document number"));
+        country.setCellValueFactory(new PropertyValueFactory<Tourist,Country>("Country"));
+        listOfInterests.setCellValueFactory(new PropertyValueFactory<Tourist,List<Interest>>("Interests"));
+
+        touristTable.setItems(touristObervableList);
+
     }
 
     @FXML
