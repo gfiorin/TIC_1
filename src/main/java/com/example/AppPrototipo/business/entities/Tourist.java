@@ -7,7 +7,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "tourists")
-@PrimaryKeyJoinColumn(name = "id_tourist")
+@PrimaryKeyJoinColumn(name = "id")
 public class Tourist extends User{
 
     @Column(name = "date_of_birth")
@@ -29,8 +29,8 @@ public class Tourist extends User{
     @ManyToMany()
     @JoinTable(
             name = "tourist_interests",
-            joinColumns = {@JoinColumn(name = "id_tourist")},
-            inverseJoinColumns = {@JoinColumn(name = "id_interest")}
+            joinColumns = {@JoinColumn(name = "tourist")},
+            inverseJoinColumns = {@JoinColumn(name = "interest")}
     )
     private List<Interest> interests;
 

@@ -273,39 +273,39 @@ INSERT INTO `tic1_db`.`countries` (`id`, `country_name`) VALUES
                                                              (252,'Zimbabwe');
 
 CREATE TABLE `tourists` (
-                            `id_tourist` int NOT NULL,
+                            `id` int NOT NULL,
                             `date_of_birth` datetime DEFAULT NULL,
                             `cellphone` varchar(45) DEFAULT NULL,
                             `document_type` enum('DNI','RG','Cedula','Pasaporte') DEFAULT NULL,
                             `document_number` varchar(45) DEFAULT NULL,
                             `country_of_birth` int DEFAULT NULL,
-                            PRIMARY KEY (`id_tourist`),
+                            PRIMARY KEY (`id`),
                             UNIQUE KEY `document_UNIQUE` (`document_number`),
                             KEY `fk_idcountry_idx` (`country_of_birth`),
                             CONSTRAINT `fk_idcountry` FOREIGN KEY (`country_of_birth`) REFERENCES `countries` (`id`),
-                            CONSTRAINT `fk_idtourist` FOREIGN KEY (`id_tourist`) REFERENCES `users` (`id`)
+                            CONSTRAINT `fk_idtourist` FOREIGN KEY (`id`) REFERENCES `users` (`id`)
 );
 
 CREATE TABLE `administrators` (
-                                  `id_administrator` int NOT NULL,
-                                  PRIMARY KEY (`id_administrator`),
-                                  CONSTRAINT `fk_idadministrator` FOREIGN KEY (`id_administrator`) REFERENCES `users` (`id`)
+                                  `id` int NOT NULL,
+                                  PRIMARY KEY (`id`),
+                                  CONSTRAINT `fk_idadministrator` FOREIGN KEY (`id`) REFERENCES `users` (`id`)
 );
 
 INSERT INTO `tic1_db`.`users` (`id`,`name`,`username`,`password`,`email`) VALUES
 (1,'admin1','admin1','tic1','admin1@gmail.com');
 
-INSERT INTO `tic1_db`.`administrators` (`id_administrator`) VALUES
+INSERT INTO `tic1_db`.`administrators` (`id`) VALUES
 (1);
 
 INSERT INTO `tic1_db`.`users` (`id`,`name`,`username`,`password`,`email`) VALUES
     (2,'admin2','admin2','tic1','admin2@gmail.com');
 
-INSERT INTO `tic1_db`.`administrators` (`id_administrator`) VALUES
+INSERT INTO `tic1_db`.`administrators` (`id`) VALUES
     (2);
 
 CREATE TABLE `tour_operators` (
-                                  `id_toperators` int NOT NULL AUTO_INCREMENT,
+                                  `id` int NOT NULL AUTO_INCREMENT,
                                   `company_name` varchar(45) NOT NULL,
                                   `fantasy_name` varchar(45) NOT NULL,
                                   `link_to_web` varchar(45) NOT NULL,
@@ -314,7 +314,7 @@ CREATE TABLE `tour_operators` (
                                   `contact_position` varchar(45) NOT NULL,
                                   `contact_email` varchar(45) NOT NULL,
                                   `authorized` tinyint NOT NULL,
-                                  PRIMARY KEY (`id_toperators`),
+                                  PRIMARY KEY (`id`),
                                   UNIQUE KEY `company_name_UNIQUE` (`company_name`),
                                   UNIQUE KEY `fantasy_name_UNIQUE` (`fantasy_name`),
                                   UNIQUE KEY `contact_email_UNIQUE` (`contact_email`),
@@ -327,20 +327,20 @@ VALUES ('tour_name','fantasy_name','tour.com','John Doe','123456789','Manager','
 
 
 CREATE TABLE `operators` (
-                             `id_operator` int NOT NULL,
+                             `id` int NOT NULL,
                              `toperator` int DEFAULT NULL,
-                             PRIMARY KEY (`id_operator`),
+                             PRIMARY KEY (`id`),
                              KEY `fk_toperator_idx` (`toperator`),
-                             CONSTRAINT `fk_idoperator` FOREIGN KEY (`id_operator`) REFERENCES `users` (`id`),
-                             CONSTRAINT `fk_toperator` FOREIGN KEY (`toperator`) REFERENCES `tour_operators` (`id_toperators`)
+                             CONSTRAINT `fk_idoperator` FOREIGN KEY (`id`) REFERENCES `users` (`id`),
+                             CONSTRAINT `fk_toperator` FOREIGN KEY (`toperator`) REFERENCES `tour_operators` (`id`)
 );
 
-CREATE TABLE `departments`(`id_departments` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `departments`(`id` int NOT NULL AUTO_INCREMENT,
                            `department_name` varchar(45) NOT NULL,
-                           PRIMARY KEY (`id_departments`)
+                           PRIMARY KEY (`id`)
 );
 
-INSERT INTO `tic1_db`.`departments` (`id_departments`, `department_name`) VALUES
+INSERT INTO `tic1_db`.`departments` (`id`, `department_name`) VALUES
                                                                               (1, 'Montevideo'),
                                                                               (2, 'Artigas'),
                                                                               (3, 'Canelones'),
@@ -362,8 +362,8 @@ INSERT INTO `tic1_db`.`departments` (`id_departments`, `department_name`) VALUES
                                                                               (19, 'Treinta y Tres');
 
 CREATE TABLE `experiences` (
-                               `id_experience` int NOT NULL AUTO_INCREMENT,
-                               `id_tourist_operator` int NOT NULL,
+                               `id` int NOT NULL AUTO_INCREMENT,
+                               `tour_operator` int NOT NULL,
                                `price` decimal(10,2) NOT NULL,
                                `department` int NOT NULL,
                                `authorized` tinyint NOT NULL,
@@ -372,38 +372,38 @@ CREATE TABLE `experiences` (
                                `vaccination` tinyint NOT NULL,
                                `capacity` varchar(45) NOT NULL,
                                `bookable` tinyint NOT NULL,
-                               PRIMARY KEY (`id_experience`),
-                               KEY `fk_tourist_operator_idx` (`id_tourist_operator`),
+                               PRIMARY KEY (`id`),
+                               KEY `fk_tourist_operator_idx` (`tour_operator`),
                                KEY `fk_department_idx` (`department`),
-                               CONSTRAINT `fk_department` FOREIGN KEY (`department`) REFERENCES `departments` (`id_departments`),
-                               CONSTRAINT `fk_tourist_operator` FOREIGN KEY (`id_tourist_operator`) REFERENCES `tour_operators` (`id_toperators`)
+                               CONSTRAINT `fk_department` FOREIGN KEY (`department`) REFERENCES `departments` (`id`),
+                               CONSTRAINT `fk_tourist_operator` FOREIGN KEY (`tour_operator`) REFERENCES `tour_operators` (`id`)
 );
 
-INSERT INTO tic1_db.experiences (id_tourist_operator,price,department,authorized,title,description,vaccination,capacity,bookable) VALUES
-(1,1000.00,1,1,'Titulo de experiencia','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ut lacus quis libero dignissim euismod. Duis rhoncus risus eu risus consectetur sagittis. Nulla facilisi. Maecenas nec dui et turpis vulputate lobortis in eget enim. Morbi libero velit, bibendum ac erat et, rutrum gravida nibh. Maecenas bibendum varius fringilla. Sed imperdiet, mauris eget consequat gravida, sem lacus sagittis quam, eget efficitur sapien urna vitae lorem. Sed laoreet lacinia dui, sed vulputate sapien sollicitudin eget. Mauris sollicitudin ac elit at placerat.',1,'100',1);
+INSERT INTO tic1_db.experiences (id,tour_operator,price,department,authorized,title,description,vaccination,capacity,bookable) VALUES
+(1,1,1000.00,1,1,'Titulo de experiencia','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ut lacus quis libero dignissim euismod. Duis rhoncus risus eu risus consectetur sagittis. Nulla facilisi. Maecenas nec dui et turpis vulputate lobortis in eget enim. Morbi libero velit, bibendum ac erat et, rutrum gravida nibh. Maecenas bibendum varius fringilla. Sed imperdiet, mauris eget consequat gravida, sem lacus sagittis quam, eget efficitur sapien urna vitae lorem. Sed laoreet lacinia dui, sed vulputate sapien sollicitudin eget. Mauris sollicitudin ac elit at placerat.',1,'100',1);
 
 CREATE TABLE `images` (
-                          `id_images` int NOT NULL AUTO_INCREMENT,
-                          `id_experience` int NOT NULL,
+                          `id` int NOT NULL AUTO_INCREMENT,
+                          `experience` int NOT NULL,
                           `image` blob NOT NULL,
-                          PRIMARY KEY (`id_images`),
-                          CONSTRAINT `fk_idexperience` FOREIGN KEY (`id_experience`) REFERENCES `experiences` (id)
+                          PRIMARY KEY (`id`),
+                          CONSTRAINT `fk_idexperience` FOREIGN KEY (`experience`) REFERENCES `experiences` (`id`)
 );
 
 CREATE TABLE `interests` (
-                             `id_interests` int NOT NULL AUTO_INCREMENT,
+                             `id` int NOT NULL AUTO_INCREMENT,
                              `name` varchar(45) NOT NULL,
-                             PRIMARY KEY (`id_interests`),
+                             PRIMARY KEY (`id`),
                              UNIQUE KEY `name_UNIQUE` (`name`)
 );
 
 CREATE TABLE `types_of_experiences` (
-                                        `id_types_of_experiences` int NOT NULL AUTO_INCREMENT,
+                                        `id` int NOT NULL AUTO_INCREMENT,
                                         `name` varchar(45) NOT NULL,
                                         `interest` int NOT NULL,
-                                        PRIMARY KEY (`id_types_of_experiences`),
+                                        PRIMARY KEY (`id`),
                                         UNIQUE KEY `namet_UNIQUE` (`name`),
-                                        CONSTRAINT `fk_types_of_experiences_interests` FOREIGN KEY (`interest`) REFERENCES interests(`id_interests`)
+                                        CONSTRAINT `fk_types_of_experiences_interests` FOREIGN KEY (`interest`) REFERENCES interests(`id`)
 
 );
 
@@ -423,52 +423,52 @@ INSERT INTO tic1_db.types_of_experiences (name,interest) VALUES
 ('G',2);
 
 CREATE TABLE `complaints` (
-                              `id_complaints` int NOT NULL AUTO_INCREMENT,
+                              `id` int NOT NULL AUTO_INCREMENT,
                               `description` varchar(45) NOT NULL,
                               `date` datetime NOT NULL,
-                              `experience_id` int NOT NULL,
-                              `tourist_id` int NOT NULL,
-                              PRIMARY KEY (`id_complaints`),
-                              KEY `fk_exp_idx` (`experience_id`),
-                              KEY `fk_tou_idx` (`tourist_id`),
-                              CONSTRAINT `fk_expc` FOREIGN KEY (`experience_id`) REFERENCES `experiences` (id),
-                              CONSTRAINT `fk_touc` FOREIGN KEY (`tourist_id`) REFERENCES `tourists` (`id_tourist`)
+                              `experience` int NOT NULL,
+                              `tourist` int NOT NULL,
+                              PRIMARY KEY (`id`),
+                              KEY `fk_exp_idx` (`experience`),
+                              KEY `fk_tou_idx` (`tourist`),
+                              CONSTRAINT `fk_expc` FOREIGN KEY (`experience`) REFERENCES `experiences` (`id`),
+                              CONSTRAINT `fk_touc` FOREIGN KEY (`tourist`) REFERENCES `tourists` (`id`)
 );
 
 CREATE TABLE `tourist_interests` (
-                                     `id_tourist` int NOT NULL,
-                                     `id_interest` int NOT NULL,
-                                     PRIMARY KEY (`id_tourist`,`id_interest`),
-                                     KEY `fk_i_idx` (`id_interest`),
-                                     KEY `fk_t_idx` (`id_tourist`),
-                                     CONSTRAINT `fk_i` FOREIGN KEY (`id_interest`) REFERENCES `interests` (`id_interests`),
-                                     CONSTRAINT `fk_t` FOREIGN KEY (`id_tourist`) REFERENCES `tourists` (`id_tourist`)
+                                     `tourist` int NOT NULL,
+                                     `interest` int NOT NULL,
+                                     PRIMARY KEY (`tourist`,`interest`),
+                                     KEY `fk_i_idx` (`interest`),
+                                     KEY `fk_t_idx` (`tourist`),
+                                     CONSTRAINT `fk_i` FOREIGN KEY (`interest`) REFERENCES `interests` (`id`),
+                                     CONSTRAINT `fk_t` FOREIGN KEY (`tourist`) REFERENCES `tourists` (`id`)
 );
 
 CREATE TABLE `types_experiences` (
-                                     `id_experience` int NOT NULL,
-                                     `id_type_of_experience` int NOT NULL,
-                                     PRIMARY KEY (`id_experience`,`id_type_of_experience`),
-                                     KEY `fk_exp_idx` (`id_experience`),
-                                     KEY `fk_type_idx` (`id_type_of_experience`),
-                                     CONSTRAINT `fk_exp` FOREIGN KEY (`id_experience`) REFERENCES `experiences` (id),
-                                     CONSTRAINT `fk_type` FOREIGN KEY (`id_type_of_experience`) REFERENCES `types_of_experiences` (`id_types_of_experiences`)
+                                     `experience` int NOT NULL,
+                                     `type_of_experience` int NOT NULL,
+                                     PRIMARY KEY (`experience`,`type_of_experience`),
+                                     KEY `fk_exp_idx` (`experience`),
+                                     KEY `fk_type_idx` (`type_of_experience`),
+                                     CONSTRAINT `fk_exp` FOREIGN KEY (`experience`) REFERENCES `experiences` (`id`),
+                                     CONSTRAINT `fk_type` FOREIGN KEY (`type_of_experience`) REFERENCES `types_of_experiences` (`id`)
 );
 
-INSERT INTO tic1_db.types_experiences (id_experience,id_type_of_experience) VALUES
+INSERT INTO tic1_db.types_experiences (experience,type_of_experience) VALUES
 (1,2);
 
 CREATE TABLE `reviews` (
-                           `id_reviews` int NOT NULL AUTO_INCREMENT,
+                           `id` int NOT NULL AUTO_INCREMENT,
                            `comment` varchar(45) NOT NULL,
                            `rating` varchar(45) NOT NULL,
-                           `experience_id` int NOT NULL,
-                           `tourist_id` int NOT NULL,
-                           PRIMARY KEY (`id_reviews`),
-                           KEY `fk_exp_idx` (`experience_id`),
-                           KEY `fk_tou_idx` (`tourist_id`),
-                           CONSTRAINT `fk_expr` FOREIGN KEY (`experience_id`) REFERENCES `experiences` (id),
-                           CONSTRAINT `fk_tour` FOREIGN KEY (`tourist_id`) REFERENCES `tourists` (`id_tourist`)
+                           `experience` int NOT NULL,
+                           `tourist` int NOT NULL,
+                           PRIMARY KEY (`id`),
+                           KEY `fk_exp_idx` (`experience`),
+                           KEY `fk_tou_idx` (`tourist`),
+                           CONSTRAINT `fk_expr` FOREIGN KEY (`experience`) REFERENCES `experiences` (`id`),
+                           CONSTRAINT `fk_tour` FOREIGN KEY (`tourist`) REFERENCES `tourists` (`id`)
 );
 
 ## CREATE TABLE 'attendance' ();
