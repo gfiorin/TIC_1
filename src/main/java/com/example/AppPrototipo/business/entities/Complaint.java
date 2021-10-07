@@ -13,10 +13,10 @@ public class Complaint {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "tourist_id")
+    @Column(name = "tourist")
     private Integer touristId;
 
-    @Column(name = "experience_id")
+    @Column(name = "experience")
     private Integer experienceId;
 
 

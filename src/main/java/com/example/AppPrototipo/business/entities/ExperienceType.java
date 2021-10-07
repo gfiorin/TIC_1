@@ -4,25 +4,19 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name="interests")
-public class Interest {
+@Table(name = "types_of_experiences")
+public class ExperienceType {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    @Column(name="id")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name="name")
+    @Column(name = "name")
     private String name;
 
-    @OneToMany()
-    @JoinColumn(name="interest")
-    private List<ExperienceType> experienceType;
+    public ExperienceType() {}
 
-    public Interest() {
-    }
-
-    public Interest(String name) {
+    public ExperienceType(String name) {
         this.name = name;
     }
 
@@ -33,4 +27,9 @@ public class Interest {
     public String getName() {
         return name;
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
 }
