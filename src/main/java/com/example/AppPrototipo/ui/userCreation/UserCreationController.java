@@ -70,7 +70,6 @@ public class UserCreationController {
             CheckBox interestCheckBox = new CheckBox(interest.getName());
             interestCheckBox.setUserData(interest);
             interestVBox.getChildren().add(interestCheckBox);
-//            interestVBox.getChildren().add(new CheckBox(interest.getName()));
         }
 
         List<Country> countries = countryRepository.findAll();

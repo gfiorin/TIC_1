@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ExperienceRepository extends CrudRepository<Experience, Integer> {
 
-    Experience findOneByTitle(String title);
+    Experience findById(int id);
 
 }

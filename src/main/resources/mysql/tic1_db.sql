@@ -387,7 +387,7 @@ CREATE TABLE `images` (
                           `id_experience` int NOT NULL,
                           `image` blob NOT NULL,
                           PRIMARY KEY (`id_images`),
-                          CONSTRAINT `fk_idexperience` FOREIGN KEY (`id_experience`) REFERENCES `experiences` (`id_experience`)
+                          CONSTRAINT `fk_idexperience` FOREIGN KEY (`id_experience`) REFERENCES `experiences` (id)
 );
 
 CREATE TABLE `interests` (
@@ -431,7 +431,7 @@ CREATE TABLE `complaints` (
                               PRIMARY KEY (`id_complaints`),
                               KEY `fk_exp_idx` (`experience_id`),
                               KEY `fk_tou_idx` (`tourist_id`),
-                              CONSTRAINT `fk_expc` FOREIGN KEY (`experience_id`) REFERENCES `experiences` (`id_experience`),
+                              CONSTRAINT `fk_expc` FOREIGN KEY (`experience_id`) REFERENCES `experiences` (id),
                               CONSTRAINT `fk_touc` FOREIGN KEY (`tourist_id`) REFERENCES `tourists` (`id_tourist`)
 );
 
@@ -451,7 +451,7 @@ CREATE TABLE `types_experiences` (
                                      PRIMARY KEY (`id_experience`,`id_type_of_experience`),
                                      KEY `fk_exp_idx` (`id_experience`),
                                      KEY `fk_type_idx` (`id_type_of_experience`),
-                                     CONSTRAINT `fk_exp` FOREIGN KEY (`id_experience`) REFERENCES `experiences` (`id_experience`),
+                                     CONSTRAINT `fk_exp` FOREIGN KEY (`id_experience`) REFERENCES `experiences` (id),
                                      CONSTRAINT `fk_type` FOREIGN KEY (`id_type_of_experience`) REFERENCES `types_of_experiences` (`id_types_of_experiences`)
 );
 
@@ -467,7 +467,7 @@ CREATE TABLE `reviews` (
                            PRIMARY KEY (`id_reviews`),
                            KEY `fk_exp_idx` (`experience_id`),
                            KEY `fk_tou_idx` (`tourist_id`),
-                           CONSTRAINT `fk_expr` FOREIGN KEY (`experience_id`) REFERENCES `experiences` (`id_experience`),
+                           CONSTRAINT `fk_expr` FOREIGN KEY (`experience_id`) REFERENCES `experiences` (id),
                            CONSTRAINT `fk_tour` FOREIGN KEY (`tourist_id`) REFERENCES `tourists` (`id_tourist`)
 );
 

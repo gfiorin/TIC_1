@@ -44,16 +44,21 @@ public class Experience {
     @JoinColumn(name="id_tourist_operator")
     private TourOperator tourOperator;
 
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_experience")
+    List<Image> images;
+
     public Experience() {
     }
 
-    public Experience(String title, String description, boolean vaccination, Integer capacity, boolean bookable, boolean authorized) {
+    public Experience(String title, String description, boolean vaccination, Integer capacity, boolean bookable, boolean authorized, List<Image> images) {
         this.title = title;
         this.description = description;
         this.vaccination = vaccination;
         this.capacity = capacity;
         this.bookable = bookable;
         this.authorized = authorized;
+        this.images = images;
     }
 
     public Integer getId() {
@@ -106,5 +111,13 @@ public class Experience {
 
     public void setAuthorized(boolean authorized) {
         this.authorized = authorized;
+    }
+
+    public List<Image> getImages() {
+        return images;
+    }
+
+    public void setImages(List<Image> images) {
+        this.images = images;
     }
 }
