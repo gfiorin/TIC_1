@@ -35,13 +35,13 @@ public class Experience {
     @ManyToMany
     @JoinTable(
             name = "types_experiences",
-            joinColumns = {@JoinColumn(name = "id_experience")},
-            inverseJoinColumns = {@JoinColumn(name = "id_type_of_experience")}
+            joinColumns = {@JoinColumn(name = "experience")},
+            inverseJoinColumns = {@JoinColumn(name = "type_of_experience")}
     )
     private List<ExperienceType> experienceTypes;
 
     @ManyToOne
-    @JoinColumn(name="id_tourist_operator")
+    @JoinColumn(name="tour_operator")
     private TourOperator tourOperator;
 
     @OneToMany(cascade = CascadeType.ALL)
