@@ -101,7 +101,7 @@ public class PrincipalController {
                 //Do nothing for now
             }
         } catch (InvalidInformation invalidInformation) {
-            invalidInformation.printStackTrace();
+            showAlert("Datos ingresados erroneos!", invalidInformation.getMessage());
         }
     }
 

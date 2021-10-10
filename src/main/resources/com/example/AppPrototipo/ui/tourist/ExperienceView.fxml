@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.AppPrototipo.ui.tourist.ExperienceController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.AppPrototipo.ui.tourist.ExperienceController">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
@@ -24,13 +24,6 @@
         </menus>
       </MenuBar>
    </top>
-   <left>
-      <AnchorPane prefHeight="114.0" prefWidth="301.0" BorderPane.alignment="CENTER">
-         <children>
-            <ImageView fitHeight="180.0" fitWidth="272.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
-         </children>
-      </AnchorPane>
-   </left>
    <right>
       <AnchorPane prefHeight="216.0" prefWidth="194.0" BorderPane.alignment="CENTER">
          <children>
@@ -45,10 +38,10 @@
                   <Font size="13.0" />
                </font>
             </Text>
-            <ImageView fitHeight="18.0" fitWidth="21.0" layoutX="44.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../../../imgs/location.png" />
-               </image>
+            <ImageView fx:id="imageViewMarker" fitHeight="18.0" fitWidth="21.0" layoutX="44.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true">
+<!--               <image>-->
+<!--                  <Image url="location.png"/>-->
+<!--               </image>-->
             </ImageView>
             <Text layoutX="32.0" layoutY="174.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Info. Adicional" underline="true" wrappingWidth="121.13671875">
                <font>
@@ -93,10 +86,20 @@
             </Text>
             <ScrollPane layoutX="14.0" layoutY="13.0" prefHeight="122.0" prefWidth="368.0">
                <content>
-                  <Text fx:id="descripcion" strokeType="OUTSIDE" strokeWidth="0.0" text="Descripción" textAlignment="JUSTIFY" wrappingWidth="336.13671875" />
+                  <Text fx:id="descripcion" strokeType="OUTSIDE" strokeWidth="0.0" text="Descripción" textAlignment="JUSTIFY" wrappingWidth="365.73675537109375" />
                </content>
             </ScrollPane>
          </children>
       </AnchorPane>
    </bottom>
+   <center>
+      <AnchorPane prefHeight="114.0" prefWidth="301.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fx:id="imageViewPrincipal" fitHeight="196.0" fitWidth="370.0" pickOnBounds="true" preserveRatio="true">
+               <viewport>
+                  <Rectangle2D />
+               </viewport></ImageView>
+         </children>
+      </AnchorPane>
+   </center>
 </BorderPane>

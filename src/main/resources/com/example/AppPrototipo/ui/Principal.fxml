@@ -8,9 +8,9 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane prefHeight="246.0" prefWidth="351.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.AppPrototipo.ui.PrincipalController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="246.0" prefWidth="351.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.AppPrototipo.ui.PrincipalController">
    <center>
-      <AnchorPane BorderPane.alignment="CENTER">
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="246.0" prefWidth="351.0" BorderPane.alignment="CENTER">
          <children>
             <TextField fx:id="userInput" layoutX="56.0" layoutY="27.0" prefHeight="26.0" prefWidth="240.0" promptText="Email o usuario" />
             <PasswordField fx:id="passwordInput" layoutX="57.0" layoutY="70.0" prefHeight="26.0" prefWidth="238.0" promptText="Contraseña" />

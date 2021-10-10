@@ -11,12 +11,20 @@ public class Image {
     int id;
 
     @Column(name = "image")
-    Byte[] imageData;
+    byte[] imageData;
 
     public Image() {
     }
 
-    public Image(Byte[] imageData) {
+    public Image(byte[] imageData) {
         this.imageData = imageData;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public byte[] getImageData() {
+        return imageData;
     }
 }
