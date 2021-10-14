@@ -2,7 +2,6 @@ package com.example.AppPrototipo.business.entities;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -10,20 +9,20 @@ import java.util.List;
 @PrimaryKeyJoinColumn(name = "id_tourist")
 public class Tourist extends User{
 
-    @Column(name = "date_of_birth")
+    @Column(name = "date_of_birth", nullable = false)
     private LocalDate dateOfBirth;
 
-    @Column(name = "cellphone")
+    @Column(name = "cellphone", nullable = false)
     private String cellphone;
 
-    @Column(name = "document_type", nullable = true)
+    @Column(name = "document_type")
     private String documentType;
 
-    @Column(name = "document_number", nullable = true)
+    @Column(name = "document_number")
     private String documentNumber;
 
     @ManyToOne()
-    @JoinColumn(name = "country_of_birth")
+    @JoinColumn(name = "country_of_birth", nullable = false)
     private Country country;
 
     @ManyToMany()
@@ -77,4 +76,5 @@ public class Tourist extends User{
     public List<Interest> getInterests() {
         return interests;
     }
+
 }

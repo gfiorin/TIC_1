@@ -6,7 +6,6 @@ import com.example.AppPrototipo.business.exceptions.UserAlreadyExsists;
 import com.example.AppPrototipo.persistence.TouristRepository;
 import com.example.AppPrototipo.persistence.UserRepository;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDate;
 import java.util.List;
 
@@ -87,7 +86,7 @@ public class UserMgr {
 
         }
 
-        touristRepository.save(touristToAdd); //estaria bueno mostrar algo del estilo, el usuario ha sido registrado con exito
+        touristRepository.save(touristToAdd);
     }
 
     public void addAdministrator() {

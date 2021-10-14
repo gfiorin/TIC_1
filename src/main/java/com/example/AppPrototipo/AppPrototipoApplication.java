@@ -19,4 +19,5 @@ public class AppPrototipoApplication {
 	public static ConfigurableApplicationContext getContext() {
 		return context;
 	}
+
 }

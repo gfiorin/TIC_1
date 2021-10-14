@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="401.0" prefWidth="828.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.AppPrototipo.ui.admin.ExperiencesTableController">
+   <children>
+      <TableView prefHeight="401.0" prefWidth="837.0">
+        <columns>
+          <TableColumn fx:id="id" prefWidth="75.0" text="ID" />
+            <TableColumn prefWidth="126.0" text="Operador Turistico" />
+            <TableColumn fx:id="title" prefWidth="75.0" text="Titulo" />
+            <TableColumn fx:id="department" prefWidth="94.4000244140625" text="Departamento" />
+            <TableColumn fx:id="authorized" prefWidth="78.4000244140625" text="Autorizado" />
+            <TableColumn fx:id="price" prefWidth="52.7999267578125" text="Precio" />
+            <TableColumn fx:id="description" prefWidth="75.0" text="Descripcion" />
+            <TableColumn fx:id="vaccination" prefWidth="98.39996337890625" text="Vacuncacion" />
+            <TableColumn fx:id="capacity" prefWidth="82.39996337890625" text="Capacidad" />
+            <TableColumn fx:id="bookable" prefWidth="76.0" text="Reservable" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

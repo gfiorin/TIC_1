@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.AppPrototipo.ui.admin.AdminController">
-
+<AnchorPane prefHeight="292.0" prefWidth="893.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.AppPrototipo.ui.admin.AdminController">
+   <children>
+      <Button fx:id="listOfTouristOperatorsBtn" layoutX="460.0" layoutY="76.0" mnemonicParsing="false" onAction="#showTouristOperatorsList" prefHeight="44.0" prefWidth="182.0" text="Operadores turisticos" />
+      <Button fx:id="listOfOperatorsBtn" layoutX="247.0" layoutY="76.0" mnemonicParsing="false" onAction="#showOperatorsList" prefHeight="44.0" prefWidth="182.0" text="Operadores" />
+      <Button fx:id="listOfTouristsBtn" layoutX="41.0" layoutY="76.0" mnemonicParsing="false" onAction="#showTouristsList" prefHeight="44.0" prefWidth="182.0" text="Turistas" />
+      <Button fx:id="listOfExperiencesBtn" layoutX="663.0" layoutY="76.0" mnemonicParsing="false" onAction="#showExperiencesList" prefHeight="44.0" prefWidth="182.0" text="Experiencias" />
+      <Button fx:id="listOfTouristsBtn1" layoutX="247.0" layoutY="181.0" mnemonicParsing="false" onAction="#showTouristsList" prefHeight="44.0" prefWidth="182.0" text="Agregar operador turistico" />
+      <Button fx:id="listOfTouristsBtn2" layoutX="41.0" layoutY="181.0" mnemonicParsing="false" onAction="#showTouristsList" prefHeight="44.0" prefWidth="182.0" text="Administradores" />
+   </children>
 </AnchorPane>

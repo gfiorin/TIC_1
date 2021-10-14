@@ -1,25 +1,16 @@
 package com.example.AppPrototipo.ui.admin;
 
-import com.example.AppPrototipo.business.UserMgr;
-import com.example.AppPrototipo.business.entities.Country;
-import com.example.AppPrototipo.business.entities.Interest;
-import com.example.AppPrototipo.business.entities.Tourist;
-import com.example.AppPrototipo.persistence.*;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import com.example.AppPrototipo.AppPrototipoApplication;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import org.springframework.stereotype.Component;
-
-import java.time.LocalDate;
-import java.util.List;
 
 @Component
 public class AdminController {
@@ -37,88 +28,55 @@ public class AdminController {
     private Button listOfTouristOperatorsBtn;
 
     @FXML
-    private TableView<Tourist> touristTable;
+    private Button listOfAdministratorsBtn;
 
     @FXML
-    private TableColumn<Tourist, Integer> id;
+    private Button addTouristOperator;
+
+    public AdminController(){};
 
     @FXML
-    private TableColumn<Tourist, String> name;
+    void showTouristsList(ActionEvent event) throws Exception {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
 
-    @FXML
-    private TableColumn<Tourist, String> username;
-
-    @FXML
-    private TableColumn<Tourist, String> email;
-
-    //@FXML
-    //private TableColumn<Tourist, String> password;
-
-    @FXML
-    private TableColumn<Tourist, LocalDate> dateOfBirth;
-
-    @FXML
-    private TableColumn<Tourist, String> cellphone;
-
-    @FXML
-    private TableColumn<Tourist, String> documentType;
-
-    @FXML
-    private TableColumn<Tourist, String> documentNumber;
-
-    @FXML
-    private TableColumn<Tourist, Country> country;
-
-    @FXML
-    private TableColumn<Tourist, List<Interest>> listOfInterests;
-
-    private final UserMgr userMgr;
-    private final InterestRepository interestRepository;
-    private final AdministratorRepository administratorRepository;
-    private final OperatorsRepository operatorsRepository;
-    private final TouristRepository touristRepository;
-    private final TourOperatorRepository tourOperatorRepository;
-    private final ExperienceRepository experienceRepository;
-    private final ExperienceTypeRepository experienceTypeRepository;
-
-    public AdminController(UserMgr userMgr,
-                           InterestRepository interestRepository,
-                           AdministratorRepository administratorRepository,
-                           OperatorsRepository operatorsRepository,
-                           TouristRepository touristRepository,
-                           TourOperatorRepository tourOperatorRepository,
-                           ExperienceRepository experienceRepository,
-                           ExperienceTypeRepository experienceTypeRepository) {
-        this.userMgr = userMgr;
-        this.interestRepository = interestRepository;
-        this.administratorRepository = administratorRepository;
-        this.operatorsRepository = operatorsRepository;
-        this.touristRepository = touristRepository;
-        this.tourOperatorRepository = tourOperatorRepository;
-        this.experienceRepository = experienceRepository;
-        this.experienceTypeRepository = experienceTypeRepository;
+        Parent root = fxmlLoader.load(TouristsTableController.class.getResourceAsStream("TouristsTable.fxml"));
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 
     @FXML
-    void listadoDeTuristas(ActionEvent event) {
+    void showOperatorsList(ActionEvent event) throws Exception {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
 
-        List<Tourist> touristList = touristRepository.findAll();
-        ObservableList<Tourist> touristObervableList = FXCollections.observableArrayList(touristList);
+        Parent root = fxmlLoader.load(TouristsTableController.class.getResourceAsStream("OperatorsTable.fxml"));
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
 
-        id.setCellValueFactory(new PropertyValueFactory<Tourist,Integer>("Id"));
-        name.setCellValueFactory(new PropertyValueFactory<Tourist,String>("Name"));
-        username.setCellValueFactory(new PropertyValueFactory<Tourist,String>("Username"));
-        email.setCellValueFactory(new PropertyValueFactory<Tourist,String>("Email"));
-        //password.setCellValueFactory(new PropertyValueFactory<Tourist,String>("Password"));
-        dateOfBirth.setCellValueFactory(new PropertyValueFactory<Tourist,LocalDate>("Date of birth"));
-        cellphone.setCellValueFactory(new PropertyValueFactory<Tourist,String>("Cellphone"));
-        documentType.setCellValueFactory(new PropertyValueFactory<Tourist,String>("Document type"));
-        documentNumber.setCellValueFactory(new PropertyValueFactory<Tourist,String>("Document number"));
-        country.setCellValueFactory(new PropertyValueFactory<Tourist,Country>("Country"));
-        listOfInterests.setCellValueFactory(new PropertyValueFactory<Tourist,List<Interest>>("Interests"));
+    @FXML
+    void showTouristOperatorsList(ActionEvent event) throws Exception {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
 
-        touristTable.setItems(touristObervableList);
+        Parent root = fxmlLoader.load(TouristsTableController.class.getResourceAsStream("TouristOperatorsTable.fxml"));
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
 
+    @FXML
+    void showExperiencesList(ActionEvent event) throws Exception {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
+
+        Parent root = fxmlLoader.load(TouristsTableController.class.getResourceAsStream("ExperiencesTable.fxml"));
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 
     @FXML
@@ -135,4 +93,5 @@ public class AdminController {
         alert.setContentText(contextText);
         alert.showAndWait();
     }
+
 }

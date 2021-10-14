@@ -100,7 +100,7 @@ public class PrincipalController {
             } else if (type == Operator.class){
                 //Do nothing for now
             }
-        } catch (InvalidInformation invalidInformation) {
+        } catch (InvalidInformation invalidInformation) { // deberia hacer algo
             invalidInformation.printStackTrace();
         }
     }

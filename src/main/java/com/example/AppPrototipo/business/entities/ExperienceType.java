@@ -1,7 +1,6 @@
 package com.example.AppPrototipo.business.entities;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "types_of_experiences")

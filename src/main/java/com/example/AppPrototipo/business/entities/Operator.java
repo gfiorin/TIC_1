@@ -16,4 +16,5 @@ public class Operator extends User{
     public Operator(String name, String username, String email, String password) {
         super(name, username, email, password);
     }
+
 }
