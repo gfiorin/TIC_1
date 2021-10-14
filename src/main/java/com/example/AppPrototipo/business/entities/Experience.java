@@ -48,6 +48,9 @@ public class Experience {
     @JoinColumn(name = "experience")
     List<Image> images;
 
+    @Column(name = "location")
+    private String ubicacion;
+
     public Experience() {
     }
 
@@ -119,5 +122,13 @@ public class Experience {
 
     public void setImages(List<Image> images) {
         this.images = images;
+    }
+
+    public String getUbicacion() {
+        return ubicacion;
+    }
+
+    public void setUbicacion(String ubicacion) {
+        this.ubicacion = ubicacion;
     }
 }

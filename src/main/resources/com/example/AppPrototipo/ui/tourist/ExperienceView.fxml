@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.geometry.Rectangle2D?>
-<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
@@ -9,6 +9,8 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -27,78 +29,92 @@
    <right>
       <AnchorPane prefHeight="216.0" prefWidth="194.0" BorderPane.alignment="CENTER">
          <children>
-            <Text fx:id="nombreExperiencia" layoutX="32.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Experiencia" underline="true" wrappingWidth="98.13671875">
+            <Text fx:id="nombreExperiencia" layoutX="13.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Experiencia" underline="true" wrappingWidth="177.13671875" AnchorPane.bottomAnchor="343.984375" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="9.734375">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
             </Text>
-            <DatePicker layoutX="14.0" layoutY="76.0" />
-            <Text fx:id="ubicacion" layoutX="62.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ubicacion" wrappingWidth="121.13671875">
+            <Text fx:id="ubicacion" layoutX="33.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ubicacion" wrappingWidth="147.13671875" AnchorPane.bottomAnchor="308.7373046875" AnchorPane.leftAnchor="33.0" AnchorPane.rightAnchor="13.86328125" AnchorPane.topAnchor="48.9716796875">
                <font>
                   <Font size="13.0" />
                </font>
             </Text>
-            <ImageView fx:id="imageViewMarker" fitHeight="18.0" fitWidth="21.0" layoutX="44.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true">
-<!--               <image>-->
-<!--                  <Image url="location.png"/>-->
-<!--               </image>-->
-            </ImageView>
-            <Text layoutX="32.0" layoutY="174.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Info. Adicional" underline="true" wrappingWidth="121.13671875">
-               <font>
-                  <Font name="System Bold" size="16.0" />
-               </font>
-            </Text>
-            <Text fx:id="vacunacion" layoutX="32.0" layoutY="201.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Si/No requiere vacuncion" wrappingWidth="151.13671875">
-               <font>
-                  <Font size="13.0" />
-               </font>
-            </Text>
+            <ImageView fx:id="imageViewMarker" fitHeight="18.0" fitWidth="21.0" layoutX="15.0" layoutY="49.0" pickOnBounds="true" preserveRatio="true" />
+            <VBox layoutX="14.0" layoutY="232.0" prefHeight="142.0" prefWidth="174.0" spacing="6.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="0.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Contacto" underline="true" wrappingWidth="121.13671875">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="email" strokeType="OUTSIDE" strokeWidth="0.0" text="email" wrappingWidth="121.13671875">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="nombreEmpresa" strokeType="OUTSIDE" strokeWidth="0.0" text="nombreEmpresa" wrappingWidth="121.13671875">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="telefono" strokeType="OUTSIDE" strokeWidth="0.0" text="telefono" wrappingWidth="121.13671875">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="linkWeb" strokeType="OUTSIDE" strokeWidth="0.0" text="linkWeb" wrappingWidth="121.13671875">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Text>
+               </children>
+            </VBox>
+            <VBox layoutX="13.0" layoutY="174.0" prefHeight="58.0" prefWidth="157.0" spacing="6.0" AnchorPane.bottomAnchor="143.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="0.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Info. Adicional" underline="true" wrappingWidth="121.13671875">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="vacunacion" strokeType="OUTSIDE" strokeWidth="0.0" text="Si/No requiere vacunacion" wrappingWidth="156.13671875">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Text>
+               </children>
+            </VBox>
          </children>
       </AnchorPane>
    </right>
-   <bottom>
-      <AnchorPane prefHeight="148.0" prefWidth="441.0" BorderPane.alignment="CENTER">
-         <children>
-            <Text layoutX="436.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contacto" underline="true" wrappingWidth="121.13671875">
-               <font>
-                  <Font name="System Bold" size="16.0" />
-               </font>
-            </Text>
-            <Text fx:id="nombreEmpresa" layoutX="464.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="nombreEmpresa" wrappingWidth="121.13671875">
-               <font>
-                  <Font size="13.0" />
-               </font>
-            </Text>
-            <Text fx:id="telefono" layoutX="464.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="telefono" wrappingWidth="121.13671875">
-               <font>
-                  <Font size="13.0" />
-               </font>
-            </Text>
-            <Text fx:id="email" layoutX="464.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="email" wrappingWidth="121.13671875">
-               <font>
-                  <Font size="13.0" />
-               </font>
-            </Text>
-            <Text fx:id="linkWeb" layoutX="464.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="linkWeb" wrappingWidth="121.13671875">
-               <font>
-                  <Font size="13.0" />
-               </font>
-            </Text>
-            <ScrollPane layoutX="14.0" layoutY="13.0" prefHeight="122.0" prefWidth="368.0">
-               <content>
-                  <Text fx:id="descripcion" strokeType="OUTSIDE" strokeWidth="0.0" text="Descripción" textAlignment="JUSTIFY" wrappingWidth="365.73675537109375" />
-               </content>
-            </ScrollPane>
-         </children>
-      </AnchorPane>
-   </bottom>
    <center>
-      <AnchorPane prefHeight="114.0" prefWidth="301.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="148.0" prefWidth="372.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fx:id="imageViewPrincipal" fitHeight="196.0" fitWidth="370.0" pickOnBounds="true" preserveRatio="true">
-               <viewport>
-                  <Rectangle2D />
-               </viewport></ImageView>
+            <VBox alignment="CENTER_LEFT" prefHeight="375.0" prefWidth="407.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Pane fx:id="imagePane" prefHeight="221.0" prefWidth="396.0" style="-fx-background-color: #101; -fx-border-radius: 10;" VBox.vgrow="ALWAYS">
+                     <children>
+                        <ImageView fx:id="imageViewPrincipal" pickOnBounds="true" preserveRatio="true">
+                           <viewport>
+                              <Rectangle2D />
+                           </viewport></ImageView>
+                     </children>
+                     <VBox.margin>
+                        <Insets left="7.0" right="5.0" />
+                     </VBox.margin>
+                  </Pane>
+                  <ScrollPane fx:id="descripcionScrollPane" prefHeight="159.0" prefWidth="402.0" style="-fx-background-color: transparent;" VBox.vgrow="ALWAYS">
+                     <content>
+                        <Text fx:id="descripcion" boundsType="VISUAL" strokeType="OUTSIDE" strokeWidth="0.0" text="Descripción" textAlignment="JUSTIFY" wrappingWidth="390.1890869140625" />
+                     </content>
+                     <VBox.margin>
+                        <Insets bottom="7.0" left="7.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </ScrollPane>
+               </children>
+               <padding>
+                  <Insets bottom="7.0" top="7.0" />
+               </padding>
+            </VBox>
          </children>
       </AnchorPane>
    </center>
