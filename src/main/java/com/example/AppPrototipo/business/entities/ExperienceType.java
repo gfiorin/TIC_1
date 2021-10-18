@@ -1,6 +1,7 @@
 package com.example.AppPrototipo.business.entities;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "types_of_experiences")
@@ -19,6 +20,11 @@ public class ExperienceType {
         this.name = name;
     }
 
+    public ExperienceType(String name, List<Interest> interests){
+        this.name = name;
+        //this.interests=interests;
+    }
+
     public Integer getId_types_of_experiences() {
         return id_types_of_experiences;
     }
@@ -30,5 +36,9 @@ public class ExperienceType {
     public void setName(String name) {
         this.name = name;
     }
+
+    //@ManyToMany
+    //@JoinColumn(name="type_of_experience");
+    //public List<Interest> interests;
 
 }

@@ -36,6 +36,9 @@ public class AdminController {
     @FXML
     private Button addOperatorToTouristOperator;
 
+    @FXML
+    private Button addTypeOfExperience;
+
     public AdminController(){};
 
     @FXML
@@ -54,7 +57,7 @@ public class AdminController {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
 
-        Parent root = fxmlLoader.load(TouristsTableController.class.getResourceAsStream("OperatorsTable.fxml"));
+        Parent root = fxmlLoader.load(OperatorsTableController.class.getResourceAsStream("OperatorsTable.fxml"));
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.show();
@@ -76,7 +79,18 @@ public class AdminController {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
 
-        Parent root = fxmlLoader.load(TouristsTableController.class.getResourceAsStream("ExperiencesTable.fxml"));
+        Parent root = fxmlLoader.load(ExperiencesTableController.class.getResourceAsStream("ExperiencesTable.fxml"));
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+
+    @FXML
+    void showCreateTypeOfExperience(ActionEvent event) throws Exception {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
+
+        Parent root = fxmlLoader.load(TypeOfExperienceController.class.getResourceAsStream("TypeOfExperience.fxml"));
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.show();
