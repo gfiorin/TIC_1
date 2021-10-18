@@ -10,5 +10,10 @@
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.example.AppPrototipo.ui.admin.OperatorsTableController"
             prefHeight="400.0" prefWidth="600.0">
-
+    <TableView fx:id="operatorTable" layoutY="24.0" prefHeight="353.0" prefWidth="919.0">
+        <columns>
+            <TableColumn fx:id="id" prefWidth="63.19998013973236" text="ID"/>
+            <TableColumn fx:id="idTouristOperator" prefWidth="87.20001983642578" text="Tourist Operator"/>
+        </columns>
+    </TableView>
 </AnchorPane>

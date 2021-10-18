@@ -5,9 +5,12 @@ import com.example.AppPrototipo.business.entities.Tourist;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface TourOperatorRepository extends CrudRepository<TourOperator, Integer>{
 
     TourOperator findOneByCompanyName(String companyName);
+    List<TourOperator> findAll();
 
 }

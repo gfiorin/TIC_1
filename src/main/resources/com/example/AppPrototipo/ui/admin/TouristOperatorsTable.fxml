@@ -5,12 +5,21 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.AppPrototipo.ui.admin.TouristOperatorsTableController">
-   <children>
-      <ToolBar layoutX="200.0" layoutY="150.0" prefHeight="40.0" prefWidth="200.0">
-        <items>
-          <Button mnemonicParsing="false" text="Button" />
-        </items>
-      </ToolBar>
-   </children>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.AppPrototipo.ui.admin.TouristOperatorsTableController">
+    <TableView fx:id="touristOperatorTable" layoutY="24.0" prefHeight="353.0" prefWidth="919.0">
+        <columns>
+            <TableColumn fx:id="id" prefWidth="63.19998013973236" text="ID"/>
+            <TableColumn fx:id="companyName" prefWidth="87.20001983642578" text="Company"/>
+            <TableColumn fx:id="fantasyName" prefWidth="85.59994506835938" text="Fantasy name"/>
+            <TableColumn fx:id="webLink" prefWidth="108.0" text="Link to web"/>
+            <TableColumn fx:id="contactName" prefWidth="81.5999755859375" text="Contact name"/>
+            <TableColumn fx:id="contactPhone" prefWidth="102.4000244140625" text="Contact phone"/>
+            <TableColumn fx:id="contactPosition" prefWidth="95.20001220703125" text="Contact position"/>
+            <TableColumn fx:id="contactEmail" prefWidth="119.20001220703125" text="Contact Email"/>
+            <TableColumn fx:id="authorized" minWidth="0.0" prefWidth="97.60009765625" text="Authorized"/>
+        </columns>
+    </TableView>
 </AnchorPane>

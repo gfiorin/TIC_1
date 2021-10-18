@@ -36,7 +36,7 @@ public class AdminController {
     @FXML
     private Button addTypeOfExperience;
 
-    public AdminController(){};
+    public AdminController(){}
 
     @FXML
     void showTouristsList(ActionEvent event) throws Exception {
@@ -65,7 +65,7 @@ public class AdminController {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
 
-        Parent root = fxmlLoader.load(TouristsTableController.class.getResourceAsStream("TouristOperatorsTable.fxml"));
+        Parent root = fxmlLoader.load(TouristOperatorsTableController.class.getResourceAsStream("TouristOperatorsTable.fxml"));
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.show();
