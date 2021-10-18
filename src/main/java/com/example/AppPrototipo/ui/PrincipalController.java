@@ -100,8 +100,8 @@ public class PrincipalController {
             } else if (type == Operator.class){
                 //Do nothing for now
             }
-        } catch (InvalidInformation invalidInformation) { // deberia hacer algo
-            invalidInformation.printStackTrace();
+        } catch (InvalidInformation invalidInformation) {
+            showAlert("Datos ingresados erroneos!", invalidInformation.getMessage());
         }
     }
 

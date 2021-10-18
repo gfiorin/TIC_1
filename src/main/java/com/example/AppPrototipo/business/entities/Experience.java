@@ -17,6 +17,9 @@ public class Experience {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "shortdescription")
+    private String shortdescription;
+
     @Column(name = "vaccination")
     private boolean vaccination;
 
@@ -35,25 +38,34 @@ public class Experience {
     @ManyToMany
     @JoinTable(
             name = "types_experiences",
-            joinColumns = {@JoinColumn(name = "id_experience")},
-            inverseJoinColumns = {@JoinColumn(name = "id_type_of_experience")}
+            joinColumns = {@JoinColumn(name = "experience")},
+            inverseJoinColumns = {@JoinColumn(name = "type_of_experience")}
     )
     private List<ExperienceType> experienceTypes;
 
     @ManyToOne
-    @JoinColumn(name="id_tourist_operator")
+    @JoinColumn(name="tour_operator")
     private TourOperator tourOperator;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "experience")
+    List<Image> images;
+
+    @Column(name = "location")
+    private String ubicacion;
 
     public Experience() {
     }
 
-    public Experience(String title, String description, boolean vaccination, Integer capacity, boolean bookable, boolean authorized) {
+    public Experience(String title, String description, String shortdescription, boolean vaccination, Integer capacity, boolean bookable, boolean authorized, List<Image> images) {
         this.title = title;
         this.description = description;
+        this.shortdescription = shortdescription;
         this.vaccination = vaccination;
         this.capacity = capacity;
         this.bookable = bookable;
         this.authorized = authorized;
+        this.images = images;
     }
 
     public Integer getId() {
@@ -107,4 +119,24 @@ public class Experience {
     public void setAuthorized(boolean authorized) {
         this.authorized = authorized;
     }
+
+    public List<Image> getImages() {
+        return images;
+    }
+
+    public void setImages(List<Image> images) {
+        this.images = images;
+    }
+
+    public String getUbicacion() {
+        return ubicacion;
+    }
+
+    public void setUbicacion(String ubicacion) {
+        this.ubicacion = ubicacion;
+    }
+
+    public String getShortDescription() { return shortdescription; }
+
+    public void setShortDescription(String shortDescription) { this.shortdescription = shortDescription; }
 }

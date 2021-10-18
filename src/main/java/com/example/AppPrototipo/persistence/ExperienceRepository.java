@@ -9,7 +9,7 @@ import java.util.List;
 @Repository
 public interface ExperienceRepository extends CrudRepository<Experience, Integer> {
 
-    Experience findOneByTitle(String title);
+    Experience findById(int id);
 
     List<Experience> findAll();
 
