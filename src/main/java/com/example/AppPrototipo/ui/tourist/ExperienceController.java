@@ -8,15 +8,18 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import org.springframework.stereotype.Component;
 
 import java.io.ByteArrayInputStream;
-import java.net.URL;
 
 @Component
 public class ExperienceController {
+
+    @FXML
+    AnchorPane rightAnchorPane;
 
     @FXML
     Text nombreExperiencia;
@@ -52,22 +55,26 @@ public class ExperienceController {
 
     @FXML
     private void initialize(){
-        Image imageMarker = new Image(getClass().getResourceAsStream("/imgs/location.png"));
-        imageViewMarker.setImage(imageMarker);
-
+        //POPOULACION
         Experience experience = experienceRepository.findById(1);
 
         //Populacion de campos
         nombreExperiencia.setText(experience.getTitle());
+        nombreExperiencia.wrappingWidthProperty().bind(rightAnchorPane.prefWidthProperty());
         ubicacion.setText(experience.getUbicacion());
-        vacunacion.setText((experience.isVaccination() ? "No" : "Si") + "requiere vacunacion");
-//        email.setText(experience.);
-//        nombreEmpresa.setText(experience.);
-//        linkWeb.setText(experience.);
+        ubicacion.wrappingWidthProperty().bind(rightAnchorPane.prefWidthProperty());
+
+        vacunacion.setText((experience.isVaccination() ? "No" : "Si") + " requiere vacunacion");
+        email.setText(experience.getEmail());
+        nombreEmpresa.setText(experience.getTourOperator().getCompanyName());
+        linkWeb.setText(experience.getLink());
         descripcion.setText(experience.getDescription());
         descripcion.wrappingWidthProperty().bind(descripcionScrollPane.widthProperty());
 
-        //Populacion de imagen
+        //Populacion de imagenes
+        Image imageMarker = new Image(getClass().getResourceAsStream("/imgs/location.png"));
+        imageViewMarker.setImage(imageMarker);
+
         Image image = new Image(new ByteArrayInputStream(experience.getImages().get(0).getImageData()));
         double oldImageWidth = image.getWidth(), oldImageHeight = image.getHeight();            //saving the original image size and ratio
         double imageRatio = oldImageWidth / oldImageHeight;

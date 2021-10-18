@@ -23,9 +23,6 @@ public class Experience {
     @Column(name = "capacity")
     private Integer capacity;
 
-    //@Column(name = "")
-    //private String image;
-
     @Column(name = "bookable")
     private boolean bookable;
 
@@ -51,10 +48,16 @@ public class Experience {
     @Column(name = "location")
     private String ubicacion;
 
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "link")
+    private String link;
+
     public Experience() {
     }
 
-    public Experience(String title, String description, boolean vaccination, Integer capacity, boolean bookable, boolean authorized, List<Image> images) {
+    public Experience(String title, String description, boolean vaccination, Integer capacity, boolean bookable, boolean authorized, String email, String link, List<Image> images) {
         this.title = title;
         this.description = description;
         this.vaccination = vaccination;
@@ -62,6 +65,8 @@ public class Experience {
         this.bookable = bookable;
         this.authorized = authorized;
         this.images = images;
+        this.email = email;
+        this.link = link;
     }
 
     public Integer getId() {
@@ -130,5 +135,21 @@ public class Experience {
 
     public void setUbicacion(String ubicacion) {
         this.ubicacion = ubicacion;
+    }
+
+    public TourOperator getTourOperator() {
+        return tourOperator;
+    }
+
+    public List<ExperienceType> getExperienceTypes() {
+        return experienceTypes;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getLink() {
+        return link;
     }
 }
