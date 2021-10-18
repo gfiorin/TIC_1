@@ -10,4 +10,6 @@ public interface TourOperatorRepository extends CrudRepository<TourOperator, Int
 
     TourOperator findOneByCompanyName(String companyName);
 
+    TourOperator findOneByFantasyName(String fantasyName);
+
 }

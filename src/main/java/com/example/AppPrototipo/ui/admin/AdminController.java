@@ -33,6 +33,9 @@ public class AdminController {
     @FXML
     private Button addTouristOperator;
 
+    @FXML
+    private Button addOperatorToTouristOperator;
+
     public AdminController(){};
 
     @FXML
@@ -74,6 +77,17 @@ public class AdminController {
         fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
 
         Parent root = fxmlLoader.load(TouristsTableController.class.getResourceAsStream("ExperiencesTable.fxml"));
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+
+    @FXML
+    void agregarOperadorTuristico(ActionEvent event) throws Exception {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
+
+        Parent root = fxmlLoader.load(TouristsTableController.class.getResourceAsStream("AddTouristOperatorPanel.fxml"));
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.show();

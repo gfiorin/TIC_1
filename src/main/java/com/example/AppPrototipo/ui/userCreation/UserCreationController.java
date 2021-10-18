@@ -87,7 +87,7 @@ public class UserCreationController {
         boolean invalidValue = false;
         for (Control control : controlList) {
             if (control instanceof TextField) {
-                if (((TextField) control).getText() == null || ((TextField) control).getText().isEmpty()) {
+                if (((TextField) control).getText() == null || ((TextField) control).getText().isBlank()) {
                     invalidValue = true;
                     break;
                 }
