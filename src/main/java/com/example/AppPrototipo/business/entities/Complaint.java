@@ -13,11 +13,13 @@ public class Complaint {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "tourist_id")
-    private Integer touristId;
+    @ManyToOne
+    @JoinColumn(name = "tourist")
+    private Tourist touristId;
 
-    @Column(name = "experience_id")
-    private Integer experienceId;
+    @ManyToOne
+    @JoinColumn(name = "experience")
+    private Experience experienceId;
 
 
 

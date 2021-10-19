@@ -8,15 +8,15 @@ public class Interest {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    @Column(name="id_interests")
+    @Column(name="id")
     private Integer id;
 
     @Column(name="name")
     private String name;
 
-    @ManyToOne
-    @JoinColumn(name="type_of_experience")
-    private ExperienceType experienceType;
+    //@OneToMany
+    //private List<ExperienceType> experienceTypes;
+
 
     public Interest() {
     }

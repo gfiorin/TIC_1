@@ -9,7 +9,8 @@ public class ExperienceType {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private Integer id_types_of_experiences;
+    @Column(name = "id")
+    private Integer id;
 
     @Column(name = "name")
     private String name;
@@ -20,13 +21,13 @@ public class ExperienceType {
         this.name = name;
     }
 
-    public ExperienceType(String name, List<Interest> interests){
+    public ExperienceType(String name, Interest interest){
         this.name = name;
-        //this.interests=interests;
+        this.interest=interest;
     }
 
-    public Integer getId_types_of_experiences() {
-        return id_types_of_experiences;
+    public Integer getId() {
+        return id;
     }
 
     public String getName() {
@@ -37,8 +38,16 @@ public class ExperienceType {
         this.name = name;
     }
 
-    //@ManyToMany
-    //@JoinColumn(name="type_of_experience");
-    //public List<Interest> interests;
+    public Interest getInterest() {
+        return interest;
+    }
+
+    public void setInterest(Interest interest) {
+        this.interest = interest;
+    }
+
+    @ManyToOne
+    @JoinColumn(name="interest")
+    private Interest interest;
 
 }
