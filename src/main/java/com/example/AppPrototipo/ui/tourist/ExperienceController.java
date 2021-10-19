@@ -1,8 +1,10 @@
 package com.example.AppPrototipo.ui.tourist;
 
+import com.example.AppPrototipo.AppPrototipoApplication;
 import com.example.AppPrototipo.business.entities.Experience;
 import com.example.AppPrototipo.persistence.ExperienceRepository;
 import javafx.beans.value.ChangeListener;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;

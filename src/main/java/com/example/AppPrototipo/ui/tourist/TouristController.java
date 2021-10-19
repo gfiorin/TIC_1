@@ -30,7 +30,7 @@ import java.util.ResourceBundle;
 @Component
 public class TouristController implements Initializable {
 
-    private Tourist tourist;
+    private static Tourist tourist;
 
     @FXML
     private ImageView favoritosMarker;
@@ -50,12 +50,12 @@ public class TouristController implements Initializable {
         this.experienceRepository = experienceRepository;
     }
 
-    public Tourist getTourist() {
+    public static Tourist getTourist() {
         return tourist;
     }
 
-    public void setTourist(Tourist tourist) {
-        this.tourist = tourist;
+    public static void setTourist(Tourist tourist) {
+        TouristController.tourist = tourist;
     }
 
     @Override
