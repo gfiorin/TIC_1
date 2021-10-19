@@ -43,7 +43,7 @@ public class Experience {
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "experience")
-    List<Image> images;
+    private List<Image> images;
 
     @Column(name = "location")
     private String ubicacion;
@@ -54,10 +54,13 @@ public class Experience {
     @Column(name = "link")
     private String link;
 
+    @Column(name = "telephone")
+    private String telephone;
+
     public Experience() {
     }
 
-    public Experience(String title, String description, boolean vaccination, Integer capacity, boolean bookable, boolean authorized, String email, String link, List<Image> images) {
+    public Experience(String title, String description, boolean vaccination, Integer capacity, boolean bookable, boolean authorized, String email, String link, String telephone, List<Image> images) {
         this.title = title;
         this.description = description;
         this.vaccination = vaccination;
@@ -67,6 +70,7 @@ public class Experience {
         this.images = images;
         this.email = email;
         this.link = link;
+        this.telephone = telephone;
     }
 
     public Integer getId() {
@@ -151,5 +155,13 @@ public class Experience {
 
     public String getLink() {
         return link;
+    }
+
+    public Experience(String telephone) {
+        this.telephone = telephone;
+    }
+
+    public String getTelephone() {
+        return telephone;
     }
 }
