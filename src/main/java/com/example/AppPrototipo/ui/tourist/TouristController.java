@@ -1,6 +1,7 @@
 package com.example.AppPrototipo.ui.tourist;
 
 import com.example.AppPrototipo.AppPrototipoApplication;
+import com.example.AppPrototipo.business.entities.Tourist;
 import com.example.AppPrototipo.persistence.ExperienceRepository;
 import com.example.AppPrototipo.business.entities.Experience;
 import javafx.event.ActionEvent;
@@ -29,6 +30,8 @@ import java.util.ResourceBundle;
 @Component
 public class TouristController implements Initializable {
 
+    private Tourist tourist;
+
     @FXML
     private ImageView favoritosMarker;
 
@@ -47,10 +50,18 @@ public class TouristController implements Initializable {
         this.experienceRepository = experienceRepository;
     }
 
+    public Tourist getTourist() {
+        return tourist;
+    }
+
+    public void setTourist(Tourist tourist) {
+        this.tourist = tourist;
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        ArrayList<Experience> experiences = new ArrayList<>(experiences());
+        ArrayList<Experience> experiences = new ArrayList<>(recomendations());
 
         int columns = 0;
         int row = 1;
@@ -62,12 +73,7 @@ public class TouristController implements Initializable {
                 VBox vbox = fxmlLoader.load();
                 MiniExperienceController miniExperienceController = fxmlLoader.getController();
                 miniExperienceController.setData(experiences.get(i));
-
-                if(columns == 4){
-                    columns = 0;
-                    ++row;
-                }
-
+                miniExperienceController.setTourist(tourist);
                 grillaExperiencias.add(vbox,columns++,row);
                 GridPane.setMargin(vbox,new Insets(10));
             }
@@ -76,9 +82,9 @@ public class TouristController implements Initializable {
         }
     }
 
-    private List<Experience> experiences(){
+    private List<Experience> recomendations(){
         List<Experience> list = new ArrayList<>();
-        for (int i=0; i<15; i++) {
+        for (int i=0; i<6; i++) {
             Experience experience = experienceRepository.findById(1);
             list.add(experience);
         }

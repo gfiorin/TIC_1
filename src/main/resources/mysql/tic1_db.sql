@@ -475,6 +475,16 @@ CREATE TABLE `reviews` (
                            CONSTRAINT `fk_tour` FOREIGN KEY (`tourist`) REFERENCES `tourists` (`id`)
 );
 
+CREATE TABLE `liked` (
+                                     `tourist` int NOT NULL,
+                                     `experience` int NOT NULL,
+                                     PRIMARY KEY (`tourist`,`experience`),
+                                     KEY `fk_i_idx` (`experience`),
+                                     KEY `fk_t_idx` (`tourist`),
+                                     CONSTRAINT `fk_e` FOREIGN KEY (`experience`) REFERENCES `experiences` (`id`),
+                                     CONSTRAINT `fk_tou` FOREIGN KEY (`tourist`) REFERENCES `tourists` (`id`)
+);
+
 ## CREATE TABLE 'attendance' ();
 
 CREATE USER 'springuser'@'%' identified by 'ThePassword';

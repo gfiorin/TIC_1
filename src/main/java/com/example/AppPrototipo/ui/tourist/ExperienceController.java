@@ -27,6 +27,8 @@ import java.net.URL;
 @Component
 public class ExperienceController {
 
+    private Experience experience;
+
     @FXML
     private Button backBtn;
     @FXML
@@ -60,6 +62,10 @@ public class ExperienceController {
         this.experienceRepository = experienceRepository;
     }
 
+    public void setExperience(Experience experience) {
+        this.experience = experience;
+    }
+
     @FXML
     void backAction(ActionEvent actionEvent) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
@@ -82,7 +88,7 @@ public class ExperienceController {
         //Populacion de campos
         nombreExperiencia.setText(experience.getTitle());
         ubicacion.setText(experience.getUbicacion());
-        vacunacion.setText((experience.isVaccination() ? "No" : "Si") + "requiere vacunacion");
+        vacunacion.setText((experience.isVaccination() ? "No" : "Si") + " requiere vacunacion");
 //        email.setText(experience.);
 //        nombreEmpresa.setText(experience.);
 //        linkWeb.setText(experience.);
