@@ -4,7 +4,12 @@ import com.example.AppPrototipo.business.entities.Experience;
 import com.example.AppPrototipo.persistence.ExperienceRepository;
 import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -12,9 +17,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import org.springframework.stereotype.Component;
 
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 
 @Component
 public class ExperienceController {
@@ -24,7 +31,8 @@ public class ExperienceController {
 
     @FXML
     private AnchorPane rightAnchorPane;
-
+    @FXML
+    private Button backBtn;
     @FXML
     private Text nombreExperiencia;
     @FXML
@@ -57,6 +65,17 @@ public class ExperienceController {
 
     public ExperienceController(ExperienceRepository experienceRepository) {
         this.experienceRepository = experienceRepository;
+    }
+
+    @FXML
+    void backAction(ActionEvent actionEvent) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
+
+        Parent root = fxmlLoader.load(ExperienceController.class.getResourceAsStream("TouristMain.fxml"));
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        stage.setScene(scene);
     }
 
     @FXML

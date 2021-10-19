@@ -17,6 +17,9 @@ public class Experience {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "shortdescription")
+    private String shortdescription;
+
     @Column(name = "vaccination")
     private boolean vaccination;
 
@@ -60,9 +63,10 @@ public class Experience {
     public Experience() {
     }
 
-    public Experience(String title, String description, boolean vaccination, Integer capacity, boolean bookable, boolean authorized, String email, String link, String telephone, List<Image> images) {
+    public Experience(String title, String description, String shortdescription, boolean vaccination, Integer capacity, boolean bookable, boolean authorized, String email, String link, String telephone, List<Image> images) {
         this.title = title;
         this.description = description;
+        this.shortdescription = shortdescription;
         this.vaccination = vaccination;
         this.capacity = capacity;
         this.bookable = bookable;
@@ -140,6 +144,10 @@ public class Experience {
     public void setUbicacion(String ubicacion) {
         this.ubicacion = ubicacion;
     }
+
+    public String getShortDescription() { return shortdescription; }
+
+    public void setShortDescription(String shortDescription) { this.shortdescription = shortDescription; }
 
     public TourOperator getTourOperator() {
         return tourOperator;

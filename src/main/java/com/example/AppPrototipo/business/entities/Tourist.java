@@ -34,6 +34,22 @@ public class Tourist extends User{
     )
     private List<Interest> interests;
 
+    @ManyToMany()
+    @JoinTable(
+            name = "liked",
+            joinColumns = {@JoinColumn(name = "tourist")},
+            inverseJoinColumns = {@JoinColumn(name = "experience")}
+    )
+    private List<Experience> liked;
+
+    public List<Experience> getLiked() {
+        return liked;
+    }
+
+    public void addLiked(Experience experience) {
+        liked.add(experience);
+    }
+
     public Tourist (String name, String username, String email, String password, LocalDate dateOfBirth, String cellphone, Country country, List<Interest> interests, String documentType, String documentNumber) {
         super(name, username, email, password);
         this.dateOfBirth = dateOfBirth;

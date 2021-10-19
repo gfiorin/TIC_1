@@ -370,6 +370,7 @@ CREATE TABLE `experiences` (
                                `authorized` tinyint NOT NULL,
                                `title` varchar(45) NOT NULL,
                                `description` varchar(1000) NOT NULL,
+                               `shortdescription` varchar(600) NOT NULL,
                                `vaccination` tinyint NOT NULL,
                                `capacity` varchar(45) NOT NULL,
                                `bookable` tinyint NOT NULL,
@@ -383,9 +384,8 @@ CREATE TABLE `experiences` (
                                CONSTRAINT `fk_tourist_operator` FOREIGN KEY (`tour_operator`) REFERENCES `tour_operators` (`id`)
 );
 
-INSERT INTO tic1_db.experiences (id,tour_operator,price,location,department,authorized,title,description,vaccination,capacity,bookable, email, link, telephone) VALUES
-(1,1,1000.00,'23 Kingston Drive Lawrence Township, NJ 08648',1,1,'Titulo de experiencia','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ut lacus quis libero dignissim euismod. Duis rhoncus risus eu risus consectetur sagittis. Nulla facilisi. Maecenas nec dui et turpis vulputate lobortis in eget enim. Morbi libero velit, bibendum ac erat et, rutrum gravida nibh. Maecenas bibendum varius fringilla. Sed imperdiet, mauris eget consequat gravida, sem lacus sagittis quam, eget efficitur sapien urna vitae lorem. Sed laoreet lacinia dui, sed vulputate sapien sollicitudin eget. Mauris sollicitudin ac elit at placerat.',1,'100',1,'correo@correo.com', 'google.com', 1234567890);
-
+INSERT INTO tic1_db.experiences (id,tour_operator,price,department,authorized,title,description,shortdescription,vaccination,capacity,bookable, email, link, telephone) VALUES
+(1,1,1000.00,'23 Kingston Drive Lawrence Township, NJ 08648',1,1,'Titulo de experiencia','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ut lacus quis libero dignissim euismod. Duis rhoncus risus eu risus consectetur sagittis. Nulla facilisi. Maecenas nec dui et turpis vulputate lobortis in eget enim. Morbi libero velit, bibendum ac erat et, rutrum gravida nibh. Maecenas bibendum varius fringilla. Sed imperdiet, mauris eget consequat gravida, sem lacus sagittis quam, eget efficitur sapien urna vitae lorem. Sed laoreet lacinia dui, sed vulputate sapien sollicitudin eget. Mauris sollicitudin ac elit at placerat.','Lorem ipsum dolor sit amet, consectetur adipiscing elit.',1,'100',1,'correo@correo.com', 'google.com', 1234567890);
 CREATE TABLE `images` (
                           `id` int NOT NULL AUTO_INCREMENT,
                           `experience` int NOT NULL,
@@ -473,6 +473,16 @@ CREATE TABLE `reviews` (
                            KEY `fk_tou_idx` (`tourist`),
                            CONSTRAINT `fk_expr` FOREIGN KEY (`experience`) REFERENCES `experiences` (`id`),
                            CONSTRAINT `fk_tour` FOREIGN KEY (`tourist`) REFERENCES `tourists` (`id`)
+);
+
+CREATE TABLE `liked` (
+                                     `tourist` int NOT NULL,
+                                     `experience` int NOT NULL,
+                                     PRIMARY KEY (`tourist`,`experience`),
+                                     KEY `fk_i_idx` (`experience`),
+                                     KEY `fk_t_idx` (`tourist`),
+                                     CONSTRAINT `fk_e` FOREIGN KEY (`experience`) REFERENCES `experiences` (`id`),
+                                     CONSTRAINT `fk_tou` FOREIGN KEY (`tourist`) REFERENCES `tourists` (`id`)
 );
 
 ## CREATE TABLE 'attendance' ();

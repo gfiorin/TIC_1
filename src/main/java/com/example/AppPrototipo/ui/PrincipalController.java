@@ -5,8 +5,10 @@ import com.example.AppPrototipo.business.UserMgr;
 import com.example.AppPrototipo.business.entities.Administrator;
 import com.example.AppPrototipo.business.entities.Operator;
 import com.example.AppPrototipo.business.entities.Tourist;
+import com.example.AppPrototipo.business.entities.User;
 import com.example.AppPrototipo.business.exceptions.InvalidInformation;
 import com.example.AppPrototipo.ui.admin.AdminController;
+import com.example.AppPrototipo.ui.tourist.ExperienceController;
 import com.example.AppPrototipo.ui.tourist.TouristController;
 import com.example.AppPrototipo.ui.userCreation.UserCreationController;
 import javafx.event.ActionEvent;
@@ -69,9 +71,9 @@ public class PrincipalController {
         }
 
         try {
-            Class type = userMgr.userLogIn(userInput.getText(), passwordInput.getText());
+            User user = userMgr.userLogIn(userInput.getText(), passwordInput.getText());
 
-            if(type == Administrator.class){
+            if(user instanceof Administrator){
                 Node source = (Node) actionEvent.getSource();
                 Stage oldStage  = (Stage) source.getScene().getWindow();
 
@@ -84,7 +86,7 @@ public class PrincipalController {
                 newStage.show();
 
                 oldStage.close();
-            } else if (type == Tourist.class){
+            } else if (user instanceof Tourist){
                 Node source = (Node) actionEvent.getSource();
                 Stage oldStage  = (Stage) source.getScene().getWindow();
 
@@ -92,12 +94,14 @@ public class PrincipalController {
                 fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
 
                 Parent root = fxmlLoader.load(TouristController.class.getResourceAsStream("TouristMain.fxml"));
+                TouristController touristController = fxmlLoader.getController();
+                touristController.setTourist((Tourist) user);
                 Stage newStage = new Stage();
                 newStage.setScene(new Scene(root));
                 newStage.show();
 
                 oldStage.close();
-            } else if (type == Operator.class){
+            } else if (user instanceof Operator){
                 //Do nothing for now
             }
         } catch (InvalidInformation invalidInformation) {

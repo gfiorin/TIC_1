@@ -98,7 +98,7 @@ public class UserMgr {
 
     }
 
-    public Class userLogIn(String emailOrUsername, String password) throws InvalidInformation {
+    public User userLogIn(String emailOrUsername, String password) throws InvalidInformation {
 
         User user = userRepository.findOneByEmail(emailOrUsername);
 
@@ -115,20 +115,9 @@ public class UserMgr {
         }
 
         if (user.getPassword().equals(password)){
-
-            if (user instanceof Tourist) {
-                return Tourist.class;
-            }
-            else if (user instanceof Administrator) {
-                return Administrator.class;
-            }
-            else {
-                return Operator.class;
-            }
-
+            return  user;
         }
         else{
-
             throw new InvalidInformation("Contraseña incorrecta");
 
         }
