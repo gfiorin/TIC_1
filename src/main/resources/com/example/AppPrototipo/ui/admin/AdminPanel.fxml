@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
 <AnchorPane prefHeight="526.0" prefWidth="944.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.AppPrototipo.ui.admin.AdminController">
    <children>
@@ -10,8 +10,9 @@
       <Button fx:id="listOfTouristsBtn" layoutX="41.0" layoutY="76.0" mnemonicParsing="false" onAction="#showTouristsList" prefHeight="44.0" prefWidth="182.0" text="Turistas" />
       <Button fx:id="listOfExperiencesBtn" layoutX="41.0" layoutY="288.0" mnemonicParsing="false" onAction="#showExperiencesList" prefHeight="44.0" prefWidth="182.0" text="Experiencias" />
       <Button fx:id="addTouristOperator" layoutX="247.0" layoutY="181.0" mnemonicParsing="false" onAction="#agregarOperadorTuristico" prefHeight="44.0" prefWidth="182.0" text="Agregar operador turistico" />
-      <Button fx:id="listOfTouristsBtn2" layoutX="41.0" layoutY="181.0" mnemonicParsing="false" onAction="#showTouristsList" prefHeight="44.0" prefWidth="182.0" text="Administradores" />
-      <Button fx:id="addOperatorToTouristOperator" layoutX="460.0" layoutY="181.0" mnemonicParsing="false" onAction="#showTouristsList" prefHeight="44.0" prefWidth="217.0" text="Asociar operador a operador turistico" />
+      <Button fx:id="listOfAdministratorsBtn" layoutX="41.0" layoutY="181.0" mnemonicParsing="false" onAction="#showListOfAdministrators" prefHeight="44.0" prefWidth="182.0" text="Administradores" />
+      <Button fx:id="addOperatorToTouristOperatorBtn" layoutX="460.0" layoutY="181.0" mnemonicParsing="false" onAction="#addOperatorToTouristOperator" prefHeight="44.0" prefWidth="217.0" text="Asociar operador a operador turistico" />
       <Button fx:id="addTypeOfExperience" layoutX="247.0" layoutY="288.0" mnemonicParsing="false" onAction="#showCreateTypeOfExperience" prefHeight="44.0" prefWidth="182.0" text="Agregar tipo de experiencia" />
+      <Button fx:id="authorizeTourOperatorBtn" layoutX="460.0" layoutY="288.0" mnemonicParsing="false" onAction="#authorizeTourOperator" prefHeight="44.0" prefWidth="218.0" text="(Des)Habilitar operador turístico" />
    </children>
 </AnchorPane>

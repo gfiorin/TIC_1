@@ -1,5 +1,6 @@
 package com.example.AppPrototipo.ui.admin;
 
+
 import com.example.AppPrototipo.business.entities.ExperienceType;
 import com.example.AppPrototipo.business.entities.Interest;
 import com.example.AppPrototipo.persistence.ExperienceTypeRepository;
@@ -7,14 +8,10 @@ import com.example.AppPrototipo.persistence.InterestRepository;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.Alert;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -27,7 +24,11 @@ public class TypeOfExperienceController {
 
     public TextField nameInput;
 
-    public VBox interestVBox;
+    public ComboBox<Interest> interestInput;
+
+    public Button agregarBtn;
+
+    public Button cancelarBtn;
 
     public TypeOfExperienceController(ExperienceTypeRepository experienceTypeRepository, InterestRepository interestRepository) {
         this.experienceTypeRepository = experienceTypeRepository;
@@ -38,17 +39,18 @@ public class TypeOfExperienceController {
     public void initialize(){
         List<Interest> interests = interestRepository.findAll();
         for(Interest interest : interests){
-            CheckBox interestCheckBox = new CheckBox(interest.getName());
-            interestCheckBox.setUserData(interest);
-            interestVBox.getChildren().add(interestCheckBox);
+            interestInput.getItems().add(interest);
         }
 
     }
 
     @FXML
     public void agregarExperienceType(ActionEvent event){
+
         String name = nameInput.getText();
-        if (name == null){
+        Interest interest = interestInput.getValue();
+
+        if (name.isEmpty() || interest == null) {
             showAlert(
                     "Datos faltantes",
                     "Uno o mas campos esta vacio. Por favor, verifique la informacion introducida.");
@@ -59,23 +61,14 @@ public class TypeOfExperienceController {
         } else {
             try {
 
-                List<Interest> interests = new ArrayList<>();
-
-                for (Node node : interestVBox.getChildren()) {
-                    CheckBox checkBox = (CheckBox) node;
-                    if (checkBox.isSelected()) {
-                        interests.add((Interest) checkBox.getUserData());
-                    }
-                }
-
-                ExperienceType newType = new ExperienceType(name, interests);
+                ExperienceType newType = new ExperienceType(name, interest);
 
                 experienceTypeRepository.save(newType);
 
                 close(event);
 
 
-            } catch (Exception e) {}
+            } catch (Exception ignored) {}
         }
 
 

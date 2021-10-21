@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.AppPrototipo.ui.admin.OperatorsTableController"
+            fx:controller="com.example.AppPrototipo.ui.admin.ListOfAdministratorsController"
             prefHeight="400.0" prefWidth="600.0">
-    <TableView fx:id="operatorTable" layoutY="24.0" prefHeight="353.0" prefWidth="919.0">
+    <TableView fx:id="adminTable" layoutY="24.0" prefHeight="353.0" prefWidth="919.0">
         <columns>
             <TableColumn fx:id="id" prefWidth="63.19998013973236" text="ID"/>
             <TableColumn fx:id="name" prefWidth="90" text="Nombre"/>
             <TableColumn fx:id="username" prefWidth="90" text="Nombre de usuario"/>
             <TableColumn fx:id="email" prefWidth="90" text="Email"/>
-            <TableColumn fx:id="idTourOperator" prefWidth="100" text="Tourist Operator"/>
         </columns>
     </TableView>
 </AnchorPane>

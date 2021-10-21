@@ -1,7 +1,6 @@
 package com.example.AppPrototipo.business.entities;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name="interests")
@@ -15,9 +14,9 @@ public class Interest {
     @Column(name="name")
     private String name;
 
-    @OneToMany()
-    @JoinColumn(name="interest")
-    private List<ExperienceType> experienceType;
+    //@OneToMany
+    //private List<ExperienceType> experienceTypes;
+
 
     public Interest() {
     }

@@ -5,7 +5,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "operators")
 @PrimaryKeyJoinColumn(name = "id")
-public class Operator extends User{
+public class Operator extends User {
 
     @ManyToOne
     @JoinColumn(name="toperator")

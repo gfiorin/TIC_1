@@ -53,8 +53,8 @@ public class TouristsTableController {
     @FXML
     private TableColumn<Tourist, Country> country;
 
-    //@FXML
-    //private TableColumn<Tourist, List<Interest>> listOfInterests;
+    @FXML
+    private TableColumn<Tourist, List<Interest>> listOfInterests;
 
     private final TouristRepository touristRepository;
 
