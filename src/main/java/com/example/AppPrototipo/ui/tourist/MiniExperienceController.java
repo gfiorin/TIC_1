@@ -22,7 +22,7 @@ public class MiniExperienceController {
 
     private Experience experience;
 
-    private Tourist tourist;
+    private static Tourist tourist;
 
     @FXML
     private Text descripcionCorta;
@@ -36,12 +36,12 @@ public class MiniExperienceController {
     @FXML
     private Text nombreExperiencia;
 
-    public Tourist getTourist() {
+    public static Tourist getTourist() {
         return tourist;
     }
 
-    public void setTourist(Tourist tourist) {
-        this.tourist = tourist;
+    public static void setTourist(Tourist tourist) {
+        MiniExperienceController.tourist = tourist;
     }
 
     public Experience getExperience() {
