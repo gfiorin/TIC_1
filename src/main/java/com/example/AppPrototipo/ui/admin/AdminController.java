@@ -34,10 +34,14 @@ public class AdminController {
     private Button addTouristOperator;
 
     @FXML
-    private Button addOperatorToTouristOperator;
+    private Button addOperatorToTouristOperatorBtn;
 
     @FXML
     private Button addTypeOfExperience;
+
+    @FXML
+    private Button authorizeTourOperatorBtn;
+
 
     public AdminController(){}
 
@@ -101,11 +105,47 @@ public class AdminController {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
 
-        Parent root = fxmlLoader.load(TouristsTableController.class.getResourceAsStream("AddTouristOperatorPanel.fxml"));
+        Parent root = fxmlLoader.load(AddTouristOperatorPanelController.class.getResourceAsStream("AddTouristOperator.fxml"));
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.show();
     }
+
+    @FXML
+    void addOperatorToTouristOperator(ActionEvent event) throws Exception {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
+
+        Parent root = fxmlLoader.load(AddOperatorToTouristOperatorController.class.getResourceAsStream("AddOperatorToTouristOperator.fxml"));
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+
+    @FXML
+    void showListOfAdministrators(ActionEvent event) throws Exception {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
+
+        Parent root = fxmlLoader.load(ListOfAdministratorsController.class.getResourceAsStream("ListOfAdministrators.fxml"));
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+
+    @FXML
+    void authorizeTourOperator(ActionEvent event) throws Exception {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
+
+        Parent root = fxmlLoader.load(AuthorizeTourOperatorController.class.getResourceAsStream("AuthorizeTourOperator.fxml"));
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+
+
+
 
     @FXML
     void close(ActionEvent event){

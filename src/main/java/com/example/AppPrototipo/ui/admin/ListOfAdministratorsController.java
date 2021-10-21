@@ -1,9 +1,7 @@
 package com.example.AppPrototipo.ui.admin;
 
-import com.example.AppPrototipo.business.entities.Operator;
-import com.example.AppPrototipo.business.entities.TourOperator;
-import com.example.AppPrototipo.business.entities.Tourist;
-import com.example.AppPrototipo.persistence.OperatorsRepository;
+import com.example.AppPrototipo.business.entities.Administrator;
+import com.example.AppPrototipo.persistence.AdministratorRepository;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,54 +16,50 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+
 @Component
-public class OperatorsTableController {
+public class ListOfAdministratorsController {
 
-    private final OperatorsRepository operatorsRepository;
+    private final AdministratorRepository administratorRepository;
+
 
     @FXML
-    private TableView<Operator> operatorTable;
+    private TableView<Administrator> adminTable;
 
     @FXML
-    private TableColumn<Operator, Integer> id;
+    private TableColumn<Administrator, Integer> id;
 
     @FXML
-    private TableColumn<Operator, String> name;
+    private TableColumn<Administrator, String> name;
 
     @FXML
-    private TableColumn<Operator, String> username;
+    private TableColumn<Administrator, String> username;
 
     @FXML
-    private TableColumn<Operator, String> email;
-
-    @FXML
-    private TableColumn<Operator, Integer> idTourOperator;
-    // modificar para que muestre el nombre del operador turistico en lugar del id
+    private TableColumn<Administrator, String> email;
 
 
 
-
-    public OperatorsTableController(OperatorsRepository operatorsRepository) {
-        this.operatorsRepository = operatorsRepository;
+    public ListOfAdministratorsController(AdministratorRepository administratorRepository) {
+        this.administratorRepository = administratorRepository;
     }
 
     @FXML
     public void initialize(){
-        operatorTable.setItems(getOperators());
+        adminTable.setItems(getAdministrators());
 
         id.setCellValueFactory(new PropertyValueFactory<>("id"));
         name.setCellValueFactory(new PropertyValueFactory<>("name"));
         username.setCellValueFactory(new PropertyValueFactory<>("username"));
         email.setCellValueFactory(new PropertyValueFactory<>("email"));
-        //tourOperator.setCellValueFactory(new PropertyValueFactory<>("tourOperator"));
-        idTourOperator.setCellValueFactory(new PropertyValueFactory<>("idTourOperator"));
+
     }
 
-
-    private ObservableList<Operator> getOperators() {
-        List<Operator> operatorList = operatorsRepository.findAll();
-        return FXCollections.observableArrayList(operatorList);
+    private ObservableList<Administrator> getAdministrators() {
+        List<Administrator> administratorsList = administratorRepository.findAll();
+        return FXCollections.observableArrayList(administratorsList);
     }
+
 
     @FXML
     void close(ActionEvent event){

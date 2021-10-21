@@ -7,7 +7,7 @@
 
 <AnchorPane prefHeight="401.0" prefWidth="828.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.AppPrototipo.ui.admin.ExperiencesTableController">
    <children>
-      <TableView prefHeight="401.0" prefWidth="837.0">
+      <TableView fx:id="experiencesTable" prefHeight="401.0" prefWidth="837.0">
         <columns>
           <TableColumn fx:id="id" prefWidth="75.0" text="ID" />
             <TableColumn prefWidth="126.0" text="Operador Turistico" />
