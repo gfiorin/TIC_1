@@ -1,6 +1,7 @@
 package com.example.AppPrototipo.business.entities;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "types_of_experiences")
@@ -24,6 +25,10 @@ public class ExperienceType {
         this.name = name;
         this.interest=interest;
     }
+
+    public ExperienceType(String name, List<Interest> interests) {
+    }
+
 
     public Integer getId() {
         return id;

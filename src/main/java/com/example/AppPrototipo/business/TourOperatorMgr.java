@@ -70,6 +70,18 @@ public class TourOperatorMgr {
             throw new TourOperatorAlreadyExists("El nombre de fantasia de la compañia ya ha sido registrado en el sistema");
         }
 
+        if (tourOperatorRepository.findOneByContactPhone(contactPhone) != null) {
+            throw new TourOperatorAlreadyExists("El telefono de contacto de la compañia ya ha sido registrado en el sistema");
+        }
+
+        if (tourOperatorRepository.findOneByContactEmail(contactEmail) != null) {
+            throw new TourOperatorAlreadyExists("El email de contacto de la compañia ya ha sido registrado en el sistema");
+        }
+
+        if (tourOperatorRepository.findOneByLinkToWeb(linkToWeb) != null) {
+            throw new TourOperatorAlreadyExists("El link de la compañia ya ha sido registrado en el sistema");
+        }
+
         TourOperator tourOperatorToAdd = new TourOperator(companyName, fantasyName, linkToWeb, contactName, contactPhone, contactPosition, contactEmail, authorized);
 
         tourOperatorRepository.save(tourOperatorToAdd);

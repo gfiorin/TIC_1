@@ -85,10 +85,12 @@ public class AddTouristOperatorPanelController {
                 String linkToWeb = linkToWebInput.getText();
                 boolean authorized = authorizedInput.isSelected();
 
+                tourOperatorMgr.addTourOperator(companyName, fantasyName, linkToWeb, contactName, contactPhone, contactPosition, contactEmail, authorized);
 
-                tourOperatorMgr.addTourOperator(companyName, fantasyName, contactPhone, contactEmail, contactName, contactPosition, linkToWeb, authorized);
+                showAlert("Operador turistico creado con exito", "El operador turistico ha sido creado con exito!\n¿Desea asociar un operador a este operador turistico?");
 
-                showAlert("Operador turistico creado con exito", "El operador turistico ha sido creado con exito");
+
+
 
                 close(event);
 

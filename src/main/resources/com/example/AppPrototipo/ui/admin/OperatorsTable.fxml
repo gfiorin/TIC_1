@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.AppPrototipo.ui.admin.OperatorsTableController"
-            prefHeight="400.0" prefWidth="600.0">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.AppPrototipo.ui.admin.OperatorsTableController">
     <TableView fx:id="operatorTable" layoutY="24.0" prefHeight="353.0" prefWidth="919.0">
         <columns>
-            <TableColumn fx:id="id" prefWidth="63.19998013973236" text="ID"/>
-            <TableColumn fx:id="name" prefWidth="90" text="Nombre"/>
-            <TableColumn fx:id="username" prefWidth="90" text="Nombre de usuario"/>
-            <TableColumn fx:id="email" prefWidth="90" text="Email"/>
-            <TableColumn fx:id="idTourOperator" prefWidth="100" text="Tourist Operator"/>
+            <TableColumn fx:id="id" prefWidth="63.19998013973236" text="ID" />
+            <TableColumn fx:id="name" prefWidth="190.39999389648438" text="Nombre" />
+            <TableColumn fx:id="username" prefWidth="163.20001220703125" text="Nombre de usuario" />
+            <TableColumn fx:id="email" prefWidth="204.79998779296875" text="Email" />
+            <TableColumn fx:id="idTourOperator" prefWidth="295.9999877929688" text="Tourist Operator" />
         </columns>
     </TableView>
 </AnchorPane>
