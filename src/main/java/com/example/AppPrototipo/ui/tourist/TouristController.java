@@ -70,10 +70,10 @@ public class TouristController implements Initializable {
             for (int i=0; i < experiences.size(); i++){
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setLocation(getClass().getResource("MiniExperience.fxml"));
+                MiniExperienceController.setTourist(tourist);
                 VBox vbox = fxmlLoader.load();
                 MiniExperienceController miniExperienceController = fxmlLoader.getController();
                 miniExperienceController.setData(experiences.get(i));
-                miniExperienceController.setTourist(tourist);
                 grillaExperiencias.add(vbox,columns++,row);
                 GridPane.setMargin(vbox,new Insets(10));
             }
