@@ -13,8 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<BorderPane prefHeight="576.0" prefWidth="853.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.AppPrototipo.ui.tourist.TouristController">
+<BorderPane prefHeight="576.0" prefWidth="853.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.AppPrototipo.ui.tourist.TouristController">
    <left>
       <VBox prefWidth="213.0" style="-fx-background-color: #998;" BorderPane.alignment="CENTER">
          <children>
@@ -22,7 +21,7 @@
                <children>
                   <HBox prefHeight="45.0" prefWidth="205.0" spacing="10.0">
                      <children>
-                        <ImageView fx:id="perfilMarker" fitHeight="32.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="perfilMarker" fitHeight="32.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true" smooth="false">
                            <HBox.margin>
                               <Insets bottom="10.0" top="10.0" />
                            </HBox.margin>
@@ -99,7 +98,7 @@
       </VBox>
    </left>
    <top>
-      <HBox prefHeight="55.0" prefWidth="853.0" BorderPane.alignment="CENTER" />
+      <HBox prefHeight="30.0" prefWidth="854.0" BorderPane.alignment="CENTER" />
    </top>
    <center>
       <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
