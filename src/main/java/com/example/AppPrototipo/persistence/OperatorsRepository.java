@@ -10,6 +10,7 @@ import java.util.List;
 public interface OperatorsRepository extends CrudRepository<Operator, Integer> {
 
     Operator findOneByEmail(String email);
+    Operator findOneByUsername(String username);
     List<Operator> findAll();
 
 }
