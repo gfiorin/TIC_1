@@ -11,7 +11,7 @@
             <TableColumn fx:id="name" prefWidth="190.39999389648438" text="Nombre" />
             <TableColumn fx:id="username" prefWidth="163.20001220703125" text="Nombre de usuario" />
             <TableColumn fx:id="email" prefWidth="204.79998779296875" text="Email" />
-            <TableColumn fx:id="idTourOperator" prefWidth="295.9999877929688" text="Tourist Operator" />
+            <TableColumn fx:id="idTourOperator" prefWidth="295.9999877929688" text="Operador turístico" />
         </columns>
     </TableView>
 </AnchorPane>
