@@ -124,4 +124,8 @@ public class UserMgr {
 
     }
 
+    public void updateTourist(Tourist tourist){
+        touristRepository.save(tourist);
+    }
+
 }

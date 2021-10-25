@@ -1,9 +1,9 @@
 package com.example.AppPrototipo.ui.tourist;
 
 import com.example.AppPrototipo.AppPrototipoApplication;
+import com.example.AppPrototipo.business.entities.Experience;
 import com.example.AppPrototipo.business.entities.Tourist;
 import com.example.AppPrototipo.persistence.ExperienceRepository;
-import com.example.AppPrototipo.business.entities.Experience;
 import com.example.AppPrototipo.ui.PrincipalController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,10 +13,7 @@ import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -29,7 +26,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 @Component
-public class TouristController implements Initializable {
+public class LikedController implements Initializable {
 
     private static Tourist tourist;
 
@@ -47,10 +44,22 @@ public class TouristController implements Initializable {
 
     private final ExperienceRepository experienceRepository;
 
+    public LikedController(ExperienceRepository experienceRepository) {
+        this.experienceRepository = experienceRepository;
+    }
+
+    public static Tourist getTourist() {
+        return tourist;
+    }
+
+    public static void setTourist(Tourist tourist) {
+        LikedController.tourist = tourist;
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        ArrayList<Experience> experiences = new ArrayList<>(recomendations());
+        ArrayList<Experience> experiences = new ArrayList<>(liked(tourist));
 
         int columns = 0;
         int row = 1;
@@ -69,18 +78,6 @@ public class TouristController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public TouristController(ExperienceRepository experienceRepository) {
-        this.experienceRepository = experienceRepository;
-    }
-
-    public static Tourist getTourist() {
-        return tourist;
-    }
-
-    public static void setTourist(Tourist tourist) {
-        TouristController.tourist = tourist;
     }
 
     public void perfilAction(ActionEvent event) throws IOException {
@@ -112,12 +109,7 @@ public class TouristController implements Initializable {
         stage.setScene(scene);
     }
 
-    private List<Experience> recomendations(){
-        List<Experience> list = new ArrayList<>();
-        for (int i=0; i<6; i++) {
-            Experience experience = experienceRepository.findById(1);
-            list.add(experience);
-        }
-        return list;
+    private List<Experience> liked(Tourist tourist){
+        return tourist.getLiked();
     }
 }
