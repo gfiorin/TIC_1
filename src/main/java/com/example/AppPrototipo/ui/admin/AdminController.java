@@ -34,7 +34,7 @@ public class AdminController {
     private Button addTouristOperator;
 
     @FXML
-    private Button addOperatorToTouristOperatorBtn;
+    private Button addOperatorBtn;
 
     @FXML
     private Button addTypeOfExperience;
@@ -132,11 +132,11 @@ public class AdminController {
     }
 
     @FXML
-    void addOperatorToTouristOperator(ActionEvent event) throws Exception {
+    void addOperator(ActionEvent event) throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
 
-        Parent root = fxmlLoader.load(AddOperatorToTouristOperatorController.class.getResourceAsStream("AddOperatorToTouristOperator.fxml"));
+        Parent root = fxmlLoader.load(AddOperatorController.class.getResourceAsStream("AddOperator.fxml"));
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.show();

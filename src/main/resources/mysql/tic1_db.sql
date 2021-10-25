@@ -11,7 +11,8 @@ CREATE TABLE `users` (
                          `password` varchar(45) NOT NULL,
                          `email` varchar(45) NOT NULL,
                          PRIMARY KEY (`id`),
-                         UNIQUE KEY `email_UNIQUE` (`email`)
+                         UNIQUE KEY `email_UNIQUE` (`email`),
+                         UNIQUE KEY `username_UNIQUE` (`username`)
 );
 
 CREATE TABLE `countries` (

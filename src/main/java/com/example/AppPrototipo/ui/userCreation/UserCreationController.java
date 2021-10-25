@@ -140,7 +140,6 @@ public class UserCreationController {
                     }
                 }
 
-
                 userMgr.addTourist(name, user, email, password, dateOfBirth, cellphone, countryId, interests, null, null);
 
                 showAlert("Usuario creado con exito", "El usuario ha sido creado con exito");
