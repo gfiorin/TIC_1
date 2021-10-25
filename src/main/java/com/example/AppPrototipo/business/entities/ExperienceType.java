@@ -9,7 +9,7 @@ public class ExperienceType {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name = "id") // es necesario? todo
+    @Column(name = "id")
     private Integer id;
 
     @Column(name = "name")

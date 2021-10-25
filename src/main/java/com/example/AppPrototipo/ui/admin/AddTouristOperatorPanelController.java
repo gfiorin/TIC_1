@@ -1,18 +1,23 @@
 package com.example.AppPrototipo.ui.admin;
 
+import com.example.AppPrototipo.AppPrototipoApplication;
 import com.example.AppPrototipo.business.TourOperatorMgr;
 import com.example.AppPrototipo.business.exceptions.InvalidInformation;
 import com.example.AppPrototipo.business.exceptions.TourOperatorAlreadyExists;
 import com.example.AppPrototipo.business.exceptions.UserAlreadyExsists;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class AddTouristOperatorPanelController {
@@ -54,7 +59,7 @@ public class AddTouristOperatorPanelController {
     }
 
     @FXML
-    void addTouristOperator(ActionEvent event) {
+    void addTouristOperator(ActionEvent event) throws Exception{
 
         List<Control> controlList = Arrays.asList(companyNameInput, fantasyNameInput, contactPhoneInput, contactEmailInput, contactNameInput, contactPositionInput, linkToWebInput);
 
@@ -87,12 +92,29 @@ public class AddTouristOperatorPanelController {
 
                 tourOperatorMgr.addTourOperator(companyName, fantasyName, linkToWeb, contactName, contactPhone, contactPosition, contactEmail, authorized);
 
-                showAlert("Operador turistico creado con exito", "El operador turistico ha sido creado con exito!\n¿Desea asociar un operador a este operador turistico?");
+                boolean createOperator = touristOperatorCreatedAlert("Operador turistico creado con exito", "El operador turistico ha sido creado con exito!\n¿Desea asociar un operador a este operador turistico?");
 
+                if (createOperator){
 
+                    Node source = (Node) event.getSource();
+                    Stage oldStage  = (Stage) source.getScene().getWindow();
 
+                    FXMLLoader fxmlLoader = new FXMLLoader();
+                    fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
 
-                close(event);
+                    Parent root = fxmlLoader.load(AdminController.class.getResourceAsStream("AssociateOperatorToTOCreation.fxml"));
+                    Stage newStage = new Stage();
+                    newStage.setScene(new Scene(root));
+                    newStage.show();
+
+                    oldStage.close();
+
+                }
+                else {
+
+                    close(event);
+
+                }
 
             } catch (TourOperatorAlreadyExists e) {
                 showAlert(
@@ -119,6 +141,20 @@ public class AddTouristOperatorPanelController {
         alert.setHeaderText(null);
         alert.setContentText(contextText);
         alert.showAndWait();
+    }
+
+    private boolean touristOperatorCreatedAlert(String title, String contextText){
+
+        ButtonType acceptBtn = new ButtonType("Si", ButtonBar.ButtonData.OK_DONE);
+        ButtonType cancelBtn = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, contextText, acceptBtn, cancelBtn);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        Optional<ButtonType> result = alert.showAndWait();
+
+        return result.orElse(cancelBtn) == acceptBtn;
+
     }
 
 }

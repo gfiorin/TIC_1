@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.AppPrototipo.ui.admin.TouristOperatorsTableController">
-    <TableView fx:id="touristOperatorTable" layoutY="24.0" prefHeight="353.0" prefWidth="919.0">
+<AnchorPane prefHeight="406.0" prefWidth="924.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.AppPrototipo.ui.admin.TouristOperatorsTableController">
+    <TableView fx:id="touristOperatorTable" layoutY="38.0" prefHeight="366.0" prefWidth="924.0">
         <columns>
             <TableColumn fx:id="id" prefWidth="63.19998013973236" text="ID" />
             <TableColumn fx:id="companyName" prefWidth="87.20001983642578" text="Company" />
@@ -15,7 +17,17 @@
             <TableColumn fx:id="contactPhone" prefWidth="107.20001220703125" text="Contact phone" />
             <TableColumn fx:id="contactPosition" prefWidth="108.79998779296875" text="Contact position" />
             <TableColumn fx:id="contactEmail" prefWidth="156.0001220703125" text="Contact Email" />
-            <TableColumn fx:id="authorized" minWidth="0.0" prefWidth="82.39995117187505" text="Authorized" />
+            <TableColumn fx:id="authorized" minWidth="0.0" prefWidth="87.199951171875" text="Authorized" />
         </columns>
     </TableView>
+   <Pane layoutY="403.0" prefHeight="46.0" prefWidth="919.0">
+      <children>
+         <Button fx:id="authorizeBtn" layoutX="671.0" layoutY="11.0" mnemonicParsing="false" onAction="#enableOrDisableTO" text="Autorizar/Desautorizar operador turistico" />
+      </children>
+   </Pane>
+   <Pane prefHeight="38.0" prefWidth="924.0">
+      <children>
+         <Button fx:id="goBackBtn" layoutX="20.0" layoutY="7.0" mnemonicParsing="false" onAction="#goBackToAdminView" prefHeight="25.0" prefWidth="65.0" text="Atras" />
+      </children>
+   </Pane>
 </AnchorPane>

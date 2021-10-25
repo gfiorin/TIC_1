@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 
-
-<AnchorPane prefHeight="401.0" prefWidth="828.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.AppPrototipo.ui.admin.ExperiencesTableController">
+<AnchorPane prefHeight="491.0" prefWidth="838.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.AppPrototipo.ui.admin.ExperiencesTableController">
    <children>
-      <TableView fx:id="experiencesTable" prefHeight="401.0" prefWidth="837.0">
+      <TableView fx:id="experiencesTable" layoutY="40.0" prefHeight="401.0" prefWidth="837.0">
         <columns>
           <TableColumn fx:id="id" prefWidth="75.0" text="ID" />
             <TableColumn prefWidth="126.0" text="Operador Turistico" />
@@ -21,5 +22,15 @@
             <TableColumn fx:id="bookable" prefWidth="76.0" text="Reservable" />
         </columns>
       </TableView>
+      <Pane prefHeight="40.0" prefWidth="838.0">
+         <children>
+            <Button fx:id="goBackBtn" layoutX="23.0" layoutY="8.0" mnemonicParsing="false" onAction="#goBackToAdminView" prefHeight="25.0" prefWidth="63.0" text="Atras" />
+         </children>
+      </Pane>
+      <Pane layoutY="441.0" prefHeight="50.0" prefWidth="838.0">
+         <children>
+            <Button fx:id="authorizeBtn" layoutX="619.0" layoutY="13.0" mnemonicParsing="false" onAction="#enableOrDisableExperience" text="Autorizar/Desautorizar experiencia" />
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

@@ -1,5 +1,6 @@
 package com.example.AppPrototipo.ui.admin;
 
+import com.example.AppPrototipo.AppPrototipoApplication;
 import com.example.AppPrototipo.business.entities.Country;
 import com.example.AppPrototipo.business.entities.Interest;
 import com.example.AppPrototipo.business.entities.Tourist;
@@ -8,7 +9,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
@@ -56,6 +60,9 @@ public class TouristsTableController {
     @FXML
     private TableColumn<Tourist, List<Interest>> listOfInterests;
 
+    @FXML
+    private Button goBackBtn;
+
     private final TouristRepository touristRepository;
 
     public TouristsTableController(TouristRepository touristRepository) {
@@ -83,6 +90,22 @@ public class TouristsTableController {
     private ObservableList<Tourist> getTourists() {
         List<Tourist> touristList = touristRepository.findAll();
         return FXCollections.observableArrayList(touristList);
+    }
+
+    @FXML
+    void goBackToAdminView(ActionEvent event) throws Exception{
+        Node source = (Node) event.getSource();
+        Stage oldStage  = (Stage) source.getScene().getWindow();
+
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
+
+        Parent root = fxmlLoader.load(AdminController.class.getResourceAsStream("AdminPanel.fxml"));
+        Stage newStage = new Stage();
+        newStage.setScene(new Scene(root));
+        newStage.show();
+
+        oldStage.close();
     }
 
     @FXML

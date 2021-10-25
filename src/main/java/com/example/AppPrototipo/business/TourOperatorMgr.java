@@ -5,7 +5,9 @@ import com.example.AppPrototipo.business.exceptions.InvalidInformation;
 import com.example.AppPrototipo.business.exceptions.TourOperatorAlreadyExists;
 import com.example.AppPrototipo.persistence.OperatorsRepository;
 import com.example.AppPrototipo.persistence.TourOperatorRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class TourOperatorMgr {
@@ -87,5 +89,7 @@ public class TourOperatorMgr {
         tourOperatorRepository.save(tourOperatorToAdd);
 
     }
+
+    //@Transactional
 
 }

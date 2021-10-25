@@ -54,6 +54,9 @@ public class Experience {
     @Column(name = "location")
     private String ubicacion;
 
+    @Column(name = "reviewed")
+    private Boolean reviewed;
+
     public Experience() {
     }
 
@@ -66,6 +69,7 @@ public class Experience {
         this.bookable = bookable;
         this.authorized = authorized;
         this.images = images;
+        //this.reviewed = false;
     }
 
     public Integer getId() {
