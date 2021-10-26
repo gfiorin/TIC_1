@@ -24,12 +24,6 @@ public interface TourOperatorRepository extends CrudRepository<TourOperator, Int
 
     TourOperator findOneByContactPhone(String contactPhone);
 
-    @Modifying
-    @Query("update TourOperator to set to.authorized = true where to.id = :idTO")
-    void enableTO(@Param("idTO") Integer idTO);
-
-    @Modifying
-    @Query("update TourOperator to set to.authorized = false where to.id = :idTO")
-    void disableTO(@Param("idTO") Integer idTO);
+    TourOperator findOneById(Integer id);
 
 }

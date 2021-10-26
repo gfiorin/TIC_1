@@ -79,7 +79,7 @@ public class TouristController implements Initializable {
     private List<Experience> experiences(){
         List<Experience> list = new ArrayList<>();
         for (int i=0; i<15; i++) {
-            Experience experience = experienceRepository.findById(1);
+            Experience experience = experienceRepository.findOneById(1);
             list.add(experience);
         }
         return list;

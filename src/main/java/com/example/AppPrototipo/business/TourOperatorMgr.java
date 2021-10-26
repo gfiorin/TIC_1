@@ -90,6 +90,15 @@ public class TourOperatorMgr {
 
     }
 
-    //@Transactional
+    @Transactional
+    public void changeAuthorizationOfTouristOperator(Integer tourOperatorId){
+        TourOperator tourOperator = tourOperatorRepository.findOneById(tourOperatorId);
+        if (tourOperator.isAuthorized()){
+            tourOperator.disableTourOperator();
+        }
+        else {
+            tourOperator.enableTourOperator();
+        }
+    }
 
 }
