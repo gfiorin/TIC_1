@@ -77,7 +77,7 @@ public class ExperienceController {
         Image imageMarker = new Image(getClass().getResourceAsStream("/imgs/location.png"));
         imageViewMarker.setImage(imageMarker);
 
-        Experience experience = experienceRepository.findById(1);
+        Experience experience = experienceRepository.findOneById(1);
 
         //Populacion de campos
         nombreExperiencia.setText(experience.getTitle());

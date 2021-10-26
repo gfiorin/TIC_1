@@ -69,7 +69,51 @@ public class Experience {
         this.bookable = bookable;
         this.authorized = authorized;
         this.images = images;
-        //this.reviewed = false;
+        this.reviewed = false;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getShortdescription() {
+        return shortdescription;
+    }
+
+    public void setShortdescription(String shortdescription) {
+        this.shortdescription = shortdescription;
+    }
+
+    public List<ExperienceType> getExperienceTypes() {
+        return experienceTypes;
+    }
+
+    public void setExperienceTypes(List<ExperienceType> experienceTypes) {
+        this.experienceTypes = experienceTypes;
+    }
+
+    public TourOperator getTourOperator() {
+        return tourOperator;
+    }
+
+    public void setTourOperator(TourOperator tourOperator) {
+        this.tourOperator = tourOperator;
+    }
+
+    public Boolean getReviewed() {
+        return reviewed;
+    }
+
+    public void setReviewed(Boolean reviewed) {
+        this.reviewed = reviewed;
+    }
+
+    public void enableExperience(){
+        this.authorized = true;
+    }
+
+    public void disableExperience(){
+        this.authorized = false;
     }
 
     public Integer getId() {

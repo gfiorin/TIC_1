@@ -1,8 +1,8 @@
 package com.example.AppPrototipo.ui.admin;
 
 import com.example.AppPrototipo.AppPrototipoApplication;
+import com.example.AppPrototipo.business.TourOperatorMgr;
 import com.example.AppPrototipo.business.entities.TourOperator;
-import com.example.AppPrototipo.business.entities.Tourist;
 import com.example.AppPrototipo.persistence.TourOperatorRepository;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -64,9 +64,11 @@ public class TouristOperatorsTableController {
     @FXML
     private Button goBackBtn;
 
+    private final TourOperatorMgr tourOperatorMgr;
 
-    public TouristOperatorsTableController(TourOperatorRepository tourOperatorRepository) {
+    public TouristOperatorsTableController(TourOperatorRepository tourOperatorRepository, TourOperatorMgr tourOperatorMgr) {
         this.tourOperatorRepository = tourOperatorRepository;
+        this.tourOperatorMgr = tourOperatorMgr;
     }
 
     @FXML
@@ -92,13 +94,8 @@ public class TouristOperatorsTableController {
     @FXML
     private void enableOrDisableTO(ActionEvent event){
         TourOperator tourOperatorToModify = touristOperatorTable.getSelectionModel().getSelectedItem();
-        if (tourOperatorToModify.isAuthorized()){
-
-            tourOperatorRepository.disableTO(tourOperatorToModify.getId());
-        }
-        else {
-            tourOperatorRepository.enableTO(tourOperatorToModify.getId());
-        }
+        tourOperatorMgr.changeAuthorizationOfTouristOperator(tourOperatorToModify.getId());
+        touristOperatorTable.setItems(getTourOperators());
     }
 
     @FXML
@@ -131,4 +128,5 @@ public class TouristOperatorsTableController {
         alert.setContentText(contextText);
         alert.showAndWait();
     }
+
 }

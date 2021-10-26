@@ -1,8 +1,8 @@
 package com.example.AppPrototipo.ui.admin;
 
 import com.example.AppPrototipo.AppPrototipoApplication;
+import com.example.AppPrototipo.business.ExperienceMgr;
 import com.example.AppPrototipo.business.entities.Experience;
-import com.example.AppPrototipo.business.entities.TourOperator;
 import com.example.AppPrototipo.persistence.ExperienceRepository;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -55,6 +55,9 @@ public class ExperiencesTableController {
     private TableColumn<Experience, Boolean> bookable;
 
     @FXML
+    private TableColumn<Experience, Boolean> reviewed;
+
+    @FXML
     private Button goBackBtn;
 
     @FXML
@@ -62,8 +65,11 @@ public class ExperiencesTableController {
 
     private final ExperienceRepository experienceRepository;
 
-    public ExperiencesTableController(ExperienceRepository experienceRepository) {
+    private final ExperienceMgr experienceMgr;
+
+    public ExperiencesTableController(ExperienceRepository experienceRepository, ExperienceMgr experienceMgr) {
         this.experienceRepository = experienceRepository;
+        this.experienceMgr = experienceMgr;
     }
 
     @FXML
@@ -80,6 +86,7 @@ public class ExperiencesTableController {
         vaccination.setCellValueFactory(new PropertyValueFactory<>("vaccination"));
         capacity.setCellValueFactory(new PropertyValueFactory<>("capacity"));
         bookable.setCellValueFactory(new PropertyValueFactory<>("bookable"));
+        reviewed.setCellValueFactory(new PropertyValueFactory<>("reviewed"));
 
     }
 
@@ -91,12 +98,8 @@ public class ExperiencesTableController {
     @FXML
     private void enableOrDisableExperience(ActionEvent event){
         Experience experienceToModify = experiencesTable.getSelectionModel().getSelectedItem();
-        if (experienceToModify.isAuthorized()){
-            //experienceRepository todo
-        }
-        else {
-            //experienceRepository
-        }
+        experienceMgr.changeAuthorizationOfExperience(experienceToModify.getId());
+        experiencesTable.setItems(getExperiences());
     }
 
     @FXML
