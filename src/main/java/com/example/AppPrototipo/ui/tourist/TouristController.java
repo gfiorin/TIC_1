@@ -47,6 +47,8 @@ public class TouristController implements Initializable {
 
     private final ExperienceRepository experienceRepository;
 
+    private final MiniExperienceController miniExperienceController;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -58,10 +60,10 @@ public class TouristController implements Initializable {
         try {
             for (int i=0; i < experiences.size(); i++){
                 FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setLocation(getClass().getResource("MiniExperience.fxml"));
+                fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
+                fxmlLoader.setLocation(miniExperienceController.getClass().getResource("MiniExperience.fxml"));
                 MiniExperienceController.setTourist(tourist);
                 VBox vbox = fxmlLoader.load();
-                MiniExperienceController miniExperienceController = fxmlLoader.getController();
                 miniExperienceController.setData(experiences.get(i));
                 grillaExperiencias.add(vbox,columns++,row);
                 GridPane.setMargin(vbox,new Insets(10));
@@ -71,8 +73,9 @@ public class TouristController implements Initializable {
         }
     }
 
-    public TouristController(ExperienceRepository experienceRepository) {
+    public TouristController(ExperienceRepository experienceRepository, MiniExperienceController miniExperienceController) {
         this.experienceRepository = experienceRepository;
+        this.miniExperienceController = miniExperienceController;
     }
 
     public static Tourist getTourist() {
@@ -114,8 +117,8 @@ public class TouristController implements Initializable {
 
     private List<Experience> recomendations(){
         List<Experience> list = new ArrayList<>();
-        for (int i=0; i<6; i++) {
-            Experience experience = experienceRepository.findById(1);
+        for (int i=1; i<6; i++) {
+            Experience experience = experienceRepository.findById(i);
             list.add(experience);
         }
         return list;

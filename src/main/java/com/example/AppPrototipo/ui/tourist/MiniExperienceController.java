@@ -17,17 +17,19 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.springframework.stereotype.Component;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
+@Component
 public class MiniExperienceController {
 
     private Experience experience;
 
     private static Tourist tourist;
 
-    //private final UserMgr userMgr;
+    private final UserMgr userMgr;
 
     @FXML
     private Text descripcionCorta;
@@ -41,9 +43,9 @@ public class MiniExperienceController {
     @FXML
     private Text nombreExperiencia;
 
-    /*public MiniExperienceController(UserMgr userMgr) {
+    public MiniExperienceController(UserMgr userMgr) {
         this.userMgr = userMgr;
-    }*/
+    }
 
     public static Tourist getTourist() {
         return tourist;
@@ -82,16 +84,19 @@ public class MiniExperienceController {
 
     @FXML
     void likeAction(ActionEvent event) {
-        Experience experience = getExperience();
+        boolean yaFavorita = false;
         for(Experience liked : tourist.getLiked()){
-            if (liked.equals(experience)){
+            if (liked.getTitle().equals(experience.getTitle())){
                 showAlert(
                         "Atención",
                         "La experiencia ya se encuentra entre sus favoritas.");
+                yaFavorita = true;
             }
         }
+        if(!yaFavorita){
         tourist.addLiked(experience);
-        //userMgr.updateTourist(tourist);
+        userMgr.updateTourist(tourist);
+        }
     }
 
     private void showAlert(String title, String contextText){
