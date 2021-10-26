@@ -42,6 +42,9 @@ public class AdminController {
     @FXML
     private Button authorizeTourOperatorBtn;
 
+    @FXML
+    private Button listOfComplaintsBtn;
+
 
     public AdminController(){}
 
@@ -167,6 +170,22 @@ public class AdminController {
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.show();
+    }
+
+    @FXML
+    void showListOfComplaints(ActionEvent event) throws Exception {
+        Node source = (Node) event.getSource();
+        Stage oldStage  = (Stage) source.getScene().getWindow();
+
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
+
+        Parent root = fxmlLoader.load(AdminController.class.getResourceAsStream("ComplaintsList.fxml"));
+        Stage newStage = new Stage();
+        newStage.setScene(new Scene(root));
+        newStage.show();
+
+        oldStage.close();
     }
 
 
