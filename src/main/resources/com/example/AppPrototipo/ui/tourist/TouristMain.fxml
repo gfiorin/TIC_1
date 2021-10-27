@@ -1,133 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="576.0" prefWidth="853.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.AppPrototipo.ui.tourist.TouristController">
+<BorderPane maxHeight="1000.0" maxWidth="1000.0" prefHeight="576.0" prefWidth="853.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.AppPrototipo.ui.tourist.TouristController">
    <left>
-      <VBox prefWidth="213.0" style="-fx-background-color: #998;" BorderPane.alignment="CENTER">
+      <VBox fx:id="leftPane" prefHeight="576.0" style="-fx-background-color: #998;" BorderPane.alignment="CENTER">
          <children>
-            <VBox prefHeight="521.0" prefWidth="210.0" style="-fx-background-color: #998;" VBox.vgrow="ALWAYS">
+            <VBox fx:id="top" alignment="CENTER" spacing="10.0">
                <children>
-                  <HBox prefHeight="45.0" prefWidth="205.0" spacing="10.0">
-                     <children>
-                        <ImageView fx:id="perfilMarker" fitHeight="32.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true" smooth="false">
-                           <HBox.margin>
-                              <Insets bottom="10.0" top="10.0" />
-                           </HBox.margin>
-                           <image>
-                              <Image url="@imgs/perfil.png" />
-                           </image>
-                        </ImageView>
-                        <Button fx:id="perfilBtn" mnemonicParsing="false" onAction="#perfilAction">
-                           <graphic>
-                              <Label prefHeight="36.0" prefWidth="152.0" text="Perfil">
-                                 <font>
-                                    <Font name="System Bold" size="18.0" />
-                                 </font>
-                              </Label>
-                           </graphic>
-                           <HBox.margin>
-                              <Insets right="5.0" top="5.0" />
-                           </HBox.margin>
-                        </Button>
-                     </children>
-                     <padding>
-                        <Insets left="15.0" />
-                     </padding>
-                  </HBox>
-                  <HBox prefHeight="45.0" prefWidth="205.0" spacing="10.0">
-                     <children>
-                        <ImageView fx:id="favoritosMarker" fitHeight="32.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
-                           <HBox.margin>
-                              <Insets bottom="10.0" top="10.0" />
-                           </HBox.margin>
-                           <image>
-                              <Image url="@imgs/liked.png" />
-                           </image>
-                        </ImageView>
-                        <Button fx:id="favoritosBtn" mnemonicParsing="false" onAction="#favoritosAction">
-                           <graphic>
-                              <Label prefHeight="36.0" prefWidth="152.0" text="Favoritos">
-                                 <font>
-                                    <Font name="System Bold" size="18.0" />
-                                 </font>
-                                 <padding>
-                                    <Insets right="5.0" top="5.0" />
-                                 </padding>
-                              </Label>
-                           </graphic>
-                           <HBox.margin>
-                              <Insets right="5.0" top="5.0" />
-                           </HBox.margin>
-                        </Button>
-                     </children>
-                     <padding>
-                        <Insets left="15.0" />
-                     </padding>
-                  </HBox>
-                  <AnchorPane prefHeight="421.0" prefWidth="198.0" VBox.vgrow="ALWAYS">
-                     <children>
-                        <HBox prefHeight="56.0" prefWidth="213.0" spacing="10.0" AnchorPane.bottomAnchor="5.0">
-                           <children>
-                              <ImageView fx:id="sesionMarker" fitHeight="36.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
-                                 <HBox.margin>
-                                    <Insets bottom="10.0" top="10.0" />
-                                 </HBox.margin>
-                                 <image>
-                                    <Image url="@imgs/cerrarSesion.png" />
-                                 </image>
-                              </ImageView>
-                              <Button fx:id="cerrarSesionBtn" mnemonicParsing="false" onAction="#cerrarSesionAction">
-                                 <graphic>
-                                    <Label prefHeight="36.0" prefWidth="152.0" text="Cerrar Sesión">
-                                       <font>
-                                          <Font name="System Bold" size="18.0" />
-                                       </font>
-                                    </Label>
-                                 </graphic>
-                                 <HBox.margin>
-                                    <Insets right="5.0" top="5.0" />
-                                 </HBox.margin>
-                              </Button>
-                           </children>
-                           <padding>
-                              <Insets left="15.0" />
-                           </padding>
-                        </HBox>
-                     </children>
-                  </AnchorPane>
+                  <ImageView fx:id="gridMarker" fitHeight="39.0" fitWidth="39.0" onMouseClicked="#showExperienceGrid" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@imgs/grid.png" />
+                     </image>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </ImageView>
+                  <ImageView fx:id="perfilMarker" fitHeight="39.0" fitWidth="39.0" onMouseClicked="#showProfile" pickOnBounds="true" preserveRatio="true" smooth="false">
+                     <image>
+                        <Image url="@imgs/perfil.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="favoritosMarker" fitHeight="39.0" fitWidth="39.0" onMouseClicked="#showFavourites" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@imgs/liked.png" />
+                     </image>
+                  </ImageView>
                </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
+            </VBox>
+            <VBox fx:id="bottom" alignment="BOTTOM_CENTER" maxHeight="-Infinity">
+               <children>
+                  <ImageView fx:id="sesionMarker" fitHeight="39.0" fitWidth="39.0" onMouseClicked="#cerrarSesionAction" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@imgs/cerrarSesion.png" />
+                     </image>
+                  </ImageView>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
             </VBox>
          </children>
       </VBox>
    </left>
-   <top>
-      <HBox prefHeight="30.0" prefWidth="854.0" BorderPane.alignment="CENTER" />
-   </top>
-   <right>
-      <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <content>
-            <GridPane fx:id="grillaExperiencias">
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-            </GridPane>
-         </content>
-      </ScrollPane>
-   </right>
    <center>
-      <AnchorPane fx:id="innerView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" BorderPane.alignment="CENTER" />
+      <AnchorPane fx:id="innerView" maxHeight="1000.0" maxWidth="1000.0" minHeight="-Infinity" minWidth="-Infinity" BorderPane.alignment="CENTER" />
    </center>
 </BorderPane>

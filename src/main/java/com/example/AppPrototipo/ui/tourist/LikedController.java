@@ -28,22 +28,18 @@ import java.util.ResourceBundle;
 @Component
 public class LikedController implements Initializable {
 
-    private static Tourist tourist;
+    private Tourist tourist;
 
     @FXML
     private ImageView favoritosMarker;
-
     @FXML
     private GridPane grillaExperiencias;
-
     @FXML
     private ImageView perfilMarker;
-
     @FXML
     private ImageView sesionMarker;
 
     private final ExperienceRepository experienceRepository;
-
     private final MiniExperienceController miniExperienceController;
 
     public LikedController(ExperienceRepository experienceRepository, MiniExperienceController miniExperienceController) {
@@ -51,12 +47,12 @@ public class LikedController implements Initializable {
         this.miniExperienceController = miniExperienceController;
     }
 
-    public static Tourist getTourist() {
+    public Tourist getTourist() {
         return tourist;
     }
 
-    public static void setTourist(Tourist tourist) {
-        LikedController.tourist = tourist;
+    public void setTourist(Tourist tourist) {
+        this.tourist = tourist;
     }
 
     @Override
@@ -88,22 +84,13 @@ public class LikedController implements Initializable {
     }
 
     public void favoritosAction(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
-        LikedController.setTourist(tourist);
-        Parent root = fxmlLoader.load(LikedController.class.getResourceAsStream("LikedView.fxml"));
-        Scene scene = new Scene(root);
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(scene);
-    }
-
-    public void cerrarSesionAction(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
-        Parent root = fxmlLoader.load(PrincipalController.class.getResourceAsStream("Principal.fxml"));
-        Scene scene = new Scene(root);
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(scene);
+//        FXMLLoader fxmlLoader = new FXMLLoader();
+//        fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
+//        LikedController.setTourist(tourist);
+//        Parent root = fxmlLoader.load(LikedController.class.getResourceAsStream("LikedView.fxml"));
+//        Scene scene = new Scene(root);
+//        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+//        stage.setScene(scene);
     }
 
     private List<Experience> liked(Tourist tourist){
