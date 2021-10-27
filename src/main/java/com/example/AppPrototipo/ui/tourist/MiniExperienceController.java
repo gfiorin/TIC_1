@@ -1,49 +1,48 @@
 package com.example.AppPrototipo.ui.tourist;
 
-import com.example.AppPrototipo.AppPrototipoApplication;
 import com.example.AppPrototipo.business.UserMgr;
 import com.example.AppPrototipo.business.entities.Experience;
 import com.example.AppPrototipo.business.entities.Tourist;
-import com.example.AppPrototipo.business.exceptions.UserAlreadyExsists;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Component;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class MiniExperienceController {
+@Component
+public class MiniExperienceController implements Initializable {
 
     private Experience experience;
-
     private static Tourist tourist;
 
-    //private final UserMgr userMgr;
+    private final UserMgr userMgr;
+    private final TouristController touristController;
 
     @FXML
     private Text descripcionCorta;
-
     @FXML
     private ImageView experienciaImg;
-
     @FXML
     private Button likeBtn;
-
     @FXML
     private Text nombreExperiencia;
+    @FXML
+    private Button verMasBtn;
 
-    /*public MiniExperienceController(UserMgr userMgr) {
+    public MiniExperienceController(UserMgr userMgr,@Lazy TouristController touristController) {
         this.userMgr = userMgr;
-    }*/
+        this.touristController = touristController;
+    }
 
     public static Tourist getTourist() {
         return tourist;
@@ -57,9 +56,6 @@ public class MiniExperienceController {
         return experience;
     }
 
-    @FXML
-    private Button verMasBtn;
-
     public void setData(Experience experience){
         this.experience = experience;
         nombreExperiencia.setText(experience.getTitle());
@@ -70,14 +66,19 @@ public class MiniExperienceController {
 
     @FXML
     void experienciaAction(ActionEvent actionEvent) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
-        Parent root = fxmlLoader.load(ExperienceController.class.getResourceAsStream("ExperienceView.fxml"));
-        ExperienceController ExperienceController = fxmlLoader.getController();
-        ExperienceController.setExperience(getExperience());
-        Scene scene = new Scene(root);
-        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        stage.setScene(scene);
+//        FXMLLoader fxmlLoader = new FXMLLoader();
+//        fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
+//        Parent root = fxmlLoader.load(ExperienceController.class.getResourceAsStream("ExperienceView.fxml"));
+//        ExperienceController ExperienceController = fxmlLoader.getController();
+//        ExperienceController.setExperience(getExperience());
+//        Scene scene = new Scene(root);
+//        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+//        stage.setScene(scene);
+//        FXMLLoader fxmlLoader = new FXMLLoader();
+//        fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
+//        fxmlLoader.load(TouristController.class.getResourceAsStream("TouristMain.fxml"));
+//        TouristController touristController = fxmlLoader.getController();
+        touristController.showExperience(experience);
     }
 
     @FXML
@@ -91,7 +92,7 @@ public class MiniExperienceController {
             }
         }
         tourist.addLiked(experience);
-        //userMgr.updateTourist(tourist);
+        userMgr.updateTourist(tourist);
     }
 
     private void showAlert(String title, String contextText){
@@ -100,5 +101,10 @@ public class MiniExperienceController {
         alert.setHeaderText(null);
         alert.setContentText(contextText);
         alert.showAndWait();
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
     }
 }

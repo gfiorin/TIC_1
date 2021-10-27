@@ -13,12 +13,12 @@ import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.springframework.stereotype.Component;
 
@@ -35,17 +35,24 @@ public class TouristController implements Initializable {
 
     @FXML
     private ImageView favoritosMarker;
-
     @FXML
     private GridPane grillaExperiencias;
-
     @FXML
     private ImageView perfilMarker;
-
     @FXML
     private ImageView sesionMarker;
+    @FXML
+    private AnchorPane innerView;
 
     private final ExperienceRepository experienceRepository;
+    private final MiniExperienceController miniExperienceController;
+    private final ExperienceController experienceController;
+
+    public TouristController(ExperienceRepository experienceRepository, MiniExperienceController miniExperienceController, ExperienceController experienceController) {
+        this.experienceRepository = experienceRepository;
+        this.miniExperienceController = miniExperienceController;
+        this.experienceController = experienceController;
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -58,10 +65,11 @@ public class TouristController implements Initializable {
         try {
             for (int i=0; i < experiences.size(); i++){
                 FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setLocation(getClass().getResource("MiniExperience.fxml"));
-                MiniExperienceController.setTourist(tourist);
+                fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
+
+                fxmlLoader.setLocation(miniExperienceController.getClass().getResource("MiniExperience.fxml"));
+                miniExperienceController.setTourist(tourist);
                 VBox vbox = fxmlLoader.load();
-                MiniExperienceController miniExperienceController = fxmlLoader.getController();
                 miniExperienceController.setData(experiences.get(i));
                 grillaExperiencias.add(vbox,columns++,row);
                 GridPane.setMargin(vbox,new Insets(10));
@@ -69,10 +77,6 @@ public class TouristController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public TouristController(ExperienceRepository experienceRepository) {
-        this.experienceRepository = experienceRepository;
     }
 
     public static Tourist getTourist() {
@@ -110,6 +114,23 @@ public class TouristController implements Initializable {
         Scene scene = new Scene(root);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(scene);
+    }
+
+    public void showExperience(Experience experience) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
+        fxmlLoader.setLocation(experienceController.getClass().getResource("ExperienceView.fxml"));
+        experienceController.setExperience(experience);
+        BorderPane experiencia = fxmlLoader.load();
+        loadToInnerView(experiencia);
+    }
+
+    private void loadToInnerView(Node object){
+        innerView.getChildren().setAll(object);
+        AnchorPane.setBottomAnchor(object, 0.0);
+        AnchorPane.setTopAnchor(object, 0.0);
+        AnchorPane.setLeftAnchor(object, 0.0);
+        AnchorPane.setRightAnchor(object, 0.0);
     }
 
     private List<Experience> recomendations(){

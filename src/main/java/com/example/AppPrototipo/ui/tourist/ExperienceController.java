@@ -28,8 +28,8 @@ import java.io.IOException;
 @Component
 public class ExperienceController {
 
-    private static Experience experience;
-    private static int imageIndex = -1;
+    private Experience experience;
+    private int imageIndex = -1;
 
     @FXML
     private AnchorPane rightAnchorPane;
@@ -63,10 +63,7 @@ public class ExperienceController {
     @FXML
     private Text rightArrow;
 
-    private final ExperienceRepository experienceRepository;
-
-    public ExperienceController(ExperienceRepository experienceRepository) {
-        this.experienceRepository = experienceRepository;
+    public ExperienceController() {
     }
 
     @FXML
@@ -94,8 +91,6 @@ public class ExperienceController {
 
 
         //POPOULACION
-        experience = experienceRepository.findById(1);
-
         //Populacion de campos
         {
             nombreExperiencia.setText(experience.getTitle());
@@ -196,7 +191,7 @@ public class ExperienceController {
     }
 
     public void setExperience(Experience experience) {
-        ExperienceController.experience = experience;
+        this.experience = experience;
         imageIndex = -1;
     }
 }

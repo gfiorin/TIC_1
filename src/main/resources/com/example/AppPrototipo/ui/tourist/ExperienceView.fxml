@@ -31,7 +31,8 @@
             <ImageView fx:id="imageViewMarker" fitHeight="18.0" fitWidth="21.0" layoutX="15.0" layoutY="49.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@imgs/location.png" />
-               </image></ImageView>
+               </image>
+            </ImageView>
             <VBox layoutX="14.0" layoutY="232.0" prefHeight="142.0" prefWidth="174.0" spacing="6.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="0.0">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Contacto" underline="true" wrappingWidth="121.13671875">
@@ -88,7 +89,8 @@
                         <ImageView fx:id="imageViewPrincipal" pickOnBounds="true" preserveRatio="true">
                            <viewport>
                               <Rectangle2D />
-                           </viewport></ImageView>
+                           </viewport>
+                        </ImageView>
                         <Text fx:id="leftArrow" fill="#ffffff80" layoutX="14.0" layoutY="193.0" onMouseClicked="#previousImage" stroke="#ffffff80" strokeType="OUTSIDE" text="◁">
                            <font>
                               <Font size="86.0" />

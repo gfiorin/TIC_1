@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="576.0" prefWidth="853.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.AppPrototipo.ui.tourist.TouristController">
+<BorderPane prefHeight="576.0" prefWidth="853.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.AppPrototipo.ui.tourist.TouristController">
    <left>
       <VBox prefWidth="213.0" style="-fx-background-color: #998;" BorderPane.alignment="CENTER">
          <children>
@@ -116,7 +116,7 @@
    <top>
       <HBox prefHeight="30.0" prefWidth="854.0" BorderPane.alignment="CENTER" />
    </top>
-   <center>
+   <right>
       <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <content>
             <GridPane fx:id="grillaExperiencias">
@@ -126,5 +126,8 @@
             </GridPane>
          </content>
       </ScrollPane>
+   </right>
+   <center>
+      <AnchorPane fx:id="innerView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" BorderPane.alignment="CENTER" />
    </center>
 </BorderPane>
