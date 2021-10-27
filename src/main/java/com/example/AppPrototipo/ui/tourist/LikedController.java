@@ -44,8 +44,11 @@ public class LikedController implements Initializable {
 
     private final ExperienceRepository experienceRepository;
 
-    public LikedController(ExperienceRepository experienceRepository) {
+    private final MiniExperienceController miniExperienceController;
+
+    public LikedController(ExperienceRepository experienceRepository, MiniExperienceController miniExperienceController) {
         this.experienceRepository = experienceRepository;
+        this.miniExperienceController = miniExperienceController;
     }
 
     public static Tourist getTourist() {
@@ -67,10 +70,10 @@ public class LikedController implements Initializable {
         try {
             for (int i=0; i < experiences.size(); i++){
                 FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setLocation(getClass().getResource("MiniExperience.fxml"));
+                fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
+                fxmlLoader.setLocation(miniExperienceController.getClass().getResource("MiniExperience.fxml"));
                 MiniExperienceController.setTourist(tourist);
                 VBox vbox = fxmlLoader.load();
-                MiniExperienceController miniExperienceController = fxmlLoader.getController();
                 miniExperienceController.setData(experiences.get(i));
                 grillaExperiencias.add(vbox,columns++,row);
                 GridPane.setMargin(vbox,new Insets(10));
@@ -81,13 +84,7 @@ public class LikedController implements Initializable {
     }
 
     public void perfilAction(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
-        ProfileController.setTourist(tourist);
-        Parent root = fxmlLoader.load(ProfileController.class.getResourceAsStream("ProfileView.fxml"));
-        Scene scene = new Scene(root);
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(scene);
+        //Perfil
     }
 
     public void favoritosAction(ActionEvent event) throws IOException {

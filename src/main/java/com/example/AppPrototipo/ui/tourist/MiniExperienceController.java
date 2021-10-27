@@ -5,7 +5,6 @@ import com.example.AppPrototipo.business.entities.Experience;
 import com.example.AppPrototipo.business.entities.Tourist;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -16,15 +15,12 @@ import org.springframework.stereotype.Component;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 
 @Component
-public class MiniExperienceController implements Initializable {
+public class MiniExperienceController {
 
     private Experience experience;
     private static Tourist tourist;
-
     private final UserMgr userMgr;
     private final TouristController touristController;
 
@@ -66,33 +62,24 @@ public class MiniExperienceController implements Initializable {
 
     @FXML
     void experienciaAction(ActionEvent actionEvent) throws IOException {
-//        FXMLLoader fxmlLoader = new FXMLLoader();
-//        fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
-//        Parent root = fxmlLoader.load(ExperienceController.class.getResourceAsStream("ExperienceView.fxml"));
-//        ExperienceController ExperienceController = fxmlLoader.getController();
-//        ExperienceController.setExperience(getExperience());
-//        Scene scene = new Scene(root);
-//        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-//        stage.setScene(scene);
-//        FXMLLoader fxmlLoader = new FXMLLoader();
-//        fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
-//        fxmlLoader.load(TouristController.class.getResourceAsStream("TouristMain.fxml"));
-//        TouristController touristController = fxmlLoader.getController();
         touristController.showExperience(experience);
     }
 
     @FXML
     void likeAction(ActionEvent event) {
-        Experience experience = getExperience();
+        boolean yaFavorita = false;
         for(Experience liked : tourist.getLiked()){
-            if (liked.equals(experience)){
+            if (liked.getTitle().equals(experience.getTitle())){
                 showAlert(
                         "Atención",
                         "La experiencia ya se encuentra entre sus favoritas.");
+                yaFavorita = true;
             }
         }
+        if(!yaFavorita){
         tourist.addLiked(experience);
         userMgr.updateTourist(tourist);
+        }
     }
 
     private void showAlert(String title, String contextText){
@@ -101,10 +88,5 @@ public class MiniExperienceController implements Initializable {
         alert.setHeaderText(null);
         alert.setContentText(contextText);
         alert.showAndWait();
-    }
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-
     }
 }

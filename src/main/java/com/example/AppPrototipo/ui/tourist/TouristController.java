@@ -18,7 +18,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.springframework.stereotype.Component;
 
@@ -66,9 +65,8 @@ public class TouristController implements Initializable {
             for (int i=0; i < experiences.size(); i++){
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
-
                 fxmlLoader.setLocation(miniExperienceController.getClass().getResource("MiniExperience.fxml"));
-                miniExperienceController.setTourist(tourist);
+                MiniExperienceController.setTourist(tourist);
                 VBox vbox = fxmlLoader.load();
                 miniExperienceController.setData(experiences.get(i));
                 grillaExperiencias.add(vbox,columns++,row);
@@ -77,6 +75,10 @@ public class TouristController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public TouristController(ExperienceRepository experienceRepository) {
+        this.experienceRepository = experienceRepository;
     }
 
     public static Tourist getTourist() {
@@ -135,8 +137,8 @@ public class TouristController implements Initializable {
 
     private List<Experience> recomendations(){
         List<Experience> list = new ArrayList<>();
-        for (int i=0; i<6; i++) {
-            Experience experience = experienceRepository.findById(1);
+        for (int i=1; i<6; i++) {
+            Experience experience = experienceRepository.findById(i);
             list.add(experience);
         }
         return list;
