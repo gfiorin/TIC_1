@@ -17,6 +17,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -33,8 +35,6 @@ public class ExperienceController {
 
     @FXML
     private AnchorPane rightAnchorPane;
-    @FXML
-    private Button backBtn;
     @FXML
     private Text nombreExperiencia;
     @FXML
@@ -53,6 +53,8 @@ public class ExperienceController {
     private Text descripcion;
     @FXML
     private ScrollPane descripcionScrollPane;
+    @FXML
+    private BorderPane borderPane;
 
     @FXML
     private Pane imagePane;
