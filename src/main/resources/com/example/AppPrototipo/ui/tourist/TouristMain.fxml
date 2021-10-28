@@ -52,6 +52,6 @@
       </VBox>
    </left>
    <center>
-      <AnchorPane fx:id="innerView" maxHeight="1000.0" maxWidth="1000.0" minHeight="-Infinity" minWidth="-Infinity" BorderPane.alignment="CENTER" />
+      <AnchorPane fx:id="innerView" minHeight="-Infinity" minWidth="-Infinity" BorderPane.alignment="CENTER" />
    </center>
 </BorderPane>
