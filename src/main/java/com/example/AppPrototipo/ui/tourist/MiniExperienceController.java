@@ -56,7 +56,7 @@ public class MiniExperienceController {
     }
 
     public void setData(Experience experience){
-        idexperience = experience.getId();
+        verMasBtn.setUserData(experience.getId());
         nombreExperiencia.setText(experience.getTitle());
         descripcionCorta.setText(experience.getShortDescription());
         Image image = new Image(new ByteArrayInputStream(experience.getImages().get(0).getImageData()));
@@ -65,13 +65,13 @@ public class MiniExperienceController {
 
     @FXML
     void experienciaAction(ActionEvent actionEvent) throws IOException {
-        Experience experience = experienceMgr.findById(idexperience);
+        Experience experience = experienceMgr.findById((Integer) verMasBtn.getUserData());
         touristController.showExperience(experience);
     }
 
     @FXML
     void likeAction(ActionEvent event) {
-        Experience experience = experienceMgr.findById(idexperience);
+        Experience experience = experienceMgr.findById((Integer) verMasBtn.getUserData());
         boolean yaFavorita = false;
         for(Experience liked : tourist.getLiked()){
             if (liked.getTitle().equals(experience.getTitle())){

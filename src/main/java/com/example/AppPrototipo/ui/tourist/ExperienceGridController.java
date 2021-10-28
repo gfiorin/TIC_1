@@ -63,15 +63,15 @@ public class ExperienceGridController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-        /*List<Interest> interests = tourist.getInterests();*/
+        Hibernate.initialize(tourist);
+        List<Interest> interests = tourist.getInterests();
         /*for(Interest interest : interests){
         }*/
 
-        /*interes1.setText(interests.get(0).getName());
+        interes1.setText(interests.get(0).getName());
         interes2.setText(interests.get(1).getName());
         interes3.setText(interests.get(2).getName());
-        interes4.setText(interests.get(3).getName());*/
+        interes4.setText(interests.get(3).getName());
 
         ArrayList<Experience> recomendations = new ArrayList<>(recomendations());
         ArrayList<Experience> interes1 = new ArrayList<>(interes1());
