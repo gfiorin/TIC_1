@@ -12,6 +12,7 @@ import javafx.geometry.Insets;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import org.hibernate.Hibernate;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -63,8 +64,7 @@ public class ExperienceGridController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        List<Interest> interests = tourist.getInterests();
-
+        /*List<Interest> interests = tourist.getInterests();*/
         /*for(Interest interest : interests){
         }*/
 

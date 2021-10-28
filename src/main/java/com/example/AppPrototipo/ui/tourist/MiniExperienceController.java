@@ -1,5 +1,6 @@
 package com.example.AppPrototipo.ui.tourist;
 
+import com.example.AppPrototipo.business.ExperienceMgr;
 import com.example.AppPrototipo.business.UserMgr;
 import com.example.AppPrototipo.business.entities.Experience;
 import com.example.AppPrototipo.business.entities.Tourist;
@@ -19,9 +20,10 @@ import java.io.IOException;
 @Component
 public class MiniExperienceController {
 
-    private Experience experience;
+    private int idexperience;
     private static Tourist tourist;
     private final UserMgr userMgr;
+    private final ExperienceMgr experienceMgr;
     private final TouristController touristController;
 
     @FXML
@@ -35,9 +37,10 @@ public class MiniExperienceController {
     @FXML
     private Button verMasBtn;
 
-    public MiniExperienceController(UserMgr userMgr,@Lazy TouristController touristController) {
+    public MiniExperienceController(UserMgr userMgr, @Lazy TouristController touristController, ExperienceMgr experienceMgr) {
         this.userMgr = userMgr;
         this.touristController = touristController;
+        this.experienceMgr = experienceMgr;
     }
 
     public static Tourist getTourist() {
@@ -48,12 +51,12 @@ public class MiniExperienceController {
         MiniExperienceController.tourist = tourist;
     }
 
-    public Experience getExperience() {
-        return experience;
+    public int getIdExperience() {
+        return idexperience;
     }
 
     public void setData(Experience experience){
-        this.experience = experience;
+        idexperience = experience.getId();
         nombreExperiencia.setText(experience.getTitle());
         descripcionCorta.setText(experience.getShortDescription());
         Image image = new Image(new ByteArrayInputStream(experience.getImages().get(0).getImageData()));
@@ -62,11 +65,13 @@ public class MiniExperienceController {
 
     @FXML
     void experienciaAction(ActionEvent actionEvent) throws IOException {
+        Experience experience = experienceMgr.findById(idexperience);
         touristController.showExperience(experience);
     }
 
     @FXML
     void likeAction(ActionEvent event) {
+        Experience experience = experienceMgr.findById(idexperience);
         boolean yaFavorita = false;
         for(Experience liked : tourist.getLiked()){
             if (liked.getTitle().equals(experience.getTitle())){

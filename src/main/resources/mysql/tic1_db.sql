@@ -427,10 +427,10 @@ CREATE TABLE `types_of_experiences` (
 );
 
 INSERT INTO tic1_db.interests (name) VALUES
-('A'),
-('B'),
-('C'),
-('D');
+('Aventura'),
+('Naturaleza'),
+('Historia'),
+('Paisajes');
 
 INSERT INTO tic1_db.types_of_experiences (name,interest) VALUES
 ('A',1),

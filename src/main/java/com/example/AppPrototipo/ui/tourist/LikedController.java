@@ -26,13 +26,7 @@ public class LikedController implements Initializable {
     private Tourist tourist;
 
     @FXML
-    private ImageView favoritosMarker;
-    @FXML
-    private GridPane grillaExperiencias;
-    @FXML
-    private ImageView perfilMarker;
-    @FXML
-    private ImageView sesionMarker;
+    private GridPane grillaFavoritos;
 
     private final ExperienceRepository experienceRepository;
     private final MiniExperienceController miniExperienceController;
@@ -66,26 +60,18 @@ public class LikedController implements Initializable {
                 MiniExperienceController.setTourist(tourist);
                 VBox vbox = fxmlLoader.load();
                 miniExperienceController.setData(experiences.get(i));
-                grillaExperiencias.add(vbox,columns++,row);
+
+                if(columns == 5){
+                    columns = 0;
+                    ++row;
+                }
+
+                grillaFavoritos.add(vbox,columns++,row);
                 GridPane.setMargin(vbox,new Insets(10));
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public void perfilAction(ActionEvent event) throws IOException {
-        //Perfil
-    }
-
-    public void favoritosAction(ActionEvent event) throws IOException {
-//        FXMLLoader fxmlLoader = new FXMLLoader();
-//        fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
-//        LikedController.setTourist(tourist);
-//        Parent root = fxmlLoader.load(LikedController.class.getResourceAsStream("LikedView.fxml"));
-//        Scene scene = new Scene(root);
-//        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-//        stage.setScene(scene);
     }
 
     private List<Experience> liked(Tourist tourist){

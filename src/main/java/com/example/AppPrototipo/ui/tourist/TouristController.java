@@ -13,6 +13,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
@@ -72,7 +73,7 @@ public class TouristController implements Initializable {
         TouristController.tourist = tourist;
     }
 
-    public void showProfile(ActionEvent event) throws IOException {
+    public void showProfile(MouseEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
         ProfileController.setTourist(tourist);
@@ -82,16 +83,16 @@ public class TouristController implements Initializable {
         stage.setScene(scene);
     }
 
-    public void showFavourites(ActionEvent event) throws IOException {
+    public  void showFavourites(MouseEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
         fxmlLoader.setLocation(likedController.getClass().getResource("LikedView.fxml"));
         likedController.setTourist(tourist);
-        BorderPane experiencia = fxmlLoader.load();
+        ScrollPane experiencia = fxmlLoader.load();
         loadToInnerView(experiencia);
     }
 
-    public void cerrarSesionAction(ActionEvent event) throws IOException {
+    public void cerrarSesionAction(MouseEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
         Parent root = fxmlLoader.load(PrincipalController.class.getResourceAsStream("Principal.fxml"));
