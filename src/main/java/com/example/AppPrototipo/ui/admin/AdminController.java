@@ -39,6 +39,13 @@ public class AdminController {
     @FXML
     private Button addTypeOfExperience;
 
+    @FXML
+    private Button listOfComplaintsBtn;
+
+    @FXML
+    private Button listOfReviewsBtn;
+
+
     public AdminController(){}
 
     @FXML
@@ -153,6 +160,41 @@ public class AdminController {
 
         oldStage.close();
     }
+
+    @FXML
+    void showListOfComplaints(ActionEvent event) throws Exception {
+        Node source = (Node) event.getSource();
+        Stage oldStage  = (Stage) source.getScene().getWindow();
+
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
+
+        Parent root = fxmlLoader.load(AdminController.class.getResourceAsStream("ComplaintsList.fxml"));
+        Stage newStage = new Stage();
+        newStage.setScene(new Scene(root));
+        newStage.show();
+
+        oldStage.close();
+    }
+
+    @FXML
+    void showListOfReviews(ActionEvent event) throws Exception {
+        Node source = (Node) event.getSource();
+        Stage oldStage  = (Stage) source.getScene().getWindow();
+
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
+
+        Parent root = fxmlLoader.load(AdminController.class.getResourceAsStream("ReviewsList.fxml"));
+        Stage newStage = new Stage();
+        newStage.setScene(new Scene(root));
+        newStage.show();
+
+        oldStage.close();
+    }
+
+
+
 
     @FXML
     void close(ActionEvent event){

@@ -1,9 +1,11 @@
 package com.example.AppPrototipo.ui.admin;
 
 import com.example.AppPrototipo.AppPrototipoApplication;
-import com.example.AppPrototipo.business.entities.Operator;
-import com.example.AppPrototipo.business.entities.TourOperator;
-import com.example.AppPrototipo.persistence.OperatorsRepository;
+import com.example.AppPrototipo.business.entities.Experience;
+import com.example.AppPrototipo.business.entities.Review;
+import com.example.AppPrototipo.business.entities.Tourist;
+import com.example.AppPrototipo.persistence.ComplaintRepository;
+import com.example.AppPrototipo.persistence.ReviewRepository;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -19,62 +21,53 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import org.springframework.stereotype.Component;
-
 import java.util.List;
 
 @Component
-public class OperatorsTableController {
+public class ReviewsListController {
 
-    private final OperatorsRepository operatorsRepository;
-
-    @FXML
-    private TableView<Operator> operatorTable;
+    private final ReviewRepository reviewRepository;
 
     @FXML
-    private TableColumn<Operator, Integer> id;
+    private TableView<Review> reviewsTable;
 
     @FXML
-    private TableColumn<Operator, String> name;
+    private TableColumn<Review, Integer> id;
 
     @FXML
-    private TableColumn<Operator, String> username;
+    private TableColumn<Review, String> comment;
 
     @FXML
-    private TableColumn<Operator, String> email;
+    private TableColumn<Review, String> rating;
 
     @FXML
-    private TableColumn<Operator, String> tourOperatorName;
-    // modificar para que muestre el nombre del operador turistico en lugar del id todo
+    private TableColumn<Review, Experience> experience;
+
+    @FXML
+    private TableColumn<Review, Tourist> tourist;
 
     @FXML
     private Button goBackBtn;
 
-    public OperatorsTableController(OperatorsRepository operatorsRepository) {
-        this.operatorsRepository = operatorsRepository;
-    }
-
     @FXML
     public void initialize(){
-        operatorTable.setItems(getOperators());
+        reviewsTable.setItems(getReviews());
 
         id.setCellValueFactory(new PropertyValueFactory<>("id"));
-        name.setCellValueFactory(new PropertyValueFactory<>("name"));
-        username.setCellValueFactory(new PropertyValueFactory<>("username"));
-        email.setCellValueFactory(new PropertyValueFactory<>("email"));
+        comment.setCellValueFactory(new PropertyValueFactory<>("comment"));
+        rating.setCellValueFactory(new PropertyValueFactory<>("rating"));
+        experience.setCellValueFactory(new PropertyValueFactory<>("experience"));
+        tourist.setCellValueFactory(new PropertyValueFactory<>("tourist"));
+    }
 
-        //TourOperator tourOperator = operatorTable.getColumns().get(4).getCellValueFactory();
-        //tourOperatorName.setCellFactory();
-        //tourOperatorName.setCellValueFactory(new PropertyValueFactory<>("tourOperator"));
-        //idTourOperator.setCellValueFactory(new PropertyValueFactory<>("idTourOperator"));
+    private ObservableList<Review> getReviews() {
+        List<Review> reviewsList = reviewRepository.findAll();
+        return FXCollections.observableArrayList(reviewsList);
     }
 
 
-    private ObservableList<Operator> getOperators() {
-        List<Operator> operatorList = operatorsRepository.findAll();
-
-        //TourOperator tourOperator = operatorList.get(0).getTourOperator();
-
-        return FXCollections.observableArrayList(operatorList);
+    public ReviewsListController(ReviewRepository reviewRepository) {
+        this.reviewRepository = reviewRepository;
     }
 
     @FXML

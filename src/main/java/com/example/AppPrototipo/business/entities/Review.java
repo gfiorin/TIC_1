@@ -1,21 +1,21 @@
 package com.example.AppPrototipo.business.entities;
 
+
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "complaints")
-public class Complaint {
+@Table(name = "reviews")
+public class Review {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "description")
-    private String description;
+    @Column(name = "comment")
+    private String comment;
 
-    @Column(name = "date")
-    private LocalDateTime date;
+    @Column(name = "rating")
+    private String rating;
 
     @ManyToOne
     @JoinColumn(name = "tourist")

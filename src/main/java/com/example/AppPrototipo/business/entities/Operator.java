@@ -11,6 +11,7 @@ public class Operator extends User {
     @JoinColumn(name="toperator")
     private TourOperator tourOperator;
 
+
     public Operator() {}
 
     public Operator(String name, String username, String email, String password) {
@@ -29,4 +30,6 @@ public class Operator extends User {
     public void setTourOperator(TourOperator tourOperator) {
         this.tourOperator = tourOperator;
     }
+
+
 }
