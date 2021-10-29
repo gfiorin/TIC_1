@@ -6,13 +6,13 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.AppPrototipo.ui.admin.ComplaintsListController">
+<AnchorPane prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.AppPrototipo.ui.admin.ReviewsListController">
     <children>
-        <TableView fx:id="complaintsTable" layoutY="46.0" prefHeight="353.0" prefWidth="919.0">
+        <TableView fx:id="reviewsTable" layoutY="46.0" prefHeight="353.0" prefWidth="919.0">
             <columns>
                 <TableColumn fx:id="id" prefWidth="63.19998013973236" text="ID" />
-                <TableColumn fx:id="description" prefWidth="450" text="Descripcion" />
-                <TableColumn fx:id="date" prefWidth="85.59994506835938" text="Fecha" />
+                <TableColumn fx:id="comment" prefWidth="450" text="Comentario" />
+                <TableColumn fx:id="rating" prefWidth="85.59994506835938" text="Rating" />
                 <TableColumn fx:id="experience" prefWidth="108.0" text="Experiencia" />
                 <TableColumn fx:id="tourist" prefWidth="81.5999755859375" text="Turista" />
             </columns>

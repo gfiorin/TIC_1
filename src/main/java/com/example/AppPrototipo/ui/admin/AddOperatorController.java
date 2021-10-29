@@ -67,7 +67,10 @@ public class AddOperatorController {
                     Operator newOperator = new Operator(name, username, email, password, tourOperator);
                     operatorsRepository.save(newOperator);
 
+                    showAlert("Tipo de experiencia creado con éxito","El tipo de experiencia fue creado con éxito");
+
                     close(event);
+                    
                 } catch (Exception ignored) {}
             }
 

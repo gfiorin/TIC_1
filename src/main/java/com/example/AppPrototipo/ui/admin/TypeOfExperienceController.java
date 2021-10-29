@@ -65,6 +65,8 @@ public class TypeOfExperienceController {
 
                 experienceTypeRepository.save(newType);
 
+                showAlert("Tipo de experiencia creado con éxito","El tipo de experiencia fue creado con éxito");
+
                 close(event);
 
 
