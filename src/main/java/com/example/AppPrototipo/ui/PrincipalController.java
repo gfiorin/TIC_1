@@ -97,8 +97,20 @@ public class PrincipalController {
                 newStage.show();
 
                 oldStage.close();
+
             } else if (type == Operator.class){
-                //Do nothing for now
+                Node source = (Node) actionEvent.getSource();
+                Stage oldStage  = (Stage) source.getScene().getWindow();
+
+                FXMLLoader fxmlLoader = new FXMLLoader();
+                fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
+
+                Parent root = fxmlLoader.load(TouristController.class.getResourceAsStream("OperatorMain.fxml"));
+                Stage newStage = new Stage();
+                newStage.setScene(new Scene(root));
+                newStage.show();
+
+                oldStage.close();
             }
         } catch (InvalidInformation invalidInformation) {
             showAlert("Datos ingresados erroneos!", invalidInformation.getMessage());

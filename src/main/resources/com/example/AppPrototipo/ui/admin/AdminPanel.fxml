@@ -13,6 +13,5 @@
       <Button fx:id="listOfAdministratorsBtn" layoutX="41.0" layoutY="145.0" mnemonicParsing="false" onAction="#showListOfAdministrators" prefHeight="44.0" prefWidth="230.0" text="Administradores" />
       <Button fx:id="addOperatorBtn" layoutX="546.0" layoutY="145.0" mnemonicParsing="false" onAction="#addOperator" prefHeight="44.0" prefWidth="230.0" text="Agregar operador a operador turistico" />
       <Button fx:id="addTypeOfExperience" layoutX="296.0" layoutY="236.0" mnemonicParsing="false" onAction="#showCreateTypeOfExperience" prefHeight="44.0" prefWidth="230.0" text="Agregar tipo de experiencia" />
-      <Button fx:id="authorizeTourOperatorBtn" layoutX="546.0" layoutY="236.0" mnemonicParsing="false" onAction="#authorizeTourOperator" prefHeight="44.0" prefWidth="230.0" text="(Des)Habilitar operador turístico" />
    </children>
 </AnchorPane>

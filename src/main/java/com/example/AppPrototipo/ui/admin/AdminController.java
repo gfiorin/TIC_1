@@ -39,10 +39,6 @@ public class AdminController {
     @FXML
     private Button addTypeOfExperience;
 
-    @FXML
-    private Button authorizeTourOperatorBtn;
-
-
     public AdminController(){}
 
     @FXML
@@ -157,20 +153,6 @@ public class AdminController {
 
         oldStage.close();
     }
-
-    @FXML
-    void authorizeTourOperator(ActionEvent event) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
-
-        Parent root = fxmlLoader.load(AuthorizeTourOperatorController.class.getResourceAsStream("AuthorizeTourOperator.fxml"));
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.show();
-    }
-
-
-
 
     @FXML
     void close(ActionEvent event){
