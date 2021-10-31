@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="500.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.AppPrototipo.ui.operator.OperatorController">
+   <children>
+      <StackPane prefHeight="500.0" prefWidth="750.0">
+         <children>
+            <BorderPane prefHeight="200.0" prefWidth="200.0">
+               <top>
+                  <HBox prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #ffff;" BorderPane.alignment="CENTER">
+                     <children>
+                        <Label prefHeight="50.0" prefWidth="102.0" />
+                        <JFXButton id="boton_1" fx:id="boton_1" prefHeight="74.0" prefWidth="140.0" styleClass="boton_1" stylesheets="@style.css" text="Mis experiencias">
+                           <font>
+                              <Font name="Yu Gothic Medium" size="12.0" />
+                           </font></JFXButton>
+                        <JFXButton prefHeight="74.0" prefWidth="140.0" styleClass="boton_4" stylesheets="@style.css" text="Crear experiencia">
+                           <font>
+                              <Font size="13.0" />
+                           </font></JFXButton>
+                        <JFXButton prefHeight="74.0" prefWidth="140.0" styleClass="boton_2" stylesheets="@style.css" text="Reservas">
+                           <font>
+                              <Font name="Wingdings" size="12.0" />
+                           </font></JFXButton>
+                        <JFXButton prefHeight="74.0" prefWidth="140.0" styleClass="boton_3" stylesheets="@style.css" text="Configuracion">
+                           <font>
+                              <Font name="Verdana" size="12.0" />
+                           </font></JFXButton>
+                        <Label prefHeight="50.0" prefWidth="102.0" />
+                     </children>
+                  </HBox>
+               </top>
+               <center>
+                  <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #cfcfcf;" BorderPane.alignment="CENTER" />
+               </center>
+            </BorderPane>
+         </children>
+      </StackPane>
+   </children>
+</AnchorPane>

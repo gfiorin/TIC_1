@@ -193,9 +193,6 @@ public class AdminController {
         oldStage.close();
     }
 
-
-
-
     @FXML
     void close(ActionEvent event){
         Node source = (Node)  event.getSource();
