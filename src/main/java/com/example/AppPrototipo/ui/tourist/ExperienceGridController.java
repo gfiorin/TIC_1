@@ -2,6 +2,7 @@ package com.example.AppPrototipo.ui.tourist;
 
 import com.example.AppPrototipo.AppPrototipoApplication;
 import com.example.AppPrototipo.business.ExperienceMgr;
+import com.example.AppPrototipo.business.UserMgr;
 import com.example.AppPrototipo.business.entities.Experience;
 import com.example.AppPrototipo.business.entities.Interest;
 import com.example.AppPrototipo.business.entities.Tourist;
@@ -12,7 +13,6 @@ import javafx.geometry.Insets;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import org.hibernate.Hibernate;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -24,10 +24,9 @@ import java.util.ResourceBundle;
 @Component
 public class ExperienceGridController implements Initializable {
 
-    private Tourist tourist;
-
     private final ExperienceMgr experienceMgr;
     private final MiniExperienceController miniExperienceController;
+    private final UserMgr userMgr;
 
     @FXML
     private GridPane grillaInteres1;
@@ -56,22 +55,23 @@ public class ExperienceGridController implements Initializable {
     @FXML
     private Text interes4;
 
-    public ExperienceGridController(ExperienceMgr experienceMgr, MiniExperienceController miniExperienceController) {
+    public ExperienceGridController(ExperienceMgr experienceMgr, MiniExperienceController miniExperienceController, UserMgr userMgr) {
         this.experienceMgr = experienceMgr;
         this.miniExperienceController = miniExperienceController;
+        this.userMgr = userMgr;
     }
 
+//    @Transactional
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        Hibernate.initialize(tourist);
-        List<Interest> interests = tourist.getInterests();
+        List<Interest> interests = userMgr.getCurrentUserInterests();
         /*for(Interest interest : interests){
         }*/
 
-        interes1.setText(interests.get(0).getName());
-        interes2.setText(interests.get(1).getName());
-        interes3.setText(interests.get(2).getName());
-        interes4.setText(interests.get(3).getName());
+//        interes1.setText(interests.get(0).getName());
+//        interes2.setText(interests.get(1).getName());
+//        interes3.setText(interests.get(2).getName());
+//        interes4.setText(interests.get(3).getName());
 
         ArrayList<Experience> recomendations = new ArrayList<>(recomendations());
         ArrayList<Experience> interes1 = new ArrayList<>(interes1());
@@ -87,7 +87,6 @@ public class ExperienceGridController implements Initializable {
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
                 fxmlLoader.setLocation(miniExperienceController.getClass().getResource("MiniExperience.fxml"));
-                MiniExperienceController.setTourist(tourist);
                 VBox vbox = fxmlLoader.load();
                 miniExperienceController.setData(recomendations.get(i));
                 grillaRecomendaciones.add(vbox,columns++,row);
@@ -102,7 +101,6 @@ public class ExperienceGridController implements Initializable {
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
                 fxmlLoader.setLocation(miniExperienceController.getClass().getResource("MiniExperience.fxml"));
-                MiniExperienceController.setTourist(tourist);
                 VBox vbox = fxmlLoader.load();
                 miniExperienceController.setData(interes1.get(i));
                 grillaInteres1.add(vbox,columns++,row);
@@ -117,7 +115,6 @@ public class ExperienceGridController implements Initializable {
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
                 fxmlLoader.setLocation(miniExperienceController.getClass().getResource("MiniExperience.fxml"));
-                MiniExperienceController.setTourist(tourist);
                 VBox vbox = fxmlLoader.load();
                 miniExperienceController.setData(interes2.get(i));
                 grillaInteres2.add(vbox,columns++,row);
@@ -132,7 +129,6 @@ public class ExperienceGridController implements Initializable {
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
                 fxmlLoader.setLocation(miniExperienceController.getClass().getResource("MiniExperience.fxml"));
-                MiniExperienceController.setTourist(tourist);
                 VBox vbox = fxmlLoader.load();
                 miniExperienceController.setData(interes3.get(i));
                 grillaInteres3.add(vbox,columns++,row);
@@ -147,7 +143,6 @@ public class ExperienceGridController implements Initializable {
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
                 fxmlLoader.setLocation(miniExperienceController.getClass().getResource("MiniExperience.fxml"));
-                MiniExperienceController.setTourist(tourist);
                 VBox vbox = fxmlLoader.load();
                 miniExperienceController.setData(interes4.get(i));
                 grillaInteres4.add(vbox,columns++,row);
@@ -156,10 +151,6 @@ public class ExperienceGridController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public void setTourist(Tourist tourist) {
-        this.tourist = tourist;
     }
 
     private List<Experience> recomendations(){

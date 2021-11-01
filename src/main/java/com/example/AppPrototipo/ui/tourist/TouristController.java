@@ -1,10 +1,9 @@
 package com.example.AppPrototipo.ui.tourist;
 
 import com.example.AppPrototipo.AppPrototipoApplication;
-import com.example.AppPrototipo.business.entities.Tourist;
+import com.example.AppPrototipo.business.UserMgr;
 import com.example.AppPrototipo.business.entities.Experience;
 import com.example.AppPrototipo.ui.PrincipalController;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -27,8 +26,6 @@ import java.util.ResourceBundle;
 @Component
 public class TouristController implements Initializable {
 
-    private static Tourist tourist;
-
     @FXML
     private ImageView favoritosMarker;
     @FXML
@@ -47,11 +44,15 @@ public class TouristController implements Initializable {
     private final ExperienceController experienceController;
     private final ExperienceGridController experienceGridController;
     private final LikedController likedController;
+    private final UserMgr userMgr;
+    private final ProfileController profileController;
 
-    public TouristController(ExperienceController experienceController, ExperienceGridController experienceGridController, LikedController likedController) {
+    public TouristController(ExperienceController experienceController, ExperienceGridController experienceGridController, LikedController likedController, UserMgr userMgr, ProfileController profileController) {
         this.experienceController = experienceController;
         this.experienceGridController = experienceGridController;
         this.likedController = likedController;
+        this.userMgr = userMgr;
+        this.profileController = profileController;
     }
 
     @Override
@@ -65,19 +66,10 @@ public class TouristController implements Initializable {
         }
     }
 
-    public static Tourist getTourist() {
-        return tourist;
-    }
-
-    public static void setTourist(Tourist tourist) {
-        TouristController.tourist = tourist;
-    }
-
     public void showProfile(MouseEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
-        ProfileController.setTourist(tourist);
-        Parent root = fxmlLoader.load(ProfileController.class.getResourceAsStream("ProfileView.fxml"));
+        Parent root = fxmlLoader.load(profileController.getClass().getResourceAsStream("ProfileView.fxml"));
         Scene scene = new Scene(root);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(scene);
@@ -87,7 +79,6 @@ public class TouristController implements Initializable {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
         fxmlLoader.setLocation(likedController.getClass().getResource("LikedView.fxml"));
-        likedController.setTourist(tourist);
         ScrollPane experiencia = fxmlLoader.load();
         loadToInnerView(experiencia);
     }
@@ -114,7 +105,6 @@ public class TouristController implements Initializable {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
         fxmlLoader.setLocation(experienceGridController.getClass().getResource("ExperienceGrid.fxml"));
-        experienceGridController.setTourist(tourist);
         ScrollPane experienceGrid = fxmlLoader.load();
         loadToInnerView(experienceGrid);
     }

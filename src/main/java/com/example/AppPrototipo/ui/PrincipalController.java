@@ -8,7 +8,6 @@ import com.example.AppPrototipo.business.entities.Tourist;
 import com.example.AppPrototipo.business.entities.User;
 import com.example.AppPrototipo.business.exceptions.InvalidInformation;
 import com.example.AppPrototipo.ui.admin.AdminController;
-import com.example.AppPrototipo.ui.tourist.ExperienceController;
 import com.example.AppPrototipo.ui.tourist.TouristController;
 import com.example.AppPrototipo.ui.userCreation.UserCreationController;
 import javafx.event.ActionEvent;
@@ -43,9 +42,11 @@ public class PrincipalController {
     private Button login;
 
     private final UserMgr userMgr;
+    private final TouristController touristController;
 
-    public PrincipalController(UserMgr userMgr) {
+    public PrincipalController(UserMgr userMgr, TouristController touristController) {
         this.userMgr = userMgr;
+        this.touristController = touristController;
     }
 
     @FXML
@@ -92,11 +93,8 @@ public class PrincipalController {
 
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
-                TouristController.setTourist((Tourist) user);
 
-                Parent root = fxmlLoader.load(TouristController.class.getResourceAsStream("TouristMain.fxml"));
-                TouristController touristController = fxmlLoader.getController();
-//                touristController.setTourist((Tourist) user);
+                Parent root = fxmlLoader.load(touristController.getClass().getResourceAsStream("TouristMain.fxml"));
                 Stage newStage = new Stage();
                 newStage.setScene(new Scene(root));
                 newStage.show();

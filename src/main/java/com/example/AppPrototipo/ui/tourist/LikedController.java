@@ -1,15 +1,14 @@
 package com.example.AppPrototipo.ui.tourist;
 
 import com.example.AppPrototipo.AppPrototipoApplication;
+import com.example.AppPrototipo.business.UserMgr;
 import com.example.AppPrototipo.business.entities.Experience;
 import com.example.AppPrototipo.business.entities.Tourist;
 import com.example.AppPrototipo.persistence.ExperienceRepository;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import org.springframework.stereotype.Component;
@@ -30,10 +29,12 @@ public class LikedController implements Initializable {
 
     private final ExperienceRepository experienceRepository;
     private final MiniExperienceController miniExperienceController;
+    private final UserMgr userMgr;
 
-    public LikedController(ExperienceRepository experienceRepository, MiniExperienceController miniExperienceController) {
+    public LikedController(ExperienceRepository experienceRepository, MiniExperienceController miniExperienceController, UserMgr userMgr) {
         this.experienceRepository = experienceRepository;
         this.miniExperienceController = miniExperienceController;
+        this.userMgr = userMgr;
     }
 
     public Tourist getTourist() {
@@ -47,7 +48,7 @@ public class LikedController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        ArrayList<Experience> experiences = new ArrayList<>(liked(tourist));
+        List<Experience> experiences = userMgr.getCurrentUserLiked();
 
         int columns = 0;
         int row = 1;
@@ -74,7 +75,4 @@ public class LikedController implements Initializable {
         }
     }
 
-    private List<Experience> liked(Tourist tourist){
-        return tourist.getLiked();
-    }
 }
