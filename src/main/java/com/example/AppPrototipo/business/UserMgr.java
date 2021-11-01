@@ -142,6 +142,7 @@ public class UserMgr {
         return ((Tourist) getCurrentUser()).getLiked();
     }
 
+    @Transactional
     public List<Interest> getCurrentUserInterests() {
         return ((Tourist) getCurrentUser()).getInterests();
     }
