@@ -17,19 +17,19 @@
                   <HBox prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #ffff;" BorderPane.alignment="CENTER">
                      <children>
                         <Label prefHeight="50.0" prefWidth="102.0" />
-                        <JFXButton id="boton_1" fx:id="boton_1" prefHeight="74.0" prefWidth="140.0" styleClass="boton_1" stylesheets="@style.css" text="Mis experiencias">
+                        <JFXButton id="boton_1" fx:id="boton_1" prefHeight="74.0" prefWidth="140.0" styleClass="boton_1" stylesheets="@com/example/AppPrototipo/ui/operator/style.css" text="Mis experiencias">
                            <font>
                               <Font name="Yu Gothic Medium" size="12.0" />
                            </font></JFXButton>
-                        <JFXButton prefHeight="74.0" prefWidth="140.0" styleClass="boton_4" stylesheets="@style.css" text="Crear experiencia">
+                        <JFXButton prefHeight="74.0" prefWidth="140.0" styleClass="boton_4" stylesheets="@com/example/AppPrototipo/ui/operator/style.css" text="Crear experiencia">
                            <font>
                               <Font size="13.0" />
                            </font></JFXButton>
-                        <JFXButton prefHeight="74.0" prefWidth="140.0" styleClass="boton_2" stylesheets="@style.css" text="Reservas">
+                        <JFXButton prefHeight="74.0" prefWidth="140.0" styleClass="boton_2" stylesheets="@com/example/AppPrototipo/ui/operator/style.css" text="Reservas">
                            <font>
                               <Font name="Wingdings" size="12.0" />
                            </font></JFXButton>
-                        <JFXButton prefHeight="74.0" prefWidth="140.0" styleClass="boton_3" stylesheets="@style.css" text="Configuracion">
+                        <JFXButton prefHeight="74.0" prefWidth="140.0" styleClass="boton_3" stylesheets="@com/example/AppPrototipo/ui/operator/style.css" text="Configuracion">
                            <font>
                               <Font name="Verdana" size="12.0" />
                            </font></JFXButton>
