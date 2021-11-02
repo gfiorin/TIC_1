@@ -15,6 +15,6 @@
         <Button fx:id="addTypeOfExperience" layoutX="296.0" layoutY="230.0" mnemonicParsing="false" onAction="#showCreateTypeOfExperience" prefHeight="44.0" prefWidth="230.0" text="Agregar tipo de experiencia" />
         <Button fx:id="listOfComplaintsBtn" layoutX="546.0" layoutY="230.0" mnemonicParsing="false" onAction="#showListOfComplaints" prefHeight="44.0" prefWidth="230.0" text="Denuncias" />
         <Button fx:id="listOfReviewsBtn" layoutX="41.0" layoutY="320.0" mnemonicParsing="false" onAction="#showListOfReviews" prefHeight="44.0" prefWidth="230.0" text="Reseñas" />
-      <Button layoutX="295.0" layoutY="320.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="230.0" text="Cerrar sesión" />
+        <Button fx:id="cerrarSesionBtn" layoutX="295.0" layoutY="320.0" mnemonicParsing="false" onAction="#cerrarSesion" prefHeight="44.0" prefWidth="230.0" text="Cerrar sesión" />
     </children>
 </AnchorPane>
