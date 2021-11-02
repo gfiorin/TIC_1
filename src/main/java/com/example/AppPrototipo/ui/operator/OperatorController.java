@@ -22,6 +22,4 @@ public class OperatorController {
         stage.close();
     }
 
-    // creo que no me anda por que el css esta mal ubicado https://stackoverflow.com/questions/36934339/javafx-warning-resource-style-css-not-found-intellij
-
 }

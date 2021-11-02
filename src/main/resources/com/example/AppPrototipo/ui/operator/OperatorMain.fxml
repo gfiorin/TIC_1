@@ -38,7 +38,7 @@
                   </HBox>
                </top>
                <center>
-                  <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #cfcfcf;" BorderPane.alignment="CENTER" />
+                  <AnchorPane minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: #cfcfcf;" BorderPane.alignment="CENTER" />
                </center>
             </BorderPane>
          </children>

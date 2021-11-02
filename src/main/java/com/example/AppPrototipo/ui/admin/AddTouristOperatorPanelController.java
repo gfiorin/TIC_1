@@ -2,6 +2,7 @@ package com.example.AppPrototipo.ui.admin;
 
 import com.example.AppPrototipo.AppPrototipoApplication;
 import com.example.AppPrototipo.business.TourOperatorMgr;
+import com.example.AppPrototipo.business.entities.TourOperator;
 import com.example.AppPrototipo.business.exceptions.InvalidInformation;
 import com.example.AppPrototipo.business.exceptions.TourOperatorAlreadyExists;
 import com.example.AppPrototipo.business.exceptions.UserAlreadyExsists;
