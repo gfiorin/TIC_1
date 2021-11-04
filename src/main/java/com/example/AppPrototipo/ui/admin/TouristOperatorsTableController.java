@@ -26,7 +26,7 @@ import java.util.List;
 @Component
 public class TouristOperatorsTableController {
 
-    private final TourOperatorRepository tourOperatorRepository;
+    private final TourOperatorMgr tourOperatorMgr;
 
     @FXML
     private TableView<TourOperator> touristOperatorTable;
@@ -64,10 +64,7 @@ public class TouristOperatorsTableController {
     @FXML
     private Button goBackBtn;
 
-    private final TourOperatorMgr tourOperatorMgr;
-
-    public TouristOperatorsTableController(TourOperatorRepository tourOperatorRepository, TourOperatorMgr tourOperatorMgr) {
-        this.tourOperatorRepository = tourOperatorRepository;
+    public TouristOperatorsTableController(TourOperatorMgr tourOperatorMgr) {
         this.tourOperatorMgr = tourOperatorMgr;
     }
 
@@ -87,7 +84,7 @@ public class TouristOperatorsTableController {
     }
 
     private ObservableList<TourOperator> getTourOperators() {
-        List<TourOperator> tourOperatorList = tourOperatorRepository.findAll();
+        List<TourOperator> tourOperatorList = tourOperatorMgr.findAll();
         return FXCollections.observableArrayList(tourOperatorList);
     }
 

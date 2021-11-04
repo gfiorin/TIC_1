@@ -1,26 +1,23 @@
 package com.example.AppPrototipo.ui.admin;
 
-
+import com.example.AppPrototipo.business.ExperienceTypeMgr;
+import com.example.AppPrototipo.business.InterestMgr;
 import com.example.AppPrototipo.business.entities.ExperienceType;
 import com.example.AppPrototipo.business.entities.Interest;
-import com.example.AppPrototipo.persistence.ExperienceTypeRepository;
-import com.example.AppPrototipo.persistence.InterestRepository;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import org.springframework.stereotype.Component;
-
 import java.util.List;
 
 @Component
 public class TypeOfExperienceController {
 
+    private final ExperienceTypeMgr experienceTypeMgr;
 
-    private final ExperienceTypeRepository experienceTypeRepository;
-
-    private final InterestRepository interestRepository;
+    private final InterestMgr interestMgr;
 
     public TextField nameInput;
 
@@ -30,18 +27,17 @@ public class TypeOfExperienceController {
 
     public Button cancelarBtn;
 
-    public TypeOfExperienceController(ExperienceTypeRepository experienceTypeRepository, InterestRepository interestRepository) {
-        this.experienceTypeRepository = experienceTypeRepository;
-        this.interestRepository = interestRepository;
+    public TypeOfExperienceController(ExperienceTypeMgr experienceTypeMgr, InterestMgr interestMgr) {
+        this.experienceTypeMgr = experienceTypeMgr;
+        this.interestMgr = interestMgr;
     }
 
     @FXML
     public void initialize(){
-        List<Interest> interests = interestRepository.findAll();
+        List<Interest> interests = interestMgr.findAll();
         for(Interest interest : interests){
             interestInput.getItems().add(interest);
         }
-
     }
 
     @FXML
@@ -54,7 +50,7 @@ public class TypeOfExperienceController {
             showAlert(
                     "Datos faltantes",
                     "Uno o mas campos esta vacio. Por favor, verifique la informacion introducida.");
-        } else if (experienceTypeRepository.findOneByName(name) != null) {
+        } else if (experienceTypeMgr.findOneByName(name) != null) {
             showAlert(
                     "Datos repetidos",
                     "Ya existe un tipo de experiencia con el nombre '" + name + "'. Por favor, verifique la informacion introducida.");
@@ -63,19 +59,16 @@ public class TypeOfExperienceController {
 
                 ExperienceType newType = new ExperienceType(name, interest);
 
-                experienceTypeRepository.save(newType);
+                experienceTypeMgr.save(newType);
 
                 showAlert("Tipo de experiencia creado con éxito","El tipo de experiencia fue creado con éxito");
 
                 close(event);
 
-
             } catch (Exception ignored) {}
         }
 
-
     }
-
 
     @FXML
     void close(ActionEvent event){
@@ -91,4 +84,5 @@ public class TypeOfExperienceController {
         alert.setContentText(contextText);
         alert.showAndWait();
     }
+
 }

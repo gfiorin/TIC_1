@@ -19,11 +19,11 @@ public class Complaint {
 
     @ManyToOne
     @JoinColumn(name = "tourist")
-    private Tourist touristId;
+    private Tourist tourist;
 
     @ManyToOne
     @JoinColumn(name = "experience")
-    private Experience experienceId;
+    private Experience experience;
 
 
 }

@@ -1,10 +1,10 @@
 package com.example.AppPrototipo.ui.admin;
 
 import com.example.AppPrototipo.AppPrototipoApplication;
+import com.example.AppPrototipo.business.TouristMgr;
 import com.example.AppPrototipo.business.entities.Country;
 import com.example.AppPrototipo.business.entities.Interest;
 import com.example.AppPrototipo.business.entities.Tourist;
-import com.example.AppPrototipo.persistence.TouristRepository;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -39,9 +39,6 @@ public class TouristsTableController {
     @FXML
     private TableColumn<Tourist, String> email;
 
-    //@FXML
-    //private TableColumn<Tourist, String> password;
-
     @FXML
     private TableColumn<Tourist, LocalDate> dateOfBirth;
 
@@ -63,15 +60,14 @@ public class TouristsTableController {
     @FXML
     private Button goBackBtn;
 
-    private final TouristRepository touristRepository;
+    private final TouristMgr touristMgr;
 
-    public TouristsTableController(TouristRepository touristRepository) {
-        this.touristRepository = touristRepository;
+    public TouristsTableController(TouristMgr touristMgr) {
+        this.touristMgr = touristMgr;
     }
 
     @FXML
     public void initialize(){
-
         touristTable.setItems(getTourists());
         
         id.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -84,11 +80,10 @@ public class TouristsTableController {
         documentNumber.setCellValueFactory(new PropertyValueFactory<>("documentNumber"));
         country.setCellValueFactory(new PropertyValueFactory<>("country"));
         //listOfInterests.setCellValueFactory(new PropertyValueFactory<>("Interests"));
-
     }
 
     private ObservableList<Tourist> getTourists() {
-        List<Tourist> touristList = touristRepository.findAll();
+        List<Tourist> touristList = touristMgr.findAll();
         return FXCollections.observableArrayList(touristList);
     }
 

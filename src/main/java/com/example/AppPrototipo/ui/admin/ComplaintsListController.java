@@ -1,11 +1,10 @@
 package com.example.AppPrototipo.ui.admin;
 
 import com.example.AppPrototipo.AppPrototipoApplication;
-import com.example.AppPrototipo.business.entities.Administrator;
+import com.example.AppPrototipo.business.ComplaintMgr;
 import com.example.AppPrototipo.business.entities.Complaint;
 import com.example.AppPrototipo.business.entities.Experience;
 import com.example.AppPrototipo.business.entities.Tourist;
-import com.example.AppPrototipo.persistence.ComplaintRepository;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -21,14 +20,13 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import org.springframework.stereotype.Component;
-
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Component
 public class ComplaintsListController {
 
-    private final ComplaintRepository complaintRepository;
+    private final ComplaintMgr complaintMgr;
 
     @FXML
     private TableView<Complaint> complaintsTable;
@@ -51,6 +49,10 @@ public class ComplaintsListController {
     @FXML
     private Button goBackBtn;
 
+    public ComplaintsListController(ComplaintMgr complaintMgr) {
+        this.complaintMgr = complaintMgr;
+    }
+
     @FXML
     public void initialize(){
         complaintsTable.setItems(getComplaints());
@@ -63,13 +65,8 @@ public class ComplaintsListController {
     }
 
     private ObservableList<Complaint> getComplaints() {
-        List<Complaint> complaintsList = complaintRepository.findAll();
+        List<Complaint> complaintsList = complaintMgr.findAll();
         return FXCollections.observableArrayList(complaintsList);
-    }
-
-
-    public ComplaintsListController(ComplaintRepository complaintRepository) {
-        this.complaintRepository = complaintRepository;
     }
 
     @FXML
@@ -102,4 +99,5 @@ public class ComplaintsListController {
         alert.setContentText(contextText);
         alert.showAndWait();
     }
+
 }

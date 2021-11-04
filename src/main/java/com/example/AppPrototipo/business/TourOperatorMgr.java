@@ -5,9 +5,9 @@ import com.example.AppPrototipo.business.exceptions.InvalidInformation;
 import com.example.AppPrototipo.business.exceptions.TourOperatorAlreadyExists;
 import com.example.AppPrototipo.persistence.OperatorsRepository;
 import com.example.AppPrototipo.persistence.TourOperatorRepository;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import java.util.List;
 
 @Service
 public class TourOperatorMgr {
@@ -99,6 +99,14 @@ public class TourOperatorMgr {
         else {
             tourOperator.enableTourOperator();
         }
+    }
+
+    public TourOperator findOneByCompanyName(String companyName){
+        return tourOperatorRepository.findOneByCompanyName(companyName);
+    }
+
+    public List<TourOperator> findAll(){
+        return tourOperatorRepository.findAll();
     }
 
 }

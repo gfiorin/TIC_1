@@ -1,8 +1,8 @@
 package com.example.AppPrototipo.ui.admin;
 
 import com.example.AppPrototipo.AppPrototipoApplication;
+import com.example.AppPrototipo.business.AdministratorMgr;
 import com.example.AppPrototipo.business.entities.Administrator;
-import com.example.AppPrototipo.persistence.AdministratorRepository;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -21,11 +21,10 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-
 @Component
 public class ListOfAdministratorsController {
 
-    private final AdministratorRepository administratorRepository;
+    private final AdministratorMgr administratorMgr;
 
     @FXML
     private TableView<Administrator> adminTable;
@@ -45,8 +44,8 @@ public class ListOfAdministratorsController {
     @FXML
     private Button goBackBtn;
 
-    public ListOfAdministratorsController(AdministratorRepository administratorRepository) {
-        this.administratorRepository = administratorRepository;
+    public ListOfAdministratorsController(AdministratorMgr administratorMgr) {
+        this.administratorMgr = administratorMgr;
     }
 
     @FXML
@@ -60,7 +59,7 @@ public class ListOfAdministratorsController {
     }
 
     private ObservableList<Administrator> getAdministrators() {
-        List<Administrator> administratorsList = administratorRepository.findAll();
+        List<Administrator> administratorsList = administratorMgr.findAll();
         return FXCollections.observableArrayList(administratorsList);
     }
 
@@ -94,4 +93,5 @@ public class ListOfAdministratorsController {
         alert.setContentText(contextText);
         alert.showAndWait();
     }
+
 }

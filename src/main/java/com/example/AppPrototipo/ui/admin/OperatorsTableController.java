@@ -1,9 +1,8 @@
 package com.example.AppPrototipo.ui.admin;
 
 import com.example.AppPrototipo.AppPrototipoApplication;
+import com.example.AppPrototipo.business.OperatorMgr;
 import com.example.AppPrototipo.business.entities.Operator;
-import com.example.AppPrototipo.business.entities.TourOperator;
-import com.example.AppPrototipo.persistence.OperatorsRepository;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -19,13 +18,12 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import org.springframework.stereotype.Component;
-
 import java.util.List;
 
 @Component
 public class OperatorsTableController {
 
-    private final OperatorsRepository operatorsRepository;
+    private final OperatorMgr operatorMgr;
 
     @FXML
     private TableView<Operator> operatorTable;
@@ -49,8 +47,8 @@ public class OperatorsTableController {
     @FXML
     private Button goBackBtn;
 
-    public OperatorsTableController(OperatorsRepository operatorsRepository) {
-        this.operatorsRepository = operatorsRepository;
+    public OperatorsTableController(OperatorMgr operatorMgr) {
+        this.operatorMgr = operatorMgr;
     }
 
     @FXML
@@ -68,12 +66,8 @@ public class OperatorsTableController {
         //idTourOperator.setCellValueFactory(new PropertyValueFactory<>("idTourOperator"));
     }
 
-
     private ObservableList<Operator> getOperators() {
-        List<Operator> operatorList = operatorsRepository.findAll();
-
-        //TourOperator tourOperator = operatorList.get(0).getTourOperator();
-
+        List<Operator> operatorList = operatorMgr.findAll();
         return FXCollections.observableArrayList(operatorList);
     }
 
@@ -107,4 +101,5 @@ public class OperatorsTableController {
         alert.setContentText(contextText);
         alert.showAndWait();
     }
+
 }

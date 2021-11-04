@@ -1,11 +1,10 @@
 package com.example.AppPrototipo.ui.admin;
 
 import com.example.AppPrototipo.AppPrototipoApplication;
+import com.example.AppPrototipo.business.ReviewMgr;
 import com.example.AppPrototipo.business.entities.Experience;
 import com.example.AppPrototipo.business.entities.Review;
 import com.example.AppPrototipo.business.entities.Tourist;
-import com.example.AppPrototipo.persistence.ComplaintRepository;
-import com.example.AppPrototipo.persistence.ReviewRepository;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -26,7 +25,7 @@ import java.util.List;
 @Component
 public class ReviewsListController {
 
-    private final ReviewRepository reviewRepository;
+    private final ReviewMgr reviewMgr;
 
     @FXML
     private TableView<Review> reviewsTable;
@@ -49,6 +48,10 @@ public class ReviewsListController {
     @FXML
     private Button goBackBtn;
 
+    public ReviewsListController(ReviewMgr reviewMgr) {
+        this.reviewMgr = reviewMgr;
+    }
+
     @FXML
     public void initialize(){
         reviewsTable.setItems(getReviews());
@@ -61,13 +64,8 @@ public class ReviewsListController {
     }
 
     private ObservableList<Review> getReviews() {
-        List<Review> reviewsList = reviewRepository.findAll();
+        List<Review> reviewsList = reviewMgr.findAll();
         return FXCollections.observableArrayList(reviewsList);
-    }
-
-
-    public ReviewsListController(ReviewRepository reviewRepository) {
-        this.reviewRepository = reviewRepository;
     }
 
     @FXML
