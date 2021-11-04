@@ -12,7 +12,7 @@
 
 <ScrollPane prefHeight="500.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.AppPrototipo.ui.tourist.ExperienceGridController">
     <content>
-      <VBox prefHeight="501.0" prefWidth="884.0" spacing="5.0">
+      <VBox fx:id="vBoxGral" prefHeight="501.0" prefWidth="884.0" spacing="5.0">
          <children>
             <Pane prefHeight="54.0" prefWidth="884.0">
                <children>
@@ -22,7 +22,7 @@
                   <Insets />
                </VBox.margin>
             </Pane>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Recomendaciones" underline="true">
+            <Text fx:id="titulo" strokeType="OUTSIDE" strokeWidth="0.0" text="Recomendaciones" underline="true">
                <font>
                   <Font size="24.0" />
                </font>
@@ -30,63 +30,11 @@
                   <Insets left="5.0" />
                </VBox.margin>
             </Text>
-              <GridPane fx:id="grillaRecomendaciones">
+              <GridPane fx:id="grillaRecomendaciones" VBox.vgrow="ALWAYS">
                   <rowConstraints>
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   </rowConstraints>
               </GridPane>
-            <Text fx:id="interes1" strokeType="OUTSIDE" strokeWidth="0.0" text="Interes1" underline="true">
-               <font>
-                  <Font size="24.0" />
-               </font>
-               <VBox.margin>
-                  <Insets left="5.0" />
-               </VBox.margin>
-            </Text>
-            <GridPane fx:id="grillaInteres1">
-               <rowConstraints>
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-               </rowConstraints>
-            </GridPane>
-            <Text fx:id="interes2" strokeType="OUTSIDE" strokeWidth="0.0" text="Interes2" underline="true">
-               <font>
-                  <Font size="24.0" />
-               </font>
-               <VBox.margin>
-                  <Insets left="5.0" />
-               </VBox.margin>
-            </Text>
-            <GridPane fx:id="grillaInteres2">
-               <rowConstraints>
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-               </rowConstraints>
-            </GridPane>
-            <Text fx:id="interes3" strokeType="OUTSIDE" strokeWidth="0.0" text="Interes3" underline="true">
-               <font>
-                  <Font size="24.0" />
-               </font>
-               <VBox.margin>
-                  <Insets left="5.0" />
-               </VBox.margin>
-            </Text>
-            <GridPane fx:id="grillaInteres3">
-               <rowConstraints>
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-               </rowConstraints>
-            </GridPane>
-            <Text fx:id="interes4" strokeType="OUTSIDE" strokeWidth="0.0" text="Interes4" underline="true">
-               <font>
-                  <Font size="24.0" />
-               </font>
-               <VBox.margin>
-                  <Insets left="5.0" />
-               </VBox.margin>
-            </Text>
-            <GridPane fx:id="grillaInteres4">
-               <rowConstraints>
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-               </rowConstraints>
-            </GridPane>
          </children>
       </VBox>
     </content>
