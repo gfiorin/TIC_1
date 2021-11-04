@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane prefHeight="402.0" prefWidth="919.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.AppPrototipo.ui.admin.ListOfAdministratorsController">
+    <TableView fx:id="adminTable" layoutY="48.0" prefHeight="353.0" prefWidth="919.0">
+        <columns>
+            <TableColumn fx:id="id" prefWidth="63.19998013973236" text="ID" />
+            <TableColumn fx:id="name" prefWidth="196.79998779296875" text="Nombre" />
+            <TableColumn fx:id="username" prefWidth="352.79998779296875" text="Nombre de usuario" />
+            <TableColumn fx:id="email" prefWidth="305.60002441406255" text="Email" />
+        </columns>
+    </TableView>
+   <Pane prefHeight="48.0" prefWidth="919.0">
+      <children>
+         <Button fx:id="goBackBtn" layoutX="16.0" layoutY="11.0" mnemonicParsing="false" onAction="#goBackToAdminView" prefHeight="26.0" prefWidth="56.0" text="Atras" />
+      </children>
+   </Pane>
+</AnchorPane>

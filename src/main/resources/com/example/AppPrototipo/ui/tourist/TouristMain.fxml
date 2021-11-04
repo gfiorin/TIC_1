@@ -1,14 +1,115 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.AppPrototipo.ui.tourist.TouristController"
-            prefHeight="400.0" prefWidth="600.0">
 
-</AnchorPane>
+<BorderPane prefHeight="576.0" prefWidth="853.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.AppPrototipo.ui.tourist.TouristController">
+   <left>
+      <VBox prefWidth="213.0" style="-fx-background-color: #998;" BorderPane.alignment="CENTER">
+         <children>
+            <VBox prefHeight="521.0" prefWidth="210.0" style="-fx-background-color: #998;" VBox.vgrow="ALWAYS">
+               <children>
+                  <HBox prefHeight="45.0" prefWidth="205.0" spacing="10.0">
+                     <children>
+                        <ImageView fx:id="perfilMarker" fitHeight="32.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                           <HBox.margin>
+                              <Insets bottom="10.0" top="10.0" />
+                           </HBox.margin>
+                           <image>
+                              <Image url="@imgs/perfil.png" />
+                           </image>
+                        </ImageView>
+                        <Label prefHeight="36.0" prefWidth="152.0" text="Perfil">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets bottom="10.0" top="10.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                     <padding>
+                        <Insets left="15.0" />
+                     </padding>
+                  </HBox>
+                  <HBox prefHeight="45.0" prefWidth="205.0" spacing="10.0">
+                     <children>
+                        <ImageView fx:id="favoritosMarker" fitHeight="32.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                           <HBox.margin>
+                              <Insets bottom="10.0" top="10.0" />
+                           </HBox.margin>
+                           <image>
+                              <Image url="@imgs/liked.png" />
+                           </image>
+                        </ImageView>
+                        <Label prefHeight="36.0" prefWidth="152.0" text="Favoritos">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets bottom="10.0" top="10.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                     <padding>
+                        <Insets left="15.0" />
+                     </padding>
+                  </HBox>
+                  <AnchorPane prefHeight="421.0" prefWidth="198.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <HBox prefHeight="45.0" prefWidth="205.0" spacing="10.0" AnchorPane.bottomAnchor="5.0">
+                           <children>
+                              <ImageView fx:id="sesionMarker" fitHeight="36.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+                                 <HBox.margin>
+                                    <Insets bottom="10.0" top="10.0" />
+                                 </HBox.margin>
+                                 <image>
+                                    <Image url="@imgs/cerrarSesion.png" />
+                                 </image>
+                              </ImageView>
+                              <Label prefHeight="36.0" prefWidth="152.0" text="Cerrar Sesión">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets bottom="10.0" top="10.0" />
+                                 </HBox.margin>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets left="15.0" />
+                           </padding>
+                        </HBox>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </left>
+   <top>
+      <HBox prefHeight="55.0" prefWidth="853.0" BorderPane.alignment="CENTER" />
+   </top>
+   <center>
+      <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <content>
+            <GridPane fx:id="grillaExperiencias">
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+            </GridPane>
+         </content>
+      </ScrollPane>
+   </center>
+</BorderPane>

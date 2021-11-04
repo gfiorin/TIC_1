@@ -70,7 +70,6 @@ public class UserCreationController {
             CheckBox interestCheckBox = new CheckBox(interest.getName());
             interestCheckBox.setUserData(interest);
             interestVBox.getChildren().add(interestCheckBox);
-//            interestVBox.getChildren().add(new CheckBox(interest.getName()));
         }
 
         List<Country> countries = countryRepository.findAll();
@@ -87,7 +86,7 @@ public class UserCreationController {
         boolean invalidValue = false;
         for (Control control : controlList) {
             if (control instanceof TextField) {
-                if (((TextField) control).getText() == null || ((TextField) control).getText().isEmpty()) {
+                if (((TextField) control).getText() == null || ((TextField) control).getText().isBlank()) {
                     invalidValue = true;
                     break;
                 }
@@ -140,7 +139,6 @@ public class UserCreationController {
                         interests.add((Interest) checkBox.getUserData());
                     }
                 }
-
 
                 userMgr.addTourist(name, user, email, password, dateOfBirth, cellphone, countryId, interests, null, null);
 

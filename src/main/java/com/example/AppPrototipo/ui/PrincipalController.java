@@ -7,6 +7,7 @@ import com.example.AppPrototipo.business.entities.Operator;
 import com.example.AppPrototipo.business.entities.Tourist;
 import com.example.AppPrototipo.business.exceptions.InvalidInformation;
 import com.example.AppPrototipo.ui.admin.AdminController;
+import com.example.AppPrototipo.ui.operator.OperatorController;
 import com.example.AppPrototipo.ui.tourist.TouristController;
 import com.example.AppPrototipo.ui.userCreation.UserCreationController;
 import javafx.event.ActionEvent;
@@ -20,6 +21,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -97,11 +99,23 @@ public class PrincipalController {
                 newStage.show();
 
                 oldStage.close();
+
             } else if (type == Operator.class){
-                //Do nothing for now
+                Node source = (Node) actionEvent.getSource();
+                Stage oldStage  = (Stage) source.getScene().getWindow();
+
+                FXMLLoader fxmlLoader = new FXMLLoader();
+                fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
+
+                Parent root = fxmlLoader.load(OperatorController.class.getResourceAsStream("OperatorMain.fxml"));
+                Stage newStage = new Stage();
+                newStage.setScene(new Scene(root));
+                newStage.show();
+
+                oldStage.close();
             }
         } catch (InvalidInformation invalidInformation) {
-            invalidInformation.printStackTrace();
+            showAlert("Datos ingresados erroneos!", invalidInformation.getMessage());
         }
     }
 

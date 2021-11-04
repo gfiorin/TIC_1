@@ -17,6 +17,9 @@ public class Experience {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "shortdescription")
+    private String shortdescription;
+
     @Column(name = "vaccination")
     private boolean vaccination;
 
@@ -44,16 +47,73 @@ public class Experience {
     @JoinColumn(name="tour_operator")
     private TourOperator tourOperator;
 
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "experience")
+    List<Image> images;
+
+    @Column(name = "location")
+    private String ubicacion;
+
+    @Column(name = "reviewed")
+    private Boolean reviewed;
+
     public Experience() {
     }
 
-    public Experience(String title, String description, boolean vaccination, Integer capacity, boolean bookable, boolean authorized) {
+    public Experience(String title, String description, String shortdescription, boolean vaccination, Integer capacity, boolean bookable, boolean authorized, List<Image> images) {
         this.title = title;
         this.description = description;
+        this.shortdescription = shortdescription;
         this.vaccination = vaccination;
         this.capacity = capacity;
         this.bookable = bookable;
         this.authorized = authorized;
+        this.images = images;
+        this.reviewed = false;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getShortdescription() {
+        return shortdescription;
+    }
+
+    public void setShortdescription(String shortdescription) {
+        this.shortdescription = shortdescription;
+    }
+
+    public List<ExperienceType> getExperienceTypes() {
+        return experienceTypes;
+    }
+
+    public void setExperienceTypes(List<ExperienceType> experienceTypes) {
+        this.experienceTypes = experienceTypes;
+    }
+
+    public TourOperator getTourOperator() {
+        return tourOperator;
+    }
+
+    public void setTourOperator(TourOperator tourOperator) {
+        this.tourOperator = tourOperator;
+    }
+
+    public Boolean getReviewed() {
+        return reviewed;
+    }
+
+    public void setReviewed(Boolean reviewed) {
+        this.reviewed = reviewed;
+    }
+
+    public void enableExperience(){
+        this.authorized = true;
+    }
+
+    public void disableExperience(){
+        this.authorized = false;
     }
 
     public Integer getId() {
@@ -107,4 +167,24 @@ public class Experience {
     public void setAuthorized(boolean authorized) {
         this.authorized = authorized;
     }
+
+    public List<Image> getImages() {
+        return images;
+    }
+
+    public void setImages(List<Image> images) {
+        this.images = images;
+    }
+
+    public String getUbicacion() {
+        return ubicacion;
+    }
+
+    public void setUbicacion(String ubicacion) {
+        this.ubicacion = ubicacion;
+    }
+
+    public String getShortDescription() { return shortdescription; }
+
+    public void setShortDescription(String shortDescription) { this.shortdescription = shortDescription; }
 }
