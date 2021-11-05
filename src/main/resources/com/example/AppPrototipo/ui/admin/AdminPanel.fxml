@@ -11,7 +11,7 @@
         <Button fx:id="listOfExperiencesBtn" layoutX="41.0" layoutY="230.0" mnemonicParsing="false" onAction="#showExperiencesList" prefHeight="44.0" prefWidth="230.0" text="Experiencias" />
         <Button fx:id="addTouristOperator" layoutX="296.0" layoutY="140.0" mnemonicParsing="false" onAction="#agregarOperadorTuristico" prefHeight="44.0" prefWidth="230.0" text="Agregar operador turistico" />
         <Button fx:id="listOfAdministratorsBtn" layoutX="41.0" layoutY="140.0" mnemonicParsing="false" onAction="#showListOfAdministrators" prefHeight="44.0" prefWidth="230.0" text="Administradores" />
-        <Button fx:id="addOperatorBtn" layoutX="546.0" layoutY="140.0" mnemonicParsing="false" onAction="#addOperator" prefHeight="44.0" prefWidth="230.0" text="Agregar operador a operador turistico" />
+        <Button fx:id="addOperatorBtn" layoutX="546.0" layoutY="140.0" mnemonicParsing="false" onAction="#addOperator" prefHeight="44.0" prefWidth="230.0" text="Agregar usuario operador" />
         <Button fx:id="addTypeOfExperience" layoutX="296.0" layoutY="230.0" mnemonicParsing="false" onAction="#showCreateTypeOfExperience" prefHeight="44.0" prefWidth="230.0" text="Agregar tipo de experiencia" />
         <Button fx:id="listOfComplaintsBtn" layoutX="546.0" layoutY="230.0" mnemonicParsing="false" onAction="#showListOfComplaints" prefHeight="44.0" prefWidth="230.0" text="Denuncias" />
         <Button fx:id="listOfReviewsBtn" layoutX="41.0" layoutY="320.0" mnemonicParsing="false" onAction="#showListOfReviews" prefHeight="44.0" prefWidth="230.0" text="Reseñas" />

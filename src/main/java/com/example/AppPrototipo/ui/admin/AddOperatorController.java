@@ -25,11 +25,9 @@ import org.springframework.stereotype.Component;
 public class AddOperatorController {
 
     private final OperatorMgr operatorMgr;
-    private final TourOperatorMgr tourOperatorMgr;
 
-    public AddOperatorController(OperatorMgr operatorMgr, TourOperatorMgr tourOperatorMgr) {
+    public AddOperatorController(OperatorMgr operatorMgr) {
         this.operatorMgr = operatorMgr;
-        this.tourOperatorMgr = tourOperatorMgr;
     }
 
     public TextField nameInput;
@@ -42,21 +40,10 @@ public class AddOperatorController {
     public Button selectBtn;
 
     @FXML
-    private Label tourOperatorName;
+    public Label tourOperatorName;
 
-    private TourOperator tourOperatorSelected = null;
+    public TourOperator tourOperatorSelected = null;
 
-    public Label getTourOperatorName() {
-        return tourOperatorName;
-    }
-
-    public TourOperator getTourOperatorSelected() {
-        return tourOperatorSelected;
-    }
-
-    public void setTourOperatorSelected(TourOperator tourOperatorSelected) {
-        this.tourOperatorSelected = tourOperatorSelected;
-    }
 
     @FXML
     public void addOperator(ActionEvent event) {
@@ -92,6 +79,12 @@ public class AddOperatorController {
             }
 
         }
+    }
+
+    @FXML
+    public void init(TourOperator tourOperator) {
+        tourOperatorSelected = tourOperator;
+        tourOperatorName.setText(tourOperator.getCompanyName());
     }
 
     @FXML

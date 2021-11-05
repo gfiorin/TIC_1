@@ -3,7 +3,6 @@ package com.example.AppPrototipo.ui.admin;
 import com.example.AppPrototipo.AppPrototipoApplication;
 import com.example.AppPrototipo.business.TourOperatorMgr;
 import com.example.AppPrototipo.business.entities.TourOperator;
-import com.example.AppPrototipo.persistence.TourOperatorRepository;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -68,7 +67,6 @@ public class TouristOperatorsTableController {
     @FXML
     private TextField searchInput;
 
-    private final TourOperatorMgr tourOperatorMgr;
 
     public TouristOperatorsTableController(TourOperatorMgr tourOperatorMgr) {
         this.tourOperatorMgr = tourOperatorMgr;
@@ -116,10 +114,6 @@ public class TouristOperatorsTableController {
                 });
     }
 
-    @FXML
-    public TourOperator getSelectedItem(){
-        return touristOperatorTable.getSelectionModel().getSelectedItem();
-    }
 
     @FXML
     void goBackToAdminView(ActionEvent event) throws Exception{
