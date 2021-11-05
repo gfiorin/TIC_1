@@ -1,11 +1,10 @@
 package com.example.AppPrototipo.ui.admin;
 
 import com.example.AppPrototipo.AppPrototipoApplication;
+import com.example.AppPrototipo.business.OperatorMgr;
+import com.example.AppPrototipo.business.TourOperatorMgr;
 import com.example.AppPrototipo.business.entities.Operator;
 import com.example.AppPrototipo.business.entities.TourOperator;
-import com.example.AppPrototipo.business.exceptions.UserAlreadyExsists;
-import com.example.AppPrototipo.persistence.OperatorsRepository;
-import com.example.AppPrototipo.persistence.TourOperatorRepository;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,15 +21,15 @@ import org.springframework.cglib.transform.AnnotationVisitorTee;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
-
 @Component
 public class AddOperatorController {
 
-    private final OperatorsRepository operatorsRepository;
+    private final OperatorMgr operatorMgr;
+    private final TourOperatorMgr tourOperatorMgr;
 
-
-    public AddOperatorController(OperatorsRepository operatorsRepository) {
-        this.operatorsRepository = operatorsRepository;
+    public AddOperatorController(OperatorMgr operatorMgr, TourOperatorMgr tourOperatorMgr) {
+        this.operatorMgr = operatorMgr;
+        this.tourOperatorMgr = tourOperatorMgr;
     }
 
     public TextField nameInput;
@@ -71,11 +70,11 @@ public class AddOperatorController {
                     "Datos faltantes",
                     "Uno o mas campos esta vacio. Por favor, verifique la informacion introducida.");
         } else {
-            if (operatorsRepository.findOneByEmail(email) != null) {
+            if (operatorMgr.findOneByEmail(email) != null) {
                 showAlert(
                         "Operador ya existe",
                         "Ya existe un operador con el email: " + email);
-            } else if (operatorsRepository.findOneByUsername(username) != null) {
+            } else if (operatorMgr.findOneByUsername(username) != null) {
                 showAlert(
                         "Operador ya existe",
                         "Ya existe un operador con el nombre de usuario: " + username);
@@ -83,7 +82,7 @@ public class AddOperatorController {
                 try {
 
                     Operator newOperator = new Operator(name, username, email, password, tourOperatorSelected);
-                    operatorsRepository.save(newOperator);
+                    operatorMgr.save(newOperator);
 
                     showAlert("Operador creado con exito","El operador a sido creado con éxito");
 
@@ -128,4 +127,5 @@ public class AddOperatorController {
         alert.setContentText(contextText);
         alert.showAndWait();
     }
+
 }

@@ -1,23 +1,14 @@
 package com.example.AppPrototipo.ui.tourist;
 
-import com.example.AppPrototipo.AppPrototipoApplication;
-import com.example.AppPrototipo.persistence.ExperienceRepository;
+import com.example.AppPrototipo.business.ExperienceMgr;
 import com.example.AppPrototipo.business.entities.Experience;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -41,10 +32,10 @@ public class TouristController implements Initializable {
     @FXML
     private ImageView sesionMarker;
 
-    private final ExperienceRepository experienceRepository;
+    private final ExperienceMgr experienceMgr;
 
-    public TouristController(ExperienceRepository experienceRepository) {
-        this.experienceRepository = experienceRepository;
+    public TouristController(ExperienceMgr experienceMgr) {
+        this.experienceMgr = experienceMgr;
     }
 
     @Override
@@ -79,9 +70,10 @@ public class TouristController implements Initializable {
     private List<Experience> experiences(){
         List<Experience> list = new ArrayList<>();
         for (int i=0; i<15; i++) {
-            Experience experience = experienceRepository.findOneById(1);
+            Experience experience = experienceMgr.findOneById(1);
             list.add(experience);
         }
         return list;
     }
+
 }

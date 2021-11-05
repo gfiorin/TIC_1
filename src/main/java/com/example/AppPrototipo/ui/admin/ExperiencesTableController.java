@@ -63,18 +63,14 @@ public class ExperiencesTableController {
     @FXML
     private Button authorizeBtn;
 
-    private final ExperienceRepository experienceRepository;
-
     private final ExperienceMgr experienceMgr;
 
-    public ExperiencesTableController(ExperienceRepository experienceRepository, ExperienceMgr experienceMgr) {
-        this.experienceRepository = experienceRepository;
+    public ExperiencesTableController(ExperienceMgr experienceMgr) {
         this.experienceMgr = experienceMgr;
     }
 
     @FXML
     public void initialize(){
-
         experiencesTable.setItems(getExperiences());
 
         id.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -87,11 +83,10 @@ public class ExperiencesTableController {
         capacity.setCellValueFactory(new PropertyValueFactory<>("capacity"));
         bookable.setCellValueFactory(new PropertyValueFactory<>("bookable"));
         reviewed.setCellValueFactory(new PropertyValueFactory<>("reviewed"));
-
     }
 
     private ObservableList<Experience> getExperiences() {
-        List<Experience> experienceList = experienceRepository.findAll();
+        List<Experience> experienceList = experienceMgr.findAll();
         return FXCollections.observableArrayList(experienceList);
     }
 

@@ -1,8 +1,8 @@
 package com.example.AppPrototipo.ui.tourist;
 
 import com.example.AppPrototipo.AppPrototipoApplication;
+import com.example.AppPrototipo.business.ExperienceMgr;
 import com.example.AppPrototipo.business.entities.Experience;
-import com.example.AppPrototipo.persistence.ExperienceRepository;
 import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,45 +19,55 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.springframework.stereotype.Component;
-
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.net.URL;
 
 @Component
 public class ExperienceController {
 
     @FXML
     private Button backBtn;
+
     @FXML
     Text nombreExperiencia;
+
     @FXML
     Text ubicacion;
+
     @FXML
     Text vacunacion;
+
     @FXML
     Text email;
+
     @FXML
     Text nombreEmpresa;
+
     @FXML
     Text telefono;
+
     @FXML
     Text linkWeb;
+
     @FXML
     Text descripcion;
+
     @FXML
     ScrollPane descripcionScrollPane;
+
     @FXML
     Pane imagePane;
+
     @FXML
     ImageView imageViewPrincipal;
+
     @FXML
     ImageView imageViewMarker;
 
-    private final ExperienceRepository experienceRepository;
+    private final ExperienceMgr experienceMgr;
 
-    public ExperienceController(ExperienceRepository experienceRepository) {
-        this.experienceRepository = experienceRepository;
+    public ExperienceController(ExperienceMgr experienceMgr) {
+        this.experienceMgr = experienceMgr;
     }
 
     @FXML
@@ -77,7 +87,7 @@ public class ExperienceController {
         Image imageMarker = new Image(getClass().getResourceAsStream("/imgs/location.png"));
         imageViewMarker.setImage(imageMarker);
 
-        Experience experience = experienceRepository.findOneById(1);
+        Experience experience = experienceMgr.findOneById(1);
 
         //Populacion de campos
         nombreExperiencia.setText(experience.getTitle());
@@ -121,4 +131,5 @@ public class ExperienceController {
         imagePane.widthProperty().addListener(listener);
         imagePane.heightProperty().addListener(listener);
     }
+
 }

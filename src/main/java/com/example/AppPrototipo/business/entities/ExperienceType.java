@@ -26,10 +26,6 @@ public class ExperienceType {
         this.interest=interest;
     }
 
-    public ExperienceType(String name, List<Interest> interests) {
-    }
-
-
     public Integer getId() {
         return id;
     }

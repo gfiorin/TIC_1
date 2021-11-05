@@ -88,21 +88,8 @@ public class UserMgr {
         touristRepository.save(touristToAdd);
     }
 
-    public void addAdministrator() {
-
-    }
-
-    public void addOperator() {
 
 
-
-
-
-
-
-
-
-    }
 
     public Class userLogIn(String emailOrUsername, String password) throws InvalidInformation {
 
@@ -110,7 +97,7 @@ public class UserMgr {
 
         if (user == null) {
 
-            user = userRepository.findOneByUsername(emailOrUsername); // es super ineficiente esto de buscar dos veces
+            user = userRepository.findOneByUsername(emailOrUsername);
 
             if (user == null) {
 
