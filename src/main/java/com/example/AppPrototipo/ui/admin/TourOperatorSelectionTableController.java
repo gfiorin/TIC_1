@@ -16,13 +16,15 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import org.hibernate.type.descriptor.sql.TinyIntTypeDescriptor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Objects;
 
 @Component
-public class TouristOperatorsTableController {
+public class TourOperatorSelectionTableController {
 
     private final TourOperatorRepository tourOperatorRepository;
 
@@ -54,10 +56,7 @@ public class TouristOperatorsTableController {
     private TableColumn<TourOperator, String> contactEmail;
 
     @FXML
-    private TableColumn<TourOperator, TinyIntTypeDescriptor> authorized;
-
-    @FXML
-    private Button authorizeBtn;
+    private Button selectBtn;
 
     @FXML
     private Button goBackBtn;
@@ -70,7 +69,8 @@ public class TouristOperatorsTableController {
 
     private final TourOperatorMgr tourOperatorMgr;
 
-    public TouristOperatorsTableController(TourOperatorRepository tourOperatorRepository, TourOperatorMgr tourOperatorMgr) {
+    @Autowired
+    public TourOperatorSelectionTableController(TourOperatorRepository tourOperatorRepository, TourOperatorMgr tourOperatorMgr) {
         this.tourOperatorRepository = tourOperatorRepository;
         this.tourOperatorMgr = tourOperatorMgr;
     }
@@ -87,7 +87,6 @@ public class TouristOperatorsTableController {
         contactPhone.setCellValueFactory(new PropertyValueFactory<>("contactPhone"));
         contactPosition.setCellValueFactory(new PropertyValueFactory<>("contactPosition"));
         contactEmail.setCellValueFactory(new PropertyValueFactory<>("contactEmail"));
-        authorized.setCellValueFactory(new PropertyValueFactory<>("authorized"));
     }
 
     private ObservableList<TourOperator> getTourOperators() {
@@ -96,46 +95,31 @@ public class TouristOperatorsTableController {
     }
 
     @FXML
-    private void enableOrDisableTO(ActionEvent event){
-        TourOperator tourOperatorToModify = touristOperatorTable.getSelectionModel().getSelectedItem();
-        tourOperatorMgr.changeAuthorizationOfTouristOperator(tourOperatorToModify.getId());
-        touristOperatorTable.setItems(getTourOperators());
-    }
-
-    @FXML
     private void searchItem(ActionEvent event) {
-
         touristOperatorTable.getItems().stream().filter(
                 item -> Objects.equals(item.getCompanyName(), searchInput.getText()) ||
                         Objects.equals(item.getFantasyName(), searchInput.getText()) ||
                         Objects.equals(item.getLinkToWeb(), searchInput.getText()) ||
                         Objects.equals(item.getContactName(), searchInput.getText()) ||
                         Objects.equals(item.getContactEmail(), searchInput.getText())
-                ).findAny().ifPresent(item -> {
-                    touristOperatorTable.getSelectionModel().select(item);
-                    touristOperatorTable.scrollTo(item);
-                });
+        ).findAny().ifPresent(item -> {
+            touristOperatorTable.getSelectionModel().select(item);
+            touristOperatorTable.scrollTo(item);
+        });
     }
 
     @FXML
-    public TourOperator getSelectedItem(){
+    public TourOperator getSelectedItem(ActionEvent event) throws Exception {
         return touristOperatorTable.getSelectionModel().getSelectedItem();
     }
 
     @FXML
-    void goBackToAdminView(ActionEvent event) throws Exception{
-        Node source = (Node) event.getSource();
-        Stage oldStage  = (Stage) source.getScene().getWindow();
-
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
-
-        Parent root = fxmlLoader.load(AdminController.class.getResourceAsStream("AdminPanel.fxml"));
-        Stage newStage = new Stage();
-        newStage.setScene(new Scene(root));
-        newStage.show();
-
-        oldStage.close();
+    public void selection(ActionEvent event) {
+        if (touristOperatorTable.getSelectionModel().getSelectedItem() == null){
+            showAlert("Nada seleccionado", "Por favor, seleccione una fila de la tabla.");
+        } else {
+            close(event);
+        }
     }
 
     @FXML
@@ -152,5 +136,4 @@ public class TouristOperatorsTableController {
         alert.setContentText(contextText);
         alert.showAndWait();
     }
-
 }
