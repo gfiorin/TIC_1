@@ -4,20 +4,21 @@ import com.example.AppPrototipo.business.managers.ExperienceMgr;
 import com.example.AppPrototipo.business.managers.UserMgr;
 import com.example.AppPrototipo.business.entities.Experience;
 import com.example.AppPrototipo.business.entities.Tourist;
+import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import org.springframework.context.annotation.Lazy;
-import org.springframework.stereotype.Component;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
-@Component
 public class MiniExperienceController {
 
     private int idexperience;
@@ -36,6 +37,8 @@ public class MiniExperienceController {
     private Text nombreExperiencia;
     @FXML
     private Button verMasBtn;
+    @FXML
+    private Pane imagePane;
 
     public MiniExperienceController(UserMgr userMgr, @Lazy TouristController touristController, ExperienceMgr experienceMgr) {
         this.userMgr = userMgr;
@@ -60,7 +63,37 @@ public class MiniExperienceController {
         nombreExperiencia.setText(experience.getTitle());
         descripcionCorta.setText(experience.getShortDescription());
         Image image = new Image(new ByteArrayInputStream(experience.getImages().get(0).getImageData()));
+        ChangeListener<Number> listener = getListener(imagePane, experienciaImg, image);
+        imagePane.widthProperty().addListener(listener);
+        imagePane.heightProperty().addListener(listener);
         experienciaImg.setImage(image);
+    }
+
+    private ChangeListener<Number> getListener(Pane imagePane, ImageView imageViewPrincipal, Image image) {
+        double oldImageWidth = image.getWidth(), oldImageHeight = image.getHeight();            //saving the original image size and ratio
+        double imageRatio = oldImageWidth / oldImageHeight;
+
+        return (obs, ov, nv) -> {
+            double paneWidth = imagePane.getWidth();
+            double paneHeight = imagePane.getHeight();
+
+            double paneRatio = paneWidth / paneHeight;                                          //calculating the new pane's ratio
+            //after width or height changed
+            double newImageWidth = oldImageWidth, newImageHeight = oldImageHeight;
+
+            if (paneRatio > imageRatio) {
+                newImageHeight = oldImageWidth / paneRatio;
+            } else if (paneRatio < imageRatio) {
+                newImageWidth = oldImageHeight * paneRatio;
+            }
+
+            imageViewPrincipal.setViewport(new Rectangle2D(                                     // The rectangle used to crop
+                    (oldImageWidth - newImageWidth) / 2, (oldImageHeight - newImageHeight) / 2, //MinX and MinY to crop from the center
+                    newImageWidth, newImageHeight)                                              // new width and height
+            );
+
+            imageViewPrincipal.setFitWidth(paneWidth);
+        };
     }
 
     @FXML

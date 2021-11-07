@@ -27,12 +27,6 @@ import java.util.ResourceBundle;
 public class TouristController implements Initializable {
 
     @FXML
-    private ImageView favoritosMarker;
-    @FXML
-    private ImageView perfilMarker;
-    @FXML
-    private ImageView sesionMarker;
-    @FXML
     private AnchorPane innerView;
     @FXML
     private VBox top;
@@ -44,14 +38,12 @@ public class TouristController implements Initializable {
     private final ExperienceController experienceController;
     private final ExperienceGridController experienceGridController;
     private final LikedController likedController;
-    private final UserMgr userMgr;
     private final ProfileController profileController;
 
-    public TouristController(ExperienceController experienceController, ExperienceGridController experienceGridController, LikedController likedController, UserMgr userMgr, ProfileController profileController) {
+    public TouristController(ExperienceController experienceController, ExperienceGridController experienceGridController, LikedController likedController, ProfileController profileController) {
         this.experienceController = experienceController;
         this.experienceGridController = experienceGridController;
         this.likedController = likedController;
-        this.userMgr = userMgr;
         this.profileController = profileController;
     }
 
