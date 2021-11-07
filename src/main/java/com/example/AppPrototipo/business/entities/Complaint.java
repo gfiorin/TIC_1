@@ -1,6 +1,7 @@
 package com.example.AppPrototipo.business.entities;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "complaints")
@@ -13,14 +14,16 @@ public class Complaint {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "tourist")
-    private Integer touristId;
+    @Column(name = "date")
+    private LocalDateTime date;
 
-    @Column(name = "experience")
-    private Integer experienceId;
+    @ManyToOne
+    @JoinColumn(name = "tourist")
+    private Tourist tourist;
 
-
-
+    @ManyToOne
+    @JoinColumn(name = "experience")
+    private Experience experience;
 
 
 }

@@ -9,7 +9,7 @@
 
 <BorderPane maxHeight="1000.0" maxWidth="1000.0" prefHeight="576.0" prefWidth="853.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.AppPrototipo.ui.tourist.TouristController">
    <left>
-      <VBox fx:id="leftPane" prefHeight="576.0" style="-fx-background-color: #998;" BorderPane.alignment="CENTER">
+      <VBox fx:id="leftPane" prefHeight="576.0" style="-fx-background-color: #82a17a;" BorderPane.alignment="CENTER">
          <children>
             <VBox fx:id="top" alignment="CENTER" spacing="10.0">
                <children>

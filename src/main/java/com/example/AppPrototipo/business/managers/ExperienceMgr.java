@@ -1,4 +1,4 @@
-package com.example.AppPrototipo.business;
+package com.example.AppPrototipo.business.managers;
 
 import com.example.AppPrototipo.business.entities.Booking;
 import com.example.AppPrototipo.business.entities.Experience;
@@ -6,13 +6,14 @@ import com.example.AppPrototipo.business.entities.Tourist;
 import com.example.AppPrototipo.persistence.BookingRepository;
 import com.example.AppPrototipo.persistence.ExperienceRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Date;
 import java.sql.Time;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+
 
 @Service
 public class ExperienceMgr {
@@ -26,7 +27,7 @@ public class ExperienceMgr {
     }
 
     public Experience findById(int id){
-        return experienceRepository.findById(id);
+        return experienceRepository.findById(id).get();
     }
 
     private int remainingCapacityForExperienceOnDateAtTime(Experience experience, Date date, Time time){
@@ -56,4 +57,24 @@ public class ExperienceMgr {
     public void createNewReservation(Experience experience, Tourist tourist, Date date, Time time, int amount){
         this.bookingRepository.save(new Booking(experience, tourist, date, time, amount));
     }
+
+    @Transactional
+    public void changeAuthorizationOfExperience(Integer experienceId){
+        Experience experience = experienceRepository.findOneById(experienceId);
+        if (experience.isAuthorized()){
+            experience.disableExperience();
+        }
+        else {
+            experience.enableExperience();
+        }
+    }
+
+    public List<Experience> findAll(){
+        return experienceRepository.findAll();
+    }
+
+    public Experience findOneById(int id){
+        return experienceRepository.findOneById(id);
+    }
+
 }

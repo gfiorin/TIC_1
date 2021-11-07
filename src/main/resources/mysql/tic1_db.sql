@@ -1,4 +1,4 @@
-DROP DATABASE `tic1_db`;
+DROP DATABASE tic1_db;
 
 CREATE DATABASE `tic1_db`;
 
@@ -11,7 +11,8 @@ CREATE TABLE `users` (
                          `password` varchar(45) NOT NULL,
                          `email` varchar(45) NOT NULL,
                          PRIMARY KEY (`id`),
-                         UNIQUE KEY `email_UNIQUE` (`email`)
+                         UNIQUE KEY `email_UNIQUE` (`email`),
+                         UNIQUE KEY `username_UNIQUE` (`username`)
 );
 
 CREATE TABLE `countries` (
@@ -375,6 +376,7 @@ CREATE TABLE `experiences` (
                                `shortdescription` varchar(600) NOT NULL,
                                `vaccination` tinyint NOT NULL,
                                `capacity` varchar(45) NOT NULL,
+                               `reviewed` tinyint NOT NULL,
                                `bookable` tinyint NOT NULL,
                                `email` varchar(200) NOT NULL,
                                `link` varchar(200),

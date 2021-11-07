@@ -1,4 +1,4 @@
-package com.example.AppPrototipo.business;
+package com.example.AppPrototipo.business.managers;
 
 import com.example.AppPrototipo.business.entities.*;
 import com.example.AppPrototipo.business.exceptions.InvalidInformation;
@@ -68,7 +68,6 @@ public class UserMgr {
         }
 
         if (userRepository.findOneByEmail(email) != null) {
-            User user = userRepository.findOneByEmail(email);
             throw new UserAlreadyExsists("El email ya ha sido registrado en el sistema");
         }
 
@@ -89,16 +88,9 @@ public class UserMgr {
 
         }
 
-        touristRepository.save(touristToAdd); //estaria bueno mostrar algo del estilo, el usuario ha sido registrado con exito
+        touristRepository.save(touristToAdd);
     }
 
-    public void addAdministrator() {
-
-    }
-
-    public void addOperator() {
-
-    }
 
     @Transactional
     public User userLogIn(String emailOrUsername, String password) throws InvalidInformation {
@@ -107,7 +99,7 @@ public class UserMgr {
 
         if (user == null) {
 
-            user = userRepository.findOneByUsername(emailOrUsername); // es super ineficiente esto de buscar dos veces
+            user = userRepository.findOneByUsername(emailOrUsername);
 
             if (user == null) {
 

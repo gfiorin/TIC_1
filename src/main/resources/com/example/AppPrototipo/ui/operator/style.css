@@ -1,0 +1,19 @@
+.boton_1:hover{
+    -fx-border-color: #660099;
+    -fx-border-width: 0px 0px 3px 0px;
+}
+
+.boton_2:hover{
+    -fx-border-color: #00ff66;
+    -fx-border-width: 0px 0px 3px 0px;
+}
+
+.boton_3:hover{
+    -fx-border-color: #0099ff;
+    -fx-border-width: 0px 0px 3px 0px;
+}
+
+.boton_4:hover{
+    -fx-border-color: #ff0099;
+    -fx-border-width: 0px 0px 3px 0px;
+}

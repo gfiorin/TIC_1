@@ -18,7 +18,7 @@ public class Experience {
     private String description;
 
     @Column(name = "shortdescription")
-    private String shortdescription;
+    private String shortDescription;
 
     @Column(name = "vaccination")
     private boolean vaccination;
@@ -60,13 +60,16 @@ public class Experience {
     @Column(name = "telephone")
     private String telephone;
 
+    @Column(name = "reviewed")
+    private Boolean reviewed;
+
     public Experience() {
     }
 
-    public Experience(String title, String description, String shortdescription, boolean vaccination, Integer capacity, boolean bookable, boolean authorized, String email, String link, String telephone, List<Image> images) {
+    public Experience(String title, String description, String shortDescription, boolean vaccination, Integer capacity, boolean bookable, boolean authorized, String email, String link, String telephone, List<Image> images) {
         this.title = title;
         this.description = description;
-        this.shortdescription = shortdescription;
+        this.shortDescription = shortDescription;
         this.vaccination = vaccination;
         this.capacity = capacity;
         this.bookable = bookable;
@@ -75,10 +78,55 @@ public class Experience {
         this.email = email;
         this.link = link;
         this.telephone = telephone;
+        this.reviewed = false;
     }
 
     public Integer getId() {
         return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getShortDescription() {
+        return shortDescription;
+    }
+
+    public List<ExperienceType> getExperienceTypes() {
+        return experienceTypes;
+    }
+
+    public void setExperienceTypes(List<ExperienceType> experienceTypes) {
+        this.experienceTypes = experienceTypes;
+    }
+
+    public TourOperator getTourOperator() {
+        return tourOperator;
+    }
+
+    public void setTourOperator(TourOperator tourOperator) {
+        this.tourOperator = tourOperator;
+    }
+
+    public Boolean getReviewed() {
+        return reviewed;
+    }
+
+    public void setReviewed(Boolean reviewed) {
+        this.reviewed = reviewed;
+    }
+
+    public void enableExperience(){
+        this.authorized = true;
+    }
+
+    public void disableExperience(){
+        this.authorized = false;
+    }
+
+    public void setShortDescription(String shortdescription) {
+        this.shortDescription = shortdescription;
     }
 
     public String getTitle() {
@@ -143,18 +191,6 @@ public class Experience {
 
     public void setUbicacion(String ubicacion) {
         this.ubicacion = ubicacion;
-    }
-
-    public String getShortDescription() { return shortdescription; }
-
-    public void setShortDescription(String shortDescription) { this.shortdescription = shortDescription; }
-
-    public TourOperator getTourOperator() {
-        return tourOperator;
-    }
-
-    public List<ExperienceType> getExperienceTypes() {
-        return experienceTypes;
     }
 
     public String getEmail() {

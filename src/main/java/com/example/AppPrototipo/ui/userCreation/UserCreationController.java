@@ -1,6 +1,6 @@
 package com.example.AppPrototipo.ui.userCreation;
 
-import com.example.AppPrototipo.business.UserMgr;
+import com.example.AppPrototipo.business.managers.UserMgr;
 import com.example.AppPrototipo.business.entities.Country;
 import com.example.AppPrototipo.business.entities.Interest;
 import com.example.AppPrototipo.business.exceptions.InvalidInformation;
@@ -86,7 +86,7 @@ public class UserCreationController {
         boolean invalidValue = false;
         for (Control control : controlList) {
             if (control instanceof TextField) {
-                if (((TextField) control).getText() == null || ((TextField) control).getText().isEmpty()) {
+                if (((TextField) control).getText() == null || ((TextField) control).getText().isBlank()) {
                     invalidValue = true;
                     break;
                 }
@@ -139,7 +139,6 @@ public class UserCreationController {
                         interests.add((Interest) checkBox.getUserData());
                     }
                 }
-
 
                 userMgr.addTourist(name, user, email, password, dateOfBirth, cellphone, countryId, interests, null, null);
 

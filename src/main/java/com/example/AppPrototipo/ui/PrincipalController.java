@@ -1,13 +1,14 @@
 package com.example.AppPrototipo.ui;
 
 import com.example.AppPrototipo.AppPrototipoApplication;
-import com.example.AppPrototipo.business.UserMgr;
+import com.example.AppPrototipo.business.managers.UserMgr;
 import com.example.AppPrototipo.business.entities.Administrator;
 import com.example.AppPrototipo.business.entities.Operator;
 import com.example.AppPrototipo.business.entities.Tourist;
 import com.example.AppPrototipo.business.entities.User;
 import com.example.AppPrototipo.business.exceptions.InvalidInformation;
 import com.example.AppPrototipo.ui.admin.AdminController;
+import com.example.AppPrototipo.ui.operator.OperatorController;
 import com.example.AppPrototipo.ui.tourist.TouristController;
 import com.example.AppPrototipo.ui.userCreation.UserCreationController;
 import javafx.event.ActionEvent;
@@ -43,10 +44,14 @@ public class PrincipalController {
 
     private final UserMgr userMgr;
     private final TouristController touristController;
+    private final AdminController adminController;
+    private final OperatorController operatorController;
 
-    public PrincipalController(UserMgr userMgr, TouristController touristController) {
+    public PrincipalController(UserMgr userMgr, TouristController touristController, AdminController adminController, OperatorController operatorController) {
         this.userMgr = userMgr;
         this.touristController = touristController;
+        this.adminController = adminController;
+        this.operatorController = operatorController;
     }
 
     @FXML
@@ -81,7 +86,7 @@ public class PrincipalController {
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
 
-                Parent root = fxmlLoader.load(AdminController.class.getResourceAsStream("AdminPanel.fxml"));
+                Parent root = fxmlLoader.load(adminController.getClass().getResourceAsStream("AdminPanel.fxml"));
                 Stage newStage = new Stage();
                 newStage.setScene(new Scene(root));
                 newStage.show();
@@ -101,7 +106,18 @@ public class PrincipalController {
 
                 oldStage.close();
             } else if (user instanceof Operator){
-                //Do nothing for now
+                Node source = (Node) actionEvent.getSource();
+                Stage oldStage  = (Stage) source.getScene().getWindow();
+
+                FXMLLoader fxmlLoader = new FXMLLoader();
+                fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
+
+                Parent root = fxmlLoader.load(operatorController.getClass().getResourceAsStream("OperatorMain.fxml"));
+                Stage newStage = new Stage();
+                newStage.setScene(new Scene(root));
+                newStage.show();
+
+                oldStage.close();
             }
         } catch (InvalidInformation invalidInformation) {
             showAlert("Datos ingresados erroneos!", invalidInformation.getMessage());

@@ -1,18 +1,15 @@
 package com.example.AppPrototipo.ui.tourist;
 
 import com.example.AppPrototipo.AppPrototipoApplication;
-import com.example.AppPrototipo.business.ExperienceMgr;
-import com.example.AppPrototipo.business.UserMgr;
+import com.example.AppPrototipo.business.managers.ExperienceMgr;
+import com.example.AppPrototipo.business.managers.UserMgr;
 import com.example.AppPrototipo.business.entities.Experience;
-import com.example.AppPrototipo.business.entities.Interest;
-import com.example.AppPrototipo.business.entities.Tourist;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;

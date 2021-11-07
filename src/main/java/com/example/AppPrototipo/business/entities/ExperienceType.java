@@ -9,6 +9,7 @@ public class ExperienceType {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name = "id")
     private Integer id;
 
     @Column(name = "name")
@@ -18,6 +19,11 @@ public class ExperienceType {
 
     public ExperienceType(String name) {
         this.name = name;
+    }
+
+    public ExperienceType(String name, Interest interest){
+        this.name = name;
+        this.interest=interest;
     }
 
     public Integer getId() {
@@ -31,5 +37,17 @@ public class ExperienceType {
     public void setName(String name) {
         this.name = name;
     }
+
+    public Interest getInterest() {
+        return interest;
+    }
+
+    public void setInterest(Interest interest) {
+        this.interest = interest;
+    }
+
+    @ManyToOne
+    @JoinColumn(name="interest")
+    private Interest interest;
 
 }

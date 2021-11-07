@@ -3,7 +3,6 @@ package com.example.AppPrototipo.ui.admin;
 import org.springframework.stereotype.Component;
 
 @Component
-public class TableOfTourists {
-
+public class AssociateOperatorToTOCreationController {
 
 }

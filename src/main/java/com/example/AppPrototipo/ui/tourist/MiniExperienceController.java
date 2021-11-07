@@ -1,7 +1,7 @@
 package com.example.AppPrototipo.ui.tourist;
 
-import com.example.AppPrototipo.business.ExperienceMgr;
-import com.example.AppPrototipo.business.UserMgr;
+import com.example.AppPrototipo.business.managers.ExperienceMgr;
+import com.example.AppPrototipo.business.managers.UserMgr;
 import com.example.AppPrototipo.business.entities.Experience;
 import com.example.AppPrototipo.business.entities.Tourist;
 import javafx.event.ActionEvent;
