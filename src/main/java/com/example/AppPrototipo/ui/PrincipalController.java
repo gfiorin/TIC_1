@@ -1,10 +1,11 @@
 package com.example.AppPrototipo.ui;
 
 import com.example.AppPrototipo.AppPrototipoApplication;
-import com.example.AppPrototipo.business.UserMgr;
+import com.example.AppPrototipo.business.managers.UserMgr;
 import com.example.AppPrototipo.business.entities.Administrator;
 import com.example.AppPrototipo.business.entities.Operator;
 import com.example.AppPrototipo.business.entities.Tourist;
+import com.example.AppPrototipo.business.entities.User;
 import com.example.AppPrototipo.business.exceptions.InvalidInformation;
 import com.example.AppPrototipo.ui.admin.AdminController;
 import com.example.AppPrototipo.ui.operator.OperatorController;
@@ -21,7 +22,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -43,9 +43,15 @@ public class PrincipalController {
     private Button login;
 
     private final UserMgr userMgr;
+    private final TouristController touristController;
+    private final AdminController adminController;
+    private final OperatorController operatorController;
 
-    public PrincipalController(UserMgr userMgr) {
+    public PrincipalController(UserMgr userMgr, TouristController touristController, AdminController adminController, OperatorController operatorController) {
         this.userMgr = userMgr;
+        this.touristController = touristController;
+        this.adminController = adminController;
+        this.operatorController = operatorController;
     }
 
     @FXML
@@ -71,43 +77,42 @@ public class PrincipalController {
         }
 
         try {
-            Class type = userMgr.userLogIn(userInput.getText(), passwordInput.getText());
+            User user = userMgr.userLogIn(userInput.getText(), passwordInput.getText());
 
-            if(type == Administrator.class){
+            if(user instanceof Administrator){
                 Node source = (Node) actionEvent.getSource();
                 Stage oldStage  = (Stage) source.getScene().getWindow();
 
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
 
-                Parent root = fxmlLoader.load(AdminController.class.getResourceAsStream("AdminPanel.fxml"));
+                Parent root = fxmlLoader.load(adminController.getClass().getResourceAsStream("AdminPanel.fxml"));
                 Stage newStage = new Stage();
                 newStage.setScene(new Scene(root));
                 newStage.show();
 
                 oldStage.close();
-            } else if (type == Tourist.class){
+            } else if (user instanceof Tourist){
                 Node source = (Node) actionEvent.getSource();
                 Stage oldStage  = (Stage) source.getScene().getWindow();
 
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
 
-                Parent root = fxmlLoader.load(TouristController.class.getResourceAsStream("TouristMain.fxml"));
+                Parent root = fxmlLoader.load(touristController.getClass().getResourceAsStream("TouristMain.fxml"));
                 Stage newStage = new Stage();
                 newStage.setScene(new Scene(root));
                 newStage.show();
 
                 oldStage.close();
-
-            } else if (type == Operator.class){
+            } else if (user instanceof Operator){
                 Node source = (Node) actionEvent.getSource();
                 Stage oldStage  = (Stage) source.getScene().getWindow();
 
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
 
-                Parent root = fxmlLoader.load(OperatorController.class.getResourceAsStream("OperatorMain.fxml"));
+                Parent root = fxmlLoader.load(operatorController.getClass().getResourceAsStream("OperatorMain.fxml"));
                 Stage newStage = new Stage();
                 newStage.setScene(new Scene(root));
                 newStage.show();

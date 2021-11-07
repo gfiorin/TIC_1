@@ -1,6 +1,6 @@
 package com.example.AppPrototipo.ui.userCreation;
 
-import com.example.AppPrototipo.business.UserMgr;
+import com.example.AppPrototipo.business.managers.UserMgr;
 import com.example.AppPrototipo.business.entities.Country;
 import com.example.AppPrototipo.business.entities.Interest;
 import com.example.AppPrototipo.business.exceptions.InvalidInformation;

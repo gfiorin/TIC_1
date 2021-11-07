@@ -25,13 +25,29 @@ public class Tourist extends User{
     @JoinColumn(name = "country_of_birth", nullable = false)
     private Country country;
 
-    @ManyToMany()
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "tourist_interests",
             joinColumns = {@JoinColumn(name = "tourist")},
             inverseJoinColumns = {@JoinColumn(name = "interest")}
     )
     private List<Interest> interests;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "liked",
+            joinColumns = {@JoinColumn(name = "tourist")},
+            inverseJoinColumns = {@JoinColumn(name = "experience")}
+    )
+    private List<Experience> liked;
+
+    public List<Experience> getLiked() {
+        return liked;
+    }
+
+    public void addLiked(Experience experience) {
+        liked.add(experience);
+    }
 
     public Tourist (String name, String username, String email, String password, LocalDate dateOfBirth, String cellphone, Country country, List<Interest> interests, String documentType, String documentNumber) {
         super(name, username, email, password);

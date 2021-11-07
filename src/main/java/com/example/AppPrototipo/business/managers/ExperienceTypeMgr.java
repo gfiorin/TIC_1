@@ -1,4 +1,4 @@
-package com.example.AppPrototipo.business;
+package com.example.AppPrototipo.business.managers;
 
 import com.example.AppPrototipo.business.entities.ExperienceType;
 import com.example.AppPrototipo.persistence.ExperienceTypeRepository;

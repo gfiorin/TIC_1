@@ -1,4 +1,4 @@
-package com.example.AppPrototipo.business;
+package com.example.AppPrototipo.business.managers;
 
 import com.example.AppPrototipo.business.entities.*;
 import com.example.AppPrototipo.business.exceptions.InvalidInformation;
@@ -6,6 +6,8 @@ import com.example.AppPrototipo.business.exceptions.UserAlreadyExsists;
 import com.example.AppPrototipo.persistence.TouristRepository;
 import com.example.AppPrototipo.persistence.UserRepository;
 import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -14,6 +16,7 @@ public class UserMgr {
 
     private final TouristRepository touristRepository;
     private final UserRepository userRepository;
+    private int currentUserId;
 
     public UserMgr(TouristRepository touristRepository, UserRepository userRepository) {
         this.userRepository = userRepository;
@@ -89,9 +92,8 @@ public class UserMgr {
     }
 
 
-
-
-    public Class userLogIn(String emailOrUsername, String password) throws InvalidInformation {
+    @Transactional
+    public User userLogIn(String emailOrUsername, String password) throws InvalidInformation {
 
         User user = userRepository.findOneByEmail(emailOrUsername);
 
@@ -108,24 +110,32 @@ public class UserMgr {
         }
 
         if (user.getPassword().equals(password)){
-
-            if (user instanceof Tourist) {
-                return Tourist.class;
-            }
-            else if (user instanceof Administrator) {
-                return Administrator.class;
-            }
-            else {
-                return Operator.class;
-            }
-
+            currentUserId = user.getId();
+            return  user;
         }
         else{
-
             throw new InvalidInformation("Contraseña incorrecta");
 
         }
 
     }
 
+    public void updateTourist(Tourist tourist){
+        touristRepository.save(tourist);
+    }
+
+    @Transactional
+    public User getCurrentUser() {
+        return userRepository.findById(currentUserId).get();
+    }
+
+    @Transactional
+    public List<Experience> getCurrentUserLiked() {
+        return ((Tourist) getCurrentUser()).getLiked();
+    }
+
+    @Transactional
+    public List<Interest> getCurrentUserInterests() {
+        return ((Tourist) getCurrentUser()).getInterests();
+    }
 }

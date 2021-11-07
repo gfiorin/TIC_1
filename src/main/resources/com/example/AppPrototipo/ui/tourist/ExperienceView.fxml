@@ -3,31 +3,56 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.AppPrototipo.ui.tourist.ExperienceController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.AppPrototipo.ui.tourist.ExperienceController">
    <right>
-      <AnchorPane prefHeight="216.0" prefWidth="194.0" BorderPane.alignment="CENTER">
+      <AnchorPane fx:id="rightAnchorPane" prefHeight="216.0" prefWidth="250.0" BorderPane.alignment="CENTER">
          <children>
-            <Text fx:id="nombreExperiencia" layoutX="13.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Experiencia" underline="true" wrappingWidth="177.13671875" AnchorPane.bottomAnchor="343.984375" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="9.734375">
+            <Text fx:id="nombreExperiencia" boundsType="VISUAL" layoutX="13.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Experiencia" underline="true" wrappingWidth="177.13671875" AnchorPane.bottomAnchor="343.984375" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="9.734375">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
             </Text>
-            <Text fx:id="ubicacion" layoutX="33.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ubicacion" wrappingWidth="147.13671875" AnchorPane.bottomAnchor="308.7373046875" AnchorPane.leftAnchor="33.0" AnchorPane.rightAnchor="13.86328125" AnchorPane.topAnchor="48.9716796875">
-               <font>
-                  <Font size="13.0" />
-               </font>
-            </Text>
-            <ImageView fx:id="imageViewMarker" fitHeight="18.0" fitWidth="21.0" layoutX="15.0" layoutY="49.0" pickOnBounds="true" preserveRatio="true" />
+            <VBox layoutX="6.0" layoutY="34.0" prefHeight="200.0" prefWidth="247.0">
+               <children>
+                  <AnchorPane>
+                     <padding>
+                        <Insets top="10.0" />
+                     </padding>
+                     <children>
+                        <Text fx:id="ubicacion" boundsType="VISUAL" layoutX="1.0" layoutY="1.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ubicacion" textOrigin="TOP" wrappingWidth="147.13671875">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane>
+                     <children>
+                        <DatePicker fx:id="calendarioReserva" layoutY="5.0" onAction="#calendarioOnAction" prefHeight="26.0" prefWidth="110.0" promptText="Fecha" />
+                        <ComboBox fx:id="horarioReserva" layoutX="124.0" layoutY="5.0" onAction="#horarioOnAction" prefHeight="26.0" prefWidth="112.0" promptText="Horario" />
+                        <Label layoutX="2.0" layoutY="46.0" text="Cantidad de cupos a reservar: " />
+                        <ComboBox fx:id="cuposAReservar" layoutX="166.0" layoutY="41.0" onAction="#cuposAReservarOnAction" prefHeight="26.0" prefWidth="70.0" />
+                        <Button fx:id="reservarBtn" layoutX="55.0" layoutY="83.0" mnemonicParsing="false" onAction="#reservarBtnOnAction" prefHeight="26.0" prefWidth="126.0" style="-fx-background-radius: 15;" text="Reservar" />
+                        <Text fx:id="mensajeConfirmacion" layoutX="-4.0" layoutY="134.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reserva hecha exitosamente! Puede ver la misma en su intinerario" textAlignment="CENTER" wrappingWidth="239.457763671875" />
+                     </children>
+                     <padding>
+                        <Insets left="10.0" top="10.0" />
+                     </padding>
+                  </AnchorPane>
+               </children>
+            </VBox>
             <VBox layoutX="14.0" layoutY="232.0" prefHeight="142.0" prefWidth="174.0" spacing="6.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="0.0">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Contacto" underline="true" wrappingWidth="121.13671875">
@@ -79,12 +104,23 @@
          <children>
             <VBox alignment="CENTER_LEFT" prefHeight="375.0" prefWidth="407.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <Pane fx:id="imagePane" prefHeight="221.0" prefWidth="396.0" style="-fx-background-color: #101; -fx-border-radius: 10;" VBox.vgrow="ALWAYS">
+                  <Pane fx:id="imagePane" prefHeight="298.0" prefWidth="591.0" style="-fx-background-color: #101; -fx-border-radius: 10;" VBox.vgrow="ALWAYS">
                      <children>
                         <ImageView fx:id="imageViewPrincipal" pickOnBounds="true" preserveRatio="true">
                            <viewport>
                               <Rectangle2D />
-                           </viewport></ImageView>
+                           </viewport>
+                        </ImageView>
+                        <Text fx:id="leftArrow" fill="#ffffff80" layoutX="14.0" layoutY="193.0" onMouseClicked="#previousImage" stroke="#ffffff80" strokeType="OUTSIDE" text="◁">
+                           <font>
+                              <Font size="86.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="rightArrow" fill="#ffffff80" layoutX="534.0" layoutY="193.0" onMouseClicked="#nextImage" stroke="#ffffff80" strokeType="OUTSIDE" text="▷">
+                           <font>
+                              <Font size="86.0" />
+                           </font>
+                        </Text>
                      </children>
                      <VBox.margin>
                         <Insets left="7.0" right="5.0" />
@@ -106,18 +142,4 @@
          </children>
       </AnchorPane>
    </center>
-   <top>
-      <HBox prefHeight="31.0" prefWidth="600.0" BorderPane.alignment="CENTER">
-         <children>
-            <Button fx:id="backBtn" mnemonicParsing="false" onAction="#backAction" prefHeight="25.0" prefWidth="38.0" text="&lt;">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-               <HBox.margin>
-                  <Insets left="8.0" top="5.0" />
-               </HBox.margin>
-            </Button>
-         </children>
-      </HBox>
-   </top>
 </BorderPane>
