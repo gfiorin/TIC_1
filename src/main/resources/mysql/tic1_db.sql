@@ -378,6 +378,9 @@ CREATE TABLE `experiences` (
                                `capacity` varchar(45) NOT NULL,
                                `reviewed` tinyint NOT NULL,
                                `bookable` tinyint NOT NULL,
+                               `email` varchar(200) NOT NULL,
+                               `link` varchar(200),
+                               `telephone` varchar(45) NOT NULL,
                                PRIMARY KEY (`id`),
                                KEY `fk_tourist_operator_idx` (`tour_operator`),
                                KEY `fk_department_idx` (`department`),
@@ -385,8 +388,20 @@ CREATE TABLE `experiences` (
                                CONSTRAINT `fk_tourist_operator` FOREIGN KEY (`tour_operator`) REFERENCES `tour_operators` (`id`)
 );
 
-INSERT INTO tic1_db.experiences (id,tour_operator,price,location,department,authorized,title,description,shortdescription,vaccination,capacity,reviewed,bookable) VALUES
-(1,1,1000.00,'23 Kingston Drive Lawrence Township, NJ 08648',1,1,'Titulo de experiencia','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ut lacus quis libero dignissim euismod. Duis rhoncus risus eu risus consectetur sagittis. Nulla facilisi. Maecenas nec dui et turpis vulputate lobortis in eget enim. Morbi libero velit, bibendum ac erat et, rutrum gravida nibh. Maecenas bibendum varius fringilla. Sed imperdiet, mauris eget consequat gravida, sem lacus sagittis quam, eget efficitur sapien urna vitae lorem. Sed laoreet lacinia dui, sed vulputate sapien sollicitudin eget. Mauris sollicitudin ac elit at placerat.','Lorem ipsum dolor sit amet, consectetur adipiscing elit.',1,'100',1,1);
+INSERT INTO tic1_db.experiences (id,tour_operator,price,location,department,authorized,title,description,shortdescription,vaccination,capacity,bookable, email, link, telephone) VALUES
+(1,1,1000.00,'23 Kingston Drive Lawrence Township, NJ 08648',1,1,'Tour por la Torre Eiffel','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ut lacus quis libero dignissim euismod. Duis rhoncus risus eu risus consectetur sagittis. Nulla facilisi. Maecenas nec dui et turpis vulputate lobortis in eget enim. Morbi libero velit, bibendum ac erat et, rutrum gravida nibh. Maecenas bibendum varius fringilla. Sed imperdiet, mauris eget consequat gravida, sem lacus sagittis quam, eget efficitur sapien urna vitae lorem. Sed laoreet lacinia dui, sed vulputate sapien sollicitudin eget. Mauris sollicitudin ac elit at placerat.','Lorem ipsum dolor sit amet, consectetur adipiscing elit.',1,'100',1,'correo@correo.com', 'google.com', 1234567890);
+
+INSERT INTO tic1_db.experiences (id,tour_operator,price,location,department,authorized,title,description,shortdescription,vaccination,capacity,bookable, email, link, telephone) VALUES
+(2,1,1000.00,'23 Kingston Drive Lawrence Township, NJ 08648',1,1,'Paseo por el parque','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ut lacus quis libero dignissim euismod. Duis rhoncus risus eu risus consectetur sagittis. Nulla facilisi. Maecenas nec dui et turpis vulputate lobortis in eget enim. Morbi libero velit, bibendum ac erat et, rutrum gravida nibh. Maecenas bibendum varius fringilla. Sed imperdiet, mauris eget consequat gravida, sem lacus sagittis quam, eget efficitur sapien urna vitae lorem. Sed laoreet lacinia dui, sed vulputate sapien sollicitudin eget. Mauris sollicitudin ac elit at placerat.','Lorem ipsum dolor sit amet, consectetur adipiscing elit.',1,'100',1,'correo@correo.com', 'google.com', 1234567890);
+
+INSERT INTO tic1_db.experiences (id,tour_operator,price,location,department,authorized,title,description,shortdescription,vaccination,capacity,bookable, email, link, telephone) VALUES
+(3,1,1000.00,'23 Kingston Drive Lawrence Township, NJ 08648',1,1,'Tour por el Museo del Louvre','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ut lacus quis libero dignissim euismod. Duis rhoncus risus eu risus consectetur sagittis. Nulla facilisi. Maecenas nec dui et turpis vulputate lobortis in eget enim. Morbi libero velit, bibendum ac erat et, rutrum gravida nibh. Maecenas bibendum varius fringilla. Sed imperdiet, mauris eget consequat gravida, sem lacus sagittis quam, eget efficitur sapien urna vitae lorem. Sed laoreet lacinia dui, sed vulputate sapien sollicitudin eget. Mauris sollicitudin ac elit at placerat.','Lorem ipsum dolor sit amet, consectetur adipiscing elit.',1,'100',1,'correo@correo.com', 'google.com', 1234567890);
+
+INSERT INTO tic1_db.experiences (id,tour_operator,price,location,department,authorized,title,description,shortdescription,vaccination,capacity,bookable, email, link, telephone) VALUES
+(4,1,1000.00,'23 Kingston Drive Lawrence Township, NJ 08648',1,1,'Visita a la Estatua de la Libertad','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ut lacus quis libero dignissim euismod. Duis rhoncus risus eu risus consectetur sagittis. Nulla facilisi. Maecenas nec dui et turpis vulputate lobortis in eget enim. Morbi libero velit, bibendum ac erat et, rutrum gravida nibh. Maecenas bibendum varius fringilla. Sed imperdiet, mauris eget consequat gravida, sem lacus sagittis quam, eget efficitur sapien urna vitae lorem. Sed laoreet lacinia dui, sed vulputate sapien sollicitudin eget. Mauris sollicitudin ac elit at placerat.','Lorem ipsum dolor sit amet, consectetur adipiscing elit.',1,'100',1,'correo@correo.com', 'google.com', 1234567890);
+
+INSERT INTO tic1_db.experiences (id,tour_operator,price,location,department,authorized,title,description,shortdescription,vaccination,capacity,bookable, email, link, telephone) VALUES
+(5,1,1000.00,'23 Kingston Drive Lawrence Township, NJ 08648',1,1,'Paseo por la playa','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ut lacus quis libero dignissim euismod. Duis rhoncus risus eu risus consectetur sagittis. Nulla facilisi. Maecenas nec dui et turpis vulputate lobortis in eget enim. Morbi libero velit, bibendum ac erat et, rutrum gravida nibh. Maecenas bibendum varius fringilla. Sed imperdiet, mauris eget consequat gravida, sem lacus sagittis quam, eget efficitur sapien urna vitae lorem. Sed laoreet lacinia dui, sed vulputate sapien sollicitudin eget. Mauris sollicitudin ac elit at placerat.','Lorem ipsum dolor sit amet, consectetur adipiscing elit.',1,'100',1,'correo@correo.com', 'google.com', 1234567890);
 
 CREATE TABLE `images` (
                           `id` int NOT NULL AUTO_INCREMENT,
@@ -414,10 +429,10 @@ CREATE TABLE `types_of_experiences` (
 );
 
 INSERT INTO tic1_db.interests (name) VALUES
-('A'),
-('B'),
-('C'),
-('D');
+('Aventura'),
+('Naturaleza'),
+('Historia'),
+('Paisajes');
 
 INSERT INTO tic1_db.types_of_experiences (name,interest) VALUES
 ('A',1),
@@ -477,7 +492,27 @@ CREATE TABLE `reviews` (
                            CONSTRAINT `fk_tour` FOREIGN KEY (`tourist`) REFERENCES `tourists` (`id`)
 );
 
-## CREATE TABLE 'attendance' ();
+CREATE TABLE `liked` (
+                                     `tourist` int NOT NULL,
+                                     `experience` int NOT NULL,
+                                     PRIMARY KEY (`tourist`,`experience`),
+                                     KEY `fk_i_idx` (`experience`),
+                                     KEY `fk_t_idx` (`tourist`),
+                                     CONSTRAINT `fk_e` FOREIGN KEY (`experience`) REFERENCES `experiences` (`id`),
+                                     CONSTRAINT `fk_tou` FOREIGN KEY (`tourist`) REFERENCES `tourists` (`id`)
+);
+
+CREATE TABLE `bookings` (
+                            `id` int NOT NULL AUTO_INCREMENT,
+                            `tourist` int NOT NULL,
+                            `experience` int NOT NULL,
+                            `date` date NOT NULL,
+                            `time` time NOT NULL,
+                            `amount` int NOT NULL,
+                            PRIMARY KEY (`id`),
+                            CONSTRAINT `fk_bookings_tourist` FOREIGN KEY (`tourist`) REFERENCES `tourists`(`id`),
+                            CONSTRAINT `fk_bookings_experience` FOREIGN KEY (`experience`) REFERENCES `experiences`(`id`)
+);
 
 CREATE USER 'springuser'@'%' identified by 'ThePassword';
 GRANT ALL on tic1_db.* to 'springuser'@'%';

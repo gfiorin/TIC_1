@@ -1,9 +1,8 @@
 package com.example.AppPrototipo.ui.admin;
 
 import com.example.AppPrototipo.AppPrototipoApplication;
-import com.example.AppPrototipo.business.ExperienceMgr;
+import com.example.AppPrototipo.business.managers.ExperienceMgr;
 import com.example.AppPrototipo.business.entities.Experience;
-import com.example.AppPrototipo.persistence.ExperienceRepository;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

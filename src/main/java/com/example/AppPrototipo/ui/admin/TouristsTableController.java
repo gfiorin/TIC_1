@@ -1,7 +1,7 @@
 package com.example.AppPrototipo.ui.admin;
 
 import com.example.AppPrototipo.AppPrototipoApplication;
-import com.example.AppPrototipo.business.TouristMgr;
+import com.example.AppPrototipo.business.managers.TouristMgr;
 import com.example.AppPrototipo.business.entities.Country;
 import com.example.AppPrototipo.business.entities.Interest;
 import com.example.AppPrototipo.business.entities.Tourist;

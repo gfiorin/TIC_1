@@ -18,16 +18,13 @@ public class Experience {
     private String description;
 
     @Column(name = "shortdescription")
-    private String shortdescription;
+    private String shortDescription;
 
     @Column(name = "vaccination")
     private boolean vaccination;
 
     @Column(name = "capacity")
     private Integer capacity;
-
-    //@Column(name = "")
-    //private String image;
 
     @Column(name = "bookable")
     private boolean bookable;
@@ -49,10 +46,19 @@ public class Experience {
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "experience")
-    List<Image> images;
+    private List<Image> images;
 
     @Column(name = "location")
     private String ubicacion;
+
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "link")
+    private String link;
+
+    @Column(name = "telephone")
+    private String telephone;
 
     @Column(name = "reviewed")
     private Boolean reviewed;
@@ -60,28 +66,31 @@ public class Experience {
     public Experience() {
     }
 
-    public Experience(String title, String description, String shortdescription, boolean vaccination, Integer capacity, boolean bookable, boolean authorized, List<Image> images) {
+    public Experience(String title, String description, String shortDescription, boolean vaccination, Integer capacity, boolean bookable, boolean authorized, String email, String link, String telephone, List<Image> images) {
         this.title = title;
         this.description = description;
-        this.shortdescription = shortdescription;
+        this.shortDescription = shortDescription;
         this.vaccination = vaccination;
         this.capacity = capacity;
         this.bookable = bookable;
         this.authorized = authorized;
         this.images = images;
+        this.email = email;
+        this.link = link;
+        this.telephone = telephone;
         this.reviewed = false;
+    }
+
+    public Integer getId() {
+        return id;
     }
 
     public void setId(Integer id) {
         this.id = id;
     }
 
-    public String getShortdescription() {
-        return shortdescription;
-    }
-
-    public void setShortdescription(String shortdescription) {
-        this.shortdescription = shortdescription;
+    public String getShortDescription() {
+        return shortDescription;
     }
 
     public List<ExperienceType> getExperienceTypes() {
@@ -116,8 +125,8 @@ public class Experience {
         this.authorized = false;
     }
 
-    public Integer getId() {
-        return id;
+    public void setShortDescription(String shortdescription) {
+        this.shortDescription = shortdescription;
     }
 
     public String getTitle() {
@@ -184,7 +193,19 @@ public class Experience {
         this.ubicacion = ubicacion;
     }
 
-    public String getShortDescription() { return shortdescription; }
+    public String getEmail() {
+        return email;
+    }
 
-    public void setShortDescription(String shortDescription) { this.shortdescription = shortDescription; }
+    public String getLink() {
+        return link;
+    }
+
+    public Experience(String telephone) {
+        this.telephone = telephone;
+    }
+
+    public String getTelephone() {
+        return telephone;
+    }
 }
