@@ -500,7 +500,17 @@ CREATE TABLE `liked` (
                                      CONSTRAINT `fk_tou` FOREIGN KEY (`tourist`) REFERENCES `tourists` (`id`)
 );
 
-## CREATE TABLE 'attendance' ();
+CREATE TABLE `bookings` (
+                            `id` int NOT NULL AUTO_INCREMENT,
+                            `tourist` int NOT NULL,
+                            `experience` int NOT NULL,
+                            `date` date NOT NULL,
+                            `time` time NOT NULL,
+                            `amount` int NOT NULL,
+                            PRIMARY KEY (`id`),
+                            CONSTRAINT `fk_bookings_tourist` FOREIGN KEY (`tourist`) REFERENCES `tourists`(`id`),
+                            CONSTRAINT `fk_bookings_experience` FOREIGN KEY (`experience`) REFERENCES `experiences`(`id`)
+);
 
 CREATE USER 'springuser'@'%' identified by 'ThePassword';
 GRANT ALL on tic1_db.* to 'springuser'@'%';

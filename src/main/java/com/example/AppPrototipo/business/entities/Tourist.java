@@ -34,7 +34,7 @@ public class Tourist extends User{
     )
     private List<Interest> interests;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "liked",
             joinColumns = {@JoinColumn(name = "tourist")},
