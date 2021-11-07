@@ -11,6 +11,7 @@ import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.springframework.stereotype.Component;
@@ -37,25 +38,10 @@ public class OperatorController implements Initializable {
     private JFXButton boton_4;
 
     @FXML
-    private ImageView favoritosMarker;
-
-    @FXML
-    private ImageView perfilMarker;
-
-    @FXML
-    private ImageView sesionMarker;
-
-    @FXML
     private AnchorPane innerView;
 
     @FXML
-    private VBox top;
-
-    @FXML
-    private VBox bottom;
-
-    @FXML
-    private VBox leftPane;
+    private HBox top;
 
     public OperatorController() {}
 
@@ -63,16 +49,16 @@ public class OperatorController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         //bottom.prefHeightProperty().bind(leftPane.prefHeightProperty().subtract(top.prefHeightProperty()));
         //try {
-       //     showListOfExperiences();
+        //    showListOfExperiences();
         //} catch (IOException e) {
         //    e.printStackTrace();
-       // }
+        //}
     }
 
     public void showListOfExperiences() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
-        //fxmlLoader.setLocation(ListOfExperincesOpController.getClass().getResource(".fxml"));
+        //fxmlLoader.setLocation(ListOfExperincesOpController.getClass().getResource("CreateExperience.fxml"));
         ScrollPane experienceGrid = fxmlLoader.load();
         loadToInnerView(experienceGrid);
     }
