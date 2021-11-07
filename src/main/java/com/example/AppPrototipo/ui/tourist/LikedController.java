@@ -62,7 +62,7 @@ public class LikedController implements Initializable {
                 VBox vbox = fxmlLoader.load();
                 miniExperienceController.setData(experiences.get(i));
 
-                if(columns == 5){
+                if(columns == 4){
                     columns = 0;
                     ++row;
                 }
