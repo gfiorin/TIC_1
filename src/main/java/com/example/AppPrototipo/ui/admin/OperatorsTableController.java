@@ -1,7 +1,7 @@
 package com.example.AppPrototipo.ui.admin;
 
 import com.example.AppPrototipo.AppPrototipoApplication;
-import com.example.AppPrototipo.business.OperatorMgr;
+import com.example.AppPrototipo.business.managers.OperatorMgr;
 import com.example.AppPrototipo.business.entities.Operator;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

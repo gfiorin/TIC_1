@@ -1,7 +1,7 @@
 package com.example.AppPrototipo.ui.admin;
 
 import com.example.AppPrototipo.AppPrototipoApplication;
-import com.example.AppPrototipo.business.ReviewMgr;
+import com.example.AppPrototipo.business.managers.ReviewMgr;
 import com.example.AppPrototipo.business.entities.Experience;
 import com.example.AppPrototipo.business.entities.Review;
 import com.example.AppPrototipo.business.entities.Tourist;

@@ -72,7 +72,6 @@ public class PrincipalController {
         }
 
         try {
-
             User user = userMgr.userLogIn(userInput.getText(), passwordInput.getText());
 
             if(user instanceof Administrator){
@@ -82,7 +81,7 @@ public class PrincipalController {
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
 
-                Parent root = fxmlLoader.load(AdminController.class.getResourceAsStream("AdminPanel.fxml"));
+                Parent root = fxmlLoader.load(adminController.getClass().getResourceAsStream("AdminPanel.fxml"));
                 Stage newStage = new Stage();
                 newStage.setScene(new Scene(root));
                 newStage.show();
@@ -95,13 +94,12 @@ public class PrincipalController {
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
 
-                Parent root = fxmlLoader.load(TouristController.class.getResourceAsStream("TouristMain.fxml"));
+                Parent root = fxmlLoader.load(touristController.getClass().getResourceAsStream("TouristMain.fxml"));
                 Stage newStage = new Stage();
                 newStage.setScene(new Scene(root));
                 newStage.show();
 
                 oldStage.close();
-
             } else if (user instanceof Operator){
                 Node source = (Node) actionEvent.getSource();
                 Stage oldStage  = (Stage) source.getScene().getWindow();
@@ -109,11 +107,7 @@ public class PrincipalController {
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
 
-                OperatorController.setOperator((Operator) user);
-
-                Parent root = fxmlLoader.load(OperatorController.class.getResourceAsStream("OperatorMain.fxml"));
-                OperatorController operatorController = fxmlLoader.getController();
-
+                Parent root = fxmlLoader.load(operatorController.getClass().getResourceAsStream("OperatorMain.fxml"));
                 Stage newStage = new Stage();
                 newStage.setScene(new Scene(root));
                 newStage.show();
