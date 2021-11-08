@@ -2,14 +2,18 @@ package com.example.AppPrototipo.ui.tourist;
 
 import com.example.AppPrototipo.AppPrototipoApplication;
 import com.example.AppPrototipo.business.managers.ExperienceMgr;
-import com.example.AppPrototipo.business.managers.UserMgr;
 import com.example.AppPrototipo.business.entities.Experience;
+import com.example.AppPrototipo.business.managers.UserMgr;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -22,19 +26,24 @@ import java.util.ResourceBundle;
 public class ExperienceGridController implements Initializable {
 
     private final ExperienceMgr experienceMgr;
-    private final MiniExperienceController miniExperienceController;
     private final UserMgr userMgr;
+    private final TouristController touristController;
 
     @FXML
     private GridPane grillaRecomendaciones;
 
-    public ExperienceGridController(ExperienceMgr experienceMgr, MiniExperienceController miniExperienceController, UserMgr userMgr) {
+    public ExperienceGridController(ExperienceMgr experienceMgr, UserMgr userMgr, @Lazy TouristController touristController) {
         this.experienceMgr = experienceMgr;
-        this.miniExperienceController = miniExperienceController;
         this.userMgr = userMgr;
+        this.touristController = touristController;
     }
 
-//    @Transactional
+    @Bean
+    @Scope("prototype")
+    private MiniExperienceController miniExperienceControllerPrototype() {
+        return new MiniExperienceController(userMgr, touristController, experienceMgr);
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -43,21 +52,27 @@ public class ExperienceGridController implements Initializable {
         int row = 1;
 
         try {
-            for (int i=0; i < recommendations.size(); i++){
+            for (Experience recommendation : recommendations) {
                 FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
-                fxmlLoader.setLocation(miniExperienceController.getClass().getResource("MiniExperience.fxml"));
-                //MiniExperienceController.setTourist(tourist);
-                VBox vbox = fxmlLoader.load();
-                miniExperienceController.setData(recommendations.get(i));
 
-                if(columns == 4){
+                ApplicationContext applicationContext = AppPrototipoApplication.getContext();
+                MiniExperienceController miniExperienceController = (MiniExperienceController) applicationContext
+                        .getBean("miniExperienceControllerPrototype");
+                fxmlLoader.setController(miniExperienceController);
+
+                fxmlLoader.setController(miniExperienceController);
+                fxmlLoader.setLocation(miniExperienceController.getClass().getResource("MiniExperience.fxml"));
+                VBox vbox = fxmlLoader.load();
+                miniExperienceController.setData(recommendation);
+
+                if (columns == 4) {
                     columns = 0;
                     ++row;
                 }
 
-                grillaRecomendaciones.add(vbox,columns++,row);
-                GridPane.setMargin(vbox,new Insets(10));}
+                grillaRecomendaciones.add(vbox, columns++, row);
+                GridPane.setMargin(vbox, new Insets(10));
+            }
         }catch (IOException e) {
             e.printStackTrace();
         }
