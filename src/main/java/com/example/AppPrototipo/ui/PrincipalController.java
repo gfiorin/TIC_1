@@ -1,7 +1,7 @@
 package com.example.AppPrototipo.ui;
 
 import com.example.AppPrototipo.AppPrototipoApplication;
-import com.example.AppPrototipo.business.UserMgr;
+import com.example.AppPrototipo.business.managers.UserMgr;
 import com.example.AppPrototipo.business.entities.Administrator;
 import com.example.AppPrototipo.business.entities.Operator;
 import com.example.AppPrototipo.business.entities.Tourist;
@@ -44,9 +44,15 @@ public class PrincipalController {
     private Button login;
 
     private final UserMgr userMgr;
+    private final TouristController touristController;
+    private final AdminController adminController;
+    private final OperatorController operatorController;
 
-    public PrincipalController(UserMgr userMgr) {
+    public PrincipalController(UserMgr userMgr, TouristController touristController, AdminController adminController, OperatorController operatorController) {
         this.userMgr = userMgr;
+        this.touristController = touristController;
+        this.adminController = adminController;
+        this.operatorController = operatorController;
     }
 
     @FXML
