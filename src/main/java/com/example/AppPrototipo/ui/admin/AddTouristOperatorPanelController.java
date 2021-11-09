@@ -101,11 +101,14 @@ public class AddTouristOperatorPanelController {
                     FXMLLoader fxmlLoader = new FXMLLoader();
                     fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
 
-                    Parent root = fxmlLoader.load(AddOperatorController.class.getResourceAsStream("AddOperator.fxml"));
+                    Parent root = fxmlLoader.load(AdminController.class.getResourceAsStream("AddOperator.fxml"));
                     Stage newStage = new Stage();
                     newStage.setScene(new Scene(root));
-                    newStage.show();
 
+                    AddOperatorController addOperatorController = fxmlLoader.getController();
+                    addOperatorController.init(tourOperatorMgr.findOneByCompanyName(companyName));
+
+                    newStage.showAndWait();
                     oldStage.close();
 
                 }
