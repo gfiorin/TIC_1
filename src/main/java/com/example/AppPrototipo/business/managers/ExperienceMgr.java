@@ -99,7 +99,7 @@ public class ExperienceMgr {
         }
 
         if (capacity != null && capacity < 0){
-            throw new InvalidInformation("Por favor ingrese una cantidad válida");
+            throw new InvalidInformation("Por favor ingrese una cantidad de personas válida");
         }
 
         if (price != null && price.compareTo(new BigDecimal(0)) < 0){
@@ -135,9 +135,5 @@ public class ExperienceMgr {
         experienceRepository.save(experienceToAdd);
 
     }
-
-    //user manager . get current todo
-
-    //        maximo 5 tipos de experiencia
 
 }
