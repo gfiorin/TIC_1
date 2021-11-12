@@ -1,19 +1,18 @@
 package com.example.AppPrototipo.business.managers;
 
-import com.example.AppPrototipo.business.entities.Booking;
-import com.example.AppPrototipo.business.entities.Experience;
-import com.example.AppPrototipo.business.entities.Tourist;
+import com.example.AppPrototipo.business.entities.*;
+import com.example.AppPrototipo.business.exceptions.InvalidInformation;
 import com.example.AppPrototipo.persistence.BookingRepository;
 import com.example.AppPrototipo.persistence.ExperienceRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-
 
 @Service
 public class ExperienceMgr {
@@ -76,5 +75,69 @@ public class ExperienceMgr {
     public Experience findOneById(int id){
         return experienceRepository.findOneById(id);
     }
+
+    public void addExperience(String title, String description, String shortDescription, boolean vaccination, Integer capacity, BigDecimal price, boolean bookable, List<ExperienceType> experienceTypes, TourOperator tourOperator, List<Image> images, Department department, String ubicacion, String email, String link, String telephone) throws InvalidInformation {
+
+        if (title == null || title.isBlank()){
+            throw new InvalidInformation("Por favor ingrese un titulo válido");
+        }
+
+        if (shortDescription == null || shortDescription.isBlank()){
+            throw new InvalidInformation("Por favor ingrese una descripción corta válida");
+        }
+
+        if (description == null || description.isBlank()){
+            throw new InvalidInformation("Por favor ingrese una descripción válida");
+        }
+
+        if (department == null){
+            throw new InvalidInformation("Por favor seleccione un departamento");
+        }
+
+        if (ubicacion == null || ubicacion.isBlank()){
+            throw new InvalidInformation("Por favor ingrese un titulo válido");
+        }
+
+        if (capacity != null && capacity < 0){
+            throw new InvalidInformation("Por favor ingrese una cantidad válida");
+        }
+
+        if (price != null && price.compareTo(new BigDecimal(0)) < 0){
+            throw new InvalidInformation("Por favor ingrese un precio válido");
+        }
+
+        if (telephone == null || telephone.isBlank()){
+            throw new InvalidInformation("Por favor ingrese un télefono válido");
+        }
+
+        if (email == null || email.isBlank()){
+            throw new InvalidInformation("Por favor ingrese un email válido");
+        }
+
+        if (link == null || link.isBlank()){
+            throw new InvalidInformation("Por favor ingrese un link válido");
+        }
+
+        if (experienceTypes.size() == 0){
+            throw new InvalidInformation("Por favor asocie esta experiencia a por lo menos un tipo de experiencia");
+        }
+
+        if (experienceTypes.size() > 5){
+            throw new InvalidInformation("Solo puede asociar un maximo de 5 experiencias");
+        }
+
+        if (images.size() == 0){
+            throw new InvalidInformation("Por favor ingrese por lo menos una imágen para la experiencia");
+        }
+
+        Experience experienceToAdd = new Experience(title, description, shortDescription, vaccination, capacity, bookable, false, experienceTypes, tourOperator, images, department, ubicacion, email, link, telephone, true, price);
+
+        experienceRepository.save(experienceToAdd);
+
+    }
+
+    //user manager . get current todo
+
+    //        maximo 5 tipos de experiencia
 
 }

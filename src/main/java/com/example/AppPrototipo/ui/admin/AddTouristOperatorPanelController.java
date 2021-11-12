@@ -106,7 +106,7 @@ public class AddTouristOperatorPanelController {
                     newStage.setScene(new Scene(root));
 
                     AddOperatorController addOperatorController = fxmlLoader.getController();
-                    addOperatorController.init(tourOperatorMgr.findOneByCompanyName(companyName));
+                    //addOperatorController.init(tourOperatorMgr.findOneByCompanyName(companyName));
 
                     newStage.showAndWait();
                     oldStage.close();
