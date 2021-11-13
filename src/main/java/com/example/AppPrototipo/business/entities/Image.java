@@ -13,6 +13,15 @@ public class Image {
     @Column(name = "image")
     byte[] imageData;
 
+    @ManyToOne
+    @JoinColumn(name="experience")
+    private Experience experience;
+
+    public Image(byte[] imageData, Experience experience) {
+        this.imageData = imageData;
+        this.experience = experience;
+    }
+
     public Image() {
     }
 
@@ -26,5 +35,13 @@ public class Image {
 
     public byte[] getImageData() {
         return imageData;
+    }
+
+    public Experience getExperience() {
+        return experience;
+    }
+
+    public void setExperience(Experience experience) {
+        this.experience = experience;
     }
 }

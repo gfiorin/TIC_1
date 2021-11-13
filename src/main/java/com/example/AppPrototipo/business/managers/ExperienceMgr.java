@@ -76,7 +76,11 @@ public class ExperienceMgr {
         return experienceRepository.findOneById(id);
     }
 
-    public void addExperience(String title, String description, String shortDescription, boolean vaccination, Integer capacity, BigDecimal price, boolean bookable, List<ExperienceType> experienceTypes, TourOperator tourOperator, List<Image> images, Department department, String ubicacion, String email, String link, String telephone) throws InvalidInformation {
+    public List<Experience> findByTourOperator(TourOperator tourOperator){
+        return experienceRepository.findByTourOperator(tourOperator);
+    }
+
+    public Experience addExperience(String title, String description, String shortDescription, boolean vaccination, Integer capacity, BigDecimal price, boolean bookable, List<ExperienceType> experienceTypes, TourOperator tourOperator, Department department, String ubicacion, String email, String link, String telephone) throws InvalidInformation {
 
         if (title == null || title.isBlank()){
             throw new InvalidInformation("Por favor ingrese un titulo válido");
@@ -126,14 +130,11 @@ public class ExperienceMgr {
             throw new InvalidInformation("Solo puede asociar un maximo de 5 experiencias");
         }
 
-        if (images.size() == 0){
-            throw new InvalidInformation("Por favor ingrese por lo menos una imágen para la experiencia");
-        }
-
-        Experience experienceToAdd = new Experience(title, description, shortDescription, vaccination, capacity, bookable, false, experienceTypes, tourOperator, images, department, ubicacion, email, link, telephone, true, price);
+        Experience experienceToAdd = new Experience(title, description, shortDescription, vaccination, capacity, bookable, false, experienceTypes, tourOperator, department, ubicacion, email, link, telephone, true, price);
 
         experienceRepository.save(experienceToAdd);
 
+        return experienceToAdd;
     }
 
 }

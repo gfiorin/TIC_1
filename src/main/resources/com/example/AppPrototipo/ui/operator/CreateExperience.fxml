@@ -182,9 +182,9 @@
                   <ComboBox layoutX="332.0" layoutY="1273.0" prefHeight="28.0" prefWidth="99.0" />
                   <ComboBox layoutX="332.0" layoutY="1311.0" prefHeight="28.0" prefWidth="99.0" />
                   <ComboBox layoutX="493.0" layoutY="1311.0" prefHeight="28.0" prefWidth="99.0" />
-                  <Line endX="152.40005493164062" endY="-1.220703125E-4" layoutX="114.0" layoutY="1407.0" startX="-100.0" />
+                  <Line endX="133.19998168945312" endY="-1.220703125E-4" layoutX="114.0" layoutY="1407.0" startX="-100.0" />
                   <Line endX="100.0" layoutX="619.0" layoutY="1407.0" startX="-133.39993286132812" startY="-1.220703125E-4" />
-                  <Text layoutX="317.0" layoutY="1416.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Imágenes">
+                  <Text layoutX="309.0" layoutY="1416.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Imágenes">
                      <font>
                         <Font name="System Bold" size="25.0" />
                      </font>
@@ -207,6 +207,8 @@
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </padding>
                   </ScrollPane>
+                  <Button fx:id="addImageBtn" layoutX="311.0" layoutY="1461.0" mnemonicParsing="false" onAction="#agregarImagen" text="Agregar imagen" />
+                  <Text layoutX="169.0" layoutY="1543.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cantidad de imágenes cargadas:" />
                </children>
             </AnchorPane>
          </content>

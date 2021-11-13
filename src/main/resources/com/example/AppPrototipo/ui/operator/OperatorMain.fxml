@@ -24,7 +24,7 @@
                         <Font size="13.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton fx:id="boton_3" prefHeight="74.0" prefWidth="140.0" styleClass="boton_2" stylesheets="@com/example/AppPrototipo/ui/operator/style.css" text="Reservas">
+                  <JFXButton fx:id="boton_3" onAction="#showBookingsList" prefHeight="74.0" prefWidth="140.0" styleClass="boton_2" stylesheets="@com/example/AppPrototipo/ui/operator/style.css" text="Reservas">
                      <font>
                         <Font size="13.0" />
                      </font>

@@ -2,21 +2,25 @@ package com.example.AppPrototipo.ui.operator;
 
 import com.example.AppPrototipo.business.entities.*;
 import com.example.AppPrototipo.business.exceptions.InvalidInformation;
-import com.example.AppPrototipo.business.managers.DepartmentMgr;
-import com.example.AppPrototipo.business.managers.ExperienceMgr;
-import com.example.AppPrototipo.business.managers.ExperienceTypeMgr;
-import com.example.AppPrototipo.business.managers.UserMgr;
+import com.example.AppPrototipo.business.managers.*;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.stage.FileChooser;
 import javafx.event.ActionEvent;
 import org.springframework.stereotype.Component;
 
+import java.io.File;
+import java.io.IOException;
 import java.math.BigDecimal;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 @Component
@@ -68,18 +72,27 @@ public class CreateExperienceController {
     private Button createExperienceBtn;
 
     @FXML
+    private Button addImageBtn;
+
+    @FXML
     private VBox typesOfExperiencesVBox;
+
+    private List<byte[]> images = new LinkedList<>();
+
+    private FileChooser fileChooser = new FileChooser();
 
     private final ExperienceMgr experienceMgr;
     private final ExperienceTypeMgr experienceTypeMgr;
     private final DepartmentMgr departmentMgr;
     private final UserMgr userMgr;
+    private final ImageMgr imageMgr;
 
-    public CreateExperienceController(ExperienceMgr experienceMgr, ExperienceTypeMgr experienceTypeMgr, DepartmentMgr departmentMgr, UserMgr userMgr) {
+    public CreateExperienceController(ExperienceMgr experienceMgr, ExperienceTypeMgr experienceTypeMgr, DepartmentMgr departmentMgr, UserMgr userMgr, ImageMgr imageMgr) {
         this.experienceMgr = experienceMgr;
         this.experienceTypeMgr = experienceTypeMgr;
         this.departmentMgr = departmentMgr;
         this.userMgr = userMgr;
+        this.imageMgr = imageMgr;
     }
 
     @FXML
@@ -173,7 +186,7 @@ public class CreateExperienceController {
                 String streetAndNo = streenAndNoInput.getText();
                 String email = emailInput.getText();
                 String link = linkInput.getText();
-                String telephone = emailInput.getText();
+                String telephone = telephoneInput.getText();
                 List<ExperienceType> experienceTypes = new ArrayList<>();
 
                 for (Node node : typesOfExperiencesVBox.getChildren()) {
@@ -183,16 +196,20 @@ public class CreateExperienceController {
                     }
                 }
 
-                List<Image> images; //todo
-
                 TourOperator tourOperator = ((Operator) userMgr.getCurrentUser()).getTourOperator();
 
-                //experienceMgr.addExperience(title, longDescription, shortDescription, vaccination, capacity, price, bookable, experienceTypes, tourOperator, images, department, streetAndNo, email, link, telephone);
-                if(bookable) {
-                    throw new InvalidInformation("e");
+                if(images.size() < 1){
+                    showAlert("Informacion invalida!", "La experiencia debe tener al menos una imagen asociada");
+                    return;
                 }
 
-                showAlert("Su experiencia ha sido solicitada con exito", "Su experiencia ha sido solicitada con exito, un administrador del sitio");
+                Experience experienceAdded = experienceMgr.addExperience(title, longDescription, shortDescription, vaccination, capacity, price, bookable, experienceTypes, tourOperator, department, streetAndNo, email, link, telephone);
+
+                for (byte[] data : images){
+                    imageMgr.addImage(experienceAdded, data);
+                }
+
+                showAlert("Su experiencia ha sido solicitada con exito", "Su experiencia ha sido solicitada con exito, un administrador del sitio la revisará en los proximos días para habilitarla");
 
                 initialize();//todo
 
@@ -204,8 +221,25 @@ public class CreateExperienceController {
         }
     }
 
+    @FXML // agregar contador de imagenes todo
+    void agregarImagen(ActionEvent event){
+        byte[] imagen;
+        Scene sceneActual =((Node)event.getSource()).getScene();
+        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        File selectedFile = fileChooser.showOpenDialog(stage);
+        Path url = selectedFile.toPath();
+        try {
+            imagen = Files.readAllBytes(url);
+            images.add(imagen);
+        }catch (IOException e){
+            showAlert(
+                    "Error!",
+                    "Hubo un error al cargar la imagen");
+        }
+    }
+
     @FXML
-    void close(javafx.event.ActionEvent event){
+    void close(ActionEvent event){
         Node source = (Node)  event.getSource();
         Stage stage  = (Stage) source.getScene().getWindow();
         stage.close();

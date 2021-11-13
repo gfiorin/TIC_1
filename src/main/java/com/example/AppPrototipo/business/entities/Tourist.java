@@ -93,4 +93,9 @@ public class Tourist extends User{
         return interests;
     }
 
+    @Override
+    public String toString() {
+        return this.getEmail();
+    }
+
 }

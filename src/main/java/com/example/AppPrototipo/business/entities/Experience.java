@@ -74,7 +74,7 @@ public class Experience {
     public Experience() {
     }
 
-    public Experience(String title, String description, String shortDescription, boolean vaccination, Integer capacity, boolean bookable, boolean authorized, List<ExperienceType> experienceTypes, TourOperator tourOperator, List<Image> images, Department department, String ubicacion, String email, String link, String telephone, Boolean reviewed, BigDecimal price) {
+    public Experience(String title, String description, String shortDescription, boolean vaccination, Integer capacity, boolean bookable, boolean authorized, List<ExperienceType> experienceTypes, TourOperator tourOperator, Department department, String ubicacion, String email, String link, String telephone, Boolean reviewed, BigDecimal price) {
         this.title = title;
         this.description = description;
         this.shortDescription = shortDescription;
@@ -84,7 +84,7 @@ public class Experience {
         this.authorized = authorized;
         this.experienceTypes = experienceTypes;
         this.tourOperator = tourOperator;
-        this.images = images;
+        //this.images = images;
         this.department = department;
         this.ubicacion = ubicacion;
         this.email = email;
@@ -220,6 +220,11 @@ public class Experience {
 
     public String getTelephone() {
         return telephone;
+    }
+
+    @Override
+    public String toString() {
+        return title;
     }
 
 }
