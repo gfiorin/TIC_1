@@ -69,10 +69,9 @@ public class TouristController implements Initializable {
     public void showProfile(MouseEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
-        Parent root = fxmlLoader.load(profileController.getClass().getResourceAsStream("ProfileView.fxml"));
-        Scene scene = new Scene(root);
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(scene);
+        fxmlLoader.setLocation(profileController.getClass().getResource("ProfileView.fxml"));
+        AnchorPane perfil = fxmlLoader.load();
+        loadToInnerView(perfil);
     }
 
     public  void showFavourites(MouseEvent event) throws IOException {

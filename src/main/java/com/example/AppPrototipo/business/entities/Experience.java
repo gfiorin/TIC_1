@@ -44,7 +44,7 @@ public class Experience {
     @JoinColumn(name="tour_operator")
     private TourOperator tourOperator;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "experience")
     private List<Image> images;
 
