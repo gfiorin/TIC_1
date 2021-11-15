@@ -2,6 +2,7 @@ package com.example.AppPrototipo.business.managers;
 
 import com.example.AppPrototipo.business.entities.Booking;
 import com.example.AppPrototipo.business.entities.Experience;
+import com.example.AppPrototipo.business.entities.ExperienceType;
 import com.example.AppPrototipo.business.entities.Tourist;
 import com.example.AppPrototipo.persistence.BookingRepository;
 import com.example.AppPrototipo.persistence.ExperienceRepository;
@@ -75,6 +76,10 @@ public class ExperienceMgr {
 
     public Experience findOneById(int id){
         return experienceRepository.findOneById(id);
+    }
+
+    public List<Experience> findByTypes(List<ExperienceType> experienceTypes){
+        return experienceRepository.findAllByExperienceTypesContains(experienceTypes);
     }
 
 }

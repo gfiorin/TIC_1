@@ -2,6 +2,7 @@ package com.example.AppPrototipo.business.entities;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -43,6 +44,18 @@ public class Tourist extends User{
 
     public List<Experience> getLiked() {
         return liked;
+    }
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "bookings",
+            joinColumns = {@JoinColumn(name = "tourist")},
+            inverseJoinColumns = {@JoinColumn(name = "experience")}
+    )
+    private List<Experience> experiencesBooked;
+
+    public List<Experience> getExperiencesBooked() {
+        return experiencesBooked;
     }
 
     public void addLiked(Experience experience) {
@@ -92,5 +105,6 @@ public class Tourist extends User{
     public List<Interest> getInterests() {
         return interests;
     }
+
 
 }

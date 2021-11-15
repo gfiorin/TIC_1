@@ -63,6 +63,8 @@ public class Experience {
     @Column(name = "reviewed")
     private Boolean reviewed;
 
+    private Integer ponderation = 0;
+
     public Experience() {
     }
 
@@ -79,6 +81,14 @@ public class Experience {
         this.link = link;
         this.telephone = telephone;
         this.reviewed = false;
+    }
+
+    public Integer getPonderation() {
+        return ponderation;
+    }
+
+    public void setPonderation(Integer ponderation) {
+        this.ponderation = ponderation;
     }
 
     public Integer getId() {
