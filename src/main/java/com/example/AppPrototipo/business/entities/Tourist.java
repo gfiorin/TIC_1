@@ -93,4 +93,6 @@ public class Tourist extends User{
         return interests;
     }
 
+    public List<Booking> getBookings(){return bookings;}
+
 }
