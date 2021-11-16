@@ -8,7 +8,7 @@
 
 <ScrollPane prefHeight="500.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.AppPrototipo.ui.tourist.BookingsController">
     <content>
-        <VBox fx:id="vBoxGral" prefHeight="501.0" prefWidth="884.0" spacing="5.0">
+        <VBox fx:id="vBoxGral" prefHeight="501.0" prefWidth="884.0" spacing="10.0">
             <children>
                 <Text fx:id="titulo" strokeType="OUTSIDE" strokeWidth="0.0" text="Mis Reservas" underline="true">
                     <font>
@@ -18,7 +18,7 @@
                         <Insets left="5.0" />
                     </VBox.margin>
                 </Text>
-            <VBox fx:id="vBoxReservas" prefHeight="200.0" prefWidth="100.0" />
+            <VBox fx:id="vBoxReservas" prefHeight="200.0" prefWidth="100.0" spacing="10.0" />
             </children>
          <padding>
             <Insets left="10.0" top="15.0" />

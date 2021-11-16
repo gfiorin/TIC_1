@@ -48,7 +48,7 @@ public class BookingsController implements Initializable {
             for (Booking booking : bookings) {
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 ApplicationContext applicationContext = AppPrototipoApplication.getContext();
-                MiniBookingController miniBookingController = (MiniBookingController) applicationContext.getBean("miniExperienceControllerPrototype");
+                MiniBookingController miniBookingController = (MiniBookingController) applicationContext.getBean("miniBookingController");
                 fxmlLoader.setController(miniBookingController);
 
                 fxmlLoader.setController(miniBookingController);
