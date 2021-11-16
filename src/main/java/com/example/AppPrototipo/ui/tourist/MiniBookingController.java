@@ -3,10 +3,13 @@ package com.example.AppPrototipo.ui.tourist;
 import com.example.AppPrototipo.business.entities.Booking;
 import com.example.AppPrototipo.business.entities.Experience;
 import javafx.fxml.FXML;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import org.springframework.format.datetime.DateFormatter;
 import org.springframework.stereotype.Component;
 
+import java.io.ByteArrayInputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -16,6 +19,9 @@ import java.time.format.DateTimeFormatter;
 public class MiniBookingController {
     @FXML
     private Text cuposReserva;
+
+    @FXML
+    private ImageView experienciaImg;
 
     @FXML
     private Text fechaReserva;
@@ -38,6 +44,8 @@ public class MiniBookingController {
         nombreExperiencia.setText(booking.getExperience().getTitle());
         direccion.setText(booking.getExperience().getUbicacion());
         cuposReserva.setText(String.valueOf(booking.getAmount()));
+        Image image = new Image(new ByteArrayInputStream(booking.getExperience().getImages().get(0).getImageData()));
+        experienciaImg.setImage(image);
     }
 
 }

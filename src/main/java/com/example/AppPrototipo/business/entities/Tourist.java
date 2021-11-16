@@ -25,7 +25,7 @@ public class Tourist extends User{
     @JoinColumn(name = "country_of_birth", nullable = false)
     private Country country;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "tourist_interests",
             joinColumns = {@JoinColumn(name = "tourist")},
@@ -92,7 +92,5 @@ public class Tourist extends User{
     public List<Interest> getInterests() {
         return interests;
     }
-
-    public List<Booking> getBookings(){return bookings;}
 
 }

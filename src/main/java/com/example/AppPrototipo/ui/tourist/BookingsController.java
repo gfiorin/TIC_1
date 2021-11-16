@@ -2,14 +2,12 @@ package com.example.AppPrototipo.ui.tourist;
 
 import com.example.AppPrototipo.AppPrototipoApplication;
 import com.example.AppPrototipo.business.entities.Booking;
-import com.example.AppPrototipo.business.entities.Experience;
 import com.example.AppPrototipo.business.entities.Tourist;
+import com.example.AppPrototipo.business.managers.BookingMgr;
 import com.example.AppPrototipo.business.managers.UserMgr;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -26,6 +24,7 @@ import java.util.ResourceBundle;
 public class BookingsController implements Initializable {
 
     private final UserMgr userMgr;
+    private final BookingMgr bookingMgr;
 
     @FXML
     private Text titulo;
@@ -36,8 +35,9 @@ public class BookingsController implements Initializable {
     @FXML
     private VBox vBoxReservas;
 
-    public BookingsController(UserMgr userMgr) {
+    public BookingsController(UserMgr userMgr, BookingMgr bookingMgr) {
         this.userMgr = userMgr;
+        this.bookingMgr = bookingMgr;
     }
 
     @Override
@@ -63,8 +63,7 @@ public class BookingsController implements Initializable {
     }
 
     private List<Booking> bookings(Tourist tourist){
-        List<Booking> list = tourist.getBookings();
-        return list;
+        return bookingMgr.findAll();
     }
 
 }
