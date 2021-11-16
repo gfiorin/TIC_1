@@ -11,10 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Date;
 import java.sql.Time;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.NoSuchElementException;
+import java.util.*;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -84,7 +82,7 @@ public class ExperienceMgr {
     }
 
     public List<Experience> findByTypes(List<ExperienceType> experienceTypes){
-        return experienceRepository.findAllByExperienceTypesContains(experienceTypes);
+        return experienceRepository.findByExperienceTypesContaining(experienceTypes);
     }
 
 }

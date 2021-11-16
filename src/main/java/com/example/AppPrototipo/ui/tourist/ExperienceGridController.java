@@ -35,7 +35,7 @@ public class ExperienceGridController implements Initializable {
     private static Tourist tourist;
     private final InterestMgr interestMgr;
     private final ExperienceTypeMgr experienceTypeMgr;
-    private List<ExperienceType> types = new ArrayList<>(); //set
+    private Set<ExperienceType> types;
 
     @FXML
     private GridPane grillaRecomendaciones;
@@ -101,7 +101,7 @@ public class ExperienceGridController implements Initializable {
     }
 
     private List<Experience> recommendations() {
-        List<Experience> recommendations = experienceMgr.findByTypes(types);
+        List<Experience> recommendations = experienceMgr.findByTypes(new ArrayList<>(types));
 
         for (Experience experience : recommendations){
             if (tourist.getLiked().contains(experience) || tourist.getExperiencesBooked().contains(experience)){
