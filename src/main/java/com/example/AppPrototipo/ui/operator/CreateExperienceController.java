@@ -8,6 +8,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.FileChooser;
 import javafx.event.ActionEvent;
@@ -77,6 +78,9 @@ public class CreateExperienceController {
     @FXML
     private VBox typesOfExperiencesVBox;
 
+    @FXML
+    private Text imagesQuantity;
+
     private List<byte[]> images = new LinkedList<>();
 
     private FileChooser fileChooser = new FileChooser();
@@ -85,18 +89,18 @@ public class CreateExperienceController {
     private final ExperienceTypeMgr experienceTypeMgr;
     private final DepartmentMgr departmentMgr;
     private final UserMgr userMgr;
-    private final ImageMgr imageMgr;
 
-    public CreateExperienceController(ExperienceMgr experienceMgr, ExperienceTypeMgr experienceTypeMgr, DepartmentMgr departmentMgr, UserMgr userMgr, ImageMgr imageMgr) {
+    public CreateExperienceController(ExperienceMgr experienceMgr, ExperienceTypeMgr experienceTypeMgr, DepartmentMgr departmentMgr, UserMgr userMgr) {
         this.experienceMgr = experienceMgr;
         this.experienceTypeMgr = experienceTypeMgr;
         this.departmentMgr = departmentMgr;
         this.userMgr = userMgr;
-        this.imageMgr = imageMgr;
     }
 
     @FXML
     public void initialize(){
+
+        imagesQuantity.setText("0");
 
         List<ExperienceType> experienceTypes = experienceTypeMgr.findAll();
         for(ExperienceType experienceType : experienceTypes){
@@ -203,15 +207,20 @@ public class CreateExperienceController {
                     return;
                 }
 
-                Experience experienceAdded = experienceMgr.addExperience(title, longDescription, shortDescription, vaccination, capacity, price, bookable, experienceTypes, tourOperator, department, streetAndNo, email, link, telephone);
+                List<Image> imagesList = new LinkedList<>();
 
                 for (byte[] data : images){
-                    imageMgr.addImage(experienceAdded, data);
+                    imagesList.add(new Image(data));
                 }
+
+                Experience experienceAdded = experienceMgr.addExperience(title, longDescription, shortDescription, vaccination, capacity, price, bookable, experienceTypes, tourOperator, department, streetAndNo, email, link, telephone, imagesList);
 
                 showAlert("Su experiencia ha sido solicitada con exito", "Su experiencia ha sido solicitada con exito, un administrador del sitio la revisará en los proximos días para habilitarla");
 
-                initialize();//todo
+                images.clear();
+                imagesList.clear();
+
+                //lo mando a mis experiencias todo
 
             } catch (InvalidInformation invalidInformation) {
                 showAlert(
@@ -221,7 +230,7 @@ public class CreateExperienceController {
         }
     }
 
-    @FXML // agregar contador de imagenes todo
+    @FXML
     void agregarImagen(ActionEvent event){
         byte[] imagen;
         Scene sceneActual =((Node)event.getSource()).getScene();
@@ -231,6 +240,7 @@ public class CreateExperienceController {
         try {
             imagen = Files.readAllBytes(url);
             images.add(imagen);
+            imagesQuantity.setText(String.valueOf(images.size()));
         }catch (IOException e){
             showAlert(
                     "Error!",

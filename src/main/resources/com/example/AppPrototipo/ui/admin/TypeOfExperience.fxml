@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 
-<BorderPane prefHeight="200.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.AppPrototipo.ui.admin.TypeOfExperienceController">
+<BorderPane prefHeight="170.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.AppPrototipo.ui.admin.TypeOfExperienceController">
     <top>
         <AnchorPane BorderPane.alignment="CENTER">
-            <Label layoutX="30.0" layoutY="30.0" text="Nombre" />
-            <TextField fx:id="nameInput" layoutX="100.0" layoutY="25.0" prefHeight="26.0" prefWidth="245.0" />
-            <Label layoutX="30.0" layoutY="80.0" text="Intereses" />
-            <ComboBox fx:id="interestInput" layoutX="100.0" layoutY="80.0" prefHeight="26.0" prefWidth="246.0" />
+            <Label layoutX="30.0" layoutY="29.0" text="Nombre" />
+            <TextField fx:id="nameInput" layoutX="100.0" layoutY="25.0" prefHeight="26.0" prefWidth="268.0" />
+            <Label layoutX="30.0" layoutY="82.0" text="Intereses" />
+            <ComboBox fx:id="interestInput" layoutX="100.0" layoutY="80.0" prefHeight="26.0" prefWidth="267.0" />
         </AnchorPane>
     </top>
     <bottom>

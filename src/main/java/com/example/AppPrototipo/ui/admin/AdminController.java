@@ -12,7 +12,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import org.springframework.stereotype.Component;
-// algunas tablas estan en ingles y otras en español hay que cambiar eso urgente todo
+
 @Component // se podrian ordenar un poco las clases en paquetes todo
 public class AdminController {
 

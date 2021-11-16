@@ -17,11 +17,6 @@ public class Image {
     @JoinColumn(name="experience")
     private Experience experience;
 
-    public Image(byte[] imageData, Experience experience) {
-        this.imageData = imageData;
-        this.experience = experience;
-    }
-
     public Image() {
     }
 
@@ -37,11 +32,4 @@ public class Image {
         return imageData;
     }
 
-    public Experience getExperience() {
-        return experience;
-    }
-
-    public void setExperience(Experience experience) {
-        this.experience = experience;
-    }
 }

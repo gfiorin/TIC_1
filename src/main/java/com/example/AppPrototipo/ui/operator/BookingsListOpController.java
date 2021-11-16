@@ -4,7 +4,6 @@ import com.example.AppPrototipo.business.entities.Booking;
 import com.example.AppPrototipo.business.entities.Experience;
 import com.example.AppPrototipo.business.entities.Operator;
 import com.example.AppPrototipo.business.entities.TourOperator;
-import com.example.AppPrototipo.business.managers.BookingMgr;
 import com.example.AppPrototipo.business.managers.ExperienceMgr;
 import com.example.AppPrototipo.business.managers.UserMgr;
 import javafx.collections.FXCollections;
@@ -41,12 +40,10 @@ public class BookingsListOpController {
     @FXML
     private TableColumn<Booking, Integer> amount;
 
-    private final BookingMgr bookingMgr;
     private final UserMgr userMgr;
     private final ExperienceMgr experienceMgr;
 
-    public BookingsListOpController(BookingMgr bookingMgr, UserMgr userMgr, ExperienceMgr experienceMgr) {
-        this.bookingMgr = bookingMgr;
+    public BookingsListOpController(UserMgr userMgr, ExperienceMgr experienceMgr) {
         this.userMgr = userMgr;
         this.experienceMgr = experienceMgr;
     }
@@ -67,7 +64,7 @@ public class BookingsListOpController {
         List<Experience> experienceList = experienceMgr.findByTourOperator(tourOperator);
         List<Booking> bookingList = new LinkedList<>();
         for (Experience experience : experienceList){
-            List<Booking> bookingListPre = bookingMgr.findByExperience(experience);
+            List<Booking> bookingListPre = experienceMgr.findByExperience(experience);
             bookingList.addAll(bookingListPre);
         }
         return FXCollections.observableArrayList(bookingList);

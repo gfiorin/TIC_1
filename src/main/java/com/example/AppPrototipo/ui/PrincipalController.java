@@ -115,7 +115,6 @@ public class PrincipalController {
 
                 Parent root = fxmlLoader.load(operatorController.getClass().getResourceAsStream("OperatorMain.fxml"));
                 Stage newStage = new Stage();
-                //newStage.initStyle(StageStyle.TRANSPARENT);
                 newStage.setScene(new Scene(root));
                 newStage.show();
 

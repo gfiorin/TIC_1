@@ -25,6 +25,10 @@ public class ExperienceMgr {
         this.bookingRepository = bookingRepository;
     }
 
+    public List<Booking> findByExperience(Experience experience){
+        return bookingRepository.findByExperience(experience);
+    }
+
     public Experience findById(int id){
         return experienceRepository.findById(id).get();
     }
@@ -80,7 +84,7 @@ public class ExperienceMgr {
         return experienceRepository.findByTourOperator(tourOperator);
     }
 
-    public Experience addExperience(String title, String description, String shortDescription, boolean vaccination, Integer capacity, BigDecimal price, boolean bookable, List<ExperienceType> experienceTypes, TourOperator tourOperator, Department department, String ubicacion, String email, String link, String telephone) throws InvalidInformation {
+    public Experience addExperience(String title, String description, String shortDescription, boolean vaccination, Integer capacity, BigDecimal price, boolean bookable, List<ExperienceType> experienceTypes, TourOperator tourOperator, Department department, String ubicacion, String email, String link, String telephone, List<Image> images) throws InvalidInformation {
 
         if (title == null || title.isBlank()){
             throw new InvalidInformation("Por favor ingrese un titulo válido");
@@ -130,7 +134,11 @@ public class ExperienceMgr {
             throw new InvalidInformation("Solo puede asociar un maximo de 5 experiencias");
         }
 
-        Experience experienceToAdd = new Experience(title, description, shortDescription, vaccination, capacity, bookable, false, experienceTypes, tourOperator, department, ubicacion, email, link, telephone, true, price);
+        if (images.size() == 0){
+            throw new InvalidInformation("La experiencia debe tener al menos una imagen asociada");
+        }
+
+        Experience experienceToAdd = new Experience(title, description, shortDescription, vaccination, capacity, bookable, false, experienceTypes, tourOperator, department, ubicacion, email, link, telephone, true, price, images);
 
         experienceRepository.save(experienceToAdd);
 

@@ -3,9 +3,8 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.AppPrototipo.ui.operator.ListOfExperiencesOpController">
    <children>
-      <Text layoutX="204.0" layoutY="122.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adios" />
+      <Text layoutX="204.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Listado de experiencias" wrappingWidth="192.23590087890625" />
    </children>
 </AnchorPane>
