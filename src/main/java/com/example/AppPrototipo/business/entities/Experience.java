@@ -63,6 +63,34 @@ public class Experience {
     @Column(name = "reviewed")
     private Boolean reviewed;
 
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "liked",
+            joinColumns = {@JoinColumn(name = "experience")},
+            inverseJoinColumns = {@JoinColumn(name = "tourist")}
+    )
+    private List<Tourist> likes;
+
+    public List<Tourist> getLikes() {
+        return likes;
+    }
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "bookings",
+            joinColumns = {@JoinColumn(name = "experience")},
+            inverseJoinColumns = {@JoinColumn(name = "tourist")}
+    )
+    private List<Booking> bookings;
+
+    public List<Booking> getBookings() {
+        return bookings;
+    }
+
+    //public List<Interest> getInterests() {
+    //
+    //  }
+
     private Integer ponderation = 0;
 
     public Experience() {

@@ -1,8 +1,13 @@
 package com.example.AppPrototipo.ui.tourist;
 
 import com.example.AppPrototipo.AppPrototipoApplication;
+import com.example.AppPrototipo.business.entities.ExperienceType;
+import com.example.AppPrototipo.business.entities.Interest;
+import com.example.AppPrototipo.business.entities.Tourist;
 import com.example.AppPrototipo.business.managers.ExperienceMgr;
 import com.example.AppPrototipo.business.entities.Experience;
+import com.example.AppPrototipo.business.managers.ExperienceTypeMgr;
+import com.example.AppPrototipo.business.managers.InterestMgr;
 import com.example.AppPrototipo.business.managers.UserMgr;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,9 +23,8 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Component
 public class ExperienceGridController implements Initializable {
@@ -28,14 +32,20 @@ public class ExperienceGridController implements Initializable {
     private final ExperienceMgr experienceMgr;
     private final UserMgr userMgr;
     private final TouristController touristController;
+    private static Tourist tourist;
+    private final InterestMgr interestMgr;
+    private final ExperienceTypeMgr experienceTypeMgr;
+    private List<ExperienceType> types = new ArrayList<>(); //set
 
     @FXML
     private GridPane grillaRecomendaciones;
 
-    public ExperienceGridController(ExperienceMgr experienceMgr, UserMgr userMgr, @Lazy TouristController touristController) {
+    public ExperienceGridController(ExperienceMgr experienceMgr, UserMgr userMgr, @Lazy TouristController touristController, InterestMgr interestMgr, ExperienceTypeMgr experienceTypeMgr) {
         this.experienceMgr = experienceMgr;
         this.userMgr = userMgr;
         this.touristController = touristController;
+        this.interestMgr = interestMgr;
+        this.experienceTypeMgr = experienceTypeMgr;
     }
 
     @Bean
@@ -47,7 +57,19 @@ public class ExperienceGridController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        ArrayList<Experience> recommendations = new ArrayList<>(recommendations());
+        for (Interest interest : tourist.getInterests()) { //touristMgr
+            types.addAll(interest.getExperienceTypes());
+        }
+
+        for (Experience expLiked : tourist.getLiked()){
+            types.addAll(expLiked.getExperienceTypes());
+        }
+
+        for (Experience bookings : tourist.getExperiencesBooked()){
+            types.addAll(bookings.getExperienceTypes());
+        }
+
+        List<Experience> recommendations = recommendations();
         int columns = 0;
         int row = 1;
 
@@ -78,12 +100,50 @@ public class ExperienceGridController implements Initializable {
         }
     }
 
-    private List<Experience> recommendations(){
-        List<Experience> list = new ArrayList<>();
-        for (int i=1; i<6; i++) {
-            Experience experience = experienceMgr.findById(i);      //Algoritmo de recomendaciones
-            list.add(experience);
+    private List<Experience> recommendations() {
+        List<Experience> recommendations = experienceMgr.findByTypes(types);
+
+        for (Experience experience : recommendations){
+            if (tourist.getLiked().contains(experience) || tourist.getExperiencesBooked().contains(experience)){
+                recommendations.remove(experience);
+            } else {
+                experience.setPonderation(weigh(experience));
+            }
         }
-        return list;
+
+        recommendations = recommendations.stream().sorted(Comparator.comparingInt(Experience::getPonderation)).collect(Collectors.toList());
+        Collections.reverse(recommendations);
+
+        return recommendations;
     }
+
+
+    private Integer weigh(Experience experience){
+
+        List<ExperienceType> expTypes = experience.getExperienceTypes();
+
+        int n = 0;
+        for (ExperienceType experienceType : expTypes){
+            if (!types.contains(experienceType)) n++;
+        }
+
+        int s = expTypes.size() - n;
+
+        int l = experience.getLikes().size();
+
+        int r = experience.getBookings().size();
+
+        return -10*n + 9*s + 8*l + 7*r;
+
+    }
+
+
+    public static Tourist getTourist() {
+        return tourist;
+    }
+
+    public static void setTourist(Tourist tourist) {
+        ExperienceGridController.tourist = tourist;
+    }
+
 }

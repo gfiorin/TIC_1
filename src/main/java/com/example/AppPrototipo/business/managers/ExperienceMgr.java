@@ -14,6 +14,7 @@ import java.sql.Time;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 
 
 @Service
@@ -27,8 +28,12 @@ public class ExperienceMgr {
         this.bookingRepository = bookingRepository;
     }
 
-    public Experience findById(int id){
-        return experienceRepository.findById(id).get();
+    public Experience findById(int id) throws NoSuchElementException {
+        try {
+            return experienceRepository.findById(id).get();
+        } catch (NoSuchElementException e) {
+            return null;
+        }
     }
 
     private int remainingCapacityForExperienceOnDateAtTime(Experience experience, Date date, Time time){

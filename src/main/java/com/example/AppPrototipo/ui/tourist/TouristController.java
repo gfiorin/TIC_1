@@ -1,6 +1,7 @@
 package com.example.AppPrototipo.ui.tourist;
 
 import com.example.AppPrototipo.AppPrototipoApplication;
+import com.example.AppPrototipo.business.entities.Tourist;
 import com.example.AppPrototipo.business.managers.UserMgr;
 import com.example.AppPrototipo.business.entities.Experience;
 import com.example.AppPrototipo.ui.PrincipalController;
@@ -35,6 +36,7 @@ public class TouristController implements Initializable {
     @FXML
     private VBox leftPane;
 
+    private static Tourist tourist;
     private final ExperienceController experienceController;
     private final ExperienceGridController experienceGridController;
     private final LikedController likedController;
@@ -97,6 +99,7 @@ public class TouristController implements Initializable {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
         fxmlLoader.setLocation(experienceGridController.getClass().getResource("ExperienceGrid.fxml"));
+        ExperienceGridController.setTourist(tourist);
         ScrollPane experienceGrid = fxmlLoader.load();
         loadToInnerView(experienceGrid);
     }
@@ -109,4 +112,11 @@ public class TouristController implements Initializable {
         AnchorPane.setRightAnchor(object, 0.0);
     }
 
+    public static Tourist getTourist() {
+        return tourist;
+    }
+
+    public static void setTourist(Tourist tourist) {
+        TouristController.tourist = tourist;
+    }
 }
