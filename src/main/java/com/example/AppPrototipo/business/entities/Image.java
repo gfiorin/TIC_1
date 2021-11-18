@@ -13,6 +13,10 @@ public class Image {
     @Column(name = "image")
     byte[] imageData;
 
+    @ManyToOne
+    @JoinColumn(name="experience")
+    private Experience experience;
+
     public Image() {
     }
 
@@ -27,4 +31,5 @@ public class Image {
     public byte[] getImageData() {
         return imageData;
     }
+
 }

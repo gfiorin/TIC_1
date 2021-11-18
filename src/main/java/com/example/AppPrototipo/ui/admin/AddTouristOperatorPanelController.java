@@ -56,7 +56,7 @@ public class AddTouristOperatorPanelController {
     public AddTouristOperatorPanelController(TourOperatorMgr tourOperatorMgr) {
         this.tourOperatorMgr = tourOperatorMgr;
     }
-
+    //todo
     @FXML
     void addTouristOperator(ActionEvent event) throws Exception{
 
@@ -106,7 +106,7 @@ public class AddTouristOperatorPanelController {
                     newStage.setScene(new Scene(root));
 
                     AddOperatorController addOperatorController = fxmlLoader.getController();
-                    addOperatorController.init(tourOperatorMgr.findOneByCompanyName(companyName));
+                    //addOperatorController.init(tourOperatorMgr.findOneByCompanyName(companyName)); todo
 
                     newStage.showAndWait();
                     oldStage.close();

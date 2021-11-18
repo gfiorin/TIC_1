@@ -11,13 +11,13 @@
       <TableView fx:id="experiencesTable" layoutY="40.0" prefHeight="402.0" prefWidth="936.0">
         <columns>
           <TableColumn fx:id="id" prefWidth="75.0" text="ID" />
-            <TableColumn prefWidth="126.0" text="Operador Turistico" />
-            <TableColumn fx:id="title" prefWidth="75.0" text="Titulo" />
+            <TableColumn prefWidth="126.0" text="Operador turístico" />
+            <TableColumn fx:id="title" prefWidth="75.0" text="Título" />
             <TableColumn fx:id="department" prefWidth="94.4000244140625" text="Departamento" />
             <TableColumn fx:id="authorized" prefWidth="78.4000244140625" text="Autorizado" />
             <TableColumn fx:id="price" prefWidth="52.7999267578125" text="Precio" />
-            <TableColumn fx:id="description" prefWidth="75.0" text="Descripcion" />
-            <TableColumn fx:id="vaccination" prefWidth="98.39996337890625" text="Vacuncacion" />
+            <TableColumn fx:id="description" prefWidth="75.0" text="Descripción" />
+            <TableColumn fx:id="vaccination" prefWidth="98.39996337890625" text="Vacunación" />
             <TableColumn fx:id="capacity" prefWidth="82.39996337890625" text="Capacidad" />
             <TableColumn fx:id="bookable" prefWidth="76.0" text="Reservable" />
             <TableColumn fx:id="reviewed" prefWidth="99.20001220703125" text="Aprobado" />
@@ -25,7 +25,7 @@
       </TableView>
       <Pane prefHeight="40.0" prefWidth="838.0">
          <children>
-            <Button fx:id="goBackBtn" layoutX="23.0" layoutY="8.0" mnemonicParsing="false" onAction="#goBackToAdminView" prefHeight="25.0" prefWidth="63.0" text="Atras" />
+            <Button fx:id="goBackBtn" layoutX="23.0" layoutY="8.0" mnemonicParsing="false" onAction="#goBackToAdminView" prefHeight="25.0" prefWidth="63.0" text="Atrás" />
          </children>
       </Pane>
       <Pane layoutY="441.0" prefHeight="50.0" prefWidth="936.0">

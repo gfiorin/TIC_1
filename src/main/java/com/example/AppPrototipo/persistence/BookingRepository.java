@@ -14,4 +14,6 @@ public interface BookingRepository extends CrudRepository<Booking, Integer> {
 
     List<Booking> findByExperienceAndDateAndTimeOrderByTimeAsc(Experience experience, Date date, Time time);
 
+    List<Booking> findByExperience(Experience experience);
+
 }

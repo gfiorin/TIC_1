@@ -1,38 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.AppPrototipo.ui.admin.TourOperatorSelectionTableController"
-            prefHeight="400.0" prefWidth="600.0">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.AppPrototipo.ui.admin.TourOperatorSelectionTableController">
     <TableView fx:id="touristOperatorTable" layoutY="38.0" prefHeight="366.0" prefWidth="924.0">
         <columns>
-            <TableColumn fx:id="id" prefWidth="63.19998013973236" text="ID" />
-            <TableColumn fx:id="companyName" prefWidth="87.20001983642578" text="Company" />
-            <TableColumn fx:id="fantasyName" prefWidth="85.59994506835938" text="Fantasy name" />
-            <TableColumn fx:id="webLink" prefWidth="108.0" text="Link to web" />
-            <TableColumn fx:id="contactName" prefWidth="116.800048828125" text="Contact name" />
-            <TableColumn fx:id="contactPhone" prefWidth="107.20001220703125" text="Contact phone" />
-            <TableColumn fx:id="contactPosition" prefWidth="108.79998779296875" text="Contact position" />
-            <TableColumn fx:id="contactEmail" prefWidth="156.0001220703125" text="Contact Email" />
+            <TableColumn fx:id="id" prefWidth="55.200013756752014" text="ID" />
+            <TableColumn fx:id="companyName" prefWidth="138.39998626708984" text="Nombre compañía" />
+            <TableColumn fx:id="fantasyName" prefWidth="110.4000244140625" text="Nombre fantasía" />
+            <TableColumn fx:id="webLink" prefWidth="74.39996337890625" text="Link" />
+            <TableColumn fx:id="contactName" prefWidth="137.60000610351562" text="Nombre contacto" />
+            <TableColumn fx:id="contactPhone" prefWidth="146.4000244140625" text="Teléfono contacto" />
+            <TableColumn fx:id="contactPosition" prefWidth="131.2000732421875" text="Cargo contacto" />
+            <TableColumn fx:id="contactEmail" prefWidth="133.59991455078125" text="Email contacto" />
         </columns>
     </TableView>
     <Pane layoutY="403.0" prefHeight="46.0" prefWidth="919.0">
         <children>
-            <Button fx:id="selectBtn" layoutX="671.0" layoutY="11.0" mnemonicParsing="false" onAction="#selection" text="Seleccionar" />
+            <Button fx:id="selectBtn" layoutX="675.0" layoutY="8.0" mnemonicParsing="false" onAction="#selection" prefHeight="31.0" prefWidth="226.0" text="Seleccionar" />
         </children>
     </Pane>
     <Pane prefHeight="38.0" prefWidth="924.0">
         <children>
-            <Button fx:id="goBackBtn" layoutX="20.0" layoutY="7.0" mnemonicParsing="false" onAction="#close" prefHeight="25.0" prefWidth="65.0" text="Atras" />
+            <Button fx:id="goBackBtn" layoutX="20.0" layoutY="7.0" mnemonicParsing="false" onAction="#close" prefHeight="25.0" prefWidth="65.0" text="Atrás" />
             <TextField fx:id="searchInput" layoutX="631.0" layoutY="7.0" prefHeight="25.0" prefWidth="195.0" />
             <Button fx:id="searchBtn" layoutX="839.0" layoutY="7.0" mnemonicParsing="false" onAction="#searchItem" prefHeight="25.0" prefWidth="65.0" text="Buscar" />
         </children>
     </Pane>
 </AnchorPane>
-

@@ -138,4 +138,5 @@ public class UserMgr {
     public List<Interest> getCurrentUserInterests() {
         return ((Tourist) getCurrentUser()).getInterests();
     }
+
 }
