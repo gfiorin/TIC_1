@@ -15,6 +15,4 @@ public interface TouristRepository extends CrudRepository<Tourist, Integer>{
 
     List<Tourist> findAll();
 
-    List<Interest> getInterests(Tourist tourist);
-
 }

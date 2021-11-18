@@ -55,16 +55,17 @@ public class ExperienceGridController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        types = new HashSet<>();
 
         for (Interest interest : touristMgr.getInterests(tourist)) {
             types.addAll(interest.getExperienceTypes());
         }
 
-        for (Experience expLiked : tourist.getLiked()) {    //touristMgr
+        for (Experience expLiked : touristMgr.getLiked(tourist)) {
             types.addAll(expLiked.getExperienceTypes());
         }
 
-        for (Experience bookings : tourist.getExperiencesBooked()) {
+        for (Experience bookings : touristMgr.getExperiencesBooked(tourist)) {
             types.addAll(bookings.getExperienceTypes());
         }
 
@@ -103,10 +104,10 @@ public class ExperienceGridController implements Initializable {
         List<Experience> recommendations = experienceMgr.findByTypes(new ArrayList<>(types));
 
         for (Experience experience : recommendations){
-            if (tourist.getLiked().contains(experience) || tourist.getExperiencesBooked().contains(experience)){
+            if (touristMgr.getLiked(tourist).contains(experience) || touristMgr.getExperiencesBooked(tourist).contains(experience)){
                 recommendations.remove(experience);
             } else {
-                experience.setPonderation(weigh(experience));
+                experienceMgr.setPonderation(experience, weigh(experience));
             }
         }
 
@@ -119,7 +120,7 @@ public class ExperienceGridController implements Initializable {
 
     private Integer weigh(Experience experience){
 
-        List<ExperienceType> expTypes = experience.getExperienceTypes();
+        List<ExperienceType> expTypes = experienceMgr.getExperienceTypes(experience);
 
         int n = 0;
         for (ExperienceType experienceType : expTypes){

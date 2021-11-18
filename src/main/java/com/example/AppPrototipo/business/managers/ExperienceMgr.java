@@ -110,4 +110,8 @@ public class ExperienceMgr {
         return result;
     }
 
+    public void setPonderation(Experience experience, Integer weigh){
+        experience.setPonderation(weigh);
+    }
+
 }
