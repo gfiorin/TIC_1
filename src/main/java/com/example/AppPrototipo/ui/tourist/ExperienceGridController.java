@@ -56,6 +56,7 @@ public class ExperienceGridController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         types = new HashSet<>();
+        tourist = (Tourist) userMgr.getCurrentUser();
 
         for (Interest interest : touristMgr.getInterests(tourist)) {
             types.addAll(interest.getExperienceTypes());
