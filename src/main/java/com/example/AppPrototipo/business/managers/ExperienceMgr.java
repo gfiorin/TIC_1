@@ -73,6 +73,10 @@ public class ExperienceMgr {
         }
     }
 
+    public List<ExperienceType> getExperienceTypes(Experience experience) {
+        return experience.getExperienceTypes();
+    }
+
     public List<Experience> findAll(){
         return experienceRepository.findAll();
     }
@@ -82,7 +86,28 @@ public class ExperienceMgr {
     }
 
     public List<Experience> findByTypes(List<ExperienceType> experienceTypes){
-        return experienceRepository.findByExperienceTypesContaining(experienceTypes);
+
+        List<Experience> allExperiences = experienceRepository.findAll();
+
+        List<Experience> result = new ArrayList<>();
+
+        for (Experience e : allExperiences) {
+
+            List<ExperienceType> types = e.getExperienceTypes();
+
+            boolean ok = false;
+
+            for (ExperienceType t : types) {
+                if (experienceTypes.contains(t)){
+                    ok = true;
+                    break;
+                }
+            }
+
+            if (ok) result.add(e);
+        }
+
+        return result;
     }
 
 }

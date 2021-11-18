@@ -4,11 +4,8 @@ import com.example.AppPrototipo.AppPrototipoApplication;
 import com.example.AppPrototipo.business.entities.ExperienceType;
 import com.example.AppPrototipo.business.entities.Interest;
 import com.example.AppPrototipo.business.entities.Tourist;
-import com.example.AppPrototipo.business.managers.ExperienceMgr;
+import com.example.AppPrototipo.business.managers.*;
 import com.example.AppPrototipo.business.entities.Experience;
-import com.example.AppPrototipo.business.managers.ExperienceTypeMgr;
-import com.example.AppPrototipo.business.managers.InterestMgr;
-import com.example.AppPrototipo.business.managers.UserMgr;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -33,6 +30,7 @@ public class ExperienceGridController implements Initializable {
     private final UserMgr userMgr;
     private final TouristController touristController;
     private static Tourist tourist;
+    private final TouristMgr touristMgr;
     private final InterestMgr interestMgr;
     private final ExperienceTypeMgr experienceTypeMgr;
     private Set<ExperienceType> types;
@@ -40,10 +38,11 @@ public class ExperienceGridController implements Initializable {
     @FXML
     private GridPane grillaRecomendaciones;
 
-    public ExperienceGridController(ExperienceMgr experienceMgr, UserMgr userMgr, @Lazy TouristController touristController, InterestMgr interestMgr, ExperienceTypeMgr experienceTypeMgr) {
+    public ExperienceGridController(ExperienceMgr experienceMgr, UserMgr userMgr, @Lazy TouristController touristController, TouristMgr touristMgr, InterestMgr interestMgr, ExperienceTypeMgr experienceTypeMgr) {
         this.experienceMgr = experienceMgr;
         this.userMgr = userMgr;
         this.touristController = touristController;
+        this.touristMgr = touristMgr;
         this.interestMgr = interestMgr;
         this.experienceTypeMgr = experienceTypeMgr;
     }
@@ -57,15 +56,15 @@ public class ExperienceGridController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        for (Interest interest : tourist.getInterests()) { //touristMgr
+        for (Interest interest : touristMgr.getInterests(tourist)) {
             types.addAll(interest.getExperienceTypes());
         }
 
-        for (Experience expLiked : tourist.getLiked()){
+        for (Experience expLiked : tourist.getLiked()) {    //touristMgr
             types.addAll(expLiked.getExperienceTypes());
         }
 
-        for (Experience bookings : tourist.getExperiencesBooked()){
+        for (Experience bookings : tourist.getExperiencesBooked()) {
             types.addAll(bookings.getExperienceTypes());
         }
 
@@ -95,7 +94,7 @@ public class ExperienceGridController implements Initializable {
                 grillaRecomendaciones.add(vbox, columns++, row);
                 GridPane.setMargin(vbox, new Insets(10));
             }
-        }catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

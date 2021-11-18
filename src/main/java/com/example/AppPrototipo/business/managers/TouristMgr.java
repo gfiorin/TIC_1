@@ -1,5 +1,6 @@
 package com.example.AppPrototipo.business.managers;
 
+import com.example.AppPrototipo.business.entities.Interest;
 import com.example.AppPrototipo.business.entities.Tourist;
 import com.example.AppPrototipo.persistence.TouristRepository;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,8 @@ public class TouristMgr {
     public List<Tourist> findAll(){
         return touristRepository.findAll();
     }
+
+    public List<Interest> getInterests(Tourist tourist) {return touristRepository.getInterests(tourist);}
 
 
 }
