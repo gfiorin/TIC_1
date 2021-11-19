@@ -20,6 +20,11 @@ public class Image {
     public Image() {
     }
 
+    public Image(byte[] imageData, Experience experience) {
+        this.imageData = imageData;
+        this.experience = experience;
+    }
+
     public Image(byte[] imageData) {
         this.imageData = imageData;
     }
