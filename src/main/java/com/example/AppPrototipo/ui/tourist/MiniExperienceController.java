@@ -14,15 +14,16 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
+import org.hibernate.Hibernate;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
-public class MiniExperienceController {
+public class MiniExperienceController{
 
     private int idexperience;
-    private static Tourist tourist;
     private final UserMgr userMgr;
     private final ExperienceMgr experienceMgr;
     private final TouristController touristController;
@@ -32,7 +33,7 @@ public class MiniExperienceController {
     @FXML
     private ImageView experienciaImg;
     @FXML
-    private Button likeBtn;
+    private ImageView heartImageView;
     @FXML
     private Text nombreExperiencia;
     @FXML
@@ -46,19 +47,11 @@ public class MiniExperienceController {
         this.experienceMgr = experienceMgr;
     }
 
-    public static Tourist getTourist() {
-        return tourist;
-    }
-
-    public static void setTourist(Tourist tourist) {
-        MiniExperienceController.tourist = tourist;
-    }
-
     public int getIdExperience() {
         return idexperience;
     }
 
-    public void setData(Experience experience){
+    public void setData(Experience experience, boolean likedByUser){
         verMasBtn.setUserData(experience.getId());
         nombreExperiencia.setText(experience.getTitle());
         descripcionCorta.setText(experience.getShortDescription());
@@ -103,21 +96,18 @@ public class MiniExperienceController {
     }
 
     @FXML
+    @Transactional
     void likeAction(ActionEvent event) {
+        Tourist tourist = (Tourist) userMgr.getCurrentUser();
+        Hibernate.initialize(tourist.getLiked());
         Experience experience = experienceMgr.findById((Integer) verMasBtn.getUserData());
-        boolean yaFavorita = false;
-        for(Experience liked : tourist.getLiked()){
-            if (liked.getTitle().equals(experience.getTitle())){
-                showAlert(
-                        "Atención",
-                        "La experiencia ya se encuentra entre sus favoritas.");
-                yaFavorita = true;
-            }
+
+        if (!tourist.getLiked().contains(experience)){
+            tourist.getLiked().add(experience);
+        } else {
+            tourist.getLiked().remove(experience);
         }
-        if(!yaFavorita){
-        tourist.addLiked(experience);
-        userMgr.updateTourist(tourist);
-        }
+
     }
 
     private void showAlert(String title, String contextText){
@@ -126,5 +116,15 @@ public class MiniExperienceController {
         alert.setHeaderText(null);
         alert.setContentText(contextText);
         alert.showAndWait();
+    }
+
+    private void heartController(boolean state){
+        state = true;
+        if(state){
+            Image image = new Image("imgs/heart.png");
+            heartImageView.setImage(image);
+        } else {
+
+        }
     }
 }

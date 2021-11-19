@@ -5,9 +5,10 @@ import com.example.AppPrototipo.business.exceptions.InvalidInformation;
 import com.example.AppPrototipo.business.exceptions.UserAlreadyExsists;
 import com.example.AppPrototipo.persistence.TouristRepository;
 import com.example.AppPrototipo.persistence.UserRepository;
+import org.hibernate.Hibernate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -130,12 +131,11 @@ public class UserMgr {
     }
 
     @Transactional
-    public List<Experience> getCurrentUserLiked() {
-        return ((Tourist) getCurrentUser()).getLiked();
+    public Tourist getCurrentTourist() {
+        Tourist tourist = (Tourist) userRepository.findById(currentUserId).get();
+        Hibernate.initialize(tourist.getLiked());
+        Hibernate.initialize(tourist.getInterests());
+        return tourist;
     }
 
-    @Transactional
-    public List<Interest> getCurrentUserInterests() {
-        return ((Tourist) getCurrentUser()).getInterests();
-    }
 }

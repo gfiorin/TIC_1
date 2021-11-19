@@ -1,6 +1,7 @@
 package com.example.AppPrototipo.ui.tourist;
 
 import com.example.AppPrototipo.AppPrototipoApplication;
+import com.example.AppPrototipo.business.entities.Tourist;
 import com.example.AppPrototipo.business.managers.ExperienceMgr;
 import com.example.AppPrototipo.business.entities.Experience;
 import com.example.AppPrototipo.business.managers.UserMgr;
@@ -10,12 +11,14 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import org.hibernate.Hibernate;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import javax.transaction.Transactional;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -47,7 +50,10 @@ public class ExperienceGridController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        ArrayList<Experience> recommendations = new ArrayList<>(recommendations());
+        List<Experience> recommendations = new ArrayList<>(recommendations());
+        Tourist tourist = userMgr.getCurrentTourist();
+        List<Experience> likedByUser = tourist.getLiked();
+
         int columns = 0;
         int row = 1;
 
@@ -63,7 +69,7 @@ public class ExperienceGridController implements Initializable {
                 fxmlLoader.setController(miniExperienceController);
                 fxmlLoader.setLocation(miniExperienceController.getClass().getResource("MiniExperience.fxml"));
                 VBox vbox = fxmlLoader.load();
-                miniExperienceController.setData(recommendation);
+                miniExperienceController.setData(recommendation, true);
 
                 if (columns == 4) {
                     columns = 0;
