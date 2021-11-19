@@ -1,5 +1,6 @@
 package com.example.AppPrototipo.business.managers;
 
+import com.example.AppPrototipo.business.entities.Experience;
 import com.example.AppPrototipo.business.entities.Operator;
 import com.example.AppPrototipo.persistence.OperatorsRepository;
 import org.springframework.stereotype.Service;
@@ -9,9 +10,11 @@ import java.util.List;
 public class OperatorMgr {
 
     private final OperatorsRepository operatorsRepository;
+    private final UserMgr userMgr;
 
-    public OperatorMgr(OperatorsRepository operatorsRepository) {
+    public OperatorMgr(OperatorsRepository operatorsRepository, UserMgr userMgr) {
         this.operatorsRepository = operatorsRepository;
+        this.userMgr = userMgr;
     }
 
     public Operator findOneByEmail(String email){
@@ -28,6 +31,10 @@ public class OperatorMgr {
 
     public List<Operator> findAll(){
         return operatorsRepository.findAll();
+    }
+
+    public List<Experience> getExperiences() {
+        return ((Operator) userMgr.getCurrentUser()).getTourOperator().getListOfExperiences();
     }
 
 }

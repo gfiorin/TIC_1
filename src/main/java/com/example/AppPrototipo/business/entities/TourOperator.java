@@ -36,6 +36,7 @@ public class TourOperator {
     private boolean authorized;
 
     @OneToMany
+    @JoinColumn(name = "tour_operator")
     private List<Experience> listOfExperiences;
 
     @OneToMany
@@ -132,6 +133,14 @@ public class TourOperator {
 
     public void setAuthorized(boolean authorized) {
         this.authorized = authorized;
+    }
+
+    public List<Experience> getListOfExperiences() {
+        return listOfExperiences;
+    }
+
+    public List<Operator> getListOfAuthorizedOperators() {
+        return listOfAuthorizedOperators;
     }
 
 }

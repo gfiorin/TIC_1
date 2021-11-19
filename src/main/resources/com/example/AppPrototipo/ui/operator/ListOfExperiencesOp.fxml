@@ -2,9 +2,39 @@
 
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.AppPrototipo.ui.operator.ListOfExperiencesOpController">
-   <children>
-      <Text layoutX="204.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Listado de experiencias" wrappingWidth="192.23590087890625" />
-   </children>
-</AnchorPane>
+
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.control.Button?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<ScrollPane prefHeight="500.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.AppPrototipo.ui.operator.ListOfExperiencesOpController">
+   <content>
+      <VBox fx:id="vBoxGral" prefHeight="501.0" prefWidth="884.0" spacing="5.0">
+         <children>
+            <Pane prefHeight="54.0" prefWidth="884.0">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </Pane>
+            <Text fx:id="titulo" strokeType="OUTSIDE" strokeWidth="0.0" text="Experiencias" underline="true">
+               <font>
+                  <Font size="24.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="5.0" />
+               </VBox.margin>
+            </Text>
+            <GridPane fx:id="grillaExperiencias" VBox.vgrow="ALWAYS">
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+            </GridPane>
+         </children>
+      </VBox>
+   </content>
+</ScrollPane>
