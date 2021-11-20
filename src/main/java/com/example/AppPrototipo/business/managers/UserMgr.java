@@ -5,6 +5,7 @@ import com.example.AppPrototipo.business.exceptions.InvalidInformation;
 import com.example.AppPrototipo.business.exceptions.UserAlreadyExsists;
 import com.example.AppPrototipo.persistence.TouristRepository;
 import com.example.AppPrototipo.persistence.UserRepository;
+import org.hibernate.Hibernate;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -139,4 +140,12 @@ public class UserMgr {
         return ((Tourist) getCurrentUser()).getInterests();
     }
 
+    @Transactional
+    public Tourist getCurrentTourist() {
+        Tourist tourist = (Tourist) userRepository.findById(currentUserId).get();
+        Hibernate.initialize(tourist.getLiked());
+        Hibernate.initialize(tourist.getInterests());
+        Hibernate.initialize(tourist.getBookings());
+        return tourist;
+    }
 }

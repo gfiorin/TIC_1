@@ -47,19 +47,21 @@ public class LikedController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        List<Experience> experiences = userMgr.getCurrentUserLiked();
+        Tourist tourist = userMgr.getCurrentTourist();
+        List<Experience> likes = tourist.getLiked();
 
         int columns = 0;
         int row = 1;
 
         try {
-            for (int i=0; i < experiences.size(); i++){
+            for (int i=0; i < likes.size(); i++){
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
                 fxmlLoader.setLocation(miniExperienceController.getClass().getResource("MiniExperience.fxml"));
                 MiniExperienceController.setTourist(tourist);
+                fxmlLoader.setController(miniExperienceController);
                 VBox vbox = fxmlLoader.load();
-                miniExperienceController.setData(experiences.get(i));
+                miniExperienceController.setData(likes.get(i));
 
                 if(columns == 4){
                     columns = 0;
