@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="109.0" prefWidth="800.0" spacing="10.0" style="-fx-border-color: #808080; -fx-border-radius: 18px; -fx-background-radius: 18px;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Pane fx:id="imagePane" prefHeight="97.0" prefWidth="172.0">
+         <HBox.margin>
+            <Insets bottom="5.0" left="10.0" top="5.0" />
+         </HBox.margin>
+         <children>
+            <ImageView fx:id="experienciaImg" fitHeight="89.0" fitWidth="187.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </Pane>
+      <VBox prefHeight="100.0" prefWidth="170.0" spacing="5.0">
+         <children>
+            <Text fx:id="nombreExperiencia" strokeType="OUTSIDE" strokeWidth="0.0" text="NombreExperiencia" wrappingWidth="302.13671875">
+               <VBox.margin>
+                  <Insets top="15.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Text>
+            <Text fx:id="direccion" strokeType="OUTSIDE" strokeWidth="0.0" text="Direccion" wrappingWidth="298.6708984375">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Text>
+         </children>
+      </VBox>
+      <VBox alignment="TOP_RIGHT" prefHeight="66.0" prefWidth="285.0" spacing="10.0">
+         <children>
+            <HBox alignment="TOP_RIGHT">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Fecha:  ">
+                     <font>
+                        <Font name="System Bold Italic" size="17.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="fechaReserva" strokeType="OUTSIDE" strokeWidth="0.0" text="FechaReserva">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Text>
+               </children>
+            </HBox>
+            <HBox alignment="TOP_RIGHT">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Hora: ">
+                     <font>
+                        <Font name="System Bold Italic" size="17.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="horaReserva" strokeType="OUTSIDE" strokeWidth="0.0" text="HoraReserva">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Text>
+               </children>
+            </HBox>
+            <HBox alignment="TOP_RIGHT">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Cupos Reservados: ">
+                     <font>
+                        <Font name="System Bold Italic" size="17.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="cuposReserva" strokeType="OUTSIDE" strokeWidth="0.0" text="CuposReserva">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Text>
+               </children>
+            </HBox>
+         </children>
+         <HBox.margin>
+            <Insets bottom="10.0" top="10.0" />
+         </HBox.margin>
+      </VBox>
+   </children>
+</HBox>

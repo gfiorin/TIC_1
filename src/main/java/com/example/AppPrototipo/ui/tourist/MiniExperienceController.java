@@ -6,25 +6,23 @@ import com.example.AppPrototipo.business.entities.Experience;
 import com.example.AppPrototipo.business.entities.Tourist;
 import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Rectangle2D;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
-import org.hibernate.Hibernate;
 import org.springframework.context.annotation.Lazy;
-
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
 public class MiniExperienceController {
 
     private int idexperience;
-    private static Tourist tourist;
     private final UserMgr userMgr;
     private final ExperienceMgr experienceMgr;
     private final TouristController touristController;
@@ -48,19 +46,11 @@ public class MiniExperienceController {
         this.experienceMgr = experienceMgr;
     }
 
-    public static Tourist getTourist() {
-        return tourist;
-    }
-
-    public static void setTourist(Tourist tourist) {
-        MiniExperienceController.tourist = tourist;
-    }
-
     public int getIdExperience() {
         return idexperience;
     }
 
-    public void setData(Experience experience){
+    public void setData(Experience experience, boolean likedByUser){
         verMasBtn.setUserData(experience.getId());
         nombreExperiencia.setText(experience.getTitle());
         descripcionCorta.setText(experience.getShortDescription());
@@ -69,6 +59,32 @@ public class MiniExperienceController {
         imagePane.widthProperty().addListener(listener);
         imagePane.heightProperty().addListener(listener);
         experienciaImg.setImage(image);
+
+        //Heart
+        heartImageView.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+
+            @Override
+            @Transactional
+            public void handle(MouseEvent event) {
+                Tourist tourist = userMgr.getCurrentTourist();
+                Experience experience = experienceMgr.findById((Integer) verMasBtn.getUserData());
+                if (!isLikedByUser(tourist, experience)){
+                    tourist.getLiked().add(experience);
+                    heartController(true);
+                } else {
+                    tourist.getLiked().removeIf(experienceToBeRemoved -> experienceToBeRemoved.getId().equals(experience.getId()));
+                    heartController(false);
+                }
+
+                userMgr.updateTourist(tourist);
+            }
+        });
+
+        heartController(likedByUser);
+    }
+
+    private boolean isLikedByUser(Tourist tourist, Experience experience) {
+        return tourist.getLiked().stream().mapToInt(Experience::getId).anyMatch(id -> id == experience.getId());
     }
 
     private ChangeListener<Number> getListener(Pane imagePane, ImageView imageViewPrincipal, Image image) {
@@ -104,27 +120,14 @@ public class MiniExperienceController {
         touristController.showExperience(experience);
     }
 
-    @FXML
-    @Transactional
-    void likeAction(ActionEvent event) {
-
-        Tourist tourist = (Tourist) userMgr.getCurrentUser();
-        Hibernate.initialize(tourist.getLiked());
-        Experience experience = experienceMgr.findById((Integer) verMasBtn.getUserData());
-
-        if (!tourist.getLiked().contains(experience)){
-            tourist.getLiked().add(experience);
+    private void heartController(boolean state){
+        if(state){
+            Image image = new Image("imgs/heart.png");
+            heartImageView.setImage(image);
         } else {
-            tourist.getLiked().remove(experience);
+            Image image = new Image("imgs/heart_outline.png");
+            heartImageView.setImage(image);
         }
-    }
-
-    private void showAlert(String title, String contextText){
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(contextText);
-        alert.showAndWait();
     }
 
 

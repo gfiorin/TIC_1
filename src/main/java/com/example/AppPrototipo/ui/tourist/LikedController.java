@@ -4,7 +4,6 @@ import com.example.AppPrototipo.AppPrototipoApplication;
 import com.example.AppPrototipo.business.managers.UserMgr;
 import com.example.AppPrototipo.business.entities.Experience;
 import com.example.AppPrototipo.business.entities.Tourist;
-import com.example.AppPrototipo.persistence.ExperienceRepository;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -13,7 +12,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
-
 import javax.transaction.Transactional;
 import java.io.IOException;
 import java.net.URL;
@@ -46,8 +44,7 @@ public class LikedController implements Initializable {
     @Transactional
     public void initialize(URL location, ResourceBundle resources) {
 
-        tourist = userMgr.getCurrentTourist();
-
+        Tourist tourist = userMgr.getCurrentTourist();
         List<Experience> likedExperiences = tourist.getLiked();
 
         int columns = 0;
@@ -75,7 +72,7 @@ public class LikedController implements Initializable {
                 grillaFavoritos.add(vbox, columns++, row);
                 GridPane.setMargin(vbox, new Insets(10));
             }
-        }catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

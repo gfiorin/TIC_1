@@ -9,6 +9,7 @@ import org.hibernate.Hibernate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -134,6 +135,7 @@ public class UserMgr {
         Tourist tourist = (Tourist) userRepository.findById(currentUserId).get();
         Hibernate.initialize(tourist.getLiked());
         Hibernate.initialize(tourist.getInterests());
+        Hibernate.initialize(tourist.getBookings());
         Hibernate.initialize(tourist.getExperiencesBooked());
         return tourist;
     }

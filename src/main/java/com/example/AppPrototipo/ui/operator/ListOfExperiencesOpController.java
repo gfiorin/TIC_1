@@ -7,7 +7,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 @Component
-public class ListOfExperincesOpController implements Initializable {
+public class ListOfExperiencesOpController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

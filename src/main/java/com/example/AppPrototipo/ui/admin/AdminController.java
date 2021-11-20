@@ -210,7 +210,6 @@ public class AdminController {
         newStage.show();
 
         oldStage.close();
-
     }
 
     @FXML

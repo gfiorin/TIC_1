@@ -31,5 +31,4 @@ public class Operator extends User {
         this.tourOperator = tourOperator;
     }
 
-
 }

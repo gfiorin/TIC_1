@@ -18,7 +18,7 @@
     </TableView>
    <Pane layoutY="-2.0" prefHeight="48.0" prefWidth="919.0">
       <children>
-         <Button fx:id="goBackBtn" layoutX="18.0" layoutY="13.0" mnemonicParsing="false" onAction="#goBackToAdminView" prefHeight="25.0" prefWidth="58.0" text="Atras" />
+         <Button fx:id="goBackBtn" layoutX="18.0" layoutY="13.0" mnemonicParsing="false" onAction="#goBackToAdminView" prefHeight="25.0" prefWidth="58.0" text="Atrás" />
       </children>
    </Pane>
 </AnchorPane>

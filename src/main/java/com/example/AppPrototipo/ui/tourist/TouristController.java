@@ -1,7 +1,6 @@
 package com.example.AppPrototipo.ui.tourist;
 
 import com.example.AppPrototipo.AppPrototipoApplication;
-import com.example.AppPrototipo.business.entities.Tourist;
 import com.example.AppPrototipo.business.managers.UserMgr;
 import com.example.AppPrototipo.business.entities.Experience;
 import com.example.AppPrototipo.ui.PrincipalController;
@@ -28,6 +27,14 @@ import java.util.ResourceBundle;
 public class TouristController implements Initializable {
 
     @FXML
+    private ImageView favoritosMarker;
+    @FXML
+    private ImageView perfilMarker;
+    @FXML
+    private ImageView sesionMarker;
+    @FXML
+    private ImageView calendarMarker;
+    @FXML
     private AnchorPane innerView;
     @FXML
     private VBox top;
@@ -36,16 +43,19 @@ public class TouristController implements Initializable {
     @FXML
     private VBox leftPane;
 
-    private static Tourist tourist;
+    private final BookingsController bookingsController;
     private final ExperienceController experienceController;
     private final ExperienceGridController experienceGridController;
     private final LikedController likedController;
+    private final UserMgr userMgr;
     private final ProfileController profileController;
 
-    public TouristController(ExperienceController experienceController, ExperienceGridController experienceGridController, LikedController likedController, ProfileController profileController) {
+    public TouristController(BookingsController bookingsController, ExperienceController experienceController, ExperienceGridController experienceGridController, LikedController likedController, UserMgr userMgr, ProfileController profileController) {
+        this.bookingsController = bookingsController;
         this.experienceController = experienceController;
         this.experienceGridController = experienceGridController;
         this.likedController = likedController;
+        this.userMgr = userMgr;
         this.profileController = profileController;
     }
 
@@ -63,10 +73,9 @@ public class TouristController implements Initializable {
     public void showProfile(MouseEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
-        Parent root = fxmlLoader.load(profileController.getClass().getResourceAsStream("ProfileView.fxml"));
-        Scene scene = new Scene(root);
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(scene);
+        fxmlLoader.setLocation(profileController.getClass().getResource("ProfileView.fxml"));
+        AnchorPane perfil = fxmlLoader.load();
+        loadToInnerView(perfil);
     }
 
     public  void showFavourites(MouseEvent event) throws IOException {
@@ -95,11 +104,19 @@ public class TouristController implements Initializable {
         loadToInnerView(experiencia);
     }
 
+    public void showCalendar(MouseEvent event) throws IOException{
+        Stage currentStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
+        fxmlLoader.setLocation(bookingsController.getClass().getResource("BookingsView.fxml"));
+        ScrollPane bookings = fxmlLoader.load();
+        loadToInnerView(bookings);
+    }
+
     public void showExperienceGrid() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
         fxmlLoader.setLocation(experienceGridController.getClass().getResource("ExperienceGrid.fxml"));
-        ExperienceGridController.setTourist(tourist);
         ScrollPane experienceGrid = fxmlLoader.load();
         loadToInnerView(experienceGrid);
     }
@@ -112,11 +129,4 @@ public class TouristController implements Initializable {
         AnchorPane.setRightAnchor(object, 0.0);
     }
 
-    public static Tourist getTourist() {
-        return tourist;
-    }
-
-    public static void setTourist(Tourist tourist) {
-        TouristController.tourist = tourist;
-    }
 }
