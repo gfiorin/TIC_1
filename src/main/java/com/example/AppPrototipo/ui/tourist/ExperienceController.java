@@ -305,7 +305,7 @@ public class ExperienceController {
                 cuposAReservar.getValue()
         ); //Se hace la reserva
 
-        //Se procede a deshabilitar todo
+        //Se procede a deshabilitar tod0
         calendarioReserva.setDisable(true);
         horarioReserva.setDisable(true);
         cuposAReservar.setDisable(true);

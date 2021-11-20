@@ -1,6 +1,7 @@
 package com.example.AppPrototipo.business.entities;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.List;
 
 @Entity
@@ -44,9 +45,12 @@ public class Experience {
     @JoinColumn(name="tour_operator")
     private TourOperator tourOperator;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "experience")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "experience")
     private List<Image> images;
+
+    @ManyToOne
+    @JoinColumn(name="department")
+    private Department department;
 
     @Column(name = "location")
     private String ubicacion;
@@ -63,10 +67,13 @@ public class Experience {
     @Column(name = "reviewed")
     private Boolean reviewed;
 
+    @Column(name = "price")
+    private BigDecimal price;
+
     public Experience() {
     }
 
-    public Experience(String title, String description, String shortDescription, boolean vaccination, Integer capacity, boolean bookable, boolean authorized, String email, String link, String telephone, List<Image> images) {
+    public Experience(String title, String description, String shortDescription, boolean vaccination, Integer capacity, boolean bookable, boolean authorized, List<ExperienceType> experienceTypes, TourOperator tourOperator, Department department, String ubicacion, String email, String link, String telephone, Boolean reviewed, BigDecimal price) {
         this.title = title;
         this.description = description;
         this.shortDescription = shortDescription;
@@ -74,11 +81,15 @@ public class Experience {
         this.capacity = capacity;
         this.bookable = bookable;
         this.authorized = authorized;
-        this.images = images;
+        this.experienceTypes = experienceTypes;
+        this.tourOperator = tourOperator;
+        this.department = department;
+        this.ubicacion = ubicacion;
         this.email = email;
         this.link = link;
         this.telephone = telephone;
-        this.reviewed = false;
+        this.reviewed = reviewed;
+        this.price = price;
     }
 
     public Integer getId() {
@@ -208,4 +219,10 @@ public class Experience {
     public String getTelephone() {
         return telephone;
     }
+
+    @Override
+    public String toString() {
+        return title;
+    }
+
 }

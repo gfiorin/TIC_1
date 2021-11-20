@@ -79,7 +79,7 @@ public class TouristsTableController {
         documentType.setCellValueFactory(new PropertyValueFactory<>("documentType"));
         documentNumber.setCellValueFactory(new PropertyValueFactory<>("documentNumber"));
         country.setCellValueFactory(new PropertyValueFactory<>("country"));
-        //listOfInterests.setCellValueFactory(new PropertyValueFactory<>("Interests"));
+        //listOfInterests.setCellValueFactory(new PropertyValueFactory<>("Interests")); todo
     }
 
     private ObservableList<Tourist> getTourists() {

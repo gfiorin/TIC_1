@@ -1,6 +1,7 @@
 package com.example.AppPrototipo.ui.admin;
 
 import com.example.AppPrototipo.AppPrototipoApplication;
+import com.example.AppPrototipo.ui.PrincipalController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -45,6 +46,8 @@ public class AdminController {
     @FXML
     private Button listOfReviewsBtn;
 
+    @FXML
+    private Button cerrarSesionBtn;
 
     public AdminController(){}
 
@@ -186,6 +189,22 @@ public class AdminController {
         fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
 
         Parent root = fxmlLoader.load(AdminController.class.getResourceAsStream("ReviewsList.fxml"));
+        Stage newStage = new Stage();
+        newStage.setScene(new Scene(root));
+        newStage.show();
+
+        oldStage.close();
+    }
+
+    @FXML
+    void cerrarSesion(ActionEvent event) throws Exception {
+        Node source = (Node) event.getSource();
+        Stage oldStage  = (Stage) source.getScene().getWindow();
+
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
+
+        Parent root = fxmlLoader.load(PrincipalController.class.getResourceAsStream("Principal.fxml"));
         Stage newStage = new Stage();
         newStage.setScene(new Scene(root));
         newStage.show();

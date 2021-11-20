@@ -50,7 +50,6 @@ public class TouristController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         bottom.prefHeightProperty().bind(leftPane.prefHeightProperty().subtract(top.prefHeightProperty()));
-
         try {
             showExperienceGrid();
         } catch (IOException e) {
