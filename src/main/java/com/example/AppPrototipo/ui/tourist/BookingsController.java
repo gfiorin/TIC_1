@@ -5,15 +5,20 @@ import com.example.AppPrototipo.business.entities.Booking;
 import com.example.AppPrototipo.business.entities.Tourist;
 import com.example.AppPrototipo.business.managers.BookingMgr;
 import com.example.AppPrototipo.business.managers.UserMgr;
+import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Rectangle2D;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -65,5 +70,4 @@ public class BookingsController implements Initializable {
     private List<Booking> bookings(Tourist tourist){
         return bookingMgr.findAll();
     }
-
 }

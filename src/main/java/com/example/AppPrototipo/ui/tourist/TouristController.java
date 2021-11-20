@@ -33,6 +33,8 @@ public class TouristController implements Initializable {
     @FXML
     private ImageView sesionMarker;
     @FXML
+    private ImageView calendarMarker;
+    @FXML
     private AnchorPane innerView;
     @FXML
     private VBox top;
@@ -41,13 +43,15 @@ public class TouristController implements Initializable {
     @FXML
     private VBox leftPane;
 
+    private final BookingsController bookingsController;
     private final ExperienceController experienceController;
     private final ExperienceGridController experienceGridController;
     private final LikedController likedController;
     private final UserMgr userMgr;
     private final ProfileController profileController;
 
-    public TouristController(ExperienceController experienceController, ExperienceGridController experienceGridController, LikedController likedController, UserMgr userMgr, ProfileController profileController) {
+    public TouristController(BookingsController bookingsController, ExperienceController experienceController, ExperienceGridController experienceGridController, LikedController likedController, UserMgr userMgr, ProfileController profileController) {
+        this.bookingsController = bookingsController;
         this.experienceController = experienceController;
         this.experienceGridController = experienceGridController;
         this.likedController = likedController;
@@ -98,6 +102,15 @@ public class TouristController implements Initializable {
         experienceController.setExperience(experience);
         BorderPane experiencia = fxmlLoader.load();
         loadToInnerView(experiencia);
+    }
+
+    public void showCalendar(MouseEvent event) throws IOException{
+        Stage currentStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
+        fxmlLoader.setLocation(bookingsController.getClass().getResource("BookingsView.fxml"));
+        ScrollPane bookings = fxmlLoader.load();
+        loadToInnerView(bookings);
     }
 
     public void showExperienceGrid() throws IOException {

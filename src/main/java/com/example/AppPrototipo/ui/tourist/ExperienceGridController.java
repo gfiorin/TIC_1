@@ -38,19 +38,14 @@ public class ExperienceGridController implements Initializable {
     private final ExperienceMgr experienceMgr;
     private final UserMgr userMgr;
     private final TouristController touristController;
-    private final BookingsController bookingsController;
 
     @FXML
     private GridPane grillaRecomendaciones;
 
-    @FXML
-    private Button reservasBtn;
-
-    public ExperienceGridController(ExperienceMgr experienceMgr, UserMgr userMgr, @Lazy TouristController touristController, BookingsController bookingsController) {
+    public ExperienceGridController(ExperienceMgr experienceMgr, UserMgr userMgr, @Lazy TouristController touristController) {
         this.experienceMgr = experienceMgr;
         this.userMgr = userMgr;
         this.touristController = touristController;
-        this.bookingsController = bookingsController;
     }
 
     @Bean
@@ -100,16 +95,5 @@ public class ExperienceGridController implements Initializable {
             list.add(experience);
         }
         return list;
-    }
-
-    @FXML
-    void verReservas(ActionEvent event) throws IOException {
-        Stage currentStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
-        fxmlLoader.setLocation(bookingsController.getClass().getResource("BookingsView.fxml"));
-        ScrollPane bookings = fxmlLoader.load();
-        Scene scene = new Scene(bookings);
-        currentStage.setScene(scene);
     }
 }
