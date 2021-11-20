@@ -45,9 +45,21 @@ public class Tourist extends User{
         return liked;
     }
 
+    @OneToMany(mappedBy = "tourist")
+    private List<Booking> bookings;
+
+    public List<Booking> getBookings() {
+        return bookings;
+    }
+
+    public void setBookings(List<Booking> bookings) {
+        this.bookings = bookings;
+    }
+
     public void addLiked(Experience experience) {
         liked.add(experience);
     }
+
 
     public Tourist (String name, String username, String email, String password, LocalDate dateOfBirth, String cellphone, Country country, List<Interest> interests, String documentType, String documentNumber) {
         super(name, username, email, password);

@@ -47,7 +47,7 @@ public class ProfileController {
 
     @FXML
     private void initialize(){
-        Tourist tourist = (Tourist) userMgr.getCurrentUser();
+        Tourist tourist = userMgr.getCurrentTourist();
         listaIntereses = tourist.getInterests();
         populacionDeCampos(tourist);
     }

@@ -47,7 +47,7 @@ public class BookingsController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        Tourist tourist = (Tourist) userMgr.getCurrentUser();
+        Tourist tourist = userMgr.getCurrentTourist();
         ArrayList<Booking> bookings = new ArrayList<>(bookings(tourist));
         try {
             for (Booking booking : bookings) {
@@ -68,6 +68,7 @@ public class BookingsController implements Initializable {
     }
 
     private List<Booking> bookings(Tourist tourist){
-        return bookingMgr.findAll();
+        List<Booking> bookings = tourist.getBookings();
+        return bookings;
     }
 }
