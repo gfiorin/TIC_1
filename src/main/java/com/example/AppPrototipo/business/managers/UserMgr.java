@@ -134,15 +134,8 @@ public class UserMgr {
         Tourist tourist = (Tourist) userRepository.findById(currentUserId).get();
         Hibernate.initialize(tourist.getLiked());
         Hibernate.initialize(tourist.getInterests());
-        return tourist;
-    }
-
-    @Transactional
-    public Tourist getCurrentTourist() {
-        Tourist tourist = (Tourist) userRepository.findById(currentUserId).get();
-        Hibernate.initialize(tourist.getLiked());
-        Hibernate.initialize(tourist.getInterests());
         Hibernate.initialize(tourist.getBookings());
         return tourist;
     }
+
 }
