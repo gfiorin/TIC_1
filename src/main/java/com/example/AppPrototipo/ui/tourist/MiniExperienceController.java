@@ -14,8 +14,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
+import org.hibernate.Hibernate;
 import org.springframework.context.annotation.Lazy;
 
+import javax.transaction.Transactional;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
@@ -32,7 +34,7 @@ public class MiniExperienceController {
     @FXML
     private ImageView experienciaImg;
     @FXML
-    private Button likeBtn;
+    private ImageView heartImageView;
     @FXML
     private Text nombreExperiencia;
     @FXML
@@ -103,20 +105,17 @@ public class MiniExperienceController {
     }
 
     @FXML
+    @Transactional
     void likeAction(ActionEvent event) {
+
+        Tourist tourist = (Tourist) userMgr.getCurrentUser();
+        Hibernate.initialize(tourist.getLiked());
         Experience experience = experienceMgr.findById((Integer) verMasBtn.getUserData());
-        boolean yaFavorita = false;
-        for(Experience liked : tourist.getLiked()){
-            if (liked.getTitle().equals(experience.getTitle())){
-                showAlert(
-                        "Atención",
-                        "La experiencia ya se encuentra entre sus favoritas.");
-                yaFavorita = true;
-            }
-        }
-        if(!yaFavorita){
-        tourist.addLiked(experience);
-        userMgr.updateTourist(tourist);
+
+        if (!tourist.getLiked().contains(experience)){
+            tourist.getLiked().add(experience);
+        } else {
+            tourist.getLiked().remove(experience);
         }
     }
 
@@ -127,4 +126,6 @@ public class MiniExperienceController {
         alert.setContentText(contextText);
         alert.showAndWait();
     }
+
+
 }

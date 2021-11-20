@@ -30,21 +30,15 @@ public class ExperienceGridController implements Initializable {
     private final UserMgr userMgr;
     private final TouristController touristController;
     private static Tourist tourist;
-    private final TouristMgr touristMgr;
-    private final InterestMgr interestMgr;
-    private final ExperienceTypeMgr experienceTypeMgr;
-    private Set<ExperienceType> types;
+    private static Set<ExperienceType> types;
 
     @FXML
     private GridPane grillaRecomendaciones;
 
-    public ExperienceGridController(ExperienceMgr experienceMgr, UserMgr userMgr, @Lazy TouristController touristController, TouristMgr touristMgr, InterestMgr interestMgr, ExperienceTypeMgr experienceTypeMgr) {
+    public ExperienceGridController(ExperienceMgr experienceMgr, UserMgr userMgr, @Lazy TouristController touristController) {
         this.experienceMgr = experienceMgr;
         this.userMgr = userMgr;
         this.touristController = touristController;
-        this.touristMgr = touristMgr;
-        this.interestMgr = interestMgr;
-        this.experienceTypeMgr = experienceTypeMgr;
     }
 
     @Bean
@@ -56,17 +50,17 @@ public class ExperienceGridController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         types = new HashSet<>();
-        tourist = (Tourist) userMgr.getCurrentUser();
+        tourist = userMgr.getCurrentTourist();
 
-        for (Interest interest : touristMgr.getInterests(tourist)) {
+        for (Interest interest : tourist.getInterests()) {
             types.addAll(interest.getExperienceTypes());
         }
 
-        for (Experience expLiked : touristMgr.getLiked(tourist)) {
+        for (Experience expLiked : tourist.getLiked()) {
             types.addAll(expLiked.getExperienceTypes());
         }
 
-        for (Experience bookings : touristMgr.getExperiencesBooked(tourist)) {
+        for (Experience bookings : tourist.getExperiencesBooked()) {
             types.addAll(bookings.getExperienceTypes());
         }
 
@@ -105,10 +99,11 @@ public class ExperienceGridController implements Initializable {
         List<Experience> recommendations = experienceMgr.findByTypes(new ArrayList<>(types));
 
         for (Experience experience : recommendations){
-            if (touristMgr.getLiked(tourist).contains(experience) || touristMgr.getExperiencesBooked(tourist).contains(experience)){
+            if (tourist.getLiked().contains(experience) || tourist.getExperiencesBooked().contains(experience)){
                 recommendations.remove(experience);
             } else {
-                experienceMgr.setPonderation(experience, weigh(experience));
+                experience.setPonderation(weigh(experience));
+                experienceMgr.updateExperience(experience);
             }
         }
 

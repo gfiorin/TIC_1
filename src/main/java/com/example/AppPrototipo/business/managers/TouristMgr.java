@@ -21,17 +21,5 @@ public class TouristMgr {
         return touristRepository.findAll();
     }
 
-    public List<Interest> getInterests(Tourist tourist) {
-        return tourist.getInterests();
-    }
-
-    public List<Experience> getLiked(Tourist tourist) {
-        return tourist.getLiked();
-    }
-
-    public List<Experience> getExperiencesBooked(Tourist tourist) {
-        return tourist.getExperiencesBooked();
-    }
-
 
 }
