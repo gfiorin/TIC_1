@@ -42,16 +42,12 @@ public class OperatorController implements Initializable {
     @FXML
     private HBox topPane;
 
-    private final ExperienceController experienceController;
-    private final UserMgr userMgr;
     private final CreateExperienceController createExperienceController;
     private final ListOfExperiencesOpController listOfExperiencesOpController;
     private final AjustesOpController ajustesOpController;
     private final BookingsListOpController bookingsListOpController;
 
-    public OperatorController(ExperienceController experienceController, UserMgr userMgr, CreateExperienceController createExperienceController, ListOfExperiencesOpController listOfExperiencesOpController, AjustesOpController ajustesOpController, BookingsListOpController bookingsListOpController) {
-        this.experienceController = experienceController;
-        this.userMgr = userMgr;
+    public OperatorController(CreateExperienceController createExperienceController, ListOfExperiencesOpController listOfExperiencesOpController, AjustesOpController ajustesOpController, BookingsListOpController bookingsListOpController) {
         this.createExperienceController = createExperienceController;
         this.listOfExperiencesOpController = listOfExperiencesOpController;
         this.ajustesOpController = ajustesOpController;

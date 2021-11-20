@@ -2,7 +2,8 @@ package com.example.AppPrototipo.ui.operator;
 
 import com.example.AppPrototipo.AppPrototipoApplication;
 import com.example.AppPrototipo.business.entities.Experience;
-import com.example.AppPrototipo.business.managers.ExperienceMgr;
+import com.example.AppPrototipo.business.entities.Operator;
+import com.example.AppPrototipo.business.entities.TourOperator;
 import com.example.AppPrototipo.business.managers.OperatorMgr;
 import com.example.AppPrototipo.business.managers.UserMgr;
 import com.example.AppPrototipo.ui.tourist.MiniExperienceController;
@@ -11,68 +12,58 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
 @Component
 public class ListOfExperiencesOpController implements Initializable {
 
-    private final OperatorMgr operatorMgr;
+    private final UserMgr userMgr;
 
     @FXML
-    private GridPane grillaExperiencias;
+    private Text titulo;
 
-    public ListOfExperiencesOpController(OperatorMgr operatorMgr) {
-        this.operatorMgr = operatorMgr;
+    @FXML
+    private VBox vBoxGral;
+
+    @FXML
+    private VBox vBoxExperiencias;
+
+    public ListOfExperiencesOpController(UserMgr userMgr) {
+        this.userMgr = userMgr;
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        ArrayList<Experience> experiences = new ArrayList<>(operatorMgr.getExperiences());
-        int columns = 0;
-        int row = 1;
+        Operator operator = (Operator) userMgr.getCurrentUser();
+        TourOperator tourOperator = operator.getTourOperator();
+
+        ArrayList<Experience> experiences = new ArrayList<>(tourOperator.getListOfExperiences());
 
         try {
-            for (Experience exp : experiences) {
+            for (Experience experience : experiences) {
                 FXMLLoader fxmlLoader = new FXMLLoader();
-
                 ApplicationContext applicationContext = AppPrototipoApplication.getContext();
-                MiniExperienceController miniExperienceController = (MiniExperienceController) applicationContext
-                        .getBean("miniExperienceControllerPrototype");
-                fxmlLoader.setController(miniExperienceController);
+                MiniExperienceOpController miniExperienceOpController = (MiniExperienceOpController) applicationContext.getBean("miniExperienceOpController");
+                fxmlLoader.setController(miniExperienceOpController);
 
-                fxmlLoader.setController(miniExperienceController);
-                fxmlLoader.setLocation(miniExperienceController.getClass().getResource("MiniExperience.fxml"));
-                VBox vbox = fxmlLoader.load();
-                miniExperienceController.setData(exp);
-
-                if (columns == 4) {
-                    columns = 0;
-                    ++row;
-                }
-
-                grillaExperiencias.add(vbox, columns++, row);
-                GridPane.setMargin(vbox, new Insets(10));
+                fxmlLoader.setLocation(miniExperienceOpController.getClass().getResource("MiniBookingView.fxml"));
+                HBox hbox = fxmlLoader.load();
+                miniExperienceOpController.setData(experience);
+                vBoxExperiencias.getChildren().add(hbox);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
-//    @Bean
-//    @Scope("prototype")
-//    private MiniExperienceController miniExperienceControllerPrototype() {
-//        return new MiniExperienceController(userMgr, touristController, experienceMgr);
-//    }
 
 }

@@ -49,6 +49,10 @@ public class Experience {
     @JoinColumn(name = "experience")
     private List<Image> images;
 
+    @OneToMany()
+    @JoinColumn(name = "experience")
+    private List<Booking> bookings;
+
     @ManyToOne
     @JoinColumn(name="department")
     private Department department;
@@ -220,6 +224,10 @@ public class Experience {
 
     public String getTelephone() {
         return telephone;
+    }
+
+    public List<Booking> getBookings() {
+        return bookings;
     }
 
     @Override

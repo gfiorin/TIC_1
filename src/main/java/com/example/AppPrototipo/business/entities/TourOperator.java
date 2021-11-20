@@ -40,6 +40,7 @@ public class TourOperator {
     private List<Experience> listOfExperiences;
 
     @OneToMany
+    @JoinColumn(name = "toperator")
     private List<Operator> listOfAuthorizedOperators;
 
     public TourOperator() {}
