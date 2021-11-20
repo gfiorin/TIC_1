@@ -50,23 +50,14 @@ public class MiniBookingController {
         nombreExperiencia.setText(booking.getExperience().getTitle());
         direccion.setText(booking.getExperience().getUbicacion());
         cuposReserva.setText(String.valueOf(booking.getAmount()));
-        setImage(booking.getExperience(),0);
-    }
-
-    private void setImage(Experience experience, int imageIndex) {
-        Image image = new Image(new ByteArrayInputStream(experience.getImages().get(imageIndex).getImageData()));
-
-        ChangeListener<Number> listenerNumber = getListenerNumber(experienciaImg, image);
-        ChangeListener<Image> listenerImage = getListener(experienciaImg, image);
-
-        imagePane.widthProperty().addListener(listenerNumber);
-        imagePane.heightProperty().addListener(listenerNumber);
-        experienciaImg.imageProperty().addListener(listenerImage);
-
+        Image image = new Image(new ByteArrayInputStream(booking.getExperience().getImages().get(0).getImageData()));
+        ChangeListener<Number> listener = getListener(imagePane, experienciaImg, image);
+        imagePane.widthProperty().addListener(listener);
+        imagePane.heightProperty().addListener(listener);
         experienciaImg.setImage(image);
     }
 
-    private ChangeListener<Number> getListenerNumber(ImageView imageViewPrincipal, Image image){
+    private ChangeListener<Number> getListener(Pane imagePane, ImageView imageViewPrincipal, Image image) {
         double oldImageWidth = image.getWidth(), oldImageHeight = image.getHeight();            //saving the original image size and ratio
         double imageRatio = oldImageWidth / oldImageHeight;
 
@@ -93,30 +84,4 @@ public class MiniBookingController {
         };
     }
 
-    private ChangeListener<Image> getListener(ImageView imageViewPrincipal, Image image) {
-        double oldImageWidth = image.getWidth(), oldImageHeight = image.getHeight();            //saving the original image size and ratio
-        double imageRatio = oldImageWidth / oldImageHeight;
-
-        return (obs, ov, nv) -> {
-            double paneWidth = imagePane.getWidth();
-            double paneHeight = imagePane.getHeight();
-
-            double paneRatio = paneWidth / paneHeight;                                          //calculating the new pane's ratio
-            //after width or height changed
-            double newImageWidth = oldImageWidth, newImageHeight = oldImageHeight;
-
-            if (paneRatio > imageRatio) {
-                newImageHeight = oldImageWidth / paneRatio;
-            } else if (paneRatio < imageRatio) {
-                newImageWidth = oldImageHeight * paneRatio;
-            }
-
-            imageViewPrincipal.setViewport(new Rectangle2D(                                     // The rectangle used to crop
-                    (oldImageWidth - newImageWidth) / 2, (oldImageHeight - newImageHeight) / 2, //MinX and MinY to crop from the center
-                    newImageWidth, newImageHeight)                                              // new width and height
-            );
-
-            imageViewPrincipal.setFitWidth(paneWidth);
-        };
-    }
 }
