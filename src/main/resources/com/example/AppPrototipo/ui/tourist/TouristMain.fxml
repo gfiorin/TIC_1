@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="1000.0" maxWidth="1000.0" prefHeight="576.0" prefWidth="853.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.AppPrototipo.ui.tourist.TouristController">
+<BorderPane maxHeight="1000.0" maxWidth="1000.0" prefHeight="576.0" prefWidth="853.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.AppPrototipo.ui.tourist.TouristController">
    <left>
       <VBox fx:id="leftPane" prefHeight="576.0" style="-fx-background-color: #82a17a;" BorderPane.alignment="CENTER">
          <children>
@@ -26,7 +26,12 @@
                         <Image url="@imgs/perfil.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="favoritosMarker" fitHeight="39.0" fitWidth="39.0" onMouseClicked="#showFavourites" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="calendarMarker" fitHeight="39.0" fitWidth="39.0" onMouseClicked="#showCalendar" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@imgs/calendar.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="favoritosMarker" fitHeight="39.0" fitWidth="39.0" layoutX="10.0" layoutY="108.0" onMouseClicked="#showFavourites" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@imgs/liked.png" />
                      </image>

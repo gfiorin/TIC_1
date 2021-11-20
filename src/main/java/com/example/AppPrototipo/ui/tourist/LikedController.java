@@ -77,32 +77,6 @@ public class LikedController implements Initializable {
         }catch (IOException e) {
             e.printStackTrace();
         }
-
-//        List<Experience> experiences = userMgr.getCurrentUserLiked();
-//
-//        int columns = 0;
-//        int row = 1;
-//
-//        try {
-//            for (int i=0; i < experiences.size(); i++){
-//                FXMLLoader fxmlLoader = new FXMLLoader();
-//                fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
-//                fxmlLoader.setLocation(miniExperienceController.getClass().getResource("MiniExperience.fxml"));
-//                MiniExperienceController.setTourist(tourist);
-//                VBox vbox = fxmlLoader.load();
-//                miniExperienceController.setData(experiences.get(i));
-//
-//                if(columns == 4){
-//                    columns = 0;
-//                    ++row;
-//                }
-//
-//                grillaFavoritos.add(vbox,columns++,row);
-//                GridPane.setMargin(vbox,new Insets(10));
-//            }
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
     }
 
 }

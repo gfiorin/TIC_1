@@ -41,13 +41,8 @@ public class Tourist extends User{
     )
     private List<Experience> liked;
 
-    public List<Experience> getLiked() {
-        return liked;
-    }
-
-    public void addLiked(Experience experience) {
-        liked.add(experience);
-    }
+    @OneToMany(mappedBy = "tourist")
+    private List<Booking> bookings;
 
     public Tourist (String name, String username, String email, String password, LocalDate dateOfBirth, String cellphone, Country country, List<Interest> interests, String documentType, String documentNumber) {
         super(name, username, email, password);
@@ -68,6 +63,22 @@ public class Tourist extends User{
     }
 
     public Tourist() {}
+
+    public List<Experience> getLiked() {
+        return liked;
+    }
+
+    public void addLiked(Experience experience) {
+        liked.add(experience);
+    }
+
+    public List<Booking> getBookings() {
+        return bookings;
+    }
+
+    public void setBookings(List<Booking> bookings) {
+        this.bookings = bookings;
+    }
 
     public LocalDate getDateOfBirth() {
         return dateOfBirth;
