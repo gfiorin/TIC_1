@@ -44,7 +44,6 @@ public class LikedController implements Initializable {
     }
 
     @Override
-    @Transactional
     public void initialize(URL location, ResourceBundle resources) {
 
         Tourist tourist = userMgr.getCurrentTourist();

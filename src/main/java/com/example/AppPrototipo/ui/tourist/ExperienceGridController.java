@@ -52,7 +52,6 @@ public class ExperienceGridController implements Initializable {
 
         List<Experience> recommendations = new ArrayList<>(recommendations());
         Tourist tourist = userMgr.getCurrentTourist();
-        List<Experience> likedByUser = tourist.getLiked();
 
         int columns = 0;
         int row = 1;
@@ -69,7 +68,7 @@ public class ExperienceGridController implements Initializable {
                 fxmlLoader.setController(miniExperienceController);
                 fxmlLoader.setLocation(miniExperienceController.getClass().getResource("MiniExperience.fxml"));
                 VBox vbox = fxmlLoader.load();
-                miniExperienceController.setData(recommendation, true);
+                miniExperienceController.setData(recommendation, isLikedByUser(tourist, recommendation));
 
                 if (columns == 4) {
                     columns = 0;
@@ -91,5 +90,9 @@ public class ExperienceGridController implements Initializable {
             list.add(experience);
         }
         return list;
+    }
+
+    private boolean isLikedByUser(Tourist tourist, Experience experience) {
+        return tourist.getLiked().stream().mapToInt(Experience::getId).anyMatch(id -> id == experience.getId());
     }
 }

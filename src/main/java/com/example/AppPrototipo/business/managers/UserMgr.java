@@ -5,6 +5,7 @@ import com.example.AppPrototipo.business.exceptions.InvalidInformation;
 import com.example.AppPrototipo.business.exceptions.UserAlreadyExsists;
 import com.example.AppPrototipo.persistence.TouristRepository;
 import com.example.AppPrototipo.persistence.UserRepository;
+import org.hibernate.Hibernate;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -90,7 +91,6 @@ public class UserMgr {
 
         touristRepository.save(touristToAdd);
     }
-
 
     @Transactional
     public User userLogIn(String emailOrUsername, String password) throws InvalidInformation {
