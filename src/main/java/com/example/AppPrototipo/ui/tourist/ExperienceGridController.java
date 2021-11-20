@@ -112,7 +112,7 @@ public class ExperienceGridController implements Initializable {
         List<ExperienceSort> recommendationSort = new ArrayList<>();
 
         for (Experience experience : experiences){
-            if (tourist.getLiked().contains(experience) || tourist.getExperiencesBooked().contains(experience)){
+            if (!experience.isAuthorized() || !experience.getTourOperator().isAuthorized() || tourist.getLiked().contains(experience) || tourist.getExperiencesBooked().contains(experience)){
                 experiences.remove(experience);
             } else {
                 recommendationSort.add(new ExperienceSort(experience,weigh(experience)));
