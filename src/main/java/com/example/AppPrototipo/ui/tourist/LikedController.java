@@ -11,6 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -25,6 +26,9 @@ public class LikedController implements Initializable {
 
     @FXML
     private GridPane grillaFavoritos;
+
+    @FXML
+    private Text sinFavoritos;
 
     private final ExperienceRepository experienceRepository;
     private final MiniExperienceController miniExperienceController;
@@ -46,9 +50,12 @@ public class LikedController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        sinFavoritos.setVisible(false);
         Tourist tourist = userMgr.getCurrentTourist();
         List<Experience> likes = tourist.getLiked();
+        if(likes.size() == 0){
+            sinFavoritos.setVisible(true);
+        }
 
         int columns = 0;
         int row = 1;

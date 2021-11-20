@@ -20,6 +20,14 @@
                   <Insets left="10.0" />
                </VBox.margin>
             </Text>
+            <Text fx:id="sinFavoritos" fill="#5e5d5d" strokeType="OUTSIDE" strokeWidth="0.0" text="No ha marcado ningún favorito por el momento" wrappingWidth="704.13671875">
+               <font>
+                  <Font name="System Italic" size="24.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="10.0" />
+               </VBox.margin>
+            </Text>
               <GridPane fx:id="grillaFavoritos">
                   <rowConstraints>
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />

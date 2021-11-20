@@ -26,6 +26,9 @@ public class BookingsController implements Initializable {
     private final BookingMgr bookingMgr;
 
     @FXML
+    private Text sinReservas;
+
+    @FXML
     private Text titulo;
 
     @FXML
@@ -41,8 +44,12 @@ public class BookingsController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        sinReservas.setVisible(false);
         Tourist tourist = userMgr.getCurrentTourist();
         ArrayList<Booking> bookings = new ArrayList<>(bookings(tourist));
+        if(bookings.size() == 0){
+            sinReservas.setVisible(true);
+        }
         try {
             for (Booking booking : bookings) {
                 FXMLLoader fxmlLoader = new FXMLLoader();
