@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="451.0" prefWidth="751.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.AppPrototipo.ui.operator.BookingsListOpController">
+   <children>
+      <TableView fx:id="bookingsTable" prefHeight="445.0" prefWidth="750.0">
+        <columns>
+          <TableColumn fx:id="tourist" prefWidth="188.79995423555374" text="Email turista" />
+            <TableColumn fx:id="experience" prefWidth="187.19996643066406" text="Experiencia reservada" />
+            <TableColumn fx:id="date" prefWidth="136.0" text="Fecha" />
+            <TableColumn fx:id="time" prefWidth="104.0" text="Horario" />
+            <TableColumn fx:id="amount" prefWidth="133.60001220703123" text="Cantidad de personas" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

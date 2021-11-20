@@ -4,6 +4,8 @@ import com.example.AppPrototipo.business.entities.ExperienceType;
 import com.example.AppPrototipo.persistence.ExperienceTypeRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ExperienceTypeMgr {
 
@@ -19,6 +21,10 @@ public class ExperienceTypeMgr {
 
     public void save(ExperienceType experienceType){
         experienceTypeRepository.save(experienceType);
+    }
+
+    public List<ExperienceType> findAll(){
+        return experienceTypeRepository.findAll();
     }
 
 }
