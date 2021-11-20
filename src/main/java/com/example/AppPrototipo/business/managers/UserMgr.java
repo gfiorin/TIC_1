@@ -92,7 +92,6 @@ public class UserMgr {
         touristRepository.save(touristToAdd);
     }
 
-
     @Transactional
     public User userLogIn(String emailOrUsername, String password) throws InvalidInformation {
 
@@ -131,16 +130,6 @@ public class UserMgr {
     }
 
     @Transactional
-    public List<Experience> getCurrentUserLiked() {
-        return ((Tourist) getCurrentUser()).getLiked();
-    }
-
-    @Transactional
-    public List<Interest> getCurrentUserInterests() {
-        return ((Tourist) getCurrentUser()).getInterests();
-    }
-
-    @Transactional
     public Tourist getCurrentTourist() {
         Tourist tourist = (Tourist) userRepository.findById(currentUserId).get();
         Hibernate.initialize(tourist.getLiked());
@@ -148,4 +137,5 @@ public class UserMgr {
         Hibernate.initialize(tourist.getBookings());
         return tourist;
     }
+
 }

@@ -1,5 +1,8 @@
 package com.example.AppPrototipo.business.entities;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.List;
@@ -33,6 +36,7 @@ public class Experience {
     @Column(name = "authorized")
     private boolean authorized;
 
+    @LazyCollection(LazyCollectionOption.FALSE)
     @ManyToMany
     @JoinTable(
             name = "types_experiences",
@@ -45,7 +49,8 @@ public class Experience {
     @JoinColumn(name="tour_operator")
     private TourOperator tourOperator;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "experience")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "experience")
     private List<Image> images;
 
     @ManyToOne
