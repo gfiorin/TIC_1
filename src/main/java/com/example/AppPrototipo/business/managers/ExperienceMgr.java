@@ -6,6 +6,7 @@ import com.example.AppPrototipo.business.entities.ExperienceType;
 import com.example.AppPrototipo.business.entities.Tourist;
 import com.example.AppPrototipo.persistence.BookingRepository;
 import com.example.AppPrototipo.persistence.ExperienceRepository;
+import org.hibernate.Hibernate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -73,8 +74,11 @@ public class ExperienceMgr {
         }
     }
 
-    public List<ExperienceType> getExperienceTypes(Experience experience) {
-        return experience.getExperienceTypes();
+    @Transactional
+    public Experience getCurrentExperience(int id){
+        Experience experience = experienceRepository.findById(id).get();
+        Hibernate.initialize(experience.getExperienceTypes());
+        return experience;
     }
 
     public List<Experience> findAll(){
@@ -85,6 +89,7 @@ public class ExperienceMgr {
         return experienceRepository.findOneById(id);
     }
 
+    @Transactional
     public List<Experience> findByTypes(List<ExperienceType> experienceTypes){
 
         List<Experience> allExperiences = experienceRepository.findAll();

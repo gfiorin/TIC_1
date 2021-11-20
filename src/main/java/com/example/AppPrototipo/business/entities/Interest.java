@@ -15,10 +15,9 @@ public class Interest {
     @Column(name="name")
     private String name;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name="interest")
     private List<ExperienceType> experienceTypes;
-
 
     public Interest() {
     }

@@ -12,6 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Lazy;
@@ -28,16 +29,24 @@ public class ExperienceGridController implements Initializable {
 
     private final ExperienceMgr experienceMgr;
     private final UserMgr userMgr;
+    private final InterestMgr interestMgr;
     private final TouristController touristController;
     private static Tourist tourist;
     private static Set<ExperienceType> types;
 
     @FXML
+    private Text titulo;
+
+    @FXML
+    private VBox vBoxGral;
+
+    @FXML
     private GridPane grillaRecomendaciones;
 
-    public ExperienceGridController(ExperienceMgr experienceMgr, UserMgr userMgr, @Lazy TouristController touristController) {
+    public ExperienceGridController(ExperienceMgr experienceMgr, UserMgr userMgr, InterestMgr interestMgr, @Lazy TouristController touristController) {
         this.experienceMgr = experienceMgr;
         this.userMgr = userMgr;
+        this.interestMgr = interestMgr;
         this.touristController = touristController;
     }
 
@@ -53,15 +62,18 @@ public class ExperienceGridController implements Initializable {
         tourist = userMgr.getCurrentTourist();
 
         for (Interest interest : tourist.getInterests()) {
+            interest = interestMgr.getCurrentInterest(interest.getId());
             types.addAll(interest.getExperienceTypes());
         }
 
         for (Experience expLiked : tourist.getLiked()) {
+            expLiked = experienceMgr.getCurrentExperience(expLiked.getId());
             types.addAll(expLiked.getExperienceTypes());
         }
 
-        for (Experience bookings : tourist.getExperiencesBooked()) {
-            types.addAll(bookings.getExperienceTypes());
+        for (Experience booking : tourist.getExperiencesBooked()) {
+            booking = experienceMgr.getCurrentExperience(booking.getId());
+            types.addAll(booking.getExperienceTypes());
         }
 
         List<Experience> recommendations = recommendations();
@@ -96,27 +108,58 @@ public class ExperienceGridController implements Initializable {
     }
 
     private List<Experience> recommendations() {
-        List<Experience> recommendations = experienceMgr.findByTypes(new ArrayList<>(types));
+        List<Experience> experiences = experienceMgr.findByTypes(new ArrayList<>(types));
+        List<ExperienceSort> recommendationSort = new ArrayList<>();
 
-        for (Experience experience : recommendations){
+        for (Experience experience : experiences){
             if (tourist.getLiked().contains(experience) || tourist.getExperiencesBooked().contains(experience)){
-                recommendations.remove(experience);
+                experiences.remove(experience);
             } else {
-                experience.setPonderation(weigh(experience));
-                experienceMgr.updateExperience(experience);
+                recommendationSort.add(new ExperienceSort(experience,weigh(experience)));
             }
         }
 
-        recommendations = recommendations.stream().sorted(Comparator.comparingInt(Experience::getPonderation)).collect(Collectors.toList());
-        Collections.reverse(recommendations);
+        recommendationSort = recommendationSort.stream().sorted(Comparator.comparingInt(ExperienceSort::getPonderation)).collect(Collectors.toList());
+        Collections.reverse(recommendationSort);
+
+        List<Experience> recommendations = new ArrayList<>();
+
+        for (ExperienceSort sort : recommendationSort){
+            recommendations.add(sort.getExperience());
+        }
 
         return recommendations;
     }
 
+    public static class ExperienceSort {
+        private Experience experience;
+        private int ponderation;
+
+        public ExperienceSort(Experience experience, int ponderation) {
+            this.experience = experience;
+            this.ponderation = ponderation;
+        }
+
+        public Experience getExperience() {
+            return experience;
+        }
+
+        public void setExperience(Experience experience) {
+            this.experience = experience;
+        }
+
+        public int getPonderation() {
+            return ponderation;
+        }
+
+        public void setPonderation(int ponderation) {
+            this.ponderation = ponderation;
+        }
+    }
 
     private Integer weigh(Experience experience){
 
-        List<ExperienceType> expTypes = experienceMgr.getExperienceTypes(experience);
+        List<ExperienceType> expTypes = experience.getExperienceTypes();
 
         int n = 0;
         for (ExperienceType experienceType : expTypes){

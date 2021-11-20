@@ -32,7 +32,7 @@ public class Experience {
     @Column(name = "authorized")
     private boolean authorized;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "types_experiences",
             joinColumns = {@JoinColumn(name = "experience")},
@@ -87,12 +87,6 @@ public class Experience {
         return bookings;
     }
 
-    //public List<Interest> getInterests() {
-    //
-    //  }
-
-    private Integer ponderation = 0;
-
     public Experience() {
     }
 
@@ -111,13 +105,6 @@ public class Experience {
         this.reviewed = false;
     }
 
-    public Integer getPonderation() {
-        return ponderation;
-    }
-
-    public void setPonderation(Integer ponderation) {
-        this.ponderation = ponderation;
-    }
 
     public Integer getId() {
         return id;
