@@ -3,6 +3,7 @@ package com.example.AppPrototipo.ui.admin;
 import com.example.AppPrototipo.AppPrototipoApplication;
 import com.example.AppPrototipo.business.managers.AdministratorMgr;
 import com.example.AppPrototipo.business.entities.Administrator;
+import com.example.AppPrototipo.business.managers.UserMgr;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -11,15 +12,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class ListOfAdministratorsController {
@@ -42,10 +41,16 @@ public class ListOfAdministratorsController {
     private TableColumn<Administrator, String> email;
 
     @FXML
+    private Button deleteAdministratorBtn;
+
+    @FXML
     private Button goBackBtn;
 
-    public ListOfAdministratorsController(AdministratorMgr administratorMgr) {
+    private final UserMgr userMgr;
+
+    public ListOfAdministratorsController(AdministratorMgr administratorMgr, UserMgr userMgr) {
         this.administratorMgr = administratorMgr;
+        this.userMgr = userMgr;
     }
 
     @FXML
@@ -61,6 +66,21 @@ public class ListOfAdministratorsController {
     private ObservableList<Administrator> getAdministrators() {
         List<Administrator> administratorsList = administratorMgr.findAll();
         return FXCollections.observableArrayList(administratorsList);
+    }
+
+    @FXML
+    void deleteAdministrator(ActionEvent event) {
+        boolean deleteAdministrator = deleteAdminstratorAlert("Confirmacion", "\n¿Esta seguro que desea eliminar a este administrador?");
+        if (deleteAdministrator) {
+            Administrator administratorToDelete = adminTable.getSelectionModel().getSelectedItem();
+            if (administratorToDelete.equals(userMgr.getCurrentUser())){
+                showAlert("Error!", "No puede eliminar un usuario administrador desde la misma sesión");
+            }
+            else {
+                administratorMgr.deleteAdministratorById(administratorToDelete.getId());
+                adminTable.setItems(getAdministrators());
+            }
+        }
     }
 
     @FXML
@@ -84,6 +104,20 @@ public class ListOfAdministratorsController {
         Node source = (Node)  event.getSource();
         Stage stage  = (Stage) source.getScene().getWindow();
         stage.close();
+    }
+
+    private boolean deleteAdminstratorAlert(String title, String contextText){
+
+        ButtonType acceptBtn = new ButtonType("Si", ButtonBar.ButtonData.OK_DONE);
+        ButtonType cancelBtn = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, contextText, acceptBtn, cancelBtn);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        Optional<ButtonType> result = alert.showAndWait();
+
+        return result.orElse(cancelBtn) == acceptBtn;
+
     }
 
     private void showAlert(String title, String contextText){

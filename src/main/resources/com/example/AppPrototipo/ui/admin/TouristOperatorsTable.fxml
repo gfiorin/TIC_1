@@ -7,30 +7,31 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-<AnchorPane prefHeight="406.0" prefWidth="924.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.AppPrototipo.ui.admin.TouristOperatorsTableController">
-    <TableView fx:id="touristOperatorTable" layoutY="38.0" prefHeight="366.0" prefWidth="924.0">
+<AnchorPane prefHeight="449.0" prefWidth="938.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.AppPrototipo.ui.admin.TouristOperatorsTableController">
+    <TableView fx:id="touristOperatorTable" layoutY="38.0" prefHeight="366.0" prefWidth="938.0">
         <columns>
             <TableColumn fx:id="id" prefWidth="63.19998013973236" text="ID" />
             <TableColumn fx:id="companyName" prefWidth="121.5999984741211" text="Nombre compañía" />
             <TableColumn fx:id="fantasyName" prefWidth="106.39996337890625" text="Nombre fantasía" />
-            <TableColumn fx:id="webLink" prefWidth="100.800048828125" text="Link" />
+            <TableColumn fx:id="linkToWeb" prefWidth="100.800048828125" text="Link" />
             <TableColumn fx:id="contactName" prefWidth="112.0" text="Nombre contacto" />
             <TableColumn fx:id="contactPhone" prefWidth="115.19998168945312" text="Teléfono contacto" />
             <TableColumn fx:id="contactPosition" prefWidth="106.39996337890625" text="Cargo contacto" />
             <TableColumn fx:id="contactEmail" prefWidth="114.39996337890625" text="Email contacto" />
-            <TableColumn fx:id="authorized" minWidth="0.0" prefWidth="87.199951171875" text="Autorizado" />
+            <TableColumn fx:id="authorized" minWidth="0.0" prefWidth="94.39990234375" text="Autorizado" />
         </columns>
     </TableView>
-   <Pane layoutY="403.0" prefHeight="46.0" prefWidth="919.0">
+   <Pane layoutY="403.0" prefHeight="46.0" prefWidth="938.0">
       <children>
-         <Button fx:id="authorizeBtn" layoutX="671.0" layoutY="11.0" mnemonicParsing="false" onAction="#enableOrDisableTO" text="Autorizar/Desautorizar operador turístico" />
+         <Button fx:id="authorizeBtn" layoutX="693.0" layoutY="11.0" mnemonicParsing="false" onAction="#enableOrDisableTO" text="Autorizar/Desautorizar operador turístico" />
+         <Button fx:id="viewBookingsBtn" layoutX="477.0" layoutY="11.0" mnemonicParsing="false" onAction="#viewBookings" text="Ver reservas de operador turístico" />
       </children>
    </Pane>
-   <Pane prefHeight="38.0" prefWidth="924.0">
+   <Pane prefHeight="38.0" prefWidth="938.0">
       <children>
          <Button fx:id="goBackBtn" layoutX="20.0" layoutY="7.0" mnemonicParsing="false" onAction="#goBackToAdminView" prefHeight="25.0" prefWidth="65.0" text="Atrás" />
-         <TextField fx:id="searchInput" layoutX="631.0" layoutY="7.0" prefHeight="25.0" prefWidth="195.0" />
-         <Button fx:id="searchBtn" layoutX="839.0" layoutY="7.0" mnemonicParsing="false" onAction="#searchItem" prefHeight="25.0" prefWidth="65.0" text="Buscar" />
+         <TextField fx:id="searchInput" layoutX="645.0" layoutY="7.0" prefHeight="25.0" prefWidth="195.0" />
+         <Button fx:id="searchBtn" layoutX="849.0" layoutY="7.0" mnemonicParsing="false" onAction="#searchItem" prefHeight="25.0" prefWidth="65.0" text="Buscar" />
       </children>
    </Pane>
 </AnchorPane>

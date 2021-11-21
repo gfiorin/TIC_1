@@ -1,9 +1,6 @@
 package com.example.AppPrototipo.ui.operator;
 
-import com.example.AppPrototipo.business.entities.Booking;
-import com.example.AppPrototipo.business.entities.Experience;
-import com.example.AppPrototipo.business.entities.Operator;
-import com.example.AppPrototipo.business.entities.TourOperator;
+import com.example.AppPrototipo.business.entities.*;
 import com.example.AppPrototipo.business.managers.ExperienceMgr;
 import com.example.AppPrototipo.business.managers.UserMgr;
 import javafx.collections.FXCollections;
@@ -39,6 +36,12 @@ public class BookingsListOpController {
 
     @FXML
     private TableColumn<Booking, Integer> amount;
+
+    @FXML
+    private TableColumn<Booking, Country> country;
+    //todo
+    @FXML
+    private TableColumn<Booking, String> cellphone;
 
     private final UserMgr userMgr;
     private final ExperienceMgr experienceMgr;

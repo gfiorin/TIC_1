@@ -17,7 +17,6 @@ public class Interest {
     //@OneToMany
     //private List<ExperienceType> experienceTypes;
 
-
     public Interest() {
     }
 

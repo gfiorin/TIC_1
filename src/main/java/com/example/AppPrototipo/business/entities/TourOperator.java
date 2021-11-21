@@ -134,4 +134,9 @@ public class TourOperator {
         this.authorized = authorized;
     }
 
+    @Override
+    public String toString() {
+        return this.companyName;
+    }
+
 }

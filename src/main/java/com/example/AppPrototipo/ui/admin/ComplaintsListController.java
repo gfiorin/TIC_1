@@ -85,6 +85,11 @@ public class ComplaintsListController {
         oldStage.close();
     }
 
+    @FXML //todo
+    void checkComplaint(ActionEvent event) throws Exception{
+
+    }
+
     @FXML
     void close(ActionEvent event){
         Node source = (Node)  event.getSource();

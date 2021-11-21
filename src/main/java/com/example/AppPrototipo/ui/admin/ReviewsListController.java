@@ -68,6 +68,11 @@ public class ReviewsListController {
         return FXCollections.observableArrayList(reviewsList);
     }
 
+    @FXML //todo
+    void checkReview(ActionEvent event) throws Exception{
+
+    }
+
     @FXML
     void goBackToAdminView(ActionEvent event) throws Exception{
         Node source = (Node) event.getSource();

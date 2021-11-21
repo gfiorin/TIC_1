@@ -17,7 +17,7 @@ public class Tourist extends User{
 
     @Column(name = "document_type")
     private String documentType;
-
+    //todo
     @Column(name = "document_number")
     private String documentNumber;
 

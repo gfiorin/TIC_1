@@ -1,6 +1,8 @@
 package com.example.AppPrototipo.ui.admin;
 
 import com.example.AppPrototipo.AppPrototipoApplication;
+import com.example.AppPrototipo.business.entities.Department;
+import com.example.AppPrototipo.business.entities.TourOperator;
 import com.example.AppPrototipo.business.managers.ExperienceMgr;
 import com.example.AppPrototipo.business.entities.Experience;
 import javafx.collections.FXCollections;
@@ -18,6 +20,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import org.springframework.stereotype.Component;
+
+import java.math.BigDecimal;
 import java.util.List;
 
 @Component
@@ -30,16 +34,19 @@ public class ExperiencesTableController {
     private TableColumn<Experience, Integer> id;
 
     @FXML
+    private TableColumn<Experience, TourOperator> tourOperator;
+
+    @FXML
     private TableColumn<Experience, String> title;
 
     @FXML
-    private TableColumn<Experience, String> department;
+    private TableColumn<Experience, Department> department;
 
     @FXML
     private TableColumn<Experience, Boolean> authorized;
 
     @FXML
-    private TableColumn<Experience, Float> price;
+    private TableColumn<Experience, BigDecimal> price;
 
     @FXML
     private TableColumn<Experience, String> description;
@@ -55,6 +62,21 @@ public class ExperiencesTableController {
 
     @FXML
     private TableColumn<Experience, Boolean> reviewed;
+
+    @FXML
+    private TableColumn<Experience, String> email;
+
+    @FXML
+    private TableColumn<Experience, String> link;
+
+    @FXML
+    private TableColumn<Experience, String> telephone;
+
+    @FXML
+    private TableColumn<Experience, String> ubicacion;
+
+    @FXML
+    private TableColumn<Experience, String> shortDescription;
 
     @FXML
     private Button goBackBtn;
@@ -73,6 +95,7 @@ public class ExperiencesTableController {
         experiencesTable.setItems(getExperiences());
 
         id.setCellValueFactory(new PropertyValueFactory<>("id"));
+        tourOperator.setCellValueFactory(new PropertyValueFactory<>("tourOperator"));
         title.setCellValueFactory(new PropertyValueFactory<>("title"));
         department.setCellValueFactory(new PropertyValueFactory<>("department"));
         authorized.setCellValueFactory(new PropertyValueFactory<>("authorized"));
@@ -82,6 +105,11 @@ public class ExperiencesTableController {
         capacity.setCellValueFactory(new PropertyValueFactory<>("capacity"));
         bookable.setCellValueFactory(new PropertyValueFactory<>("bookable"));
         reviewed.setCellValueFactory(new PropertyValueFactory<>("reviewed"));
+        email.setCellValueFactory(new PropertyValueFactory<>("email"));
+        link.setCellValueFactory(new PropertyValueFactory<>("link"));
+        telephone.setCellValueFactory(new PropertyValueFactory<>("telephone"));
+        ubicacion.setCellValueFactory(new PropertyValueFactory<>("ubicacion"));
+        shortDescription.setCellValueFactory(new PropertyValueFactory<>("shortDescription"));
     }
 
     private ObservableList<Experience> getExperiences() {

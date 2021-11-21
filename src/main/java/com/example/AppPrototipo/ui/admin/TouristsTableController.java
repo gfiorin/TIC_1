@@ -55,7 +55,7 @@ public class TouristsTableController {
     private TableColumn<Tourist, Country> country;
 
     @FXML
-    private TableColumn<Tourist, List<Interest>> listOfInterests;
+    private TableColumn<Tourist, List<Interest>> interests;
 
     @FXML
     private Button goBackBtn;
@@ -79,7 +79,7 @@ public class TouristsTableController {
         documentType.setCellValueFactory(new PropertyValueFactory<>("documentType"));
         documentNumber.setCellValueFactory(new PropertyValueFactory<>("documentNumber"));
         country.setCellValueFactory(new PropertyValueFactory<>("country"));
-        //listOfInterests.setCellValueFactory(new PropertyValueFactory<>("Interests")); todo
+        //interests.setCellValueFactory(new PropertyValueFactory<>("interests")); todo
     }
 
     private ObservableList<Tourist> getTourists() {

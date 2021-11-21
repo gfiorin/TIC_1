@@ -13,6 +13,8 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
+
 @Component // se podrian ordenar un poco las clases en paquetes todo
 public class AdminController {
 
@@ -45,6 +47,9 @@ public class AdminController {
 
     @FXML
     private Button listOfReviewsBtn;
+
+    @FXML
+    private Button addAdminstratorBtn;
 
     @FXML
     private Button cerrarSesionBtn;
@@ -117,13 +122,18 @@ public class AdminController {
 
     @FXML
     void showCreateTypeOfExperience(ActionEvent event) throws Exception {
+        Node source = (Node) event.getSource();
+        Stage oldStage  = (Stage) source.getScene().getWindow();
+
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
 
         Parent root = fxmlLoader.load(TypeOfExperienceController.class.getResourceAsStream("TypeOfExperience.fxml"));
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.show();
+        Stage newStage = new Stage();
+        newStage.setScene(new Scene(root));
+        newStage.show();
+
+        oldStage.close();
     }
 
     @FXML
@@ -189,6 +199,22 @@ public class AdminController {
         fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
 
         Parent root = fxmlLoader.load(AdminController.class.getResourceAsStream("ReviewsList.fxml"));
+        Stage newStage = new Stage();
+        newStage.setScene(new Scene(root));
+        newStage.show();
+
+        oldStage.close();
+    }
+
+    @FXML
+    void addAdministrator(ActionEvent event) throws IOException {
+        Node source = (Node) event.getSource();
+        Stage oldStage  = (Stage) source.getScene().getWindow();
+
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
+
+        Parent root = fxmlLoader.load(AddAdministratorController.class.getResourceAsStream("AddAdministrator.fxml"));
         Stage newStage = new Stage();
         newStage.setScene(new Scene(root));
         newStage.show();

@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 import org.hibernate.type.descriptor.sql.TinyIntTypeDescriptor;
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
@@ -38,7 +39,7 @@ public class TouristOperatorsTableController {
     private TableColumn<TourOperator, String> fantasyName;
 
     @FXML
-    private TableColumn<TourOperator, String> webLink;
+    private TableColumn<TourOperator, String> linkToWeb;
 
     @FXML
     private TableColumn<TourOperator, String> contactName;
@@ -57,6 +58,9 @@ public class TouristOperatorsTableController {
 
     @FXML
     private Button authorizeBtn;
+
+    @FXML
+    private Button viewBookingsBtn;
 
     @FXML
     private Button goBackBtn;
@@ -79,7 +83,7 @@ public class TouristOperatorsTableController {
         id.setCellValueFactory(new PropertyValueFactory<>("id"));
         companyName.setCellValueFactory(new PropertyValueFactory<>("companyName"));
         fantasyName.setCellValueFactory(new PropertyValueFactory<>("fantasyName"));
-        webLink.setCellValueFactory(new PropertyValueFactory<>("webLink"));
+        linkToWeb.setCellValueFactory(new PropertyValueFactory<>("linkToWeb"));
         contactName.setCellValueFactory(new PropertyValueFactory<>("contactName"));
         contactPhone.setCellValueFactory(new PropertyValueFactory<>("contactPhone"));
         contactPosition.setCellValueFactory(new PropertyValueFactory<>("contactPosition"));
@@ -97,6 +101,24 @@ public class TouristOperatorsTableController {
         TourOperator tourOperatorToModify = touristOperatorTable.getSelectionModel().getSelectedItem();
         tourOperatorMgr.changeAuthorizationOfTouristOperator(tourOperatorToModify.getId());
         touristOperatorTable.setItems(getTourOperators());
+    }
+
+    @FXML //todo
+    private void viewBookings(ActionEvent event) throws IOException {
+        TourOperator tourOperator = touristOperatorTable.getSelectionModel().getSelectedItem();
+
+        Node source = (Node) event.getSource();
+        Stage oldStage  = (Stage) source.getScene().getWindow();
+
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
+
+        Parent root = fxmlLoader.load(TOBookingsTableController.class.getResourceAsStream("TOBookingsTable.fxml"));
+        Stage newStage = new Stage();
+        newStage.setScene(new Scene(root));
+        newStage.show();
+
+        oldStage.close();
     }
 
     @FXML

@@ -16,4 +16,13 @@ public class Administrator extends User{
         super(name, username, email, password);
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Administrator){
+            Administrator administrator = (Administrator) obj;
+            return this.getId().equals(administrator.getId());
+        }
+        return false;
+    }
+
 }
