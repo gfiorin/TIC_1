@@ -92,7 +92,7 @@ public class ExperienceGridController implements Initializable {
                 fxmlLoader.setController(miniExperienceController);
                 fxmlLoader.setLocation(miniExperienceController.getClass().getResource("MiniExperience.fxml"));
                 VBox vbox = fxmlLoader.load();
-                miniExperienceController.setData(recommendation);
+                miniExperienceController.setData(recommendation, false);
 
                 if (columns == 4) {
                     columns = 0;

@@ -101,7 +101,6 @@ public class PrincipalController {
                 fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
 
                 Parent root = fxmlLoader.load(touristController.getClass().getResourceAsStream("TouristMain.fxml"));
-                TouristController.setTourist((Tourist) user);
                 Stage newStage = new Stage();
                 newStage.setScene(new Scene(root));
                 newStage.show();
