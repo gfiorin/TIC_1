@@ -77,7 +77,7 @@ public class ExperienceGridController implements Initializable {
                 VBox vbox = fxmlLoader.load();
                 miniExperienceController.setData(recommendation, isLikedByUser(tourist, recommendation));
 
-                if (columns == 4) {
+                if (columns == 3) {
                     columns = 0;
                     ++row;
                 }

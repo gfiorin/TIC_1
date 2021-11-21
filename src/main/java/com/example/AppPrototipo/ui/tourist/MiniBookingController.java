@@ -1,25 +1,30 @@
 package com.example.AppPrototipo.ui.tourist;
 
 import com.example.AppPrototipo.business.entities.Booking;
-import com.example.AppPrototipo.business.entities.Experience;
+import com.example.AppPrototipo.business.managers.BookingMgr;
 import javafx.beans.value.ChangeListener;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
-import org.springframework.format.datetime.DateFormatter;
 import org.springframework.stereotype.Component;
 
 import java.io.ByteArrayInputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 @Component
 public class MiniBookingController {
+
+    private final BookingMgr bookingMgr;
+
+    @FXML
+    private Button cancelarBtn;
+
     @FXML
     private Text cuposReserva;
 
@@ -41,7 +46,12 @@ public class MiniBookingController {
     @FXML
     private Pane imagePane;
 
+    public MiniBookingController(BookingMgr bookingMgr) {
+        this.bookingMgr = bookingMgr;
+    }
+
     public void setData(Booking booking){
+        cancelarBtn.setUserData(booking.getId());
         String formatoFecha = "dd/MM/yyyy";
         DateFormat formatter = new SimpleDateFormat(formatoFecha);
         fechaReserva.setText(formatter.format(booking.getDate()));
@@ -82,6 +92,14 @@ public class MiniBookingController {
 
             imageViewPrincipal.setFitWidth(paneWidth);
         };
+    }
+
+    @FXML
+    void cancelarOnAction(ActionEvent event) {
+        Booking booking = bookingMgr.findById((Integer) cancelarBtn.getUserData());
+        bookingMgr.delete(booking);
+        cancelarBtn.setText("Cancelada");
+        cancelarBtn.setStyle("-fx-background-color: green");
     }
 
 }

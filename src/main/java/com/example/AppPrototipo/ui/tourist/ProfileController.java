@@ -2,7 +2,9 @@ package com.example.AppPrototipo.ui.tourist;
 import com.example.AppPrototipo.business.entities.Interest;
 import com.example.AppPrototipo.business.entities.Tourist;
 import com.example.AppPrototipo.business.managers.UserMgr;
+import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
+import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import org.springframework.stereotype.Component;
@@ -19,6 +21,9 @@ public class ProfileController {
     private final UserMgr userMgr;
 
     private List<Interest> listaIntereses;
+
+    @FXML
+    private Button editarBtn;
 
     @FXML
     private Text fechaNacimiento;
@@ -67,5 +72,10 @@ public class ProfileController {
             text.setText("• " + interest.getName());
             vBoxIntereses.getChildren().add(text);
         }
+    }
+
+    @FXML
+    void editarIntereses(ActionEvent event) {
+
     }
 }
