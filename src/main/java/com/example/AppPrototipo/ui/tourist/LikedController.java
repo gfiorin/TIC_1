@@ -4,17 +4,20 @@ import com.example.AppPrototipo.AppPrototipoApplication;
 import com.example.AppPrototipo.business.managers.UserMgr;
 import com.example.AppPrototipo.business.entities.Experience;
 import com.example.AppPrototipo.business.entities.Tourist;
-import com.example.AppPrototipo.persistence.ExperienceRepository;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import org.hibernate.Hibernate;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
+import javax.transaction.Transactional;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -26,13 +29,9 @@ public class LikedController implements Initializable {
     @FXML
     private GridPane grillaFavoritos;
 
-    private final ExperienceRepository experienceRepository;
-    private final MiniExperienceController miniExperienceController;
     private final UserMgr userMgr;
 
-    public LikedController(ExperienceRepository experienceRepository, MiniExperienceController miniExperienceController, UserMgr userMgr) {
-        this.experienceRepository = experienceRepository;
-        this.miniExperienceController = miniExperienceController;
+    public LikedController(UserMgr userMgr) {
         this.userMgr = userMgr;
     }
 
@@ -47,29 +46,35 @@ public class LikedController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        List<Experience> experiences = userMgr.getCurrentUserLiked();
+        Tourist tourist = userMgr.getCurrentTourist();
+        List<Experience> likedExperiences = tourist.getLiked();
 
         int columns = 0;
         int row = 1;
 
         try {
-            for (int i=0; i < experiences.size(); i++){
+            for (Experience likedExperience : likedExperiences) {
                 FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
-                fxmlLoader.setLocation(miniExperienceController.getClass().getResource("MiniExperience.fxml"));
-                MiniExperienceController.setTourist(tourist);
-                VBox vbox = fxmlLoader.load();
-                miniExperienceController.setData(experiences.get(i));
 
-                if(columns == 4){
+                ApplicationContext applicationContext = AppPrototipoApplication.getContext();
+                MiniExperienceController miniExperienceController = (MiniExperienceController) applicationContext
+                        .getBean("miniExperienceControllerPrototype");
+                fxmlLoader.setController(miniExperienceController);
+
+                fxmlLoader.setController(miniExperienceController);
+                fxmlLoader.setLocation(miniExperienceController.getClass().getResource("MiniExperience.fxml"));
+                VBox vbox = fxmlLoader.load();
+                miniExperienceController.setData(likedExperience, true);
+
+                if (columns == 4) {
                     columns = 0;
                     ++row;
                 }
 
-                grillaFavoritos.add(vbox,columns++,row);
-                GridPane.setMargin(vbox,new Insets(10));
+                grillaFavoritos.add(vbox, columns++, row);
+                GridPane.setMargin(vbox, new Insets(10));
             }
-        } catch (IOException e) {
+        }catch (IOException e) {
             e.printStackTrace();
         }
     }

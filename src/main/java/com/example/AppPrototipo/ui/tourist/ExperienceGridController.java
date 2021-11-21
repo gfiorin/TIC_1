@@ -1,6 +1,7 @@
 package com.example.AppPrototipo.ui.tourist;
 
 import com.example.AppPrototipo.AppPrototipoApplication;
+import com.example.AppPrototipo.business.entities.Tourist;
 import com.example.AppPrototipo.business.managers.ExperienceMgr;
 import com.example.AppPrototipo.business.entities.Experience;
 import com.example.AppPrototipo.business.managers.UserMgr;
@@ -8,14 +9,23 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import org.hibernate.Hibernate;
+import javafx.stage.Stage;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import javax.transaction.Transactional;
+import javafx.event.ActionEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -47,7 +57,9 @@ public class ExperienceGridController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        ArrayList<Experience> recommendations = new ArrayList<>(recommendations());
+        List<Experience> recommendations = new ArrayList<>(recommendations());
+        Tourist tourist = userMgr.getCurrentTourist();
+
         int columns = 0;
         int row = 1;
 
@@ -63,7 +75,7 @@ public class ExperienceGridController implements Initializable {
                 fxmlLoader.setController(miniExperienceController);
                 fxmlLoader.setLocation(miniExperienceController.getClass().getResource("MiniExperience.fxml"));
                 VBox vbox = fxmlLoader.load();
-                miniExperienceController.setData(recommendation);
+                miniExperienceController.setData(recommendation, isLikedByUser(tourist, recommendation));
 
                 if (columns == 4) {
                     columns = 0;
@@ -85,5 +97,9 @@ public class ExperienceGridController implements Initializable {
             list.add(experience);
         }
         return list;
+    }
+
+    private boolean isLikedByUser(Tourist tourist, Experience experience) {
+        return tourist.getLiked().stream().mapToInt(Experience::getId).anyMatch(id -> id == experience.getId());
     }
 }

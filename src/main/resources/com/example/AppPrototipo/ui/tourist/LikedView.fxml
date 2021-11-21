@@ -14,7 +14,7 @@
          <children>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Favoritos" underline="true">
                <font>
-                  <Font size="24.0" />
+                  <Font name="System Bold" size="30.0" />
                </font>
                <VBox.margin>
                   <Insets left="10.0" />

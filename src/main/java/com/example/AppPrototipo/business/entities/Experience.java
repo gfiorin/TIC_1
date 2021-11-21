@@ -1,5 +1,8 @@
 package com.example.AppPrototipo.business.entities;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.List;
@@ -33,6 +36,7 @@ public class Experience {
     @Column(name = "authorized")
     private boolean authorized;
 
+    @LazyCollection(LazyCollectionOption.FALSE)
     @ManyToMany
     @JoinTable(
             name = "types_experiences",
@@ -45,8 +49,8 @@ public class Experience {
     @JoinColumn(name="tour_operator")
     private TourOperator tourOperator;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "experience")
-    @JoinColumn(name = "experience")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "experience")
     private List<Image> images;
 
     @OneToMany()
@@ -78,7 +82,7 @@ public class Experience {
     public Experience() {
     }
 
-    public Experience(String title, String description, String shortDescription, boolean vaccination, Integer capacity, boolean bookable, boolean authorized, List<ExperienceType> experienceTypes, TourOperator tourOperator, Department department, String ubicacion, String email, String link, String telephone, Boolean reviewed, BigDecimal price, List<Image> images) {
+    public Experience(String title, String description, String shortDescription, boolean vaccination, Integer capacity, boolean bookable, boolean authorized, List<ExperienceType> experienceTypes, TourOperator tourOperator, Department department, String ubicacion, String email, String link, String telephone, Boolean reviewed, BigDecimal price) {
         this.title = title;
         this.description = description;
         this.shortDescription = shortDescription;
@@ -88,7 +92,6 @@ public class Experience {
         this.authorized = authorized;
         this.experienceTypes = experienceTypes;
         this.tourOperator = tourOperator;
-        this.images = images;
         this.department = department;
         this.ubicacion = ubicacion;
         this.email = email;

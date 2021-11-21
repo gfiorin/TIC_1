@@ -11,6 +11,7 @@ import java.math.BigDecimal;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -84,9 +85,10 @@ public class ExperienceMgr {
         return experienceRepository.findByTourOperator(tourOperator);
     }
 
-    public Experience addExperience(String title, String description, String shortDescription, boolean vaccination, Integer capacity, BigDecimal price, boolean bookable, List<ExperienceType> experienceTypes, TourOperator tourOperator, Department department, String ubicacion, String email, String link, String telephone, List<Image> images) throws InvalidInformation {
+    @Transactional
+    public void addExperience(String title, String description, String shortDescription, boolean vaccination, Integer capacity, BigDecimal price, boolean bookable, List<ExperienceType> experienceTypes, TourOperator tourOperator, Department department, String ubicacion, String email, String link, String telephone, List<byte[]> images) throws InvalidInformation {
 
-        if (title == null || title.isBlank()){
+        if (title == null || title.isBlank() || title.length() > 30){
             throw new InvalidInformation("Por favor ingrese un titulo válido");
         }
 
@@ -138,11 +140,17 @@ public class ExperienceMgr {
             throw new InvalidInformation("La experiencia debe tener al menos una imagen asociada");
         }
 
-        Experience experienceToAdd = new Experience(title, description, shortDescription, vaccination, capacity, bookable, false, experienceTypes, tourOperator, department, ubicacion, email, link, telephone, true, price, images);
+        Experience experienceToAdd = new Experience(title, description, shortDescription, vaccination, capacity, bookable, false, experienceTypes, tourOperator, department, ubicacion, email, link, telephone, true, price);
 
         experienceRepository.save(experienceToAdd);
 
-        return experienceToAdd;
+        List<Image> imageList = new LinkedList<>();
+
+        for (byte[] image : images){
+            imageList.add(new Image(image, experienceToAdd));
+        }
+
+        experienceToAdd.setImages(imageList);
     }
 
 }

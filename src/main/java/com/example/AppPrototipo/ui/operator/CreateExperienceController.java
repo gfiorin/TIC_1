@@ -1,10 +1,13 @@
 package com.example.AppPrototipo.ui.operator;
 
+import com.example.AppPrototipo.AppPrototipoApplication;
 import com.example.AppPrototipo.business.entities.*;
 import com.example.AppPrototipo.business.exceptions.InvalidInformation;
 import com.example.AppPrototipo.business.managers.*;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
@@ -12,6 +15,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.FileChooser;
 import javafx.event.ActionEvent;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
@@ -89,12 +93,14 @@ public class CreateExperienceController {
     private final ExperienceTypeMgr experienceTypeMgr;
     private final DepartmentMgr departmentMgr;
     private final UserMgr userMgr;
+    private final OperatorController operatorController;
 
-    public CreateExperienceController(ExperienceMgr experienceMgr, ExperienceTypeMgr experienceTypeMgr, DepartmentMgr departmentMgr, UserMgr userMgr) {
+    public CreateExperienceController(ExperienceMgr experienceMgr, ExperienceTypeMgr experienceTypeMgr, DepartmentMgr departmentMgr, UserMgr userMgr, @Lazy OperatorController operatorController) {
         this.experienceMgr = experienceMgr;
         this.experienceTypeMgr = experienceTypeMgr;
         this.departmentMgr = departmentMgr;
         this.userMgr = userMgr;
+        this.operatorController = operatorController;
     }
 
     @FXML
@@ -117,7 +123,7 @@ public class CreateExperienceController {
     }
 
     @FXML
-    public void requestExperience(ActionEvent event) {
+    public void requestExperience(ActionEvent event) throws IOException {
 
         //Control de errores
         List<Control> controlList = Arrays.asList(titleInput, telephoneInput, emailInput, priceInput, streenAndNoInput, linkInput, capacityInput, shortDescriptionInput, longDescriptionInput, departmentInput);
@@ -207,20 +213,14 @@ public class CreateExperienceController {
                     return;
                 }
 
-                List<Image> imagesList = new LinkedList<>();
-
-                for (byte[] data : images){
-                    imagesList.add(new Image(data));
-                }
-
-                Experience experienceAdded = experienceMgr.addExperience(title, longDescription, shortDescription, vaccination, capacity, price, bookable, experienceTypes, tourOperator, department, streetAndNo, email, link, telephone, imagesList);
+                experienceMgr.addExperience(title, longDescription, shortDescription, vaccination, capacity, price, bookable, experienceTypes, tourOperator, department, streetAndNo, email, link, telephone, images);
 
                 showAlert("Su experiencia ha sido solicitada con exito", "Su experiencia ha sido solicitada con exito, un administrador del sitio la revisará en los proximos días para habilitarla");
 
                 images.clear();
-                imagesList.clear();
 
-                //lo mando a mis experiencias todo
+                //lo mando a "mis experiencias"
+                showListOfExperiences(event);
 
             } catch (InvalidInformation invalidInformation) {
                 showAlert(
@@ -261,6 +261,21 @@ public class CreateExperienceController {
         alert.setHeaderText(null);
         alert.setContentText(contextText);
         alert.showAndWait();
+    }
+
+    public void showListOfExperiences(ActionEvent actionEvent) throws IOException {
+        Node source = (Node) actionEvent.getSource();
+        Stage oldStage  = (Stage) source.getScene().getWindow();
+
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
+
+        Parent root = fxmlLoader.load(operatorController.getClass().getResourceAsStream("OperatorMain.fxml"));
+        Stage newStage = new Stage();
+        newStage.setScene(new Scene(root));
+        newStage.show();
+
+        oldStage.close();
     }
 
 }
