@@ -91,11 +91,7 @@ public class ExperienceGridController implements Initializable {
     }
 
     private List<Experience> recommendations(){
-        List<Experience> list = new ArrayList<>();
-        for (int i=1; i<6; i++) {
-            Experience experience = experienceMgr.findById(i);      //Algoritmo de recomendaciones
-            list.add(experience);
-        }
+        List<Experience> list = experienceMgr.findAll();
         return list;
     }
 

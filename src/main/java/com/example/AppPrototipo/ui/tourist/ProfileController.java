@@ -23,9 +23,6 @@ public class ProfileController {
     private List<Interest> listaIntereses;
 
     @FXML
-    private Button editarBtn;
-
-    @FXML
     private Text fechaNacimiento;
 
     @FXML
@@ -72,10 +69,5 @@ public class ProfileController {
             text.setText("• " + interest.getName());
             vBoxIntereses.getChildren().add(text);
         }
-    }
-
-    @FXML
-    void editarIntereses(ActionEvent event) {
-
     }
 }
