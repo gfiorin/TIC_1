@@ -5,6 +5,7 @@ import com.example.AppPrototipo.business.exceptions.InvalidInformation;
 import com.example.AppPrototipo.business.exceptions.TourOperatorAlreadyExists;
 import com.example.AppPrototipo.persistence.OperatorsRepository;
 import com.example.AppPrototipo.persistence.TourOperatorRepository;
+import org.hibernate.Hibernate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
@@ -108,5 +109,13 @@ public class TourOperatorMgr {
     public List<TourOperator> findAll(){
         return tourOperatorRepository.findAll();
     }
+
+    @Transactional
+    public TourOperator getCurrentTourOperator(int id){
+        TourOperator tourOperator = tourOperatorRepository.findById(id).get();
+        Hibernate.initialize(tourOperator.getListOfExperiences());
+        return tourOperator;
+    }
+
 
 }

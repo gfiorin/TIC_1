@@ -5,55 +5,47 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="109.0"
-      prefWidth="821.0" spacing="10.0"
-      style="-fx-border-color: #808080; -fx-border-radius: 18px; -fx-background-radius: 18px;"
-      xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.example.AppPrototipo.ui.operator.MiniExperienceOpController">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="109.0" prefWidth="800.0" spacing="10.0" style="-fx-border-color: #808080; -fx-border-radius: 18px; -fx-background-radius: 18px;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1">
     <ImageView fx:id="experienciaImg" fitHeight="81.0" fitWidth="174.0" pickOnBounds="true" preserveRatio="true">
         <HBox.margin>
-            <Insets left="10.0" top="10.0"/>
+            <Insets left="10.0" top="10.0" />
         </HBox.margin>
     </ImageView>
     <VBox prefHeight="100.0" prefWidth="170.0" spacing="10.0">
-        <Text fx:id="nombreExperiencia" strokeType="OUTSIDE" strokeWidth="0.0" text="NombreExperiencia"
-              wrappingWidth="295.13671875">
+        <Text fx:id="nombreExperiencia" strokeType="OUTSIDE" strokeWidth="0.0" text="NombreExperiencia" wrappingWidth="219.13671875">
             <VBox.margin>
-                <Insets top="15.0"/>
+                <Insets top="15.0" />
             </VBox.margin>
             <font>
-                <Font name="System Bold" size="21.0"/>
+                <Font name="System Bold" size="21.0" />
             </font>
         </Text>
     </VBox>
     <VBox alignment="TOP_RIGHT" prefHeight="87.0" prefWidth="391.0" spacing="10.0">
         <HBox.margin>
-            <Insets bottom="10.0" top="10.0"/>
+            <Insets bottom="10.0" top="10.0" />
         </HBox.margin>
         <HBox alignment="TOP_RIGHT">
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Cantidad de reservas: "
-                  wrappingWidth="177.92675590515137">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Cantidad de reservas: " wrappingWidth="177.92675590515137">
                 <font>
-                    <Font name="System Bold Italic" size="17.0"/>
+                    <Font name="System Bold Italic" size="17.0" />
                 </font>
             </Text>
-            <Text fx:id="cantidadReservas" strokeType="OUTSIDE" strokeWidth="0.0" text="CantidadReservas"
-                  wrappingWidth="150.42237091064453">
+            <Text fx:id="cantidadReservas" strokeType="OUTSIDE" strokeWidth="0.0" text="CantidadReservas" wrappingWidth="150.42237091064453">
                 <font>
-                    <Font size="17.0"/>
+                    <Font size="17.0" />
                 </font>
             </Text>
         </HBox>
         <HBox alignment="TOP_RIGHT">
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Estado: " wrappingWidth="63.9267635345459">
                 <font>
-                    <Font name="System Bold Italic" size="17.0"/>
+                    <Font name="System Bold Italic" size="17.0" />
                 </font>
             </Text>
-            <Text fx:id="estado" strokeType="OUTSIDE" strokeWidth="0.0" text="estado"
-                  wrappingWidth="150.42237091064453">
+            <Text fx:id="estado" strokeType="OUTSIDE" strokeWidth="0.0" text="estado" wrappingWidth="150.42237091064453">
                 <font>
-                    <Font size="17.0"/>
+                    <Font size="17.0" />
                 </font>
             </Text>
         </HBox>

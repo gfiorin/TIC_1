@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
@@ -75,8 +76,8 @@ public class OperatorController implements Initializable {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
         fxmlLoader.setLocation(listOfExperiencesOpController.getClass().getResource("ListOfExperiencesOp.fxml"));
-        AnchorPane showListOfExperiencesAP = fxmlLoader.load();
-        loadToInnerView(showListOfExperiencesAP);
+        ScrollPane showListOfExperiencesSP = fxmlLoader.load();
+        loadToInnerView(showListOfExperiencesSP);
     }
 
     public void ajustes() throws IOException {
