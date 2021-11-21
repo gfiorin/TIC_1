@@ -54,11 +54,13 @@ public class MiniExperienceController {
         verMasBtn.setUserData(experience.getId());
         nombreExperiencia.setText(experience.getTitle());
         descripcionCorta.setText(experience.getShortDescription());
-        Image image = new Image(new ByteArrayInputStream(experience.getImages().get(0).getImageData()));
-        ChangeListener<Number> listener = getListener(imagePane, experienciaImg, image);
-        imagePane.widthProperty().addListener(listener);
-        imagePane.heightProperty().addListener(listener);
-        experienciaImg.setImage(image);
+        if (!experience.getImages().isEmpty()) {
+            Image image = new Image(new ByteArrayInputStream(experience.getImages().get(0).getImageData()));
+            ChangeListener<Number> listener = getListener(imagePane, experienciaImg, image);
+            imagePane.widthProperty().addListener(listener);
+            imagePane.heightProperty().addListener(listener);
+            experienciaImg.setImage(image);
+        }
 
         //Heart
         heartImageView.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {

@@ -6,6 +6,7 @@ import org.hibernate.annotations.LazyCollectionOption;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "experiences")
@@ -252,6 +253,14 @@ public class Experience {
     @Override
     public String toString() {
         return title;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o.getClass() == Experience.class) {
+            Experience e = (Experience) o;
+            return Objects.equals(e.getId(), id);
+        } else return false;
     }
 
 }

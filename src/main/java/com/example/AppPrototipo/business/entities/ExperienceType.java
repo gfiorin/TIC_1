@@ -2,6 +2,7 @@ package com.example.AppPrototipo.business.entities;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "types_of_experiences")
@@ -49,5 +50,13 @@ public class ExperienceType {
     @ManyToOne
     @JoinColumn(name="interest")
     private Interest interest;
+
+    @Override
+    public boolean equals(Object o) {
+        if (o.getClass() == ExperienceType.class) {
+            ExperienceType e = (ExperienceType) o;
+            return Objects.equals(e.getId(), id);
+        } else return false;
+    }
 
 }

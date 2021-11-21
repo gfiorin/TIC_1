@@ -32,7 +32,6 @@ public class ExperienceGridController implements Initializable {
     private final InterestMgr interestMgr;
     private final TouristController touristController;
     private static Tourist tourist;
-    private static Set<ExperienceType> types;
 
     @FXML
     private Text titulo;
@@ -58,7 +57,7 @@ public class ExperienceGridController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        types = new HashSet<>();
+        Set<ExperienceType> types = new HashSet<>();
         tourist = userMgr.getCurrentTourist();
 
         for (Interest interest : tourist.getInterests()) {
@@ -76,7 +75,8 @@ public class ExperienceGridController implements Initializable {
             types.addAll(booking.getExperienceTypes());
         }
 
-        List<Experience> recommendations = recommendations();
+        List<Experience> recommendations = recommendations(types);
+
         int columns = 0;
         int row = 1;
 
@@ -107,15 +107,17 @@ public class ExperienceGridController implements Initializable {
         }
     }
 
-    private List<Experience> recommendations() {
+    private List<Experience> recommendations(Set<ExperienceType> types) {
+
         List<Experience> experiences = experienceMgr.findByTypes(new ArrayList<>(types));
+        if (experiences.isEmpty()) titulo.setText("error");
         List<ExperienceSort> recommendationSort = new ArrayList<>();
 
         for (Experience experience : experiences){
             if (!experience.isAuthorized() || !experience.getTourOperator().isAuthorized() || tourist.getLiked().contains(experience) || tourist.getExperiencesBooked().contains(experience)){
                 experiences.remove(experience);
             } else {
-                recommendationSort.add(new ExperienceSort(experience,weigh(experience)));
+                recommendationSort.add(new ExperienceSort(experience,weigh(experience,types)));
             }
         }
 
@@ -157,7 +159,9 @@ public class ExperienceGridController implements Initializable {
         }
     }
 
-    private Integer weigh(Experience experience){
+    private Integer weigh(Experience experience, Set<ExperienceType> types){
+
+        experience = experienceMgr.getCurrentExperience(experience.getId());
 
         List<ExperienceType> expTypes = experience.getExperienceTypes();
 
@@ -176,13 +180,5 @@ public class ExperienceGridController implements Initializable {
 
     }
 
-
-    public static Tourist getTourist() {
-        return tourist;
-    }
-
-    public static void setTourist(Tourist tourist) {
-        ExperienceGridController.tourist = tourist;
-    }
 
 }

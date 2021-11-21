@@ -214,14 +214,18 @@ public class ExperienceController {
 
     @FXML
     private void nextImage(MouseEvent mouseEvent){
-        imageIndex = (imageIndex + 1) % experience.getImages().size();
-        setImage(imageIndex);
+        if (!experience.getImages().isEmpty()) {
+            imageIndex = (imageIndex + 1) % experience.getImages().size();
+            setImage(imageIndex);
+        }
     }
 
     @FXML
     private void previousImage(MouseEvent mouseEvent){
-        imageIndex = (imageIndex - 1) % experience.getImages().size();
-        setImage(imageIndex);
+        if (!experience.getImages().isEmpty()) {
+            imageIndex = (imageIndex - 1) % experience.getImages().size();
+            setImage(imageIndex);
+        }
     }
 
     @FXML
