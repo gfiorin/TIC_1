@@ -110,7 +110,6 @@ public class ExperienceGridController implements Initializable {
     private List<Experience> recommendations(Set<ExperienceType> types) {
 
         List<Experience> experiences = experienceMgr.findByTypes(new ArrayList<>(types));
-        if (experiences.isEmpty()) titulo.setText("error");
         List<ExperienceSort> recommendationSort = new ArrayList<>();
 
         for (Experience experience : experiences){
