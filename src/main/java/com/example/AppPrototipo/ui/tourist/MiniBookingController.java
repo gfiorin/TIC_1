@@ -50,11 +50,13 @@ public class MiniBookingController {
         nombreExperiencia.setText(booking.getExperience().getTitle());
         direccion.setText(booking.getExperience().getUbicacion());
         cuposReserva.setText(String.valueOf(booking.getAmount()));
-        Image image = new Image(new ByteArrayInputStream(booking.getExperience().getImages().get(0).getImageData()));
-        ChangeListener<Number> listener = getListener(imagePane, experienciaImg, image);
-        imagePane.widthProperty().addListener(listener);
-        imagePane.heightProperty().addListener(listener);
-        experienciaImg.setImage(image);
+        if (!booking.getExperience().getImages().isEmpty()) {
+            Image image = new Image(new ByteArrayInputStream(booking.getExperience().getImages().get(0).getImageData()));
+            ChangeListener<Number> listener = getListener(imagePane, experienciaImg, image);
+            imagePane.widthProperty().addListener(listener);
+            imagePane.heightProperty().addListener(listener);
+            experienciaImg.setImage(image);
+        }
     }
 
     private ChangeListener<Number> getListener(Pane imagePane, ImageView imageViewPrincipal, Image image) {

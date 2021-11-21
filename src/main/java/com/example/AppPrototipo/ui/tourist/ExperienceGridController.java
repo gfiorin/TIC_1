@@ -88,8 +88,6 @@ public class ExperienceGridController implements Initializable {
                 MiniExperienceController miniExperienceController = (MiniExperienceController) applicationContext
                         .getBean("miniExperienceControllerPrototype");
                 fxmlLoader.setController(miniExperienceController);
-
-                fxmlLoader.setController(miniExperienceController);
                 fxmlLoader.setLocation(miniExperienceController.getClass().getResource("MiniExperience.fxml"));
                 VBox vbox = fxmlLoader.load();
                 miniExperienceController.setData(recommendation, false);
@@ -113,10 +111,8 @@ public class ExperienceGridController implements Initializable {
         List<ExperienceSort> recommendationSort = new ArrayList<>();
 
         for (Experience experience : experiences){
-            if (!experience.isAuthorized() || !experience.getTourOperator().isAuthorized() || tourist.getLiked().contains(experience) || tourist.getExperiencesBooked().contains(experience)){
-                experiences.remove(experience);
-            } else {
-                recommendationSort.add(new ExperienceSort(experience,weigh(experience,types)));
+            if (experience.isAuthorized() && experience.getTourOperator().isAuthorized() && !tourist.getLiked().contains(experience) && !tourist.getExperiencesBooked().contains(experience)) {
+                recommendationSort.add(new ExperienceSort(experience, weigh(experience,types)));
             }
         }
 
@@ -133,8 +129,8 @@ public class ExperienceGridController implements Initializable {
     }
 
     public static class ExperienceSort {
-        private Experience experience;
-        private int ponderation;
+        private final Experience experience;
+        private final int ponderation;
 
         public ExperienceSort(Experience experience, int ponderation) {
             this.experience = experience;
@@ -145,17 +141,10 @@ public class ExperienceGridController implements Initializable {
             return experience;
         }
 
-        public void setExperience(Experience experience) {
-            this.experience = experience;
-        }
-
         public int getPonderation() {
             return ponderation;
         }
 
-        public void setPonderation(int ponderation) {
-            this.ponderation = ponderation;
-        }
     }
 
     private Integer weigh(Experience experience, Set<ExperienceType> types){
@@ -178,6 +167,5 @@ public class ExperienceGridController implements Initializable {
         return -10*n + 9*s + 8*l + 7*r;
 
     }
-
 
 }

@@ -153,16 +153,18 @@ public class ExperienceController {
     }
 
     private void setImage(int imageIndex) {
-        Image image = new Image(new ByteArrayInputStream(experience.getImages().get(imageIndex).getImageData()));
+        if (!experience.getImages().isEmpty()) {
+            Image image = new Image(new ByteArrayInputStream(experience.getImages().get(imageIndex).getImageData()));
 
-        ChangeListener<Number> listenerNumber = getListenerNumber(imageViewPrincipal, image);
-        ChangeListener<Image> listenerImage = getListener(imageViewPrincipal, image);
+            ChangeListener<Number> listenerNumber = getListenerNumber(imageViewPrincipal, image);
+            ChangeListener<Image> listenerImage = getListener(imageViewPrincipal, image);
 
-        imagePane.widthProperty().addListener(listenerNumber);
-        imagePane.heightProperty().addListener(listenerNumber);
-        imageViewPrincipal.imageProperty().addListener(listenerImage);
+            imagePane.widthProperty().addListener(listenerNumber);
+            imagePane.heightProperty().addListener(listenerNumber);
+            imageViewPrincipal.imageProperty().addListener(listenerImage);
 
-        imageViewPrincipal.setImage(image);
+            imageViewPrincipal.setImage(image);
+        }
     }
 
     private ChangeListener<Number> getListenerNumber(ImageView imageViewPrincipal, Image image){

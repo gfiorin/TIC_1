@@ -105,7 +105,6 @@ public class TouristController implements Initializable {
     }
 
     public void showCalendar(MouseEvent event) throws IOException{
-        Stage currentStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
         fxmlLoader.setLocation(bookingsController.getClass().getResource("BookingsView.fxml"));
