@@ -3,7 +3,6 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -11,27 +10,22 @@
 
 <ScrollPane prefHeight="500.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.AppPrototipo.ui.tourist.ExperienceGridController">
     <content>
-      <VBox fx:id="vBoxGral" prefHeight="501.0" prefWidth="884.0" spacing="5.0">
-         <children>
-            <Pane prefHeight="54.0" prefWidth="884.0">
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-            </Pane>
-            <Text fx:id="titulo" strokeType="OUTSIDE" strokeWidth="0.0" text="Recomendaciones" underline="true">
-               <font>
-                  <Font name="System Bold" size="30.0" />
-               </font>
-               <VBox.margin>
-                  <Insets left="5.0" />
-               </VBox.margin>
-            </Text>
-              <GridPane fx:id="grillaRecomendaciones" VBox.vgrow="ALWAYS">
-                  <rowConstraints>
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  </rowConstraints>
-              </GridPane>
-         </children>
-      </VBox>
+        <VBox fx:id="vBoxGral" prefHeight="501.0" prefWidth="884.0" spacing="5.0">
+            <children>
+                <Text fx:id="titulo" strokeType="OUTSIDE" strokeWidth="0.0" text="Recomendaciones" underline="true">
+                    <font>
+                        <Font name="System Bold" size="30.0" />
+                    </font>
+                    <VBox.margin>
+                        <Insets left="15.0" top="12.0" />
+                    </VBox.margin>
+                </Text>
+                <GridPane fx:id="grillaRecomendaciones" VBox.vgrow="ALWAYS">
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                </GridPane>
+            </children>
+        </VBox>
     </content>
 </ScrollPane>

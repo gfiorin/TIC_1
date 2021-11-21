@@ -31,7 +31,6 @@ public class ExperienceGridController implements Initializable {
     private final UserMgr userMgr;
     private final InterestMgr interestMgr;
     private final TouristController touristController;
-    private static Tourist tourist;
 
     @FXML
     private Text titulo;
@@ -58,7 +57,7 @@ public class ExperienceGridController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         Set<ExperienceType> types = new HashSet<>();
-        tourist = userMgr.getCurrentTourist();
+        Tourist tourist = userMgr.getCurrentTourist();
 
         for (Interest interest : tourist.getInterests()) {
             interest = interestMgr.getCurrentInterest(interest.getId());
@@ -75,7 +74,7 @@ public class ExperienceGridController implements Initializable {
             types.addAll(booking.getExperienceTypes());
         }
 
-        List<Experience> recommendations = recommendations(types);
+        List<Experience> recommendations = recommendations(tourist, types);
 
         int columns = 0;
         int row = 1;
@@ -105,13 +104,16 @@ public class ExperienceGridController implements Initializable {
         }
     }
 
-    private List<Experience> recommendations(Set<ExperienceType> types) {
+    private List<Experience> recommendations(Tourist tourist, Set<ExperienceType> types) {
 
         List<Experience> experiences = experienceMgr.findByTypes(new ArrayList<>(types));
         List<ExperienceSort> recommendationSort = new ArrayList<>();
 
         for (Experience experience : experiences){
-            if (experience.isAuthorized() && experience.getTourOperator().isAuthorized() && !tourist.getLiked().contains(experience) && !tourist.getExperiencesBooked().contains(experience)) {
+            if (experience.isAuthorized() &&
+                    experience.getTourOperator().isAuthorized() &&
+                    !tourist.getLiked().contains(experience) &&
+                    !tourist.getExperiencesBooked().contains(experience)) {
                 recommendationSort.add(new ExperienceSort(experience, weigh(experience,types)));
             }
         }
