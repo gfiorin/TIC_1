@@ -105,16 +105,16 @@
                   </HBox>
                </children>
             </VBox>
-            <VBox prefHeight="268.0" prefWidth="496.0" spacing="5.0">
+            <VBox prefHeight="284.0" prefWidth="200.0" spacing="5.0">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Mis Intereses:" underline="true" wrappingWidth="210.408203125">
                      <font>
                         <Font name="System Bold" size="30.0" />
                      </font>
                   </Text>
-                  <ScrollPane prefHeight="236.0" prefWidth="418.0" style="-fx-background-color: transparent;">
+                  <ScrollPane prefHeight="236.0" prefWidth="219.0" style="-fx-background-color: transparent;">
                      <content>
-                        <VBox fx:id="vBoxIntereses" prefHeight="228.0" prefWidth="276.0" spacing="10.0" />
+                        <VBox fx:id="vBoxIntereses" prefHeight="228.0" prefWidth="196.0" spacing="10.0" />
                      </content>
                   </ScrollPane>
                </children>
