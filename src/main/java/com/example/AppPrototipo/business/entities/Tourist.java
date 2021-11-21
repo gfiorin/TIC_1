@@ -44,6 +44,18 @@ public class Tourist extends User{
     @OneToMany(mappedBy = "tourist")
     private List<Booking> bookings;
 
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "bookings",
+            joinColumns = {@JoinColumn(name = "tourist")},
+            inverseJoinColumns = {@JoinColumn(name = "experience")}
+    )
+    private List<Experience> experiencesBooked;
+
+    public List<Experience> getExperiencesBooked() {
+        return experiencesBooked;
+    }
+
     public Tourist (String name, String username, String email, String password, LocalDate dateOfBirth, String cellphone, Country country, List<Interest> interests, String documentType, String documentNumber) {
         super(name, username, email, password);
         this.dateOfBirth = dateOfBirth;

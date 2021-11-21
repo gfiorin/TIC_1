@@ -1,4 +1,3 @@
-
 package com.example.AppPrototipo.ui.tourist;
 
 import com.example.AppPrototipo.business.managers.ExperienceMgr;
@@ -10,21 +9,18 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Rectangle2D;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
-import org.hibernate.Hibernate;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
-public class MiniExperienceController{
+public class MiniExperienceController {
 
     private int idexperience;
     private final UserMgr userMgr;
@@ -58,11 +54,13 @@ public class MiniExperienceController{
         verMasBtn.setUserData(experience.getId());
         nombreExperiencia.setText(experience.getTitle());
         descripcionCorta.setText(experience.getShortDescription());
-        Image image = new Image(new ByteArrayInputStream(experience.getImages().get(0).getImageData()));
-        ChangeListener<Number> listener = getListener(imagePane, experienciaImg, image);
-        imagePane.widthProperty().addListener(listener);
-        imagePane.heightProperty().addListener(listener);
-        experienciaImg.setImage(image);
+        if (!experience.getImages().isEmpty()) {
+            Image image = new Image(new ByteArrayInputStream(experience.getImages().get(0).getImageData()));
+            ChangeListener<Number> listener = getListener(imagePane, experienciaImg, image);
+            imagePane.widthProperty().addListener(listener);
+            imagePane.heightProperty().addListener(listener);
+            experienciaImg.setImage(image);
+        }
 
         //Heart
         heartImageView.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
@@ -133,4 +131,6 @@ public class MiniExperienceController{
             heartImageView.setImage(image);
         }
     }
+
+
 }

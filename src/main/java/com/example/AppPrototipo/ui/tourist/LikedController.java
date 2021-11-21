@@ -1,6 +1,7 @@
 package com.example.AppPrototipo.ui.tourist;
 
 import com.example.AppPrototipo.AppPrototipoApplication;
+import com.example.AppPrototipo.business.managers.ExperienceMgr;
 import com.example.AppPrototipo.business.managers.UserMgr;
 import com.example.AppPrototipo.business.entities.Experience;
 import com.example.AppPrototipo.business.entities.Tourist;
@@ -16,35 +17,29 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.Text;
 import org.hibernate.Hibernate;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import javax.transaction.Transactional;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
 @Component
 public class LikedController implements Initializable {
 
-    private Tourist tourist;
+    private final UserMgr userMgr;
+
+    @FXML
+    private VBox vBoxGral;
 
     @FXML
     private GridPane grillaFavoritos;
 
-    private final UserMgr userMgr;
-
     public LikedController(UserMgr userMgr) {
         this.userMgr = userMgr;
-    }
-
-    public Tourist getTourist() {
-        return tourist;
-    }
-
-    public void setTourist(Tourist tourist) {
-        this.tourist = tourist;
     }
 
     @Override
@@ -71,8 +66,6 @@ public class LikedController implements Initializable {
                 MiniExperienceController miniExperienceController = (MiniExperienceController) applicationContext
                         .getBean("miniExperienceControllerPrototype");
                 fxmlLoader.setController(miniExperienceController);
-
-                fxmlLoader.setController(miniExperienceController);
                 fxmlLoader.setLocation(miniExperienceController.getClass().getResource("MiniExperience.fxml"));
                 VBox vbox = fxmlLoader.load();
                 miniExperienceController.setData(likedExperience, true);
@@ -85,7 +78,7 @@ public class LikedController implements Initializable {
                 grillaFavoritos.add(vbox, columns++, row);
                 GridPane.setMargin(vbox, new Insets(10));
             }
-        }catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
