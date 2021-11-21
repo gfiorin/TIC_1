@@ -230,4 +230,11 @@ public class Experience {
         return title;
     }
 
+    public Department getDepartment() {
+        return department;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
 }
