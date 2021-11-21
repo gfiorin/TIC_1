@@ -1,5 +1,8 @@
 package com.example.AppPrototipo.business.entities;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
@@ -17,7 +20,7 @@ public class Tourist extends User{
 
     @Column(name = "document_type")
     private String documentType;
-    //todo
+
     @Column(name = "document_number")
     private String documentNumber;
 
@@ -25,6 +28,7 @@ public class Tourist extends User{
     @JoinColumn(name = "country_of_birth", nullable = false)
     private Country country;
 
+    @LazyCollection(LazyCollectionOption.FALSE)
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "tourist_interests",

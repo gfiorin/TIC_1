@@ -1,6 +1,7 @@
 package com.example.AppPrototipo.ui.admin;
 
 import com.example.AppPrototipo.AppPrototipoApplication;
+import com.example.AppPrototipo.business.entities.Complaint;
 import com.example.AppPrototipo.business.managers.ReviewMgr;
 import com.example.AppPrototipo.business.entities.Experience;
 import com.example.AppPrototipo.business.entities.Review;
@@ -46,6 +47,9 @@ public class ReviewsListController {
     private TableColumn<Review, Tourist> tourist;
 
     @FXML
+    private Button checkReviewBtn;
+
+    @FXML
     private Button goBackBtn;
 
     public ReviewsListController(ReviewMgr reviewMgr) {
@@ -68,8 +72,27 @@ public class ReviewsListController {
         return FXCollections.observableArrayList(reviewsList);
     }
 
-    @FXML //todo
-    void checkReview(ActionEvent event) throws Exception{
+    @FXML
+    void selectReview(ActionEvent event) throws Exception{
+        Review review = reviewsTable.getSelectionModel().getSelectedItem();
+
+        Node source = (Node) event.getSource();
+        Stage oldStage  = (Stage) source.getScene().getWindow();
+
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
+
+        Parent root = fxmlLoader.load(ReviewViewController.class.getResourceAsStream("ReviewView.fxml"));
+        Stage newStage = new Stage();
+        newStage.setScene(new Scene(root));
+
+        ReviewViewController reviewViewController = fxmlLoader.getController();
+
+        newStage.show();
+
+        reviewViewController.setReview(review);
+
+        oldStage.close();
 
     }
 

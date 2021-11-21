@@ -146,7 +146,6 @@ public class AddTouristOperatorPanelController {
     }
 
     private boolean touristOperatorCreatedAlert(String title, String contextText){
-
         ButtonType acceptBtn = new ButtonType("Si", ButtonBar.ButtonData.OK_DONE);
         ButtonType cancelBtn = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
 
@@ -156,7 +155,6 @@ public class AddTouristOperatorPanelController {
         Optional<ButtonType> result = alert.showAndWait();
 
         return result.orElse(cancelBtn) == acceptBtn;
-
     }
 
 }

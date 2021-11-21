@@ -59,7 +59,6 @@ public class OperatorsTableController {
         username.setCellValueFactory(new PropertyValueFactory<>("username"));
         email.setCellValueFactory(new PropertyValueFactory<>("email"));
         tourOperator.setCellValueFactory(new PropertyValueFactory<>("tourOperator"));
-
     }
 
     private ObservableList<Operator> getOperators() {

@@ -1,6 +1,7 @@
 package com.example.AppPrototipo.ui.admin;
 
 import com.example.AppPrototipo.AppPrototipoApplication;
+import com.example.AppPrototipo.business.entities.Review;
 import com.example.AppPrototipo.business.managers.TourOperatorMgr;
 import com.example.AppPrototipo.business.entities.TourOperator;
 import javafx.collections.FXCollections;
@@ -103,7 +104,7 @@ public class TouristOperatorsTableController {
         touristOperatorTable.setItems(getTourOperators());
     }
 
-    @FXML //todo
+    @FXML
     private void viewBookings(ActionEvent event) throws IOException {
         TourOperator tourOperator = touristOperatorTable.getSelectionModel().getSelectedItem();
 
@@ -116,14 +117,19 @@ public class TouristOperatorsTableController {
         Parent root = fxmlLoader.load(TOBookingsTableController.class.getResourceAsStream("TOBookingsTable.fxml"));
         Stage newStage = new Stage();
         newStage.setScene(new Scene(root));
+
+        TOBookingsTableController toBookingsTableController = fxmlLoader.getController();
+
         newStage.show();
 
+        toBookingsTableController.setTourOperator(tourOperator);
+
         oldStage.close();
+
     }
 
     @FXML
     private void searchItem(ActionEvent event) {
-
         touristOperatorTable.getItems().stream().filter(
                 item -> Objects.equals(item.getCompanyName(), searchInput.getText()) ||
                         Objects.equals(item.getFantasyName(), searchInput.getText()) ||

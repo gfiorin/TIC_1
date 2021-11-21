@@ -1,6 +1,7 @@
 package com.example.AppPrototipo.ui.admin;
 
 import com.example.AppPrototipo.AppPrototipoApplication;
+import com.example.AppPrototipo.business.entities.TourOperator;
 import com.example.AppPrototipo.business.managers.ComplaintMgr;
 import com.example.AppPrototipo.business.entities.Complaint;
 import com.example.AppPrototipo.business.entities.Experience;
@@ -49,6 +50,9 @@ public class ComplaintsListController {
     @FXML
     private Button goBackBtn;
 
+    @FXML
+    private Button checkComplaintBtn;
+
     public ComplaintsListController(ComplaintMgr complaintMgr) {
         this.complaintMgr = complaintMgr;
     }
@@ -85,8 +89,27 @@ public class ComplaintsListController {
         oldStage.close();
     }
 
-    @FXML //todo
-    void checkComplaint(ActionEvent event) throws Exception{
+    @FXML
+    public void selectComplaint(ActionEvent event) throws Exception{
+        Complaint complaint = complaintsTable.getSelectionModel().getSelectedItem();
+
+        Node source = (Node) event.getSource();
+        Stage oldStage  = (Stage) source.getScene().getWindow();
+
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
+
+        Parent root = fxmlLoader.load(ComplaintViewController.class.getResourceAsStream("ComplaintView.fxml"));
+        Stage newStage = new Stage();
+        newStage.setScene(new Scene(root));
+
+        ComplaintViewController complaintViewController = fxmlLoader.getController();
+
+        newStage.show();
+
+        complaintViewController.setComplaint(complaint);
+
+        oldStage.close();
 
     }
 

@@ -24,26 +24,37 @@ import org.springframework.stereotype.Component;
 @Component
 public class AddOperatorController {
 
+    @FXML
+    private TextField nameInput;
+
+    @FXML
+    private TextField usernameInput;
+
+    @FXML
+    private TextField passwordInput;
+
+    @FXML
+    private TextField emailInput;
+
+    @FXML
+    private Button agregarBtn;
+
+    @FXML
+    private Button cancelarBtn;
+
+    @FXML
+    private Button selectBtn;
+
+    @FXML
+    private Label tourOperatorName;
+
     private final OperatorMgr operatorMgr;
+
+    private TourOperator tourOperatorSelected = null;
 
     public AddOperatorController(OperatorMgr operatorMgr) {
         this.operatorMgr = operatorMgr;
     }
-
-    public TextField nameInput;
-    public TextField usernameInput;
-    public TextField passwordInput;
-    public TextField emailInput;
-
-    public Button agregarBtn;
-    public Button cancelarBtn;
-    public Button selectBtn;
-
-    @FXML
-    public Label tourOperatorName;
-
-    public TourOperator tourOperatorSelected = null;
-
 
     @FXML
     public void addOperator(ActionEvent event) {
@@ -77,7 +88,6 @@ public class AddOperatorController {
                     
                 } catch (Exception ignored) {}
             }
-
         }
     }
 
@@ -89,7 +99,6 @@ public class AddOperatorController {
 
     @FXML
     public void selectTourOperator(ActionEvent event) throws Exception {
-
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
 
@@ -103,7 +112,6 @@ public class AddOperatorController {
 
         tourOperatorSelected = touristOperatorsTableController.getSelectedItem(event);
         tourOperatorName.setText(tourOperatorSelected.getCompanyName());
-
     }
 
     @FXML

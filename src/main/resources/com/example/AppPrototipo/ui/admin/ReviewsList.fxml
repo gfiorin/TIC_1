@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.AppPrototipo.ui.admin.ReviewsListController">
+<AnchorPane prefHeight="446.0" prefWidth="919.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.AppPrototipo.ui.admin.ReviewsListController">
     <children>
         <TableView fx:id="reviewsTable" layoutY="46.0" prefHeight="353.0" prefWidth="919.0">
             <columns>
@@ -22,5 +22,10 @@
                 <Button fx:id="goBackBtn" layoutX="24.0" layoutY="11.0" mnemonicParsing="false" onAction="#goBackToAdminView" prefHeight="25.0" prefWidth="63.0" text="Atrás" />
             </children>
         </Pane>
+      <Pane layoutY="400.0" prefHeight="47.0" prefWidth="919.0">
+         <children>
+            <Button fx:id="checkReviewBtn" layoutX="824.0" layoutY="11.0" mnemonicParsing="false" onAction="#selectReview" text="Ver reseña" />
+         </children>
+      </Pane>
     </children>
 </AnchorPane>
