@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="1000.0" maxWidth="1000.0" prefHeight="576.0" prefWidth="853.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.AppPrototipo.ui.tourist.TouristController">
+<BorderPane maxHeight="1000.0" maxWidth="1000.0" prefHeight="576.0" prefWidth="853.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.AppPrototipo.ui.tourist.TouristController">
    <left>
       <VBox fx:id="leftPane" prefHeight="576.0" style="-fx-background-color: #82a17a;" BorderPane.alignment="CENTER">
          <children>
@@ -20,21 +21,33 @@
                      <VBox.margin>
                         <Insets />
                      </VBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </ImageView>
                   <ImageView fx:id="perfilMarker" fitHeight="39.0" fitWidth="39.0" onMouseClicked="#showProfile" pickOnBounds="true" preserveRatio="true" smooth="false">
                      <image>
                         <Image url="@imgs/perfil.png" />
                      </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </ImageView>
                   <ImageView fx:id="calendarMarker" fitHeight="39.0" fitWidth="39.0" onMouseClicked="#showCalendar" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@imgs/calendar.png" />
                      </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </ImageView>
                   <ImageView fx:id="favoritosMarker" fitHeight="39.0" fitWidth="39.0" layoutX="10.0" layoutY="108.0" onMouseClicked="#showFavourites" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@imgs/liked.png" />
                      </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </ImageView>
                </children>
                <VBox.margin>
@@ -47,6 +60,9 @@
                      <image>
                         <Image url="@imgs/cerrarSesion.png" />
                      </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </ImageView>
                </children>
                <VBox.margin>
