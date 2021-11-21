@@ -263,4 +263,11 @@ public class Experience {
         } else return false;
     }
 
+    public Department getDepartment() {
+        return department;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
 }
