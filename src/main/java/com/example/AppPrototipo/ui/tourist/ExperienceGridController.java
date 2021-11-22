@@ -11,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import org.springframework.context.ApplicationContext;
@@ -33,7 +34,7 @@ public class ExperienceGridController implements Initializable {
     private final TouristController touristController;
 
     @FXML
-    private GridPane grillaRecomendaciones;
+    private VBox vBoxExp;
 
     public ExperienceGridController(ExperienceMgr experienceMgr, UserMgr userMgr, InterestMgr interestMgr, @Lazy TouristController touristController) {
         this.experienceMgr = experienceMgr;
@@ -69,11 +70,14 @@ public class ExperienceGridController implements Initializable {
         }
 
         List<Experience> recommendations = recommendations(tourist, types);
-
-        int columns = 0;
-        int row = 1;
+        List<Experience> likedByUser = tourist.getLiked();
+        int counter = 0;
 
         try {
+            HBox hbox = new HBox();
+            hbox.setSpacing(15);
+            vBoxExp.getChildren().add(hbox);
+
             for (Experience recommendation : recommendations) {
                 FXMLLoader fxmlLoader = new FXMLLoader();
 
@@ -82,20 +86,25 @@ public class ExperienceGridController implements Initializable {
                         .getBean("miniExperienceControllerPrototype");
                 fxmlLoader.setController(miniExperienceController);
                 fxmlLoader.setLocation(miniExperienceController.getClass().getResource("MiniExperience.fxml"));
-                VBox vbox = fxmlLoader.load();
-                miniExperienceController.setData(recommendation, false);
+                VBox miniExeperience = fxmlLoader.load();
+                miniExperienceController.setData(recommendation, isLikedByUser(likedByUser, recommendation));
+                hbox.getChildren().add(miniExeperience);
+                counter++;
 
-                if (columns == 3) {
-                    columns = 0;
-                    ++row;
+                if (counter == 3) {
+                    counter = 0;
+                    hbox = new HBox();
+                    hbox.setSpacing(15);
+                    vBoxExp.getChildren().add(hbox);
                 }
-
-                grillaRecomendaciones.add(vbox, columns++, row);
-                GridPane.setMargin(vbox, new Insets(10));
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private boolean isLikedByUser(List<Experience> likedByUser, Experience recommendation) {
+        return likedByUser.stream().mapToInt(Experience::getId).anyMatch(i -> i == recommendation.getId());
     }
 
     private List<Experience> recommendations(Tourist tourist, Set<ExperienceType> types) {
@@ -106,7 +115,6 @@ public class ExperienceGridController implements Initializable {
         for (Experience experience : experiences){
             if (experience.isAuthorized() &&
                     experience.getTourOperator().isAuthorized() &&
-                    !tourist.getLiked().contains(experience) &&
                     !tourist.getExperiencesBooked().contains(experience)) {
                 recommendationSort.add(new ExperienceSort(experience, weigh(experience,types)));
             }

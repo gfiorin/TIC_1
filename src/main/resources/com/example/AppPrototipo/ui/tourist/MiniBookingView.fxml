@@ -9,17 +9,17 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="109.0" prefWidth="900.0" spacing="10.0" style="-fx-border-color: #808080; -fx-border-radius: 18px; -fx-background-radius: 18px;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="109.0" prefWidth="857.0" spacing="10.0" style="-fx-border-color: #808080; -fx-border-radius: 18px; -fx-background-radius: 18px;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Pane fx:id="imagePane" prefHeight="97.0" prefWidth="172.0">
          <HBox.margin>
             <Insets bottom="5.0" left="10.0" top="5.0" />
          </HBox.margin>
          <children>
-            <ImageView fx:id="experienciaImg" fitHeight="89.0" fitWidth="187.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="experienciaImg" fitHeight="89.0" fitWidth="170.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </Pane>
-      <VBox prefHeight="100.0" prefWidth="170.0" spacing="5.0">
+      <VBox fx:id="infoVBox" prefHeight="100.0" prefWidth="170.0" spacing="5.0">
          <children>
             <Text fx:id="nombreExperiencia" strokeType="OUTSIDE" strokeWidth="0.0" text="NombreExperiencia" wrappingWidth="302.13671875">
                <VBox.margin>
@@ -36,7 +36,7 @@
             </Text>
          </children>
       </VBox>
-      <VBox alignment="TOP_RIGHT" prefHeight="66.0" prefWidth="285.0" spacing="10.0">
+      <VBox alignment="TOP_RIGHT" prefHeight="90.0" prefWidth="206.0" spacing="10.0">
          <children>
             <HBox alignment="TOP_RIGHT">
                <children>
@@ -45,7 +45,7 @@
                         <Font name="System Bold Italic" size="17.0" />
                      </font>
                   </Text>
-                  <Text fx:id="fechaReserva" strokeType="OUTSIDE" strokeWidth="0.0" text="FechaReserva">
+                  <Text fx:id="fechaReserva" strokeType="OUTSIDE" strokeWidth="0.0" text="FechaRes">
                      <font>
                         <Font size="17.0" />
                      </font>
@@ -59,7 +59,7 @@
                         <Font name="System Bold Italic" size="17.0" />
                      </font>
                   </Text>
-                  <Text fx:id="horaReserva" strokeType="OUTSIDE" strokeWidth="0.0" text="HoraReserva">
+                  <Text fx:id="horaReserva" strokeType="OUTSIDE" strokeWidth="0.0" text="HoraRes">
                      <font>
                         <Font size="17.0" />
                      </font>
@@ -73,7 +73,7 @@
                         <Font name="System Bold Italic" size="17.0" />
                      </font>
                   </Text>
-                  <Text fx:id="cuposReserva" strokeType="OUTSIDE" strokeWidth="0.0" text="CuposReserva">
+                  <Text fx:id="cuposReserva" strokeType="OUTSIDE" strokeWidth="0.0" text="CuposRes">
                      <font>
                         <Font size="17.0" />
                      </font>
