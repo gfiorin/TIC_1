@@ -5,33 +5,41 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="109.0" prefWidth="800.0" spacing="10.0" style="-fx-border-color: #808080; -fx-border-radius: 18px; -fx-background-radius: 18px;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1">
-    <ImageView fx:id="experienciaImg" fitHeight="81.0" fitWidth="174.0" pickOnBounds="true" preserveRatio="true">
-        <HBox.margin>
-            <Insets left="10.0" top="10.0" />
-        </HBox.margin>
-    </ImageView>
-    <VBox prefHeight="100.0" prefWidth="170.0" spacing="10.0">
-        <Text fx:id="nombreExperiencia" strokeType="OUTSIDE" strokeWidth="0.0" text="NombreExperiencia" wrappingWidth="219.13671875">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="120.0" prefWidth="700.0" spacing="10.0" style="-fx-border-color: #808080; -fx-border-radius: 18px; -fx-background-radius: 18px;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafxcom/fxml/1">
+   <Pane fx:id="imagePane" prefHeight="90.0" prefWidth="210.0">
+      <HBox.margin>
+         <Insets left="10.0" top="10.0" />
+      </HBox.margin>
+      <children>
+          <ImageView fx:id="experienciaImg" fitHeight="98.0" fitWidth="189.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" />
+      </children>
+   </Pane>
+    <VBox prefHeight="118.0" prefWidth="288.0" spacing="5.0">
+        <Text fx:id="nombreExperiencia" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre Experiencia" textOrigin="TOP" wrappingWidth="265.13671836815774">
             <VBox.margin>
-                <Insets top="15.0" />
+                <Insets top="5.0" />
             </VBox.margin>
             <font>
                 <Font name="System Bold" size="21.0" />
             </font>
         </Text>
+        <Text fx:id="descripcion" strokeType="OUTSIDE" strokeWidth="0.0" text="Descripcion descripcion descripcion descripcion descripcion  descripcion descripcion" textOrigin="TOP" wrappingWidth="270.13671836815774">
+            <font>
+                <Font size="13.0" />
+            </font>
+        </Text>
     </VBox>
-    <VBox alignment="TOP_RIGHT" prefHeight="87.0" prefWidth="391.0" spacing="10.0">
+    <VBox alignment="TOP_RIGHT" prefHeight="98.0" prefWidth="215.0" spacing="10.0">
         <HBox.margin>
             <Insets bottom="10.0" top="10.0" />
         </HBox.margin>
         <HBox alignment="TOP_RIGHT">
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Cantidad de reservas: " wrappingWidth="177.92675590515137">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Cantidad de reservas: " wrappingWidth="175.92675590515137">
                 <font>
                     <Font name="System Bold Italic" size="17.0" />
                 </font>
             </Text>
-            <Text fx:id="cantidadReservas" strokeType="OUTSIDE" strokeWidth="0.0" text="CantidadReservas" wrappingWidth="150.42237091064453">
+            <Text fx:id="cantidadReservas" strokeType="OUTSIDE" strokeWidth="0.0" text="10" wrappingWidth="35.42237091064453">
                 <font>
                     <Font size="17.0" />
                 </font>
@@ -43,7 +51,7 @@
                     <Font name="System Bold Italic" size="17.0" />
                 </font>
             </Text>
-            <Text fx:id="estado" strokeType="OUTSIDE" strokeWidth="0.0" text="estado" wrappingWidth="150.42237091064453">
+            <Text fx:id="estado" strokeType="OUTSIDE" strokeWidth="0.0" text="estado" wrappingWidth="146.42234349250793">
                 <font>
                     <Font size="17.0" />
                 </font>
