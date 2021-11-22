@@ -102,7 +102,7 @@ public class TOBookingsTableController {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
 
-        Parent root = fxmlLoader.load(AdminController.class.getResourceAsStream("TouristOperatorsTable.fxml"));
+        Parent root = fxmlLoader.load(TouristOperatorsTableController.class.getResourceAsStream("TouristOperatorsTable.fxml"));
         Stage newStage = new Stage();
         newStage.setScene(new Scene(root));
         newStage.show();

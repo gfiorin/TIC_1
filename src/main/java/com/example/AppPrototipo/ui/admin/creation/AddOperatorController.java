@@ -99,9 +99,13 @@ public class AddOperatorController {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
 
-        Parent root = fxmlLoader.load(AdminController.class.getResourceAsStream("TourOperatorSelectTable.fxml"));
+        Parent root = fxmlLoader.load(TourOperatorSelectionTableController.class.getResourceAsStream("TourOperatorSelectTable.fxml"));
         Stage newStage = new Stage();
         newStage.setScene(new Scene(root));
+
+        newStage.setOnCloseRequest(closeEvent -> {
+            selectBtn.setDisable(false);
+        });
 
         TourOperatorSelectionTableController touristOperatorsTableController = fxmlLoader.getController();
 
