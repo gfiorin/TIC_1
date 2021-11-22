@@ -24,6 +24,7 @@ import javafx.stage.Stage;
 import org.springframework.stereotype.Component;
 
 import java.sql.Time;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.*;
@@ -96,9 +97,11 @@ public class TOBookingsTableController {
 
             for (Booking booking : getBookings()) {
                 if (booking.getDate() != null) {
-                    LocalDate bookingDate = LocalDate.ofInstant(booking.getDate().toInstant(), ZoneId.systemDefault());
+                    LocalDate bookingDate = Instant.ofEpochMilli(booking.getDate().getTime())
+                            .atZone(ZoneId.systemDefault())
+                            .toLocalDate();
                     if (bookingDate.compareTo(dateTo.getValue())<=0 && bookingDate.compareTo(dateFrom.getValue())>=0) {
-                        bookings.add(booking);
+                            bookings.add(booking);
                     }
                 }
             }
