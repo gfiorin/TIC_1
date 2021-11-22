@@ -1,8 +1,12 @@
 package com.example.AppPrototipo.business.entities;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "experiences")
@@ -33,6 +37,7 @@ public class Experience {
     @Column(name = "authorized")
     private boolean authorized;
 
+    @LazyCollection(LazyCollectionOption.FALSE)
     @ManyToMany
     @JoinTable(
             name = "types_experiences",
@@ -45,7 +50,8 @@ public class Experience {
     @JoinColumn(name="tour_operator")
     private TourOperator tourOperator;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "experience")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "experience")
     private List<Image> images;
 
     @ManyToOne
@@ -69,6 +75,26 @@ public class Experience {
 
     @Column(name = "price")
     private BigDecimal price;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "liked",
+            joinColumns = {@JoinColumn(name = "experience")},
+            inverseJoinColumns = {@JoinColumn(name = "tourist")}
+    )
+    private List<Tourist> likes;
+
+    public List<Tourist> getLikes() {
+        return likes;
+    }
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "bookings",
+            joinColumns = {@JoinColumn(name = "experience")},
+            inverseJoinColumns = {@JoinColumn(name = "tourist")}
+    )
+    private List<Booking> bookings;
 
     public Experience() {
     }
@@ -220,6 +246,10 @@ public class Experience {
         return telephone;
     }
 
+    public List<Booking> getBookings() {
+        return bookings;
+    }
+
     public Department getDepartment() {
         return department;
     }
@@ -251,6 +281,14 @@ public class Experience {
     @Override
     public String toString() {
         return title;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o.getClass() == Experience.class) {
+            Experience e = (Experience) o;
+            return Objects.equals(e.getId(), id);
+        } else return false;
     }
 
 }

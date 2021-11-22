@@ -31,7 +31,7 @@ public class Booking {
     @JoinColumn(name = "experience", referencedColumnName = "id")
     private Experience experience;
 
-    @OneToOne()
+    @ManyToOne()
     @JoinColumn(name = "tourist", referencedColumnName = "id")
     private Tourist tourist;
 

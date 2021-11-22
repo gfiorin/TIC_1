@@ -14,6 +14,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.util.Callback;
 import org.springframework.stereotype.Component;
@@ -35,9 +36,15 @@ public class ExperienceController {
     @FXML
     private AnchorPane rightAnchorPane;
     @FXML
+    private VBox informationVBox;
+    @FXML
     private Text nombreExperiencia;
     @FXML
     private Text ubicacion;
+    @FXML
+    private Text departamento;
+    @FXML
+    private Text costo;
     @FXML
     private Text vacunacion;
     @FXML
@@ -94,10 +101,15 @@ public class ExperienceController {
     }
 
     private void populacionDeCampos() {
+//        informationVBox.prefWidthProperty().bind(rightAnchorPane.prefWidthProperty());
         nombreExperiencia.setText(experience.getTitle());
         nombreExperiencia.wrappingWidthProperty().bind(rightAnchorPane.prefWidthProperty());
         ubicacion.setText(experience.getUbicacion());
         ubicacion.wrappingWidthProperty().bind(rightAnchorPane.prefWidthProperty());
+        departamento.setText(experience.getDepartment().toString());
+        departamento.wrappingWidthProperty().bind(rightAnchorPane.prefWidthProperty());
+        costo.setText("Costo: $" + experience.getPrice());
+        costo.wrappingWidthProperty().bind(rightAnchorPane.prefWidthProperty());
 
         vacunacion.setText((experience.isVaccination() ? "No" : "Si") + " requiere vacunacion");
         email.setText(experience.getEmail());
@@ -141,16 +153,18 @@ public class ExperienceController {
     }
 
     private void setImage(int imageIndex) {
-        Image image = new Image(new ByteArrayInputStream(experience.getImages().get(imageIndex).getImageData()));
+        if (!experience.getImages().isEmpty()) {
+            Image image = new Image(new ByteArrayInputStream(experience.getImages().get(imageIndex).getImageData()));
 
-        ChangeListener<Number> listenerNumber = getListenerNumber(imageViewPrincipal, image);
-        ChangeListener<Image> listenerImage = getListener(imageViewPrincipal, image);
+            ChangeListener<Number> listenerNumber = getListenerNumber(imageViewPrincipal, image);
+            ChangeListener<Image> listenerImage = getListener(imageViewPrincipal, image);
 
-        imagePane.widthProperty().addListener(listenerNumber);
-        imagePane.heightProperty().addListener(listenerNumber);
-        imageViewPrincipal.imageProperty().addListener(listenerImage);
+            imagePane.widthProperty().addListener(listenerNumber);
+            imagePane.heightProperty().addListener(listenerNumber);
+            imageViewPrincipal.imageProperty().addListener(listenerImage);
 
-        imageViewPrincipal.setImage(image);
+            imageViewPrincipal.setImage(image);
+        }
     }
 
     private ChangeListener<Number> getListenerNumber(ImageView imageViewPrincipal, Image image){
@@ -214,14 +228,18 @@ public class ExperienceController {
 
     @FXML
     private void nextImage(MouseEvent mouseEvent){
-        imageIndex = (imageIndex + 1) % experience.getImages().size();
-        setImage(imageIndex);
+        if (!experience.getImages().isEmpty()) {
+            imageIndex = (imageIndex + 1) % experience.getImages().size();
+            setImage(imageIndex);
+        }
     }
 
     @FXML
     private void previousImage(MouseEvent mouseEvent){
-        imageIndex = (imageIndex - 1) % experience.getImages().size();
-        setImage(imageIndex);
+        if (!experience.getImages().isEmpty()) {
+            imageIndex = (imageIndex - 1) % experience.getImages().size();
+            setImage(imageIndex);
+        }
     }
 
     @FXML
