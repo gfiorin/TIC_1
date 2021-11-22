@@ -10,6 +10,9 @@ import java.util.List;
 public interface InterestRepository extends CrudRepository<Interest, Integer> {
 
     Interest findOneById(Integer id);
+
     List<Interest> findAll();
+
+    Interest findOneByName(String name);
 
 }
