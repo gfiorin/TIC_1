@@ -35,10 +35,12 @@ public class TourOperator {
     @Column(name = "authorized")
     private boolean authorized;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "tour_operator")
     private List<Experience> listOfExperiences;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "toperator")
     private List<Operator> listOfAuthorizedOperators;
 
     public TourOperator() {}
@@ -132,6 +134,14 @@ public class TourOperator {
 
     public void setAuthorized(boolean authorized) {
         this.authorized = authorized;
+    }
+
+    public List<Experience> getListOfExperiences() {
+        return listOfExperiences;
+    }
+
+    public List<Operator> getListOfAuthorizedOperators() {
+        return listOfAuthorizedOperators;
     }
 
     @Override

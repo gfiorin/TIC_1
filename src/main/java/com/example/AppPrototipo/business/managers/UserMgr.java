@@ -5,9 +5,9 @@ import com.example.AppPrototipo.business.exceptions.InvalidInformation;
 import com.example.AppPrototipo.business.exceptions.UserAlreadyExsists;
 import com.example.AppPrototipo.persistence.TouristRepository;
 import com.example.AppPrototipo.persistence.UserRepository;
+import org.hibernate.Hibernate;
 import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -91,7 +91,6 @@ public class UserMgr {
         touristRepository.save(touristToAdd);
     }
 
-
     @Transactional
     public User userLogIn(String emailOrUsername, String password) throws InvalidInformation {
 
@@ -130,13 +129,13 @@ public class UserMgr {
     }
 
     @Transactional
-    public List<Experience> getCurrentUserLiked() {
-        return ((Tourist) getCurrentUser()).getLiked();
-    }
-
-    @Transactional
-    public List<Interest> getCurrentUserInterests() {
-        return ((Tourist) getCurrentUser()).getInterests();
+    public Tourist getCurrentTourist() {
+        Tourist tourist = (Tourist) userRepository.findById(currentUserId).get();
+        Hibernate.initialize(tourist.getLiked());
+        Hibernate.initialize(tourist.getInterests());
+        Hibernate.initialize(tourist.getBookings());
+        Hibernate.initialize(tourist.getExperiencesBooked());
+        return tourist;
     }
 
 }

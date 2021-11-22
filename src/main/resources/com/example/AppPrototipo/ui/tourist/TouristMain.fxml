@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -20,16 +21,33 @@
                      <VBox.margin>
                         <Insets />
                      </VBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </ImageView>
                   <ImageView fx:id="perfilMarker" fitHeight="39.0" fitWidth="39.0" onMouseClicked="#showProfile" pickOnBounds="true" preserveRatio="true" smooth="false">
                      <image>
                         <Image url="@imgs/perfil.png" />
                      </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </ImageView>
-                  <ImageView fx:id="favoritosMarker" fitHeight="39.0" fitWidth="39.0" onMouseClicked="#showFavourites" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="calendarMarker" fitHeight="39.0" fitWidth="39.0" onMouseClicked="#showCalendar" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@imgs/calendar.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
+                  <ImageView fx:id="favoritosMarker" fitHeight="39.0" fitWidth="39.0" layoutX="10.0" layoutY="108.0" onMouseClicked="#showFavourites" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@imgs/liked.png" />
                      </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </ImageView>
                </children>
                <VBox.margin>
@@ -42,6 +60,9 @@
                      <image>
                         <Image url="@imgs/cerrarSesion.png" />
                      </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </ImageView>
                </children>
                <VBox.margin>

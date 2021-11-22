@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
@@ -42,16 +43,12 @@ public class OperatorController implements Initializable {
     @FXML
     private HBox topPane;
 
-    private final ExperienceController experienceController;
-    private final UserMgr userMgr;
     private final CreateExperienceController createExperienceController;
     private final ListOfExperiencesOpController listOfExperiencesOpController;
     private final AjustesOpController ajustesOpController;
     private final BookingsListOpController bookingsListOpController;
 
-    public OperatorController(ExperienceController experienceController, UserMgr userMgr, CreateExperienceController createExperienceController, ListOfExperiencesOpController listOfExperiencesOpController, AjustesOpController ajustesOpController, BookingsListOpController bookingsListOpController) {
-        this.experienceController = experienceController;
-        this.userMgr = userMgr;
+    public OperatorController(CreateExperienceController createExperienceController, ListOfExperiencesOpController listOfExperiencesOpController, AjustesOpController ajustesOpController, BookingsListOpController bookingsListOpController) {
         this.createExperienceController = createExperienceController;
         this.listOfExperiencesOpController = listOfExperiencesOpController;
         this.ajustesOpController = ajustesOpController;
@@ -79,8 +76,8 @@ public class OperatorController implements Initializable {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
         fxmlLoader.setLocation(listOfExperiencesOpController.getClass().getResource("ListOfExperiencesOp.fxml"));
-        AnchorPane showListOfExperiencesAP = fxmlLoader.load();
-        loadToInnerView(showListOfExperiencesAP);
+        ScrollPane showListOfExperiencesSP = fxmlLoader.load();
+        loadToInnerView(showListOfExperiencesSP);
     }
 
     public void ajustes() throws IOException {

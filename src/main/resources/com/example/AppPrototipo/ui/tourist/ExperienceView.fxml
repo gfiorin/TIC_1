@@ -31,11 +31,25 @@
                         <Insets top="10.0" />
                      </padding>
                      <children>
-                        <Text fx:id="ubicacion" boundsType="VISUAL" layoutX="1.0" layoutY="1.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ubicacion" textOrigin="TOP" wrappingWidth="147.13671875">
-                           <font>
-                              <Font size="13.0" />
-                           </font>
-                        </Text>
+                        <VBox layoutX="1.9140625" layoutY="1.0" spacing="10.0">
+                           <children>
+                              <Text fx:id="ubicacion" boundsType="VISUAL" strokeType="OUTSIDE" strokeWidth="0.0" text="ubicacion" textOrigin="TOP" wrappingWidth="147.13671875">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </Text>
+                              <Text fx:id="departamento" boundsType="VISUAL" layoutX="9.0" layoutY="10.0" strokeType="OUTSIDE" strokeWidth="0.0" text="departamento" textOrigin="TOP" wrappingWidth="147.13671875">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </Text>
+                              <Text fx:id="costo" boundsType="VISUAL" layoutX="9.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="costo" textOrigin="TOP" wrappingWidth="147.13671875">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </VBox>
                      </children>
                   </AnchorPane>
                   <AnchorPane>
