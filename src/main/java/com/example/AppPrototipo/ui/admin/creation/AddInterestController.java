@@ -45,6 +45,8 @@ public class AddInterestController {
 
             interestMgr.addInterest(name);
 
+            showAlert("Interés creado con éxito", "¡El interés ha sido creado con éxito!");
+
             goBack(event);
 
         } catch (InvalidInformation invalidInformation) {

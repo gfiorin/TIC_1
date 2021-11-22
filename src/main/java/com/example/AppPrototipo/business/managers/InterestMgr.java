@@ -37,7 +37,7 @@ public class InterestMgr {
 
         }
 
-        if (interestRepository.findOneByName(name) == null){
+        if (interestRepository.findOneByName(name) != null){
             throw new InvalidInformation("El nombre de interés ya ha sido registrado en el sistema.");
         }
 
