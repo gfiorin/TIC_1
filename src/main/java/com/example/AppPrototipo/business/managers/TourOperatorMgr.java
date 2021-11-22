@@ -20,7 +20,7 @@ public class TourOperatorMgr {
         this.tourOperatorRepository = tourOperatorRepository;
     }
 
-    public void addTourOperator(String companyName, String fantasyName, String linkToWeb, String contactName, String contactPhone, String contactPosition, String contactEmail, boolean authorized) throws InvalidInformation, TourOperatorAlreadyExists {
+    public TourOperator addTourOperator(String companyName, String fantasyName, String linkToWeb, String contactName, String contactPhone, String contactPosition, String contactEmail, boolean authorized) throws InvalidInformation, TourOperatorAlreadyExists {
 
         if (companyName == null || companyName.isBlank()){
 
@@ -88,6 +88,7 @@ public class TourOperatorMgr {
 
         tourOperatorRepository.save(tourOperatorToAdd);
 
+        return tourOperatorToAdd;
     }
 
     @Transactional

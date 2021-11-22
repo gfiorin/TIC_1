@@ -49,7 +49,7 @@ public class TypeOfExperienceController {
     }
 
     @FXML
-    public void agregarExperienceType(ActionEvent event){
+    public void agregarExperienceType(ActionEvent event) throws Exception {
         String name = nameInput.getText();
         Interest interest = interestInput.getValue();
 
@@ -62,19 +62,14 @@ public class TypeOfExperienceController {
                     "Datos repetidos",
                     "Ya existe un tipo de experiencia con el nombre '" + name + "'. Por favor, verifique la informacion introducida.");
         } else {
-            try {
+            ExperienceType newType = new ExperienceType(name, interest);
 
-                ExperienceType newType = new ExperienceType(name, interest);
+            experienceTypeMgr.save(newType);
 
-                experienceTypeMgr.save(newType);
+            showAlert("Tipo de experiencia creado con éxito","El tipo de experiencia fue creado con éxito");
 
-                showAlert("Tipo de experiencia creado con éxito","El tipo de experiencia fue creado con éxito");
-
-                goBackToAdminView(event);
-
-            } catch (Exception ignored) {} //todo: y esto pa que es?
+            goBackToAdminView(event);
         }
-
     }
 
     @FXML

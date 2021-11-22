@@ -138,6 +138,9 @@ public class AdminController {
 
     @FXML
     void agregarOperadorTuristico(ActionEvent event) throws Exception {
+        Node source = (Node) event.getSource();
+        Stage oldStage  = (Stage) source.getScene().getWindow();
+
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
 
@@ -145,10 +148,15 @@ public class AdminController {
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.show();
+
+        oldStage.close();
     }
 
     @FXML
     void addOperator(ActionEvent event) throws Exception {
+        Node source = (Node) event.getSource();
+        Stage oldStage  = (Stage) source.getScene().getWindow();
+
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
 
@@ -156,6 +164,8 @@ public class AdminController {
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.show();
+
+        oldStage.close();
     }
 
     @FXML

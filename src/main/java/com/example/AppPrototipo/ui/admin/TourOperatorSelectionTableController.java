@@ -26,8 +26,6 @@ import java.util.Objects;
 @Component
 public class TourOperatorSelectionTableController {
 
-    private final TourOperatorRepository tourOperatorRepository;
-
     @FXML
     private TableView<TourOperator> touristOperatorTable;
 
@@ -41,7 +39,7 @@ public class TourOperatorSelectionTableController {
     private TableColumn<TourOperator, String> fantasyName;
 
     @FXML
-    private TableColumn<TourOperator, String> webLink;
+    private TableColumn<TourOperator, String> linkToWeb;
 
     @FXML
     private TableColumn<TourOperator, String> contactName;
@@ -59,13 +57,12 @@ public class TourOperatorSelectionTableController {
     private Button selectBtn;
 
     @FXML
-    private Button goBackBtn;
-
-    @FXML
     private Button searchBtn;
 
     @FXML
     private TextField searchInput;
+
+    private final TourOperatorRepository tourOperatorRepository;
 
     private final TourOperatorMgr tourOperatorMgr;
 
@@ -82,7 +79,7 @@ public class TourOperatorSelectionTableController {
         id.setCellValueFactory(new PropertyValueFactory<>("id"));
         companyName.setCellValueFactory(new PropertyValueFactory<>("companyName"));
         fantasyName.setCellValueFactory(new PropertyValueFactory<>("fantasyName"));
-        webLink.setCellValueFactory(new PropertyValueFactory<>("webLink"));
+        linkToWeb.setCellValueFactory(new PropertyValueFactory<>("linkToWeb"));
         contactName.setCellValueFactory(new PropertyValueFactory<>("contactName"));
         contactPhone.setCellValueFactory(new PropertyValueFactory<>("contactPhone"));
         contactPosition.setCellValueFactory(new PropertyValueFactory<>("contactPosition"));
@@ -136,4 +133,5 @@ public class TourOperatorSelectionTableController {
         alert.setContentText(contextText);
         alert.showAndWait();
     }
+
 }

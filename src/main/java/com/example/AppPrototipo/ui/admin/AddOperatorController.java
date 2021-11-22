@@ -57,7 +57,7 @@ public class AddOperatorController {
     }
 
     @FXML
-    public void addOperator(ActionEvent event) {
+    public void addOperator(ActionEvent event) throws Exception {
         String name = nameInput.getText();
         String username = usernameInput.getText();
         String password = passwordInput.getText();
@@ -77,16 +77,14 @@ public class AddOperatorController {
                         "Operador ya existe",
                         "Ya existe un operador con el nombre de usuario: " + username);
             } else {
-                try {
 
-                    Operator newOperator = new Operator(name, username, email, password, tourOperatorSelected);
-                    operatorMgr.save(newOperator);
+                Operator newOperator = new Operator(name, username, email, password, tourOperatorSelected);
+                operatorMgr.save(newOperator);
 
-                    showAlert("Operador creado con exito","El operador a sido creado con éxito");
+                showAlert("Operador creado con exito","El operador a sido creado con éxito");
 
-                    close(event);
-                    
-                } catch (Exception ignored) {}
+                goBackToAdminView(event);
+
             }
         }
     }
@@ -99,6 +97,8 @@ public class AddOperatorController {
 
     @FXML
     public void selectTourOperator(ActionEvent event) throws Exception {
+        selectBtn.setDisable(true);
+
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
 
@@ -112,6 +112,24 @@ public class AddOperatorController {
 
         tourOperatorSelected = touristOperatorsTableController.getSelectedItem(event);
         tourOperatorName.setText(tourOperatorSelected.getCompanyName());
+
+        selectBtn.setDisable(false);
+    }
+
+    @FXML
+    void goBackToAdminView(ActionEvent event) throws Exception{
+        Node source = (Node) event.getSource();
+        Stage oldStage  = (Stage) source.getScene().getWindow();
+
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
+
+        Parent root = fxmlLoader.load(AdminController.class.getResourceAsStream("AdminPanel.fxml"));
+        Stage newStage = new Stage();
+        newStage.setScene(new Scene(root));
+        newStage.show();
+
+        oldStage.close();
     }
 
     @FXML
