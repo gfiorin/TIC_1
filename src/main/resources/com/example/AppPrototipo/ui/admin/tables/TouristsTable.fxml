@@ -19,7 +19,7 @@
                 <TableColumn fx:id="documentType" prefWidth="124.79998779296875" text="Tipo de documento" />
                 <TableColumn fx:id="documentNumber" prefWidth="139.2000732421875" text="Numero de documento" />
                 <TableColumn fx:id="country" minWidth="0.0" prefWidth="46.4000244140625" text="País" />
-                <TableColumn fx:id="interests" prefWidth="74.39995117187505" text="Intereses" />
+                <TableColumn fx:id="interests" prefWidth="200.0" text="Intereses" />
             </columns>
         </TableView>
       <Pane layoutY="-1.0" prefHeight="47.0" prefWidth="919.0">

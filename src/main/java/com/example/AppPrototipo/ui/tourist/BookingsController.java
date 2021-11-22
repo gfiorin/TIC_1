@@ -20,6 +20,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -81,7 +82,7 @@ public class BookingsController implements Initializable {
 
     private List<Booking> bookings(Tourist tourist){
         List<Booking> bookings = tourist.getBookings();
-        bookings.removeIf(booking -> booking.getDate().before(new Date(System.currentTimeMillis())));
+        bookings.removeIf(booking -> booking.getDate().compareTo(LocalDate.now())<0);
         bookings = bookings.stream().sorted(Comparator.comparing(Booking::getDate)).collect(Collectors.toList());
         return bookings;
     }
