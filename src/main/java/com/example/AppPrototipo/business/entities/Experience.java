@@ -54,10 +54,6 @@ public class Experience {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "experience")
     private List<Image> images;
 
-    @OneToMany()
-    @JoinColumn(name = "experience")
-    private List<Booking> bookings;
-
     @ManyToOne
     @JoinColumn(name="department")
     private Department department;
@@ -99,10 +95,6 @@ public class Experience {
             inverseJoinColumns = {@JoinColumn(name = "tourist")}
     )
     private List<Booking> bookings;
-
-    public List<Booking> getBookings() {
-        return bookings;
-    }
 
     public Experience() {
     }
