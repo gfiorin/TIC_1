@@ -154,7 +154,7 @@ public class CreateExperienceController {
         if (invalidValue) {
             showAlert(
                     "Datos faltantes",
-                    "Uno o mas campos esta vacio. Por favor, verifique la información introducida.");
+                    "Uno o más campos están vacíos. Por favor, verifique la información introducida.");
         } else if(!anyCheckboxChecked) {
             showAlert(
                     "Datos faltantes",
@@ -174,7 +174,7 @@ public class CreateExperienceController {
                     try {
                         capacity = Integer.parseInt(capacityInput.getText());
                     } catch (NumberFormatException e) {
-                        showAlert("Informacion invalida!", "Por favor ingrese una cantidad de personas válida");
+                        showAlert("¡Información inválida!", "Por favor, ingrese una cantidad de personas válida.");
                         return;
                     }
                 }
@@ -186,7 +186,7 @@ public class CreateExperienceController {
                         price = BigDecimal.valueOf(Double.parseDouble(priceInput.getText()));
                     }
                     catch (NumberFormatException e){
-                        showAlert("Informacion invalida!", "Por favor ingrese un precio válido");
+                        showAlert("¡Información inválida!", "Por favor, ingrese un precio válido.");
                         return;
                     }
                 }
@@ -209,13 +209,13 @@ public class CreateExperienceController {
                 TourOperator tourOperator = ((Operator) userMgr.getCurrentUser()).getTourOperator();
 
                 if(images.size() < 1){
-                    showAlert("Informacion invalida!", "La experiencia debe tener al menos una imagen asociada");
+                    showAlert("¡Información inválida!", "La experiencia debe tener al menos una imagen asociada.");
                     return;
                 }
 
                 experienceMgr.addExperience(title, longDescription, shortDescription, vaccination, capacity, price, bookable, experienceTypes, tourOperator, department, streetAndNo, email, link, telephone, images);
 
-                showAlert("Su experiencia ha sido solicitada con exito", "Su experiencia ha sido solicitada con exito, un administrador del sitio la revisará en los proximos días para habilitarla");
+                showAlert("Su experiencia ha sido solicitada con éxito", "Su experiencia ha sido solicitada con éxito, un administrador del sitio la revisará en los próximos días para habilitarla");
 
                 images.clear();
 
@@ -224,7 +224,7 @@ public class CreateExperienceController {
 
             } catch (InvalidInformation invalidInformation) {
                 showAlert(
-                        "Informacion invalida!",
+                        "¡Informacion inválida!",
                         invalidInformation.getMessage());
             }
         }
@@ -243,7 +243,7 @@ public class CreateExperienceController {
             imagesQuantity.setText(String.valueOf(images.size()));
         }catch (IOException e){
             showAlert(
-                    "Error!",
+                    "¡Error!",
                     "Hubo un error al cargar la imagen");
         }
     }

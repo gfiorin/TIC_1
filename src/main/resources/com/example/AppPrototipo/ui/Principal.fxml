@@ -6,26 +6,32 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="246.0" prefWidth="351.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.AppPrototipo.ui.PrincipalController">
-   <center>
-      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="246.0" prefWidth="351.0" BorderPane.alignment="CENTER">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="314.0" prefWidth="369.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.AppPrototipo.ui.PrincipalController">
+   <left>
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="314.0" prefWidth="369.0" BorderPane.alignment="CENTER">
          <children>
-            <TextField fx:id="userInput" layoutX="56.0" layoutY="27.0" prefHeight="26.0" prefWidth="240.0" promptText="Email o usuario" />
-            <PasswordField fx:id="passwordInput" layoutX="57.0" layoutY="70.0" prefHeight="26.0" prefWidth="238.0" promptText="Contraseña" />
-            <Button fx:id="login" defaultButton="true" layoutX="112.0" layoutY="123.0" mnemonicParsing="false" onAction="#loginAction" prefHeight="29.0" prefWidth="127.0" text="Login">
+            <TextField fx:id="userInput" layoutX="66.0" layoutY="86.0" prefHeight="26.0" prefWidth="240.0" promptText="Email o usuario" />
+            <PasswordField fx:id="passwordInput" layoutX="67.0" layoutY="129.0" prefHeight="26.0" prefWidth="238.0" promptText="Contraseña" />
+            <Button fx:id="login" defaultButton="true" layoutX="122.0" layoutY="182.0" mnemonicParsing="false" onAction="#loginAction" prefHeight="29.0" prefWidth="127.0" text="Iniciar sesión">
                <cursor>
                   <Cursor fx:constant="DEFAULT" />
                </cursor>
             </Button>
-            <Text layoutX="124.0" layoutY="187.0" strokeType="OUTSIDE" strokeWidth="0.0" text="No esta registrado?" />
-            <Button fx:id="agregarUsuario" layoutX="112.0" layoutY="203.0" mnemonicParsing="false" onAction="#agregarUsuarioAction" prefHeight="29.0" prefWidth="127.0" text="Agregar Usuario">
+            <Text layoutX="132.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" text="¿No está registrado?" />
+            <Button fx:id="agregarUsuario" layoutX="122.0" layoutY="262.0" mnemonicParsing="false" onAction="#agregarUsuarioAction" prefHeight="29.0" prefWidth="127.0" text="Registrarse">
                <cursor>
                   <Cursor fx:constant="DEFAULT" />
                </cursor>
             </Button>
+            <Text layoutX="82.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="¡Bienvenido!">
+               <font>
+                  <Font name="System Bold" size="35.0" />
+               </font>
+            </Text>
          </children>
       </AnchorPane>
-   </center>
+   </left>
 </BorderPane>

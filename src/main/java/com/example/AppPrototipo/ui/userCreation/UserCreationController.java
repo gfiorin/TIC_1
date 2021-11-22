@@ -1,5 +1,6 @@
 package com.example.AppPrototipo.ui.userCreation;
 
+import com.example.AppPrototipo.AppPrototipoApplication;
 import com.example.AppPrototipo.business.managers.UserMgr;
 import com.example.AppPrototipo.business.entities.Country;
 import com.example.AppPrototipo.business.entities.Interest;
@@ -7,14 +8,19 @@ import com.example.AppPrototipo.business.exceptions.InvalidInformation;
 import com.example.AppPrototipo.business.exceptions.UserAlreadyExsists;
 import com.example.AppPrototipo.persistence.CountryRepository;
 import com.example.AppPrototipo.persistence.InterestRepository;
+import com.example.AppPrototipo.ui.PrincipalController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -43,6 +49,12 @@ public class UserCreationController {
 
     @FXML
     private ComboBox<Country> countryInput;
+
+    @FXML
+    private ComboBox<String> documentTypeInput;
+
+    @FXML
+    private TextField documentNumberInput;
 
     @FXML
     private VBox interestVBox;
@@ -76,13 +88,19 @@ public class UserCreationController {
         for(Country country : countries){
             countryInput.getItems().add(country);
         }
+
+        List<String> documentTypes = Arrays.asList("CI", "DNI", "RG", "Pasaporte");
+        for(String docType: documentTypes){
+            documentTypeInput.getItems().add(docType);
+        }
+
     }
 
     @FXML
-    void agregarUsuario(ActionEvent event) {
+    void agregarUsuario(ActionEvent event) throws IOException {
 
         //Control de errores
-        List<Control> controlList = Arrays.asList(nameInput, emailInput, userInput, passwordInput, dateOfBirthInput, cellphoneInput, countryInput);
+        List<Control> controlList = Arrays.asList(nameInput, emailInput, userInput, passwordInput, dateOfBirthInput, cellphoneInput, countryInput, documentTypeInput, documentNumberInput);
         boolean invalidValue = false;
         for (Control control : controlList) {
             if (control instanceof TextField) {
@@ -115,11 +133,11 @@ public class UserCreationController {
         if (invalidValue) {
             showAlert(
                     "Datos faltantes",
-                    "Uno o mas campos esta vacio. Por favor, verifique la informacion introducida.");
+                    "Uno o más campos están vacíos. Por favor, verifique la información introducida.");
         } else if(!anyCheckboxChecked) {
             showAlert(
                     "Datos faltantes",
-                    "Debe seleccionar al menos un interes. Por favor, verifique la informacion introducida.");
+                    "Debe seleccionar al menos un interes. Por favor, verifique la información introducida.");
         } else {
 
             try {
@@ -131,6 +149,8 @@ public class UserCreationController {
                 LocalDate dateOfBirth = dateOfBirthInput.getValue();
                 String cellphone = cellphoneInput.getText();
                 Country countryId = countryInput.getValue();
+                String documentType = documentTypeInput.getValue();
+                String documentNumber = documentNumberInput.getText();
                 List<Interest> interests = new ArrayList<>();
 
                 for (Node node : interestVBox.getChildren()) {
@@ -140,22 +160,46 @@ public class UserCreationController {
                     }
                 }
 
-                userMgr.addTourist(name, user, email, password, dateOfBirth, cellphone, countryId, interests, null, null);
+                userMgr.addTourist(name, user, email, password, dateOfBirth, cellphone, countryId, interests, documentType, documentNumber);
 
-                showAlert("Usuario creado con exito", "El usuario ha sido creado con exito");
+                showAlert("Usuario creado con éxito", "El usuario ha sido creado con éxito");
+
+                FXMLLoader fxmlLoader = new FXMLLoader();
+                fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
+
+                Parent root = fxmlLoader.load(PrincipalController.class.getResourceAsStream("Principal.fxml"));
+                Stage newStage = new Stage();
+                newStage.setScene(new Scene(root));
+                newStage.show();
 
                 close(event);
 
             } catch (UserAlreadyExsists e) {
                 showAlert(
-                        "Email o usuario existente!",
+                        "¡Email o usuario ya existente!",
                         e.getMessage());
             } catch (InvalidInformation invalidInformation) {
                 showAlert(
-                        "Informacion invalida!",
+                        "¡Información inválida!",
                         invalidInformation.getMessage());
             }
         }
+    }
+
+    @FXML
+    void goBackToMain(ActionEvent event) throws Exception{
+        Node source = (Node) event.getSource();
+        Stage oldStage  = (Stage) source.getScene().getWindow();
+
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
+
+        Parent root = fxmlLoader.load(PrincipalController.class.getResourceAsStream("Principal.fxml"));
+        Stage newStage = new Stage();
+        newStage.setScene(new Scene(root));
+        newStage.show();
+
+        oldStage.close();
     }
 
     @FXML

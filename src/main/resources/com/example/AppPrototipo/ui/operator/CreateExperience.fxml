@@ -26,7 +26,7 @@
                      </font>
                   </Text>
                   <TextField fx:id="titleInput" layoutX="260.0" layoutY="85.0" prefHeight="27.0" prefWidth="360.0" />
-                  <Text layoutX="34.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Titulo" textAlignment="RIGHT" wrappingWidth="185.0">
+                  <Text layoutX="34.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Título" textAlignment="RIGHT" wrappingWidth="185.0">
                      <font>
                         <Font size="13.0" />
                      </font>
@@ -84,7 +84,7 @@
                      </font>
                   </Text>
                   <CheckBox fx:id="doesNotHavePriceInput" layoutX="596.0" layoutY="684.0" mnemonicParsing="false" />
-                  <Text layoutX="34.0" layoutY="621.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Capacidad" textAlignment="RIGHT" wrappingWidth="185.0">
+                  <Text layoutX="34.0" layoutY="620.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cantidad de personas por hora" textAlignment="RIGHT" wrappingWidth="185.0">
                      <font>
                         <Font size="13.0" />
                      </font>

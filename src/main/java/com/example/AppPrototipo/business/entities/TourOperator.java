@@ -35,7 +35,6 @@ public class TourOperator {
     @Column(name = "authorized")
     private boolean authorized;
 
-
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "tour_operator")
     private List<Experience> listOfExperiences;
@@ -143,6 +142,11 @@ public class TourOperator {
 
     public List<Operator> getListOfAuthorizedOperators() {
         return listOfAuthorizedOperators;
+    }
+
+    @Override
+    public String toString() {
+        return this.companyName;
     }
 
 }

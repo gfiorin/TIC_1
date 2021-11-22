@@ -8,11 +8,13 @@
    <children>
       <TableView fx:id="bookingsTable" prefHeight="445.0" prefWidth="750.0">
         <columns>
-          <TableColumn fx:id="tourist" prefWidth="188.79995423555374" text="Email turista" />
-            <TableColumn fx:id="experience" prefWidth="187.19996643066406" text="Experiencia reservada" />
-            <TableColumn fx:id="date" prefWidth="136.0" text="Fecha" />
-            <TableColumn fx:id="time" prefWidth="104.0" text="Horario" />
-            <TableColumn fx:id="amount" prefWidth="133.60001220703123" text="Cantidad de personas" />
+          <TableColumn fx:id="touristEmail" prefWidth="103.99999696016312" text="Email turista" />
+            <TableColumn fx:id="touristCountry" prefWidth="96.79995727539062" text="País de origen" />
+            <TableColumn fx:id="touristCellphone" prefWidth="118.39997863769531" text="Celular de contacto" />
+            <TableColumn fx:id="experienceTitle" prefWidth="137.60003662109375" text="Experiencia reservada" />
+            <TableColumn fx:id="date" prefWidth="83.99993896484375" text="Fecha" />
+            <TableColumn fx:id="time" prefWidth="72.00006103515625" text="Horario" />
+            <TableColumn fx:id="amount" prefWidth="129.60003662109375" text="Cantidad de personas" />
         </columns>
       </TableView>
    </children>

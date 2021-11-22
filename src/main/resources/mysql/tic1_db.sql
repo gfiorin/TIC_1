@@ -373,7 +373,7 @@ CREATE TABLE `experiences` (
                                `authorized` tinyint NOT NULL,
                                `title` varchar(45) NOT NULL,
                                `description` varchar(1000) NOT NULL,
-                               `shortdescription` varchar(600) NOT NULL,
+                               `shortdescription` varchar(150) NOT NULL,
                                `vaccination` tinyint NOT NULL,
                                `capacity` varchar(45) NOT NULL,
                                `reviewed` tinyint NOT NULL,
@@ -445,7 +445,7 @@ INSERT INTO tic1_db.types_of_experiences (name,interest) VALUES
 
 CREATE TABLE `complaints` (
                               `id` int NOT NULL AUTO_INCREMENT,
-                              `description` varchar(45) NOT NULL,
+                              `description` varchar(600) NOT NULL,
                               `date` datetime NOT NULL,
                               `experience` int NOT NULL,
                               `tourist` int NOT NULL,
@@ -481,8 +481,8 @@ INSERT INTO tic1_db.types_experiences (experience,type_of_experience) VALUES
 
 CREATE TABLE `reviews` (
                            `id` int NOT NULL AUTO_INCREMENT,
-                           `comment` varchar(45) NOT NULL,
-                           `rating` varchar(45) NOT NULL,
+                           `comment` varchar(600) NOT NULL,
+                           `rating` int NOT NULL,
                            `experience` int NOT NULL,
                            `tourist` int NOT NULL,
                            PRIMARY KEY (`id`),

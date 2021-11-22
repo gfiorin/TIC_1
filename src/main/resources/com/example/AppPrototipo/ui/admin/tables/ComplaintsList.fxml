@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane prefHeight="432.0" prefWidth="919.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.AppPrototipo.ui.admin.tables.ComplaintsListController">
+    <children>
+        <TableView fx:id="complaintsTable" layoutY="46.0" prefHeight="353.0" prefWidth="919.0">
+            <columns>
+                <TableColumn fx:id="id" prefWidth="63.19998013973236" text="ID" />
+                <TableColumn fx:id="description" prefWidth="450" text="Descripción" />
+                <TableColumn fx:id="date" prefWidth="85.59994506835938" text="Fecha" />
+                <TableColumn fx:id="experience" prefWidth="165.5999755859375" text="Experiencia" />
+                <TableColumn fx:id="tourist" prefWidth="153.60002441406255" text="Turista" />
+            </columns>
+        </TableView>
+        <Pane layoutY="-1.0" prefHeight="47.0" prefWidth="919.0">
+            <children>
+                <Button fx:id="goBackBtn" layoutX="24.0" layoutY="11.0" mnemonicParsing="false" onAction="#goBackToAdminView" prefHeight="25.0" prefWidth="63.0" text="Atrás" />
+            </children>
+        </Pane>
+      <Pane layoutY="400.0" prefHeight="47.0" prefWidth="919.0">
+         <children>
+            <Button fx:id="checkComplaintBtn" layoutX="792.0" layoutY="11.0" mnemonicParsing="false" onAction="#selectComplaint" text="Revisar denuncia" />
+         </children>
+      </Pane>
+    </children>
+</AnchorPane>

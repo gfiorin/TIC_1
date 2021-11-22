@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane prefHeight="491.0" prefWidth="1473.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.AppPrototipo.ui.admin.tables.ExperiencesTableController">
+   <children>
+      <TableView fx:id="experiencesTable" layoutY="40.0" prefHeight="402.0" prefWidth="1471.0">
+        <columns>
+          <TableColumn fx:id="id" prefWidth="75.0" text="ID" />
+            <TableColumn fx:id="tourOperator" prefWidth="126.0" text="Operador turístico" />
+            <TableColumn fx:id="title" prefWidth="112.79997253417969" text="Título" />
+            <TableColumn fx:id="department" prefWidth="100.80001831054688" text="Departamento" />
+            <TableColumn fx:id="authorized" prefWidth="80.79998779296875" text="Autorizado" />
+            <TableColumn fx:id="price" minWidth="8.79998779296875" prefWidth="70.39996337890625" text="Precio" />
+            <TableColumn fx:id="description" prefWidth="101.5999755859375" text="Descripción" />
+            <TableColumn fx:id="vaccination" prefWidth="92.0" text="Vacunación" />
+            <TableColumn fx:id="capacity" minWidth="2.4000244140625" prefWidth="68.800048828125" text="Capacidad" />
+            <TableColumn fx:id="bookable" minWidth="0.0" prefWidth="83.199951171875" text="Reservable" />
+            <TableColumn fx:id="reviewed" prefWidth="73.5999755859375" text="Aprobada" />
+            <TableColumn fx:id="email" prefWidth="74.4000244140625" text="Email" />
+            <TableColumn fx:id="link" prefWidth="76.800048828125" text="Link" />
+            <TableColumn fx:id="telephone" prefWidth="96.0" text="Teléfono" />
+            <TableColumn fx:id="ubicacion" prefWidth="105.599853515625" text="Ubicación" />
+            <TableColumn fx:id="shortDescription" prefWidth="124.7999267578125" text="Descripción corta" />
+        </columns>
+      </TableView>
+      <Pane prefHeight="40.0" prefWidth="838.0">
+         <children>
+            <Button fx:id="goBackBtn" layoutX="23.0" layoutY="8.0" mnemonicParsing="false" onAction="#goBackToAdminView" prefHeight="25.0" prefWidth="63.0" text="Atrás" />
+         </children>
+      </Pane>
+      <Pane layoutY="441.0" prefHeight="50.0" prefWidth="1471.0">
+         <children>
+            <Button fx:id="authorizeBtn" layoutX="1243.0" layoutY="13.0" mnemonicParsing="false" onAction="#enableOrDisableExperience" text="Autorizar/Desautorizar experiencia" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

@@ -23,6 +23,7 @@ public class JavaFXApplication extends Application {
         root = fxmlLoader.load(PrincipalController.class.getResourceAsStream("Principal.fxml"));
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
+        primaryStage.setTitle("Eduardo García turismo en Uruguay");
     }
 
     @Override

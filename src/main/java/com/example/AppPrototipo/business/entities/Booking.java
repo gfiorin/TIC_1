@@ -79,4 +79,29 @@ public class Booking {
     public int getAmount() {
         return amount;
     }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setExperience(Experience experience) {
+        this.experience = experience;
+    }
+
+    public void setTourist(Tourist tourist) {
+        this.tourist = tourist;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public void setTime(Time time) {
+        this.time = time;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
 }

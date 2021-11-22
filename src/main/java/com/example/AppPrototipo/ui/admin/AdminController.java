@@ -2,6 +2,8 @@ package com.example.AppPrototipo.ui.admin;
 
 import com.example.AppPrototipo.AppPrototipoApplication;
 import com.example.AppPrototipo.ui.PrincipalController;
+import com.example.AppPrototipo.ui.admin.creation.*;
+import com.example.AppPrototipo.ui.admin.tables.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,7 +15,9 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import org.springframework.stereotype.Component;
 
-@Component // se podrian ordenar un poco las clases en paquetes todo
+import java.io.IOException;
+
+@Component
 public class AdminController {
 
     @FXML
@@ -47,6 +51,9 @@ public class AdminController {
     private Button listOfReviewsBtn;
 
     @FXML
+    private Button addAdminstratorBtn;
+
+    @FXML
     private Button cerrarSesionBtn;
 
     public AdminController(){}
@@ -59,7 +66,7 @@ public class AdminController {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
 
-        Parent root = fxmlLoader.load(AdminController.class.getResourceAsStream("TouristsTable.fxml"));
+        Parent root = fxmlLoader.load(TouristsTableController.class.getResourceAsStream("TouristsTable.fxml"));
         Stage newStage = new Stage();
         newStage.setScene(new Scene(root));
         newStage.show();
@@ -75,7 +82,7 @@ public class AdminController {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
 
-        Parent root = fxmlLoader.load(AdminController.class.getResourceAsStream("OperatorsTable.fxml"));
+        Parent root = fxmlLoader.load(OperatorsTableController.class.getResourceAsStream("OperatorsTable.fxml"));
         Stage newStage = new Stage();
         newStage.setScene(new Scene(root));
         newStage.show();
@@ -91,7 +98,7 @@ public class AdminController {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
 
-        Parent root = fxmlLoader.load(AdminController.class.getResourceAsStream("TouristOperatorsTable.fxml"));
+        Parent root = fxmlLoader.load(TouristOperatorsTableController.class.getResourceAsStream("TouristOperatorsTable.fxml"));
         Stage newStage = new Stage();
         newStage.setScene(new Scene(root));
         newStage.show();
@@ -107,7 +114,7 @@ public class AdminController {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
 
-        Parent root = fxmlLoader.load(AdminController.class.getResourceAsStream("ExperiencesTable.fxml"));
+        Parent root = fxmlLoader.load(ExperiencesTableController.class.getResourceAsStream("ExperiencesTable.fxml"));
         Stage newStage = new Stage();
         newStage.setScene(new Scene(root));
         newStage.show();
@@ -117,17 +124,25 @@ public class AdminController {
 
     @FXML
     void showCreateTypeOfExperience(ActionEvent event) throws Exception {
+        Node source = (Node) event.getSource();
+        Stage oldStage  = (Stage) source.getScene().getWindow();
+
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
 
         Parent root = fxmlLoader.load(TypeOfExperienceController.class.getResourceAsStream("TypeOfExperience.fxml"));
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.show();
+        Stage newStage = new Stage();
+        newStage.setScene(new Scene(root));
+        newStage.show();
+
+        oldStage.close();
     }
 
     @FXML
     void agregarOperadorTuristico(ActionEvent event) throws Exception {
+        Node source = (Node) event.getSource();
+        Stage oldStage  = (Stage) source.getScene().getWindow();
+
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
 
@@ -135,10 +150,15 @@ public class AdminController {
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.show();
+
+        oldStage.close();
     }
 
     @FXML
     void addOperator(ActionEvent event) throws Exception {
+        Node source = (Node) event.getSource();
+        Stage oldStage  = (Stage) source.getScene().getWindow();
+
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
 
@@ -146,6 +166,8 @@ public class AdminController {
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.show();
+
+        oldStage.close();
     }
 
     @FXML
@@ -156,7 +178,7 @@ public class AdminController {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
 
-        Parent root = fxmlLoader.load(AdminController.class.getResourceAsStream("ListOfAdministrators.fxml"));
+        Parent root = fxmlLoader.load(ListOfAdministratorsController.class.getResourceAsStream("ListOfAdministrators.fxml"));
         Stage newStage = new Stage();
         newStage.setScene(new Scene(root));
         newStage.show();
@@ -172,7 +194,7 @@ public class AdminController {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
 
-        Parent root = fxmlLoader.load(AdminController.class.getResourceAsStream("ComplaintsList.fxml"));
+        Parent root = fxmlLoader.load(ComplaintsListController.class.getResourceAsStream("ComplaintsList.fxml"));
         Stage newStage = new Stage();
         newStage.setScene(new Scene(root));
         newStage.show();
@@ -188,7 +210,23 @@ public class AdminController {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
 
-        Parent root = fxmlLoader.load(AdminController.class.getResourceAsStream("ReviewsList.fxml"));
+        Parent root = fxmlLoader.load(ReviewsListController.class.getResourceAsStream("ReviewsList.fxml"));
+        Stage newStage = new Stage();
+        newStage.setScene(new Scene(root));
+        newStage.show();
+
+        oldStage.close();
+    }
+
+    @FXML
+    void addAdministrator(ActionEvent event) throws IOException {
+        Node source = (Node) event.getSource();
+        Stage oldStage  = (Stage) source.getScene().getWindow();
+
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
+
+        Parent root = fxmlLoader.load(AddAdministratorController.class.getResourceAsStream("AddAdministrator.fxml"));
         Stage newStage = new Stage();
         newStage.setScene(new Scene(root));
         newStage.show();

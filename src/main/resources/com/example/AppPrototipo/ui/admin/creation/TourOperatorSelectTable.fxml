@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane prefHeight="449.0" prefWidth="933.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.AppPrototipo.ui.admin.creation.TourOperatorSelectionTableController">
+    <TableView fx:id="touristOperatorTable" layoutY="38.0" prefHeight="366.0" prefWidth="938.0">
+        <columns>
+            <TableColumn fx:id="id" prefWidth="55.200013756752014" text="ID" />
+            <TableColumn fx:id="companyName" prefWidth="138.39998626708984" text="Nombre compañía" />
+            <TableColumn fx:id="fantasyName" prefWidth="110.4000244140625" text="Nombre fantasía" />
+            <TableColumn fx:id="linkToWeb" prefWidth="74.39996337890625" text="Link" />
+            <TableColumn fx:id="contactName" prefWidth="137.60000610351562" text="Nombre contacto" />
+            <TableColumn fx:id="contactPhone" prefWidth="146.4000244140625" text="Teléfono contacto" />
+            <TableColumn fx:id="contactPosition" prefWidth="131.2000732421875" text="Cargo contacto" />
+            <TableColumn fx:id="contactEmail" prefWidth="121.5999755859375" text="Email contacto" />
+        </columns>
+    </TableView>
+    <Pane layoutY="403.0" prefHeight="46.0" prefWidth="938.0">
+        <children>
+            <Button fx:id="selectBtn" layoutX="696.0" layoutY="8.0" mnemonicParsing="false" onAction="#selection" prefHeight="31.0" prefWidth="226.0" text="Seleccionar" />
+        </children>
+    </Pane>
+    <Pane prefHeight="38.0" prefWidth="924.0">
+        <children>
+            <TextField fx:id="searchInput" layoutX="653.0" layoutY="7.0" prefHeight="25.0" prefWidth="195.0" />
+            <Button fx:id="searchBtn" layoutX="857.0" layoutY="7.0" mnemonicParsing="false" onAction="#searchItem" prefHeight="25.0" prefWidth="65.0" text="Buscar" />
+        </children>
+    </Pane>
+</AnchorPane>

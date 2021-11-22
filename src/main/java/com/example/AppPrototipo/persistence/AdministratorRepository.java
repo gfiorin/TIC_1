@@ -10,6 +10,11 @@ import java.util.List;
 public interface AdministratorRepository extends CrudRepository<Administrator, Integer> {
 
     Administrator findOneByEmail(String email);
+
+    Administrator findOneByUsername(String username);
+
     List<Administrator> findAll();
+
+    void deleteAdministratorById(Integer id);
 
 }
