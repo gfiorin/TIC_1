@@ -81,8 +81,8 @@ public class ExperienceMgr {
     public Experience getCurrentExperience(int id){
         Experience experience = experienceRepository.findById(id).get();
         Hibernate.initialize(experience.getExperienceTypes());
+        Hibernate.initialize(experience.getLikes());
         Hibernate.initialize(experience.getBookings());
-        Hibernate.initialize(experience.getImages());
         return experience;
     }
 
@@ -98,7 +98,6 @@ public class ExperienceMgr {
     public List<Experience> findByTypes(List<ExperienceType> experienceTypes){
 
         List<Experience> allExperiences = experienceRepository.findAll();
-
         List<Experience> result = new ArrayList<>();
 
         for (Experience e : allExperiences) {
@@ -108,7 +107,8 @@ public class ExperienceMgr {
             boolean ok = false;
 
             for (ExperienceType t : types) {
-                if (experienceTypes.contains(t)){
+
+                if (experienceTypes.contains(t)) {
                     ok = true;
                     break;
                 }
