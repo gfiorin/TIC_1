@@ -96,10 +96,6 @@ public class Experience {
     )
     private List<Booking> bookings;
 
-    public List<Booking> getBookings() {
-        return bookings;
-    }
-
     public Experience() {
     }
 
@@ -248,6 +244,10 @@ public class Experience {
 
     public String getTelephone() {
         return telephone;
+    }
+
+    public List<Booking> getBookings() {
+        return bookings;
     }
 
     @Override
