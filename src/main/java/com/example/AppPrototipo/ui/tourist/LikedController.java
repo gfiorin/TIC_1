@@ -1,50 +1,43 @@
 package com.example.AppPrototipo.ui.tourist;
 
 import com.example.AppPrototipo.AppPrototipoApplication;
-import com.example.AppPrototipo.business.managers.UserMgr;
 import com.example.AppPrototipo.business.entities.Experience;
 import com.example.AppPrototipo.business.entities.Tourist;
+import com.example.AppPrototipo.business.managers.UserMgr;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.Text;
-import org.hibernate.Hibernate;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import javax.transaction.Transactional;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
 @Component
 public class LikedController implements Initializable {
 
-    private Tourist tourist;
+    private final UserMgr userMgr;
 
     @FXML
-    private GridPane grillaFavoritos;
+    private VBox vBoxGral;
 
-    private final UserMgr userMgr;
+    @FXML
+    private VBox vBoxExp;
 
     public LikedController(UserMgr userMgr) {
         this.userMgr = userMgr;
-    }
-
-    public Tourist getTourist() {
-        return tourist;
-    }
-
-    public void setTourist(Tourist tourist) {
-        this.tourist = tourist;
     }
 
     @Override
@@ -57,13 +50,17 @@ public class LikedController implements Initializable {
             text.setFill(Paint.valueOf("#6b6a6a"));
             text.setFont(Font.font("System", FontPosture.ITALIC, 20));
             text.setText("  No ha seleccionado ningún favorito por el momento");
-            grillaFavoritos.add(text,0,0);
+            vBoxGral.getChildren().add(text);
         }
 
-        int columns = 0;
-        int row = 1;
+        int counter = 0;
 
         try {
+
+            HBox hbox = new HBox();
+            hbox.setSpacing(15);
+            vBoxExp.getChildren().add(hbox);
+
             for (Experience likedExperience : likedExperiences) {
                 FXMLLoader fxmlLoader = new FXMLLoader();
 
@@ -71,21 +68,20 @@ public class LikedController implements Initializable {
                 MiniExperienceController miniExperienceController = (MiniExperienceController) applicationContext
                         .getBean("miniExperienceControllerPrototype");
                 fxmlLoader.setController(miniExperienceController);
-
-                fxmlLoader.setController(miniExperienceController);
                 fxmlLoader.setLocation(miniExperienceController.getClass().getResource("MiniExperience.fxml"));
-                VBox vbox = fxmlLoader.load();
+                VBox miniExeperience = fxmlLoader.load();
                 miniExperienceController.setData(likedExperience, true);
+                hbox.getChildren().add(miniExeperience);
+                counter++;
 
-                if (columns == 4) {
-                    columns = 0;
-                    ++row;
+                if (counter == 3) {
+                    counter = 0;
+                    hbox = new HBox();
+                    hbox.setSpacing(15);
+                    vBoxExp.getChildren().add(hbox);
                 }
-
-                grillaFavoritos.add(vbox, columns++, row);
-                GridPane.setMargin(vbox, new Insets(10));
             }
-        }catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

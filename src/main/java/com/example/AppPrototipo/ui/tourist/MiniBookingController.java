@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import org.springframework.stereotype.Component;
 
@@ -46,6 +47,9 @@ public class MiniBookingController {
     @FXML
     private Pane imagePane;
 
+    @FXML
+    private VBox infoVBox;
+
     public MiniBookingController(BookingMgr bookingMgr) {
         this.bookingMgr = bookingMgr;
     }
@@ -59,12 +63,15 @@ public class MiniBookingController {
         horaReserva.setText(format.format(booking.getTime()));
         nombreExperiencia.setText(booking.getExperience().getTitle());
         direccion.setText(booking.getExperience().getUbicacion());
+        direccion.wrappingWidthProperty().bind(infoVBox.prefWidthProperty());
         cuposReserva.setText(String.valueOf(booking.getAmount()));
-        Image image = new Image(new ByteArrayInputStream(booking.getExperience().getImages().get(0).getImageData()));
-        ChangeListener<Number> listener = getListener(imagePane, experienciaImg, image);
-        imagePane.widthProperty().addListener(listener);
-        imagePane.heightProperty().addListener(listener);
-        experienciaImg.setImage(image);
+        if (!booking.getExperience().getImages().isEmpty()) {
+            Image image = new Image(new ByteArrayInputStream(booking.getExperience().getImages().get(0).getImageData()));
+            ChangeListener<Number> listener = getListener(imagePane, experienciaImg, image);
+            imagePane.widthProperty().addListener(listener);
+            imagePane.heightProperty().addListener(listener);
+            experienciaImg.setImage(image);
+        }
     }
 
     private ChangeListener<Number> getListener(Pane imagePane, ImageView imageViewPrincipal, Image image) {

@@ -1,19 +1,23 @@
 package com.example.AppPrototipo.business.managers;
 
 import com.example.AppPrototipo.business.entities.*;
+import com.example.AppPrototipo.business.entities.ExperienceType;
 import com.example.AppPrototipo.business.exceptions.InvalidInformation;
 import com.example.AppPrototipo.persistence.BookingRepository;
 import com.example.AppPrototipo.persistence.ExperienceRepository;
+import org.hibernate.Hibernate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.sql.Date;
 import java.sql.Time;
+import java.util.*;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+
 
 @Service
 public class ExperienceMgr {
@@ -73,12 +77,52 @@ public class ExperienceMgr {
         }
     }
 
+    @Transactional
+    public Experience getCurrentExperience(int id){
+        Experience experience = experienceRepository.findById(id).get();
+        Hibernate.initialize(experience.getExperienceTypes());
+        Hibernate.initialize(experience.getLikes());
+        Hibernate.initialize(experience.getBookings());
+        return experience;
+    }
+
     public List<Experience> findAll(){
         return experienceRepository.findAll();
     }
 
     public Experience findOneById(int id){
         return experienceRepository.findOneById(id);
+    }
+
+    @Transactional
+    public List<Experience> findByTypes(List<ExperienceType> experienceTypes){
+
+        List<Experience> allExperiences = experienceRepository.findAll();
+        List<Experience> result = new ArrayList<>();
+
+        for (Experience e : allExperiences) {
+
+            List<ExperienceType> types = e.getExperienceTypes();
+
+            boolean ok = false;
+
+            for (ExperienceType t : types) {
+
+                if (experienceTypes.contains(t)) {
+                    ok = true;
+                    break;
+                }
+            }
+
+            if (ok) result.add(e);
+        }
+
+        return result;
+    }
+
+
+    public void updateExperience(Experience experience){
+        experienceRepository.save(experience);
     }
 
     public List<Experience> findByTourOperator(TourOperator tourOperator){
