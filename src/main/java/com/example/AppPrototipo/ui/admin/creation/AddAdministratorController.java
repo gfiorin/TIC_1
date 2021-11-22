@@ -1,10 +1,11 @@
-package com.example.AppPrototipo.ui.admin;
+package com.example.AppPrototipo.ui.admin.creation;
 
 import com.example.AppPrototipo.AppPrototipoApplication;
 import com.example.AppPrototipo.business.exceptions.InvalidInformation;
 import com.example.AppPrototipo.business.exceptions.UserAlreadyExsists;
 import com.example.AppPrototipo.business.managers.AdministratorMgr;
 import com.example.AppPrototipo.business.managers.UserMgr;
+import com.example.AppPrototipo.ui.admin.AdminController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;

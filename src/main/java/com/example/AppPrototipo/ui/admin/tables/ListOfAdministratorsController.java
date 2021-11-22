@@ -1,9 +1,10 @@
-package com.example.AppPrototipo.ui.admin;
+package com.example.AppPrototipo.ui.admin.tables;
 
 import com.example.AppPrototipo.AppPrototipoApplication;
 import com.example.AppPrototipo.business.managers.AdministratorMgr;
 import com.example.AppPrototipo.business.entities.Administrator;
 import com.example.AppPrototipo.business.managers.UserMgr;
+import com.example.AppPrototipo.ui.admin.AdminController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

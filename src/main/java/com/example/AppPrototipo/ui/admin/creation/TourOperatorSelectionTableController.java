@@ -1,4 +1,4 @@
-package com.example.AppPrototipo.ui.admin;
+package com.example.AppPrototipo.ui.admin.creation;
 
 import com.example.AppPrototipo.AppPrototipoApplication;
 import com.example.AppPrototipo.business.managers.TourOperatorMgr;

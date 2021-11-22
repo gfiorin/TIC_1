@@ -373,7 +373,7 @@ CREATE TABLE `experiences` (
                                `authorized` tinyint NOT NULL,
                                `title` varchar(45) NOT NULL,
                                `description` varchar(1000) NOT NULL,
-                               `shortdescription` varchar(600) NOT NULL,
+                               `shortdescription` varchar(150) NOT NULL,
                                `vaccination` tinyint NOT NULL,
                                `capacity` varchar(45) NOT NULL,
                                `reviewed` tinyint NOT NULL,

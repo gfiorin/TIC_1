@@ -1,10 +1,11 @@
-package com.example.AppPrototipo.ui.admin;
+package com.example.AppPrototipo.ui.admin.creation;
 
 import com.example.AppPrototipo.AppPrototipoApplication;
 import com.example.AppPrototipo.business.entities.TourOperator;
 import com.example.AppPrototipo.business.managers.TourOperatorMgr;
 import com.example.AppPrototipo.business.exceptions.InvalidInformation;
 import com.example.AppPrototipo.business.exceptions.TourOperatorAlreadyExists;
+import com.example.AppPrototipo.ui.admin.AdminController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

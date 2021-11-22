@@ -1,9 +1,10 @@
-package com.example.AppPrototipo.ui.admin;
+package com.example.AppPrototipo.ui.admin.creation;
 
 import com.example.AppPrototipo.AppPrototipoApplication;
+import com.example.AppPrototipo.business.managers.OperatorMgr;
 import com.example.AppPrototipo.business.entities.Operator;
 import com.example.AppPrototipo.business.entities.TourOperator;
-import com.example.AppPrototipo.business.managers.OperatorMgr;
+import com.example.AppPrototipo.ui.admin.AdminController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,12 +13,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.springframework.stereotype.Component;
 
 @Component
-public class AssociateOperatorToTOCreationController {
+public class AddOperatorController {
 
     @FXML
     private TextField nameInput;
@@ -37,16 +39,18 @@ public class AssociateOperatorToTOCreationController {
     @FXML
     private Button cancelarBtn;
 
+    @FXML
+    private Button selectBtn;
+
+    @FXML
+    private Label tourOperatorName;
+
     private final OperatorMgr operatorMgr;
 
-    private TourOperator tourOperator;
+    private TourOperator tourOperatorSelected = null;
 
-    public AssociateOperatorToTOCreationController(OperatorMgr operatorMgr) {
+    public AddOperatorController(OperatorMgr operatorMgr) {
         this.operatorMgr = operatorMgr;
-    }
-
-    public void setTourOperator(TourOperator tourOperator) {
-        this.tourOperator = tourOperator;
     }
 
     @FXML
@@ -56,10 +60,10 @@ public class AssociateOperatorToTOCreationController {
         String password = passwordInput.getText();
         String email = emailInput.getText();
 
-        if (name.isEmpty() || username.isEmpty() || password.length() < 6 || email.isEmpty()) {
+        if (name.isEmpty() || username.isEmpty() || password.length() < 6 || email.isEmpty() || tourOperatorSelected == null) {
             showAlert(
                     "Datos faltantes",
-                    "Uno o mas campos esta vacio. Por favor, verifique la información introducida.");
+                    "Uno o mas campos esta vacio. Por favor, verifique la informacion introducida.");
         } else {
             if (operatorMgr.findOneByEmail(email) != null) {
                 showAlert(
@@ -71,7 +75,7 @@ public class AssociateOperatorToTOCreationController {
                         "Ya existe un operador con el nombre de usuario: " + username);
             } else {
 
-                Operator newOperator = new Operator(name, username, email, password, tourOperator);
+                Operator newOperator = new Operator(name, username, email, password, tourOperatorSelected);
                 operatorMgr.save(newOperator);
 
                 showAlert("Operador creado con exito","El operador a sido creado con éxito");
@@ -80,6 +84,37 @@ public class AssociateOperatorToTOCreationController {
 
             }
         }
+    }
+
+    @FXML
+    public void init(TourOperator tourOperator) {
+        tourOperatorSelected = tourOperator;
+        tourOperatorName.setText(tourOperator.getCompanyName());
+    }
+
+    @FXML
+    public void selectTourOperator(ActionEvent event) throws Exception {
+        selectBtn.setDisable(true);
+
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
+
+        Parent root = fxmlLoader.load(AdminController.class.getResourceAsStream("TourOperatorSelectTable.fxml"));
+        Stage newStage = new Stage();
+        newStage.setScene(new Scene(root));
+
+        TourOperatorSelectionTableController touristOperatorsTableController = fxmlLoader.getController();
+
+        newStage.showAndWait();
+
+        tourOperatorSelected = touristOperatorsTableController.getSelectedItem(event);
+        tourOperatorName.setText(tourOperatorSelected.getCompanyName());
+
+        selectBtn.setDisable(false);
+    }
+
+    public void enableButton(){
+        selectBtn.setDisable(false);
     }
 
     @FXML

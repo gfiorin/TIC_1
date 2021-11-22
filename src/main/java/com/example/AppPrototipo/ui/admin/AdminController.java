@@ -2,6 +2,7 @@ package com.example.AppPrototipo.ui.admin;
 
 import com.example.AppPrototipo.AppPrototipoApplication;
 import com.example.AppPrototipo.ui.PrincipalController;
+import com.example.AppPrototipo.ui.admin.creation.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,7 +16,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
-@Component // se podrian ordenar un poco las clases en paquetes todo
+@Component
 public class AdminController {
 
     @FXML

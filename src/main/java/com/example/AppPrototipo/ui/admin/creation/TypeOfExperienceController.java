@@ -1,10 +1,11 @@
-package com.example.AppPrototipo.ui.admin;
+package com.example.AppPrototipo.ui.admin.creation;
 
 import com.example.AppPrototipo.AppPrototipoApplication;
 import com.example.AppPrototipo.business.managers.ExperienceTypeMgr;
 import com.example.AppPrototipo.business.managers.InterestMgr;
 import com.example.AppPrototipo.business.entities.ExperienceType;
 import com.example.AppPrototipo.business.entities.Interest;
+import com.example.AppPrototipo.ui.admin.AdminController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
