@@ -9,6 +9,7 @@ import java.util.List;
 
 @Service
 public class BookingMgr {
+
     private final BookingRepository bookingRepository;
 
     public BookingMgr(BookingRepository bookingRepository) {
@@ -26,4 +27,5 @@ public class BookingMgr {
     public void delete(Booking booking){
         bookingRepository.delete(booking);
     }
+
 }

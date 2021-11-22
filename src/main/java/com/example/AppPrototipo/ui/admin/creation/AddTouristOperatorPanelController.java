@@ -77,7 +77,7 @@ public class AddTouristOperatorPanelController {
         if (invalidValue) {
             showAlert(
                     "Datos faltantes",
-                    "Uno o mas campos esta vacio. Por favor, verifique la información introducida.");
+                    "Uno o más campos están vacíos. Por favor, verifique la información introducida.");
         }
         else {
 
@@ -93,7 +93,7 @@ public class AddTouristOperatorPanelController {
 
                 TourOperator tourOperatorAdded = tourOperatorMgr.addTourOperator(companyName, fantasyName, linkToWeb, contactName, contactPhone, contactPosition, contactEmail, authorized);
 
-                boolean createOperator = touristOperatorCreatedAlert("Operador turistico creado con exito", "El operador turistico ha sido creado con exito!\n¿Desea asociar un operador a este operador turistico?");
+                boolean createOperator = touristOperatorCreatedAlert("Operador turístico creado con éxito", "¡El operador turístico ha sido creado con éxito!\n¿Desea asociar un operador a este operador turístico?");
 
                 if (createOperator){
 
@@ -122,11 +122,11 @@ public class AddTouristOperatorPanelController {
 
             } catch (TourOperatorAlreadyExists e) {
                 showAlert(
-                        "La compañia ya ha sido registrada en el sistema!",
+                        "¡La compañía ya ha sido registrada en el sistema!",
                         e.getMessage());
             } catch (InvalidInformation invalidInformation) {
                 showAlert(
-                        "Informacion invalida!",
+                        "¡Informacion invalida!",
                         invalidInformation.getMessage());
             }
         }

@@ -25,7 +25,7 @@
             <TableColumn fx:id="link" prefWidth="76.800048828125" text="Link" />
             <TableColumn fx:id="telephone" prefWidth="96.0" text="Teléfono" />
             <TableColumn fx:id="ubicacion" prefWidth="105.599853515625" text="Ubicación" />
-            <TableColumn fx:id="shortDescription" prefWidth="124.7999267578125" text="Descripcion corta" />
+            <TableColumn fx:id="shortDescription" prefWidth="124.7999267578125" text="Descripción corta" />
         </columns>
       </TableView>
       <Pane prefHeight="40.0" prefWidth="838.0">

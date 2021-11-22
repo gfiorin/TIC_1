@@ -9,7 +9,6 @@ import com.example.AppPrototipo.business.exceptions.UserAlreadyExsists;
 import com.example.AppPrototipo.persistence.CountryRepository;
 import com.example.AppPrototipo.persistence.InterestRepository;
 import com.example.AppPrototipo.ui.PrincipalController;
-import com.example.AppPrototipo.ui.admin.AdminController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,7 +24,6 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.List;
 
 @Component
@@ -135,11 +133,11 @@ public class UserCreationController {
         if (invalidValue) {
             showAlert(
                     "Datos faltantes",
-                    "Uno o mas campos esta vacio. Por favor, verifique la informacion introducida.");
+                    "Uno o más campos están vacíos. Por favor, verifique la información introducida.");
         } else if(!anyCheckboxChecked) {
             showAlert(
                     "Datos faltantes",
-                    "Debe seleccionar al menos un interes. Por favor, verifique la informacion introducida.");
+                    "Debe seleccionar al menos un interes. Por favor, verifique la información introducida.");
         } else {
 
             try {
@@ -164,7 +162,7 @@ public class UserCreationController {
 
                 userMgr.addTourist(name, user, email, password, dateOfBirth, cellphone, countryId, interests, documentType, documentNumber);
 
-                showAlert("Usuario creado con exito", "El usuario ha sido creado con exito");
+                showAlert("Usuario creado con éxito", "El usuario ha sido creado con éxito");
 
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setControllerFactory(AppPrototipoApplication.getContext()::getBean);
@@ -178,11 +176,11 @@ public class UserCreationController {
 
             } catch (UserAlreadyExsists e) {
                 showAlert(
-                        "Email o usuario existente!",
+                        "¡Email o usuario ya existente!",
                         e.getMessage());
             } catch (InvalidInformation invalidInformation) {
                 showAlert(
-                        "Informacion invalida!",
+                        "¡Información inválida!",
                         invalidInformation.getMessage());
             }
         }

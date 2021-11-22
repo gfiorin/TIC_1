@@ -25,64 +25,64 @@ public class TourOperatorMgr {
 
         if (companyName == null || companyName.isBlank()){
 
-            throw new InvalidInformation("Por favor ingrese un nombre de compañía válido");
+            throw new InvalidInformation("Por favor, ingrese un nombre de compañía válido.");
 
         }
 
         if (fantasyName == null || fantasyName.isBlank()){
 
-            throw new InvalidInformation("Por favor ingrese un nombre de fantasía válido");
+            throw new InvalidInformation("Por favor, ingrese un nombre de fantasía válido.");
 
         }
 
         if (linkToWeb == null || linkToWeb.isBlank()){
 
-            throw new InvalidInformation("Por favor ingrese un link válido");
+            throw new InvalidInformation("Por favor, ingrese un link válido.");
 
         }
 
         if (contactName == null || contactName.isBlank()){
 
-            throw new InvalidInformation("Por favor ingrese un nombre de contacto válido");
+            throw new InvalidInformation("Por favor, ingrese un nombre de contacto válido.");
 
         }
 
         if (contactPhone == null || contactPhone.isBlank()){
 
-            throw new InvalidInformation("Por favor ingrese un numero de telefono de contacto válido");
+            throw new InvalidInformation("Por favor, ingrese un numero de teléfono de contacto válido.");
 
         }
 
         if (contactPosition == null || contactPosition.isBlank()){
 
-            throw new InvalidInformation("Por favor ingrese un cargo de contacto válido");
+            throw new InvalidInformation("Por favor, ingrese un cargo de contacto válido.");
 
         }
 
         if (contactEmail == null || contactEmail.isBlank()){
 
-            throw new InvalidInformation("Por favor ingrese un email de contacto válido");
+            throw new InvalidInformation("Por favor, ingrese un email de contacto válido.");
 
         }
 
         if (tourOperatorRepository.findOneByCompanyName(companyName) != null) {
-            throw new TourOperatorAlreadyExists("La compañia ya ha sido registrado en el sistema");
+            throw new TourOperatorAlreadyExists("La compañía ya ha sido registrado en el sistema.");
         }
 
         if (tourOperatorRepository.findOneByFantasyName(fantasyName) != null) {
-            throw new TourOperatorAlreadyExists("El nombre de fantasia de la compañia ya ha sido registrado en el sistema");
+            throw new TourOperatorAlreadyExists("El nombre de fantasía de la compañía ya ha sido registrado en el sistema.");
         }
 
         if (tourOperatorRepository.findOneByContactPhone(contactPhone) != null) {
-            throw new TourOperatorAlreadyExists("El telefono de contacto de la compañia ya ha sido registrado en el sistema");
+            throw new TourOperatorAlreadyExists("El teléfono de contacto de la compañía ya ha sido registrado en el sistema.");
         }
 
         if (tourOperatorRepository.findOneByContactEmail(contactEmail) != null) {
-            throw new TourOperatorAlreadyExists("El email de contacto de la compañia ya ha sido registrado en el sistema");
+            throw new TourOperatorAlreadyExists("El email de contacto de la compañía ya ha sido registrado en el sistema.");
         }
 
         if (tourOperatorRepository.findOneByLinkToWeb(linkToWeb) != null) {
-            throw new TourOperatorAlreadyExists("El link de la compañia ya ha sido registrado en el sistema");
+            throw new TourOperatorAlreadyExists("El link de la compañía ya ha sido registrado en el sistema.");
         }
 
         TourOperator tourOperatorToAdd = new TourOperator(companyName, fantasyName, linkToWeb, contactName, contactPhone, contactPosition, contactEmail, authorized);

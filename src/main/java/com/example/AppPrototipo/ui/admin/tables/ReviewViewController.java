@@ -29,7 +29,7 @@ public class ReviewViewController {
     private Label raiting;
 
     @FXML
-    private Label comment; // tengo que hacer que el comentario se estire para abajo aca y en las complaints TODO
+    private Label comment;
 
     private Review review;
 

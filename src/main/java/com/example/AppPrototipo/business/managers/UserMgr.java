@@ -27,52 +27,52 @@ public class UserMgr {
 
         if (name == null || name.isBlank()){
 
-            throw new InvalidInformation("Por favor ingrese un nombre válido");
+            throw new InvalidInformation("Por favor, ingrese un nombre válido.");
 
         }
 
         if (username == null || username.isBlank()){
 
-            throw new InvalidInformation("Por favor ingrese un nombre de usuario válido");
+            throw new InvalidInformation("Por favor, ingrese un nombre de usuario válido.");
 
         }
 
         if (email == null || email.isBlank()){
 
-            throw new InvalidInformation("Por favor ingrese un email válido");
+            throw new InvalidInformation("Por favor, ingrese un email válido.");
 
         }
 
         if (password == null || password.isBlank() || password.length() < 6){
 
-            throw new InvalidInformation("La clave debe tener al menos 6 caracteres");
+            throw new InvalidInformation("La clave debe tener al menos 6 caracteres.");
 
         }
 
         if (dateOfBirth == null){
 
-            throw new InvalidInformation("Por favor ingrese una fecha de nacimiento valida");
+            throw new InvalidInformation("Por favor, ingrese una fecha de nacimiento válida.");
 
         }
 
         if (cellphone == null || cellphone.isBlank()){
 
-            throw new InvalidInformation("Por favor ingrese un telefono valido");
+            throw new InvalidInformation("Por favor, ingrese un telefono válido.");
 
         }
 
         for (char ch: name.toCharArray()) {
             if(Character.isDigit(ch)){
-                throw new InvalidInformation("El nombre no puede contener numeros");
+                throw new InvalidInformation("El nombre no puede contener números.");
             }
         }
 
         if (userRepository.findOneByEmail(email) != null) {
-            throw new UserAlreadyExsists("El email ya ha sido registrado en el sistema");
+            throw new UserAlreadyExsists("El email ya ha sido registrado en el sistema.");
         }
 
         if (userRepository.findOneByUsername(username) != null) {
-            throw new UserAlreadyExsists("El nombre de usuario ya ha sido registrado en el sistema");
+            throw new UserAlreadyExsists("El nombre de usuario ya ha sido registrado en el sistema.");
         }
 
         Tourist touristToAdd;

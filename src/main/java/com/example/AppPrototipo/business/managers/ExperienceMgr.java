@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.sql.Date;
 import java.sql.Time;
-import java.time.LocalDate;
 import java.util.*;
 
 @Service
@@ -58,7 +57,7 @@ public class ExperienceMgr {
         return false;
     }
 
-    public void createNewReservation(Experience experience, Tourist tourist, LocalDate date, Time time, int amount){
+    public void createNewReservation(Experience experience, Tourist tourist, Date date, Time time, int amount){
         this.bookingRepository.save(new Booking(experience, tourist, date, time, amount));
     }
 
@@ -129,55 +128,55 @@ public class ExperienceMgr {
     public void addExperience(String title, String description, String shortDescription, boolean vaccination, Integer capacity, BigDecimal price, boolean bookable, List<ExperienceType> experienceTypes, TourOperator tourOperator, Department department, String ubicacion, String email, String link, String telephone, List<byte[]> images) throws InvalidInformation {
 
         if (title == null || title.isBlank() || title.length() > 30){
-            throw new InvalidInformation("Por favor ingrese un titulo válido");
+            throw new InvalidInformation("Por favor, ingrese un título válido.");
         }
 
         if (shortDescription == null || shortDescription.isBlank()){
-            throw new InvalidInformation("Por favor ingrese una descripción corta válida");
+            throw new InvalidInformation("Por favor, ingrese una descripción corta válida.");
         }
 
         if (description == null || description.isBlank()){
-            throw new InvalidInformation("Por favor ingrese una descripción válida");
+            throw new InvalidInformation("Por favor, ingrese una descripción válida.");
         }
 
         if (department == null){
-            throw new InvalidInformation("Por favor seleccione un departamento");
+            throw new InvalidInformation("Por favor, seleccione un departamento.");
         }
 
         if (ubicacion == null || ubicacion.isBlank()){
-            throw new InvalidInformation("Por favor ingrese un titulo válido");
+            throw new InvalidInformation("Por favor, ingrese un título válido.");
         }
 
         if (capacity != null && capacity < 0){
-            throw new InvalidInformation("Por favor ingrese una cantidad de personas válida");
+            throw new InvalidInformation("Por favor, ingrese una cantidad de personas válida.");
         }
 
         if (price != null && price.compareTo(new BigDecimal(0)) < 0){
-            throw new InvalidInformation("Por favor ingrese un precio válido");
+            throw new InvalidInformation("Por favor, ingrese un precio válido.");
         }
 
         if (telephone == null || telephone.isBlank()){
-            throw new InvalidInformation("Por favor ingrese un télefono válido");
+            throw new InvalidInformation("Por favor, ingrese un télefono válido.");
         }
 
         if (email == null || email.isBlank()){
-            throw new InvalidInformation("Por favor ingrese un email válido");
+            throw new InvalidInformation("Por favor, ingrese un email válido.");
         }
 
         if (link == null || link.isBlank()){
-            throw new InvalidInformation("Por favor ingrese un link válido");
+            throw new InvalidInformation("Por favor, ingrese un link válido.");
         }
 
         if (experienceTypes.size() == 0){
-            throw new InvalidInformation("Por favor asocie esta experiencia a por lo menos un tipo de experiencia");
+            throw new InvalidInformation("Por favor, asocie esta experiencia a por lo menos un tipo de experiencia.");
         }
 
         if (experienceTypes.size() > 5){
-            throw new InvalidInformation("Solo puede asociar un maximo de 5 experiencias");
+            throw new InvalidInformation("Solo puede asociar un máximo de 5 experiencias.");
         }
 
         if (images.size() == 0){
-            throw new InvalidInformation("La experiencia debe tener al menos una imagen asociada");
+            throw new InvalidInformation("La experiencia debe tener al menos una imagen asociada.");
         }
 
         Experience experienceToAdd = new Experience(title, description, shortDescription, vaccination, capacity, bookable, false, experienceTypes, tourOperator, department, ubicacion, email, link, telephone, true, price);

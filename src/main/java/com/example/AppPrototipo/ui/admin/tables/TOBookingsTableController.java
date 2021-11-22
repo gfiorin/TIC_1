@@ -25,6 +25,7 @@ import org.springframework.stereotype.Component;
 
 import java.sql.Time;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -94,9 +95,8 @@ public class TOBookingsTableController {
             List<Booking> bookings = new ArrayList<>();
 
             for (Booking booking : getBookings()) {
-                LocalDate bookingDate = booking.getDate();
-
-                if (bookingDate != null) {
+                if (booking.getDate() != null) {
+                    LocalDate bookingDate = LocalDate.ofInstant(booking.getDate().toInstant(), ZoneId.systemDefault());
                     if (bookingDate.compareTo(dateTo.getValue())<=0 && bookingDate.compareTo(dateFrom.getValue())>=0) {
                         bookings.add(booking);
                     }

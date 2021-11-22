@@ -318,7 +318,7 @@ public class ExperienceController {
         experienceMgr.createNewReservation(
                 experience,
                 (Tourist) userMgr.getCurrentUser(),
-                calendarioReserva.getValue(),
+                Date.valueOf(calendarioReserva.getValue()),
                 horarioReserva.getValue().time,
                 cuposAReservar.getValue()
         ); //Se hace la reserva
