@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.sql.Date;
 import java.sql.Time;
+import java.time.LocalDate;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -58,7 +59,7 @@ public class ExperienceMgr {
         return false;
     }
 
-    public void createNewReservation(Experience experience, Tourist tourist, Date date, Time time, int amount){
+    public void createNewReservation(Experience experience, Tourist tourist, LocalDate date, Time time, int amount){
         this.bookingRepository.save(new Booking(experience, tourist, date, time, amount));
     }
 

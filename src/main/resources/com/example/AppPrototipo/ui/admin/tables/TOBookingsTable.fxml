@@ -26,8 +26,8 @@
             <Text layoutX="289.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fecha desde: " />
             <DatePicker fx:id="dateTo" layoutX="571.0" layoutY="14.0" prefHeight="25.0" prefWidth="107.0" />
             <Text layoutX="494.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fecha hasta: " />
-            <Button fx:id="cleanFilterBtn" layoutX="821.0" layoutY="13.0" mnemonicParsing="false" text="Borrar filtro" />
-            <Button fx:id="applyFilterBtn" layoutX="710.0" layoutY="13.0" mnemonicParsing="false" text="Aplicar filtro" />
+            <Button fx:id="cleanFilterBtn" onAction="#cleanFilter" layoutX="821.0" layoutY="13.0" mnemonicParsing="false" text="Borrar filtro" />
+            <Button fx:id="applyFilterBtn" onAction="#applyFilter" layoutX="710.0" layoutY="13.0" mnemonicParsing="false" text="Aplicar filtro" />
             </children>
         </Pane>
     </children>

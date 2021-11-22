@@ -8,6 +8,7 @@ import com.example.AppPrototipo.business.managers.ExperienceMgr;
 import com.example.AppPrototipo.ui.admin.AdminController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableListBase;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,8 +25,8 @@ import org.springframework.stereotype.Component;
 
 import java.sql.Time;
 import java.time.LocalDate;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Component
 public class TOBookingsTableController {
@@ -50,7 +51,7 @@ public class TOBookingsTableController {
 
     @FXML
     private DatePicker dateFrom;
-    //todo
+
     @FXML
     private DatePicker dateTo;
 
@@ -84,10 +85,47 @@ public class TOBookingsTableController {
         }
     }
 
+    @FXML
+    public void applyFilter() {
+
+        if (dateTo.getValue()!=null && dateFrom.getValue()!=null) {
+
+            bookingsTable.getItems().clear();
+            List<Booking> bookings = new ArrayList<>();
+
+            for (Booking booking : getBookings()) {
+                LocalDate bookingDate = booking.getDate();
+
+                if (bookingDate != null) {
+                    if (bookingDate.compareTo(dateTo.getValue())<=0 && bookingDate.compareTo(dateFrom.getValue())>=0) {
+                        bookings.add(booking);
+                    }
+                }
+            }
+
+            bookings = bookings.stream().sorted(Comparator.comparing(Booking::getDate)).collect(Collectors.toList());
+
+            bookingsTable.setItems(FXCollections.observableArrayList(bookings));
+
+            tourist.setCellValueFactory(new PropertyValueFactory<>("tourist"));
+            experience.setCellValueFactory(new PropertyValueFactory<>("experience"));
+            date.setCellValueFactory(new PropertyValueFactory<>("date"));
+            time.setCellValueFactory(new PropertyValueFactory<>("time"));
+            amount.setCellValueFactory(new PropertyValueFactory<>("amount"));
+        }
+    }
+
+    @FXML
+    public void cleanFilter() {
+        bookingsTable.getItems().clear();
+        initialize();
+    }
+
+
     private ObservableList<Booking> getBookings() {
         List<Experience> experienceList = experienceMgr.findByTourOperator(tourOperator);
         List<Booking> bookingList = new LinkedList<>();
-        for (Experience experience : experienceList){
+        for (Experience experience : experienceList) {
             List<Booking> bookingListPre = experienceMgr.findByExperience(experience);
             bookingList.addAll(bookingListPre);
         }

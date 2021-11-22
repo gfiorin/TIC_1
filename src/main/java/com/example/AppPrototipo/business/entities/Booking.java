@@ -3,6 +3,7 @@ package com.example.AppPrototipo.business.entities;
 import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Time;
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
@@ -36,7 +37,7 @@ public class Booking {
 
     @Basic
     @Column(name = "date")
-    private Date date;
+    private LocalDate date;
 
     @Basic
     @Column(name = "time")
@@ -48,7 +49,7 @@ public class Booking {
     public Booking() {
     }
 
-    public Booking(Experience experience, Tourist tourist, Date date, Time time, int amount) {
+    public Booking(Experience experience, Tourist tourist, LocalDate date, Time time, int amount) {
         this.experience = experience;
         this.tourist = tourist;
         this.date = date;
@@ -68,7 +69,7 @@ public class Booking {
         return tourist;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
