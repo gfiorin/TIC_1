@@ -122,7 +122,8 @@ public class ExperiencesTableController {
     private void enableOrDisableExperience(ActionEvent event){
         Experience experienceToModify = experiencesTable.getSelectionModel().getSelectedItem();
         experienceMgr.changeAuthorizationOfExperience(experienceToModify.getId());
-        experiencesTable.setItems(getExperiences());
+        experiencesTable.getItems().clear();
+        initialize();
     }
 
     @FXML
