@@ -60,10 +60,10 @@ public class AddOperatorController {
         String password = passwordInput.getText();
         String email = emailInput.getText();
 
-        if (name.isEmpty() || username.isEmpty() || password.length() < 6 || email.isEmpty() || tourOperatorSelected == null) {
+        if (name.isEmpty() || username.isEmpty() || password.isEmpty() || email.isEmpty() || tourOperatorSelected == null) {
             showAlert(
                     "Datos faltantes",
-                    "Uno o mas campos esta vacio. Por favor, verifique la informacion introducida.");
+                    "Uno o más campos están vacíos. Por favor, verifique la información introducida.");
         } else {
             if (operatorMgr.findOneByEmail(email) != null) {
                 showAlert(
@@ -73,6 +73,12 @@ public class AddOperatorController {
                 showAlert(
                         "Operador ya existe",
                         "Ya existe un operador con el nombre de usuario: " + username);
+
+            } else if (password.length()<6) {
+                showAlert(
+                        "Contraseña muy corta",
+                        "La contraseña debe tener 6 caracteres o más.");
+
             } else {
 
                 Operator newOperator = new Operator(name, username, email, password, tourOperatorSelected);
