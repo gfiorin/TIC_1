@@ -28,4 +28,8 @@ public class BookingMgr {
         bookingRepository.delete(booking);
     }
 
+    public List<Booking> findByExperience(Experience experience){
+        return bookingRepository.findByExperience(experience);
+    }
+
 }

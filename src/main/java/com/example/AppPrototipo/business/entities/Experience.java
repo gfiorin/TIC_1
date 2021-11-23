@@ -88,6 +88,7 @@ public class Experience {
         return likes;
     }
 
+    @LazyCollection(LazyCollectionOption.FALSE)
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "bookings",

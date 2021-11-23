@@ -1,6 +1,7 @@
 package com.example.AppPrototipo.ui.operator;
 
 import com.example.AppPrototipo.business.entities.Experience;
+import com.example.AppPrototipo.business.managers.BookingMgr;
 import com.example.AppPrototipo.business.managers.ExperienceMgr;
 import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
@@ -17,6 +18,8 @@ import java.io.ByteArrayInputStream;
 public class MiniExperienceOpController {
 
     private final ExperienceMgr experienceMgr;
+
+    private final BookingMgr bookingMgr;
 
     @FXML
     private Text nombreExperiencia;
@@ -36,8 +39,9 @@ public class MiniExperienceOpController {
     @FXML
     private Pane imagePane;
 
-    public MiniExperienceOpController(ExperienceMgr experienceMgr) {
+    public MiniExperienceOpController(ExperienceMgr experienceMgr, BookingMgr bookingMgr) {
         this.experienceMgr = experienceMgr;
+        this.bookingMgr = bookingMgr;
     }
 
     public void setData(Experience experience){
@@ -49,7 +53,7 @@ public class MiniExperienceOpController {
         else e = "Deshabilitada";
 
         nombreExperiencia.setText(experience.getTitle());
-        cantidadReservas.setText(String.valueOf(experience.getBookings().size()));
+        cantidadReservas.setText(String.valueOf(bookingMgr.findByExperience(experience).size()));
         descripcion.setText(String.valueOf(experience.getShortDescription()));
         estado.setText(e);
         if (!experience.getImages().isEmpty()){
